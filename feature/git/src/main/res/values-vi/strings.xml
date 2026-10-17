@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fgit_title">Quản lý nhánh</string>
+    <string name="fgit_loading">Đang đọc kho lưu trữ…</string>
+    <string name="fgit_tab_branches">Nhánh</string>
+    <string name="fgit_tab_branches_count">Nhánh %1$d</string>
+    <string name="fgit_tab_commits">Commit</string>
+
+    <string name="fgit_not_repo_title">Không gian làm việc hiện tại không phải kho Git</string>
+    <string name="fgit_not_repo_hint">Để Agent chạy git init / git clone, hoặc chọn "Nhập từ Git" khi tạo dự án, sau đó quản lý nhánh và commit tại đây</string>
+
+    <string name="fgit_pull">Kéo về</string>
+    <string name="fgit_push">Đẩy lên</string>
+    <string name="fgit_detached">HEAD tách rời</string>
+    <string name="fgit_dirty_count">%1$d thay đổi</string>
+    <string name="fgit_no_remote">Chưa cấu hình remote origin</string>
+
+    <string name="fgit_local_branches">Nhánh cục bộ (%1$d)</string>
+    <string name="fgit_remote_branches">Nhánh từ xa (%1$d)</string>
+    <string name="fgit_new_branch">Tạo nhánh mới</string>
+    <string name="fgit_no_branches">Chưa có nhánh cục bộ nào</string>
+    <string name="fgit_current">Hiện tại</string>
+    <string name="fgit_branch_name">Tên nhánh</string>
+    <string name="fgit_create_branch_hint">Tạo nhánh mới từ commit hiện tại</string>
+    <string name="fgit_create_branch_from">Tạo nhánh mới từ %1$s</string>
+    <string name="fgit_create">Tạo</string>
+    <string name="fgit_delete_branch_title">Xóa nhánh</string>
+    <string name="fgit_delete_branch_confirm">Xóa nhánh %1$s? Các commit chưa merge sẽ mất vĩnh viễn.</string>
+    <string name="fgit_delete">Xóa</string>
+    <string name="fgit_cancel">Hủy</string>
+
+    <string name="fgit_no_commits">Chưa có commit nào</string>
+
+    <string name="fgit_shallow_title">Kho clone nông</string>
+    <string name="fgit_shallow_hint">Dự án được nhập với --depth 1 nên local chỉ có 1 commit mới nhất. Bấm "Lấy đủ lịch sử" để kéo toàn bộ commit và nhánh từ remote (cần sandbox đã cài Git).</string>
+    <string name="fgit_unshallow">Lấy đủ lịch sử</string>
+    <string name="fgit_unshallow_running">Đang lấy…</string>
+
+    <string name="fgit_tab_changes">Thay đổi</string>
+    <string name="fgit_tab_changes_count">Thay đổi %1$d</string>
+    <string name="fgit_no_changes">Không gian làm việc sạch, không có thay đổi nào để commit</string>
+    <string name="fgit_staged_count">Đã stage %1$d / %2$d</string>
+    <string name="fgit_stage_all">Stage tất cả</string>
+    <string name="fgit_staged">Đã stage</string>
+    <string name="fgit_message_placeholder">Nội dung commit…</string>
+    <string name="fgit_ai_message">AI tạo</string>
+    <string name="fgit_commit_n">Commit (%1$d tệp)</string>
+    <string name="fgit_commit_no_staged">Commit (chọn tệp trước)</string>
+    <string name="fgit_committing">Đang commit…</string>
+    <string name="fgit_commit_push">Commit và đẩy</string>
+    <string name="fgit_unstage_all">Bỏ stage</string>
+    <string name="fgit_discard_title">Hủy thay đổi</string>
+    <string name="fgit_discard_confirm">Hủy thay đổi của %1$s? Tệp chưa theo dõi sẽ bị xóa, tệp đang theo dõi sẽ về lại commit mới nhất. Không thể hoàn tác.</string>
+    <string name="fgit_discard">Hủy</string>
+    <string name="fgit_detail_loading">Đang tải chi tiết commit…</string>
+    <string name="fgit_push_preview_title">Xem trước khi đẩy</string>
+    <string name="fgit_push_preview_count">Sẽ đẩy %1$d commit sau:</string>
+    <string name="fgit_push_preview_empty">Không có commit nào để đẩy (hoặc local đã đồng bộ với remote).</string>
+    <string name="fgit_push_confirm">Xác nhận đẩy</string>
+
+    <string name="fgit_tab_tags">Tag</string>
+    <string name="fgit_tab_tags_count">Tag %1$d</string>
+    <string name="fgit_tags_title">Tag (%1$d)</string>
+    <string name="fgit_new_tag">Tạo tag mới</string>
+    <string name="fgit_no_tags">Chưa có tag nào</string>
+    <string name="fgit_create_tag_hint">Tạo tag trên commit hiện tại; nhập mô tả để tạo tag có chú thích, để trống là tag nhẹ</string>
+    <string name="fgit_tag_name">Tên tag</string>
+    <string name="fgit_tag_message">Mô tả (tùy chọn)</string>
+    <string name="fgit_tag_message_placeholder">VD: phát hành v1.0.0</string>
+    <string name="fgit_delete_tag_title">Xóa tag</string>
+    <string name="fgit_delete_tag_confirm">Xóa tag %1$s?</string>
+
+    <string name="fgit_credentials_title">Thông tin xác thực Git remote</string>
+    <string name="fgit_credentials_hint">Đẩy/Kéo qua HTTPS cần tên đăng nhập và Personal Access Token (tạo trong phần cài đặt của GitHub/GitLab/Gitee). Token được mã hóa trong kho khóa hệ thống.</string>
+    <string name="fgit_credentials_remote">Remote hiện tại: %1$s</string>
+    <string name="fgit_host">Host (VD: github.com)</string>
+    <string name="fgit_username">Tên đăng nhập</string>
+    <string name="fgit_token">Personal Access Token</string>
+    <string name="fgit_token_placeholder">ghp_xxxxxxxx</string>
+    <string name="fgit_saved_hosts">Đã lưu: %1$s</string>
+    <string name="fgit_save">Lưu</string>
+</resources>

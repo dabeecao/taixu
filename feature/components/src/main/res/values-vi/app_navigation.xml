@@ -1,0 +1,20 @@
+<resources>
+    <string name="components_drawer_tab_chat">Trò chuyện</string>
+    <string name="components_drawer_tab_workspace">Tệp</string>
+    <string name="components_drawer_tab_system">Hệ thống</string>
+    <string name="components_open_navigation">Mở điều hướng và trò chuyện</string>
+    <string name="components_local_terminal">Terminal cục bộ</string>
+    <string name="components_tools">Trung tâm công cụ</string>
+    <string name="components_drawer_chat">Trò chuyện AI</string>
+    <string name="components_drawer_workspace">Dự án và tệp</string>
+    <string name="components_drawer_system">Tổng quan hệ thống</string>
+    <string name="components_drawer_settings">Cài đặt</string>
+    <string name="components_rail_sessions">Trò chuyện</string>
+    <string name="components_rail_new_session">Tạo mới</string>
+    <string name="components_rail_terminal">Terminal</string>
+    <string name="components_rail_tools">Công cụ</string>
+    <string name="components_collapse_sidebar">Thu gọn thanh bên</string>
+    <string name="components_companion_open">Mở bảng terminal và trình duyệt</string>
+    <string name="components_companion_collapse">Thu gọn bảng phụ</string>
+    <string name="components_companion_resize">Kéo để điều chỉnh độ rộng các cột</string>
+</resources>

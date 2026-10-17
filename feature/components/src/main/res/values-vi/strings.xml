@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="components_nav_home">TaiXu</string>
+    <string name="components_nav_agent">Agent</string>
+    <string name="components_nav_workspace">Không gian làm việc</string>
+    <string name="components_nav_settings">Cài đặt</string>
+    <string name="components_back">Quay lại</string>
+    <string name="components_taixu_logo">TaiXu Logo</string>
+    <string name="components_close">Đóng</string>
+    <string name="components_guide_confirm">Đã hiểu</string>
+    <!-- 底部导航副标题 -->
+    <string name="components_nav_subtitle_home">Sáng thế</string>
+    <string name="components_nav_subtitle_agent">Agent</string>
+    <string name="components_nav_subtitle_workspace">Không gian làm việc</string>
+    <string name="components_nav_subtitle_settings">Cài đặt</string>
+    <!-- Markdown 渲染组件 -->
+    <string name="components_md_web_content">Ảnh từ web</string>
+    <string name="components_md_image_preview">Xem trước ảnh</string>
+    <string name="components_md_image_load_failed">Tải ảnh thất bại</string>
+    <string name="components_md_image_saved">Ảnh đã lưu vào thư viện</string>
+    <string name="components_md_image_save_failed">Lưu ảnh thất bại</string>
+    <string name="components_md_save_image">Lưu ảnh</string>
+    <string name="components_md_code_clipboard_label">Mã</string>
+    <string name="components_md_code_copied">Đã sao chép mã vào bộ nhớ tạm</string>
+    <string name="components_md_code_badge">CODE</string>
+    <string name="components_md_copy">Sao chép</string>
+</resources>

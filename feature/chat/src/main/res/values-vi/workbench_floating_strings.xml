@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chat_workbench_floating_window">Cửa sổ nổi</string>
+    <string name="chat_workbench_floating_description">Chuyển ra màn hình chính để tiếp tục trò chuyện</string>
+    <string name="chat_floating_launch_failed">Không mở được cửa sổ nổi, hãy kiểm tra quyền cửa sổ nổi rồi thử lại</string>
+</resources>

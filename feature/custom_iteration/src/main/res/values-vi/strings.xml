@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="iteration_error_bootstrap">Khởi tạo không gian làm việc lặp thất bại, vui lòng kiểm tra mạng và bộ nhớ rồi thử lại</string>
+    <string name="iteration_build_section_title">Build đám mây TaiXuDev</string>
+    <string name="iteration_build_section_subtitle">Kích hoạt GitHub Actions tự động biên dịch APK độc lập</string>
+    <string name="iteration_build_branch_label">Nhánh tính năng</string>
+    <string name="iteration_build_idle">Chưa kích hoạt build đám mây. Bản build sẽ tồn tại độc lập song song với bản chính thức (top.wkbin.taixu.dev).</string>
+    <string name="iteration_build_dispatching">Đang kích hoạt taixudev-build.yml (nhánh %1$s)…</string>
+    <string name="iteration_build_running">Đang build (run #%1$s · %2$s), tắt màn hình cũng không ảnh hưởng.</string>
+    <string name="iteration_build_downloading">Build thành công, đang tải TaiXuDev-arm64-debug.apk…</string>
+    <string name="iteration_build_success">Build xong: %1$s\nXác thực SHA-256 thành công: %2$s…</string>
+    <string name="iteration_build_failed">Build thất bại: %1$s</string>
+    <string name="iteration_build_in_progress">Đang chạy pipeline build…</string>
+    <string name="iteration_build_trigger">Kích hoạt build đám mây</string>
+</resources>

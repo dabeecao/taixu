@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delivery_title">Hồ sơ bàn giao tác vụ</string>
+    <string name="delivery_expand">Mở rộng</string>
+    <string name="delivery_collapse">Thu gọn</string>
+    <string name="delivery_counts">%1$d bản ghi công cụ · %2$d bản ghi sản phẩm</string>
+    <string name="delivery_unverified">Công cụ chạy thành công không có nghĩa hành vi mục tiêu đã được xác minh; vòng này chưa ghi nhận xác minh hành vi độc lập.</string>
+    <string name="delivery_show_all">Hiển thị toàn bộ bản ghi công cụ</string>
+    <string name="delivery_hash_at_creation">Bản ghi phiên bản SHA-256</string>
+    <string name="delivery_artifact_version">Dấu vân tay ứng với phiên bản byte lúc ghi nhận, không chứng minh tệp do vòng này tạo ra hay hiện vẫn tồn tại; nếu thay đổi cần kiểm tra lại.</string>
+    <string name="delivery_observed_at">Thời gian quan sát: %1$s</string>
+    <string name="delivery_kind_log">Nhật ký công cụ</string>
+    <string name="delivery_kind_apk">Tệp APK</string>
+    <string name="delivery_kind_image">Tệp ảnh</string>
+    <string name="delivery_kind_file">Tệp không gian làm việc</string>
+    <string name="delivery_origin_new">Quan sát thấy tệp mới sau lệnh</string>
+    <string name="delivery_origin_changed">Quan sát thấy nội dung thay đổi sau lệnh</string>
+    <string name="delivery_origin_unchanged">Phiên bản đã có, nội dung không thay đổi</string>
+    <string name="delivery_origin_observed">Quan sát sau lệnh, không so sánh được với phiên bản trước</string>
+    <string name="delivery_origin_download">Phiên bản quan sát sau khi tải xuống xong</string>
+    <string name="delivery_origin_image_read">Phiên bản ảnh đã đọc trong vòng này</string>
+    <string name="delivery_tool_succeeded">Chạy thành công</string>
+    <string name="delivery_tool_failed">Chạy thất bại</string>
+    <string name="delivery_tool_unknown">Kết quả không xác định</string>
+    <string name="delivery_tool_waiting">Đang chờ phê duyệt</string>
+    <string name="delivery_tool_unsettled">Thiếu kết quả</string>
+    <string name="delivery_no_evidence">Vòng này không có bằng chứng công cụ nào được ghi nhận.</string>
+    <string name="delivery_history_incomplete">Cửa sổ bằng chứng chưa đầy đủ, bản ghi chỉ bao phủ phần còn giữ lại.</string>
+    <string name="delivery_unknown_outcome">Có lệnh gọi chưa rõ kết quả, cần kiểm tra trạng thái thực tế.</string>
+    <string name="delivery_pending_result">Có lệnh gọi chưa hoàn thành hoặc đang chờ phê duyệt.</string>
+    <string name="delivery_failed_tool">Có lệnh gọi công cụ thất bại, hãy đánh giá kết hợp với kết quả sau.</string>
+    <string name="delivery_incomplete_artifact">Một phần bản ghi sản phẩm chưa đầy đủ: nhật ký có thể bị cắt, hoặc quét tệp, đọc dấu vân tay chưa xong.</string>
+    <string name="delivery_invalid_artifact">Một phần bản ghi dấu vân tay sản phẩm không phân giải được, chưa tính vào bằng chứng.</string>
+</resources>
