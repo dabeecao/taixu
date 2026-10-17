@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="taixu_app_name">TaiXu</string>
+<string name="taixu_update_available">Đã có phiên bản mới v%1$s</string>
+<string name="taixu_update_versions">Phiên bản hiện tại: v%1$s ➔ Phiên bản mới nhất: v%2$s</string>
+<string name="taixu_update_downloading_package">Đang tải gói cập nhật…</string>
+<string name="taixu_update_download_failed">Tải gói cập nhật thất bại, vui lòng kiểm tra mạng rồi thử lại.</string>
+<string name="taixu_downloading">Đang tải…</string>
+<string name="taixu_update_now">Cập nhật ngay</string>
+<string name="taixu_open_github">Mở GitHub</string>
+<string name="taixu_later">Để sau</string>
+<string name="taixu_agent_notification_channel">Thực thi Agent</string>
+<string name="taixu_agent_ready">Trung tâm Agent đã sẵn sàng</string>
+<string name="taixu_agent_default_title">TaiXu Agent</string>
+<string name="taixu_agent_background_running">TaiXu Agent đang chạy nền</string>
+<string name="taixu_agent_background_locked">Agent đang chạy nền · Đã bật khóa tiến trình</string>
+<string name="taixu_notification_stop">Dừng</string>
+<string name="taixu_notification_reply_to">Trả lời %1$s</string>
+<string name="taixu_notification_reply">Trả lời</string>
+<string name="taixu_agent_task_completed">【%1$s】 Tác vụ hoàn tất</string>
+<string name="taixu_agent_next_task_hint">Chạm vào trả lời bên dưới để giao tác vụ tiếp theo</string>
+<string name="taixu_agent_thinking">Agent đang suy nghĩ…</string>
+<string name="taixu_runtime_notification_channel">Linux Runtime</string>
+<string name="taixu_runtime_running">Linux Runtime đang chạy</string>
+<string name="taixu_runtime_background_available">Công cụ nền và dịch vụ cục bộ vẫn khả dụng</string>
+<string name="taixu_agent_mcp_notification_channel">MCP Agent Server</string>
+<string name="taixu_agent_mcp_running_hint">Ứng dụng AI bên ngoài có thể kết nối bất cứ lúc nào</string>
+<string name="taixu_gui_a11y_description">Dịch vụ cử chỉ GUI của TaiXu: dùng cho các cử chỉ toàn cục như chạm/vuốt/nhấn giữ. Nếu đã cấp quyền Shizuku hoặc Root, hệ thống sẽ tự bật mà không cần vào trang Trợ năng; nếu chưa cấp quyền, bạn vẫn có thể bật thủ công trong Cài đặt hệ thống.</string>
+</resources>

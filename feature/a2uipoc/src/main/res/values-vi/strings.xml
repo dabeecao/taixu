@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fa2ui_poc_title">Giao diện A2UI</string>
+    <string name="fa2ui_inject_sample">Chèn mẫu</string>
+    <string name="fa2ui_clear">Xóa hết</string>
+    <string name="fa2ui_empty_hint">Chưa có giao diện A2UI nào. Nhờ Agent vẽ giao diện trong khung trò chuyện, hoặc bấm "Chèn mẫu" ở góc phải trên.</string>
+    <string name="fa2ui_media_blocked">Chỉ hỗ trợ liên kết http hoặc https</string>
+    <string name="fa2ui_image_failed">Không tải được ảnh</string>
+    <string name="fa2ui_video_failed">Không phát được video</string>
+    <string name="fa2ui_audio_failed">Không phát được âm thanh</string>
+    <string name="fa2ui_play">Phát</string>
+    <string name="fa2ui_pause">Tạm dừng</string>
+</resources>

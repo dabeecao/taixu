@@ -1,0 +1,5 @@
+<resources>
+    <string name="chat_drawer_search">Tìm kiếm phiên</string>
+    <string name="chat_drawer_destinations">Tính năng &amp; plugin</string>
+    <string name="chat_drawer_no_matches">Không có phiên nào khớp</string>
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="chat_reasoning_action">Điều chỉnh cường độ suy luận</string>
+    <string name="chat_install_mcp">Đi cài đặt</string>
+    <string name="chat_message_placeholder">Mô tả ý tưởng hoặc vấn đề cần giải quyết…</string>
+    <string name="chat_more_controls">Thao tác phiên khác</string>
+    <string name="chat_workbench_controls">Điều khiển bàn làm việc</string>
+    <string name="chat_hide_controls">Thu gọn điều khiển bàn làm việc</string>
+    <string name="chat_browser_entry">Trình duyệt</string>
+    <string name="chat_runtime_overview">Nhật ký chạy</string>
+    <string name="chat_toolchain_entry">Chuỗi công cụ</string>
+    <string name="chat_welcome_subtitle">Chọn một hướng, hoặc mô tả nhu cầu ngay bên dưới.</string>
+    <string name="chat_welcome_project">Thao tác nhanh dự án</string>
+    <string name="chat_welcome_project_subtitle">Mô tả mục tiêu hoặc vấn đề gặp phải, TaiXu sẽ hỗ trợ bạn theo dự án hiện tại.</string>
+    <string name="chat_welcome_suggestions">Bắt đầu nhanh</string>
+    <string name="chat_start_build">Tạo một công cụ nhỏ</string>
+    <string name="chat_start_build_detail">Từ nhu cầu đến hiện thực, cùng dựng bản đầu tiên.</string>
+    <string name="chat_start_build_prompt">Tôi muốn làm một công cụ nhỏ. Hãy giúp tôi làm rõ nhu cầu trước, rồi đưa ra phương án triển khai.</string>
+    <string name="chat_start_fix">Giải quyết một vấn đề</string>
+    <string name="chat_start_fix_detail">Phân tích lỗi, định vị nguyên nhân, tìm cách khắc phục.</string>
+    <string name="chat_start_fix_prompt">Tôi gặp một vấn đề. Hãy hỏi tôi hiện tượng cụ thể và lỗi trước, rồi hỗ trợ định vị nguyên nhân.</string>
+    <string name="chat_start_explore">Tìm hiểu dự án hiện tại</string>
+    <string name="chat_start_explore_detail">Rà soát cấu trúc mã, tìm hướng đi tiếp theo.</string>
+    <string name="chat_start_explore_prompt">Hãy xem không gian làm việc hiện tại, cho biết có những tệp và dự án nào; nếu chưa có dự án, hãy cho tôi biết cách bắt đầu.</string>
+    <string name="chat_workbench_workspace">Không gian làm việc</string>
+    <string name="chat_workbench_session">Điều khiển phiên</string>
+    <string name="chat_workbench_tools_attention">Có mục cần xử lý</string>
+</resources>

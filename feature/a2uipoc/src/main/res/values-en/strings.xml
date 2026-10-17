@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fa2ui_poc_title">A2UI interface</string>
+    <string name="fa2ui_inject_sample">Inject sample</string>
+    <string name="fa2ui_clear">Clear</string>
+    <string name="fa2ui_empty_hint">No A2UI interface yet. Ask the Agent to draw an interface in chat, or tap "Inject sample" at the top right.</string>
+    <string name="fa2ui_media_blocked">Only http or https links are supported</string>
+    <string name="fa2ui_image_failed">Failed to load image</string>
+    <string name="fa2ui_video_failed">Video cannot be played</string>
+    <string name="fa2ui_audio_failed">Audio cannot be played</string>
+    <string name="fa2ui_play">Play</string>
+    <string name="fa2ui_pause">Pause</string>
+</resources>
