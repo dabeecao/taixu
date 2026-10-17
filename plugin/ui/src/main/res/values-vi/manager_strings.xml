@@ -1,0 +1,16 @@
+<resources>
+    <string name="ui_plugin_manager_title">Quản lý plugin</string>
+    <string name="ui_plugin_pages_title">Tính năng trang</string>
+    <string name="ui_plugin_pages_description">Chọn các tính năng thường dùng trong thanh bên và khu vực làm việc</string>
+    <string name="ui_plugin_open">Mở</string>
+    <string name="ui_plugin_manager_scope">Công tắc chỉ điều khiển cửa vào trang; các tác vụ terminal và hoạt động nền của trình duyệt đang chạy sẽ không dừng theo.</string>
+    <string name="ui_plugin_preferences_failed">Không đọc hoặc lưu được lựa chọn plugin, vui lòng thử lại.</string>
+    <string name="ui_plugin_retry">Thử lại</string>
+    <string name="ui_plugin_ready">Chờ khởi tạo</string>
+    <string name="ui_plugin_starting">Đang bật</string>
+    <string name="ui_plugin_running">Đã bật</string>
+    <string name="ui_plugin_draining">Đang chờ sử dụng xong</string>
+    <string name="ui_plugin_stopped">Đã tắt</string>
+    <string name="ui_plugin_blocked">Plugin phụ thuộc chưa được bật</string>
+    <string name="ui_plugin_failed">Bật/tắt thất bại, có thể còn tài nguyên chưa giải phóng</string>
+</resources>

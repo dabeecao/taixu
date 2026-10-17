@@ -1,0 +1,4 @@
+<resources>
+    <string name="ui_plugin_page_unavailable">Tính năng này tạm thời không khả dụng</string>
+    <string name="ui_plugin_page_back">Quay lại</string>
+</resources>

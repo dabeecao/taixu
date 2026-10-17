@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="harness_prompt_tool_call_disabled">## Tắt gọi công cụ\nPhiên hiện tại đã tắt gọi công cụ: hãy trả lời thẳng câu hỏi của người dùng, đừng cố gọi bất kỳ công cụ nào (read / write / edit / base đều không khả dụng).</string>
+    <string name="harness_prompt_subagent_none">## Ủy quyền cho subagent\nHiện không có vai trò subagent nào được bật, đừng gọi invoke_subagent.</string>
+    <string name="harness_prompt_subagent_lane_system">Bạn là subagent chạy trong lane cách ly. Tập trung vào nhiệm vụ được giao, không tạo thêm subagent.\nYêu cầu khi kết thúc: ở lượt dừng gọi công cụ, phải xuất ra toàn bộ kết luận (trả lời trống hoặc chỉ nói "xong" coi như chưa hoàn thành). Khi nhiệm vụ bị kẹt (cần người dùng phê duyệt, ghi bị chặn, thiếu phụ thuộc), phải ghi rõ "chưa hoàn thành" và việc còn lại, tuyệt đối không coi các dòng như "đã giao cho Agent chính" là kết luận hoàn thành.</string>
+    <string name="harness_prompt_subagent_trigger_manual">Chỉ gọi invoke_subagent khi người dùng yêu cầu rõ xử lý song song, kiểm tra chia nhỏ hoặc dùng subagent; còn lại để Agent chính làm trực tiếp.</string>
+    <string name="harness_prompt_privilege_unavailable">## Quyền máy chủ Android\nTrạng thái quyền tạm chưa đọc được; đừng gọi host exec, gọi host(status) trước.</string>
+    <string name="harness_prompt_privilege_proot">## Quyền máy chủ Android\nChế độ đang có hiệu lực là quyền PRoot/ứng dụng thường. host exec không khả dụng; các thao tác máy chủ như cài đặt hệ thống, pm, input đừng giả lập bằng base, có thể nhắc người dùng vào Cài đặt cấp quyền Shizuku hoặc Root trước. Lấy nhật ký (logcat) thì dùng ADB không dây trực tiếp (host logcat hoặc logcat-grabber), không cần Shizuku/Root.</string>
+    <string name="harness_prompt_privilege_render_failed">## Quyền máy chủ Android\nKhông tải được phần năng lực đặc quyền, mức khả dụng thực tế chưa rõ: gọi host(status) để kiểm tra thực tế trước; nếu báo lỗi thì bảo người dùng vào trang Cài đặt cấp lại quyền Shizuku hoặc Root. Đừng dùng base để chạy lệnh máy chủ.</string>
+</resources>
