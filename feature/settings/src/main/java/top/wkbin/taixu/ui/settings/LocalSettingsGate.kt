@@ -22,7 +22,7 @@ internal fun LocalSettingsGate(title: String, onBack: () -> Unit, content: @Comp
     if (active == null) content()
     else Scaffold(topBar = { RuntimeTopBar(title = title, onBack = onBack) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            NoticeBanner(text = "Tính năng này quản lý Linux, plugin và cấu hình trên điện thoại, hiện không dùng được trên hệ thống chính. Hãy chuyển về hệ thống cục bộ trong "Quản lý hệ thống Linux" trước.")
+            NoticeBanner(text = "Tính năng này quản lý Linux, plugin và cấu hình trên điện thoại, hiện không dùng được trên hệ thống chính. Hãy chuyển về hệ thống cục bộ trong \"Quản lý hệ thống Linux\" trước.")
             Text("Chuỗi công cụ máy chủ quản lý được qua lệnh Agent; thư mục điện thoại không tự mount hay đồng bộ lên máy chủ.", style = MaterialTheme.typography.bodyMedium)
             RuntimeTextButton(onClick = onBack) { Text("Quay lại") }
         }

@@ -204,7 +204,7 @@ internal fun LocalDeveloperScreen(
                     onValueChange = { value -> pairingCode = value.filter(Char::isDigit).take(6) },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text("Mã ghép nối 6 chữ số dùng một lần") },
-                    supportingText = { Text("Trước tiên hãy bật "Ghép nối thiết bị bằng mã ghép nối" trong "Gỡ lỗi không dây" của hệ thống; không cần nhập cổng thủ công") },
+                    supportingText = { Text("Trước tiên hãy bật \"Ghép nối thiết bị bằng mã ghép nối\" trong \"Gỡ lỗi không dây\" của hệ thống; không cần nhập cổng thủ công") },
                     singleLine = true,
                 )
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -666,7 +666,7 @@ private fun RuntimeControlCard(
             androidx.compose.runtime.LaunchedEffect(it.throwable) {
                 Log.w("DeveloperScreen", "Runtime error: ${it.throwable.message}")
             }
-            NoticeBanner("Khởi tạo Runtime thất bại, hãy kiểm tra mạng và dung lượng rồi bấm "Thử khởi tạo lại"", isError = true)
+            NoticeBanner("Khởi tạo Runtime thất bại, hãy kiểm tra mạng và dung lượng rồi bấm \"Thử khởi tạo lại\"", isError = true)
         }
     }
 }

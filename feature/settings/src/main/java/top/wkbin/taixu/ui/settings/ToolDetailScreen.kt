@@ -742,7 +742,7 @@ private fun ModelApplyCard(
 
         if (models.isEmpty()) {
             Spacer(Modifier.height(8.dp))
-            NoticeBanner(text = "Chưa cấu hình hồ sơ mô hình nào, có thể tới "Cài đặt → Quản lý hồ sơ mô hình" để thêm mô hình Claude, OpenAI hoặc DeepSeek")
+            NoticeBanner(text = "Chưa cấu hình hồ sơ mô hình nào, có thể tới \"Cài đặt → Quản lý hồ sơ mô hình\" để thêm mô hình Claude, OpenAI hoặc DeepSeek")
         } else {
             Spacer(Modifier.height(10.dp))
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -935,7 +935,7 @@ private fun AccessLinkCard(
         Spacer(Modifier.height(4.dp))
         Text(
             text = if (running) {
-                "Dịch vụ gateway đã bind mọi card mạng (0.0.0.0). Thiết bị cùng LAN mở "Liên kết IP LAN" là thao tác trực tiếp, không cần map localhost."
+                "Dịch vụ gateway đã bind mọi card mạng (0.0.0.0). Thiết bị cùng LAN mở \"Liên kết IP LAN\" là thao tác trực tiếp, không cần map localhost."
             } else {
                 "Dịch vụ chưa khởi động, hãy bấm khởi động trong thẻ【Dịch vụ gateway】trước, khởi động thành công sẽ hiện liên kết truy cập tại đây. Có thể tạo Token trước, lúc khởi động sẽ tự tiêm vào."
             },

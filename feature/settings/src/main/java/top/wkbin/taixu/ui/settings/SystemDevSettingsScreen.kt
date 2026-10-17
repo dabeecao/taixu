@@ -336,7 +336,7 @@ private fun BatteryOptimizationDialog(
                     Text("Mở chi tiết ứng dụng (tự khởi động/chạy nền)")
                 }
                 Text(
-                    "Gợi ý: trên hệ thống Xiaomi/Huawei/OPPO còn cần vào chi tiết ứng dụng bật thủ công "Tự khởi động" và "Chạy nền"," +
+                    "Gợi ý: trên hệ thống Xiaomi/Huawei/OPPO còn cần vào chi tiết ứng dụng bật thủ công \"Tự khởi động\" và \"Chạy nền\"," +
                         "否则厂商省电策略仍会终止进程。",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.secondary,
