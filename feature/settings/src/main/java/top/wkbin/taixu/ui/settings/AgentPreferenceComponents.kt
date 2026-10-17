@@ -100,15 +100,15 @@ internal fun BaseCommandTimeoutSliderRow(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text("base 命令默认超时", modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold))
+            Text("Timeout mặc định của lệnh base", modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold))
             Text(
-                "${sliderMinutes.toInt()} 分钟",
+                "${sliderMinutes.toInt()} phút",
                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, fontFamily = FontFamily.Monospace),
                 color = MaterialTheme.colorScheme.primary,
             )
         }
         Text(
-            "适用于普通前台命令；模型可为单次命令指定 1–60 分钟，常驻任务应使用 process 工具",
+            "Phù hợp lệnh foreground thông thường; model có thể chỉ định 1–60 phút cho từng lệnh, tác vụ thường trú nên dùng công cụ process",
             style = settingsSupportingStyle(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

@@ -56,10 +56,10 @@ class AdbNotificationManager(
         runCatching {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "无线 ADB 与调试",
+                "ADB không dây và gỡ lỗi",
                 NotificationManager.IMPORTANCE_LOW,
             ).apply {
-                description = "用于在手机开发者选项中直接下拉输入配对码并快捷连接无线 ADB 的通知助手"
+                description = "Trợ lý thông báo giúp nhập mã ghép nối từ thanh trạng thái trong tùy chọn nhà phát triển và kết nối nhanh ADB không dây"
                 enableVibration(false)
                 setSound(null, null)
                 setShowBadge(false)
@@ -122,7 +122,7 @@ class AdbNotificationManager(
         }
 
         val notif = buildNotification(
-            title = "太墟 · 无线 ADB 快捷配对",
+            title = "TaiXu · Ghép nối nhanh ADB không dây",
             contentText = contentText,
             isOngoing = true,
             actions = listOf(
@@ -138,8 +138,8 @@ class AdbNotificationManager(
     fun showPairingInProgress() {
         isManuallyDismissed = false
         val notif = buildNotification(
-            title = "太墟 · 正在配对无线 ADB…",
-            contentText = "正在与发现的端口进行安全握手 (TLS + SPAKE2)…",
+            title = "TaiXu · Đang ghép nối ADB không dây…",
+            contentText = "Đang bắt tay bảo mật với cổng đã phát hiện (TLS + SPAKE2)…",
             isOngoing = true,
             showProgress = true,
             actions = listOf(buildDismissAction()),
@@ -151,8 +151,8 @@ class AdbNotificationManager(
     fun showConnectingInProgress() {
         isManuallyDismissed = false
         val notif = buildNotification(
-            title = "太墟 · 正在建立 ADB 连接…",
-            contentText = "正在完成 RSA 密钥认证…",
+            title = "TaiXu · Đang thiết lập kết nối ADB…",
+            contentText = "Đang hoàn tất xác thực khóa RSA…",
             isOngoing = true,
             showProgress = true,
             actions = listOf(buildDismissAction()),
@@ -164,8 +164,8 @@ class AdbNotificationManager(
     fun showConnected(host: String, port: Int) {
         isManuallyDismissed = false
         val notif = buildNotification(
-            title = "太墟 · 无线 ADB 已连接",
-            contentText = "已连接到 $host:$port · 点击返回工作台",
+            title = "TaiXu · ADB không dây đã kết nối",
+            contentText = "Đã kết nối tới $host:$port · bấm để về bàn làm việc",
             isOngoing = false,
             actions = listOf(
                 buildOpenWorkbenchAction(),
@@ -179,7 +179,7 @@ class AdbNotificationManager(
     fun showFailed(errorMessage: String) {
         isManuallyDismissed = false
         val notif = buildNotification(
-            title = "太墟 · 无线 ADB 连接/配对异常",
+            title = "TaiXu · Lỗi kết nối/ghép nối ADB không dây",
             contentText = errorMessage,
             isOngoing = false,
             actions = listOf(

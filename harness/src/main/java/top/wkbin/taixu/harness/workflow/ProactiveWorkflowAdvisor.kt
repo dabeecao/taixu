@@ -26,7 +26,7 @@ sealed interface WorkflowSignal {
         override val timestamp: Long = System.currentTimeMillis(),
     ) : WorkflowSignal {
         override val eventType = "BUILD_FAILED"
-        override val description = error.ifBlank { "项目构建失败，可运行诊断工作流定位环境或依赖问题。" }
+        override val description = error.ifBlank { "Build dự án thất bại; có thể chạy workflow chẩn đoán để xác định vấn đề môi trường hoặc dependency." }
         override val variables = mapOf("BUILD_ERROR" to error, "TARGET_WORKSPACE" to workspacePath)
     }
 
@@ -39,7 +39,7 @@ sealed interface WorkflowSignal {
         val sizeBytes: Long? = null,
     ) : WorkflowSignal {
         override val eventType = "APK_GENERATED"
-        override val description = "观察到 ${apkPath.substringAfterLast('/')} 的新增或变化版本；安装和运行情况尚未验证。"
+        override val description = "Phát hiện phiên bản mới hoặc thay đổi của ${apkPath.substringAfterLast('/')}; tình trạng cài đặt và chạy chưa được xác minh."
         override val variables = buildMap {
             put("APK_PATH", apkPath); put("TARGET_WORKSPACE", workspacePath)
             sha256?.let { put("APK_SHA256", it) }; sizeBytes?.let { put("APK_BYTES", it.toString()) }

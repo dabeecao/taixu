@@ -79,56 +79,56 @@ internal fun RemoteServerDialog(viewModel: RemoteServerViewModel, existing: Remo
     if (state.fingerprint != null) {
         RuntimeAlertDialog(
             onDismissRequest = { viewModel.clear() },
-            title = { Text("确认服务器身份") },
+            title = { Text("Xác nhận danh tính máy chủ") },
             text = { Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
-                Text("请与服务器管理员提供的 SSH 主机指纹核对。确认后才会发送密码或使用私钥认证。")
+                Text("Vui lòng đối chiếu vân tay máy chủ SSH do quản trị viên cung cấp. Chỉ gửi mật khẩu hoặc dùng xác thực khóa riêng sau khi xác nhận.")
                 Spacer(Modifier.height(12.dp))
                 Text(state.fingerprint.orEmpty(), style = MaterialTheme.typography.bodySmall)
             } },
-            confirmButton = { RuntimeTextButton(onClick = viewModel::confirmFingerprint) { Text("指纹一致，连接") } },
-            dismissButton = { RuntimeTextButton(onClick = viewModel::clear) { Text("取消") } },
+            confirmButton = { RuntimeTextButton(onClick = viewModel::confirmFingerprint) { Text("Vân tay khớp, kết nối") } },
+            dismissButton = { RuntimeTextButton(onClick = viewModel::clear) { Text("Hủy") } },
         )
         return
     }
     RuntimeAlertDialog(
         onDismissRequest = { if (!state.busy) { viewModel.clear(); onDismiss() } },
-        title = { Text(if (existing == null) "新增连接" else "编辑连接") },
+        title = { Text(if (existing == null) "Thêm kết nối" else "Sửa kết nối") },
         text = {
             Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text("保存 SSH 连接档案后，可选择它作为主系统。每个档案独立保存认证信息。", style = MaterialTheme.typography.bodySmall,
+                Text("Sau khi lưu hồ sơ kết nối SSH, có thể chọn làm hệ thống chính. Mỗi hồ sơ lưu thông tin xác thực riêng.", style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
-                OutlinedTextField(name, { name = it }, modifier = Modifier.fillMaxWidth(), label = { Text("名称") }, singleLine = true, enabled = !state.busy)
-                OutlinedTextField(host, { host = it }, modifier = Modifier.fillMaxWidth(), label = { Text("主机地址") }, singleLine = true, enabled = !state.busy)
+                OutlinedTextField(name, { name = it }, modifier = Modifier.fillMaxWidth(), label = { Text("Tên") }, singleLine = true, enabled = !state.busy)
+                OutlinedTextField(host, { host = it }, modifier = Modifier.fillMaxWidth(), label = { Text("Địa chỉ máy chủ") }, singleLine = true, enabled = !state.busy)
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    OutlinedTextField(port, { port = it }, modifier = Modifier.weight(1f), label = { Text("端口") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), singleLine = true, enabled = !state.busy)
-                    OutlinedTextField(username, { username = it }, modifier = Modifier.weight(1f), label = { Text("用户名") }, singleLine = true, enabled = !state.busy)
+                    OutlinedTextField(port, { port = it }, modifier = Modifier.weight(1f), label = { Text("Cổng") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), singleLine = true, enabled = !state.busy)
+                    OutlinedTextField(username, { username = it }, modifier = Modifier.weight(1f), label = { Text("Tên người dùng") }, singleLine = true, enabled = !state.busy)
                 }
-                OutlinedTextField(workspace, { workspace = it }, modifier = Modifier.fillMaxWidth(), label = { Text("工作目录") }, supportingText = { Text("服务器上已存在的目录，需允许当前用户访问") }, singleLine = true, enabled = !state.busy)
+                OutlinedTextField(workspace, { workspace = it }, modifier = Modifier.fillMaxWidth(), label = { Text("Thư mục làm việc") }, supportingText = { Text("Thư mục đã tồn tại trên máy chủ, cần cho phép người dùng hiện tại truy cập") }, singleLine = true, enabled = !state.busy)
                 HorizontalDivider()
-                Text("认证方式", style = MaterialTheme.typography.labelLarge)
+                Text("Cách xác thực", style = MaterialTheme.typography.labelLarge)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    RuntimeOutlinedButton(modifier = Modifier.weight(1f), onClick = { if (keyMode) { keyMode = false; secret = "" } }, enabled = !state.busy) { Text(if (!keyMode) "✓ 密码" else "密码") }
-                    RuntimeOutlinedButton(modifier = Modifier.weight(1f), onClick = { if (!keyMode) { keyMode = true; secret = "" } }, enabled = !state.busy) { Text(if (keyMode) "✓ SSH 私钥" else "SSH 私钥") }
+                    RuntimeOutlinedButton(modifier = Modifier.weight(1f), onClick = { if (keyMode) { keyMode = false; secret = "" } }, enabled = !state.busy) { Text(if (!keyMode) "✓ Mật khẩu" else "Mật khẩu") }
+                    RuntimeOutlinedButton(modifier = Modifier.weight(1f), onClick = { if (!keyMode) { keyMode = true; secret = "" } }, enabled = !state.busy) { Text(if (keyMode) "✓ Khóa SSH" else "Khóa SSH") }
                 }
-                OutlinedTextField(secret, { secret = it }, modifier = Modifier.fillMaxWidth(), label = { Text(if (keyMode) "PEM / OpenSSH 私钥" else "密码") },
+                OutlinedTextField(secret, { secret = it }, modifier = Modifier.fillMaxWidth(), label = { Text(if (keyMode) "Khóa riêng PEM / OpenSSH" else "Mật khẩu") },
                     visualTransformation = if (showSecret) VisualTransformation.None else PasswordVisualTransformation(), singleLine = !keyMode, maxLines = 5, enabled = !state.busy,
-                    trailingIcon = { RuntimeTextButton(onClick = { showSecret = !showSecret }) { Text(if (showSecret) "隐藏" else "显示") } })
+                    trailingIcon = { RuntimeTextButton(onClick = { showSecret = !showSecret }) { Text(if (showSecret) "Ẩn" else "Hiện") } })
                 if (keyMode) {
-                    RuntimeTextButton(onClick = { importKey.launch(arrayOf("*/*")) }, enabled = !state.busy) { Text("从文件导入私钥") }
-                    OutlinedTextField(phrase, { phrase = it }, modifier = Modifier.fillMaxWidth(), label = { Text("私钥口令（可选）") }, singleLine = true,
+                    RuntimeTextButton(onClick = { importKey.launch(arrayOf("*/*")) }, enabled = !state.busy) { Text("Nhập khóa riêng từ tệp") }
+                    OutlinedTextField(phrase, { phrase = it }, modifier = Modifier.fillMaxWidth(), label = { Text("Mật khẩu khóa riêng (tùy chọn)") }, singleLine = true,
                         visualTransformation = PasswordVisualTransformation(), enabled = !state.busy)
                 }
                 HorizontalDivider()
-                Text("连接测试", style = MaterialTheme.typography.labelLarge)
-                Text("测试不会保存配置。首次连接需核对主机指纹，服务器需启用 SSH / SFTP。", style = MaterialTheme.typography.bodySmall)
-                RuntimeOutlinedButton(enabled = valid && !state.busy, onClick = { viewModel.test(server(), SshCredentials(secret, phrase)) }) { Text("测试连接") }
+                Text("Kiểm tra kết nối", style = MaterialTheme.typography.labelLarge)
+                Text("Kiểm tra không lưu cấu hình. Lần kết nối đầu cần đối chiếu vân tay máy chủ, máy chủ cần bật SSH / SFTP.", style = MaterialTheme.typography.bodySmall)
+                RuntimeOutlinedButton(enabled = valid && !state.busy, onClick = { viewModel.test(server(), SshCredentials(secret, phrase)) }) { Text("Kiểm tra kết nối") }
                 (state.message ?: importError)?.let { Text(it, color = if (state.tested) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error) }
                 if (state.busy) RuntimeLinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
         },
         confirmButton = { RuntimeTextButton(enabled = valid && !state.busy, onClick = {
             viewModel.connect(server(), SshCredentials(secret, phrase))
-        }) { Text(if (state.busy) "验证中…" else "保存") } },
-        dismissButton = { RuntimeTextButton(enabled = !state.busy, onClick = { viewModel.clear(); onDismiss() }) { Text("取消") } },
+        }) { Text(if (state.busy) "Đang xác minh…" else "Lưu") } },
+        dismissButton = { RuntimeTextButton(enabled = !state.busy, onClick = { viewModel.clear(); onDismiss() }) { Text("Hủy") } },
     )
 }

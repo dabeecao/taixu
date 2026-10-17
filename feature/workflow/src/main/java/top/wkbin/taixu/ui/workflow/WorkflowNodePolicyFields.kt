@@ -18,14 +18,14 @@ internal fun WorkflowNodePolicyFields(type: WorkflowNodeType, timeout: String, o
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         if (type != WorkflowNodeType.HUMAN_APPROVAL) OutlinedTextField(
             value = timeout, onValueChange = { onTimeout(it.filter(Char::isDigit).take(4)) },
-            label = { Text("超时（秒）") }, supportingText = { Text("1–3600 秒") },
+            label = { Text("Timeout (giây)") }, supportingText = { Text("1–3600 giây") },
             isError = timeout.toIntOrNull()?.let { it in 1..3600 } != true,
             singleLine = true, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.weight(1f),
         )
         Column(Modifier.weight(1.2f)) {
             RuntimeOutlinedButton(onClick = { expanded = true }, modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
-                Text("策略：${policy.label()}", maxLines = 1)
+                Text("Chính sách: ${policy.label()}", maxLines = 1)
             }
             DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                 FailurePolicy.entries.forEach { item ->

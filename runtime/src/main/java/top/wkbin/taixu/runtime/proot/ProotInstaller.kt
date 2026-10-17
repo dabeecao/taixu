@@ -54,7 +54,7 @@ class ProotInstaller(
             AppResult.Failure(
                 AppError(
                     code = ErrorCode.INSTALLATION_FAILED,
-                    message = "PRoot 运行组件校验失败：${throwable.message ?: "未知错误"}",
+                    message = "Kiểm tra thành phần runtime PRoot thất bại: ${throwable.message ?: "Lỗi không xác định"}",
                     cause = throwable,
                 ),
             )

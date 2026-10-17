@@ -79,7 +79,7 @@ class WorkflowApprovalNotifier(
             val manager = context.getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(
                 NotificationChannel(CHANNEL_ID, "工作流审批", NotificationManager.IMPORTANCE_HIGH).apply {
-                    description = "工作流执行到人工审批节点时的提醒"
+                    description = "Nhắc nhở khi luồng công việc chạy tới nút phê duyệt thủ công"
                     lockscreenVisibility = Notification.VISIBILITY_PUBLIC
                 },
             )
@@ -115,10 +115,10 @@ class WorkflowApprovalNotifier(
             val notification = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.taixu_notification)
                 .setContentTitle("工作流等待审批")
-                .setContentText(title.ifBlank { "节点 $nodeId 需要你批准后继续执行" })
+                .setContentText(title.ifBlank { "Nút $nodeId cần bạn phê duyệt để tiếp tục thực thi" })
                 .setStyle(
                     NotificationCompat.BigTextStyle()
-                        .bigText(title.ifBlank { "节点 $nodeId 需要你批准后继续执行" }),
+                        .bigText(title.ifBlank { "Nút $nodeId cần bạn phê duyệt để tiếp tục thực thi" }),
                 )
                 .setContentIntent(openRun)
                 .setAutoCancel(true)

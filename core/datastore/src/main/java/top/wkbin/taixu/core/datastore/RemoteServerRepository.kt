@@ -21,7 +21,7 @@ interface RemoteServerRepository {
     val configurationError: StateFlow<String?> get() = MutableStateFlow(null)
     suspend fun credentials(id: String): SshCredentials
     suspend fun connection(id: String): Pair<RemoteServer, SshCredentials> =
-        checkNotNull(servers.value.singleOrNull { it.id == id }) { "服务器配置已移除" } to credentials(id)
+        checkNotNull(servers.value.singleOrNull { it.id == id }) { "Đã gỡ cấu hình máy chủ" } to credentials(id)
     suspend fun save(server: RemoteServer, credentials: SshCredentials)
     suspend fun select(id: String?)
     suspend fun remove(id: String)
@@ -55,17 +55,17 @@ class EncryptedRemoteServerRepository internal constructor(private val file: Ato
         snapshot.entries.single { it.server.id == id }.credentials
     }
     override suspend fun connection(id: String) = mutex.withLock {
-        val entry = snapshot.entries.singleOrNull { it.server.id == id } ?: error("服务器配置已移除")
+        val entry = snapshot.entries.singleOrNull { it.server.id == id } ?: error("Đã gỡ cấu hình máy chủ")
         entry.server to entry.credentials
     }
     override suspend fun save(server: RemoteServer, credentials: SshCredentials) = mutate {
         server.validate()
-        require(server.fingerprint.startsWith("SHA256:")) { "请先验证服务器主机指纹" }
-        require(credentials.secret.isNotBlank()) { "请输入密码或私钥" }
+        require(server.fingerprint.startsWith("SHA256:")) { "Hãy xác minh fingerprint của máy chủ trước" }
+        require(credentials.secret.isNotBlank()) { "Hãy nhập mật khẩu hoặc khóa riêng" }
         copy(entries = entries.filterNot { it.server.id == server.id } + Entry(server, credentials))
     }
     override suspend fun select(id: String?) = mutate(recover = id == null) {
-        require(id == null || entries.any { it.server.id == id }) { "服务器不存在" }
+        require(id == null || entries.any { it.server.id == id }) { "Máy chủ không tồn tại" }
         copy(active = id)
     }
     override suspend fun remove(id: String) = mutate {
@@ -73,14 +73,14 @@ class EncryptedRemoteServerRepository internal constructor(private val file: Ato
     }
     private suspend fun mutate(recover: Boolean = false, update: Snapshot.() -> Snapshot) = withContext(Dispatchers.IO) {
         mutex.withLock {
-            check(errorState.value == null || recover) { "连接存档不可用，请先明确选择本地系统" }
+            check(errorState.value == null || recover) { "Kho lưu trữ kết nối không khả dụng, hãy chọn rõ hệ thống cục bộ trước" }
             if (errorState.value != null) {
                 // An explicit local selection unlocks recovery; preserve the damaged encrypted archive.
                 if (file.baseFile.exists()) file.baseFile.copyTo(File(file.baseFile.path + ".unreadable-${System.nanoTime()}"))
             }
             val next = snapshot.update()
             val bytes = encrypt(json.encodeToString(Snapshot.serializer(), next)).toByteArray(Charsets.UTF_8)
-            require(bytes.size <= 2 * 1024 * 1024) { "连接存档超过大小上限" }
+            require(bytes.size <= 2 * 1024 * 1024) { "Kho lưu trữ kết nối vượt quá giới hạn dung lượng" }
             val stream = file.startWrite()
             try { stream.write(bytes); file.finishWrite(stream) }
             catch (t: Throwable) { file.failWrite(stream); throw t }

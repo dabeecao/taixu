@@ -331,7 +331,7 @@ class HarnessLoop(
         sessionDao.upsert(
             HarnessSessionEntity(
                 id = id,
-                title = title.ifBlank { "新会话" },
+                title = title.ifBlank { "Cuộc trò chuyện mới" },
                 createdAt = System.currentTimeMillis(),
                 updatedAt = System.currentTimeMillis(),
                 modelId = defaultModel?.id,
@@ -578,7 +578,7 @@ class HarnessLoop(
             if (nextSession != null) {
                 loadSession(nextSession.id)
             } else {
-                newSession("新会话")
+                newSession("Cuộc trò chuyện mới")
             }
         }
     }

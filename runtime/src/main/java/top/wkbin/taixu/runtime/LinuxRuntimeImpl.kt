@@ -369,7 +369,7 @@ class LinuxRuntimeImpl(
             return@withContext false
         }
         if (!pathManager.isProotInstalled()) {
-            val message = "已安装的 Linux 环境无法恢复：PRoot 运行组件不完整（APK 内 native 库缺失或不可读）"
+            val message = "Không khôi phục được môi trường Linux đã cài: thành phần chạy PRoot không đầy đủ (thiếu hoặc không đọc được thư viện native trong APK)"
             logger.e("Restore failed: $message")
             _state.value = RuntimeState.Error(IllegalStateException(message))
             return@withContext false
@@ -391,7 +391,7 @@ class LinuxRuntimeImpl(
             return@withContext false
         }
         if (!health.isHealthy) {
-            val message = "已安装的 Linux 环境健康检查未通过：${health.detail.orEmpty()}"
+            val message = "Môi trường Linux đã cài không vượt qua kiểm tra sức khỏe: ${health.detail.orEmpty()}"
             logger.e("Restore failed: $message")
             _state.value = RuntimeState.Error(IllegalStateException(message))
             return@withContext false
@@ -455,7 +455,7 @@ class LinuxRuntimeImpl(
             } catch (cancellation: CancellationException) {
                 val targetDistro = distroId?.lowercase()?.trim() ?: _activeDistroId.value
                 rootfsInstaller.rollbackPendingUpdate(targetDistro)
-                _state.value = RuntimeState.Error(IllegalStateException("RootFS 更新已取消，旧版本已恢复"))
+                _state.value = RuntimeState.Error(IllegalStateException("Đã hủy cập nhật RootFS, phiên bản cũ đã được khôi phục"))
                 throw cancellation
             } catch (throwable: Throwable) {
                 val targetDistro = distroId?.lowercase()?.trim() ?: _activeDistroId.value

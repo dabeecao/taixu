@@ -186,7 +186,7 @@ class OnboardingViewModel(
                     _discoveredModels.value = models
                     models.firstOrNull()?.let { _modelId.value = it }
                 }
-                .onFailure { _modelDiscoveryError.value = it.message ?: "刷新模型失败" }
+                .onFailure { _modelDiscoveryError.value = it.message ?: "Làm mới mô hình thất bại" }
             _discoveringModels.value = false
         }
     }
@@ -233,7 +233,7 @@ class OnboardingViewModel(
             } catch (cancellation: CancellationException) {
                 throw cancellation
             } catch (throwable: Throwable) {
-                _importError.value = throwable.message ?: "无法导入所选 RootFS 文件"
+                _importError.value = throwable.message ?: "Không thể nhập tệp RootFS đã chọn"
             } finally {
                 imported.delete()
                 _isImporting.value = false

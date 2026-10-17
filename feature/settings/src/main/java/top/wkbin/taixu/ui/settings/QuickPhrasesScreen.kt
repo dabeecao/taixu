@@ -82,11 +82,11 @@ fun QuickPhrasesScreen(
     val pendingDeletePhrase = pendingDeletePhraseId?.let { id -> phrases.firstOrNull { it.id == id } }
 
     val filterOptions = listOf(
-        "ALL" to "全部 (${phrases.size})",
-        "GENERAL" to "通用",
+        "ALL" to "Tất cả (${phrases.size})",
+        "GENERAL" to "Chung",
         "ANDROID" to "Android",
         "FLUTTER" to "Flutter",
-        "REVERSE" to "逆向分析",
+        "REVERSE" to "Phân tích đảo ngược",
     )
 
     val filteredPhrases = remember(phrases, selectedFilter) {
@@ -103,8 +103,8 @@ fun QuickPhrasesScreen(
     if (showResetDialog) {
         RuntimeAlertDialog(
             onDismissRequest = { showResetDialog = false },
-            title = { Text("重置快捷短语预设", fontWeight = FontWeight.Bold) },
-            text = { Text("确定要恢复出厂默认的快捷短语与指令吗？这将清除你自定义添加的短语。") },
+            title = { Text("Đặt lại preset cụm từ nhanh", fontWeight = FontWeight.Bold) },
+            text = { Text("Xác nhận khôi phục cụm từ nhanh & lệnh mặc định gốc? Thao tác này sẽ xóa các cụm từ bạn tự thêm.") },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -112,12 +112,12 @@ fun QuickPhrasesScreen(
                         showResetDialog = false
                     },
                 ) {
-                    Text("确认重置", color = MaterialTheme.colorScheme.error)
+                    Text("Xác nhận đặt lại", color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showResetDialog = false }) {
-                    Text("取消")
+                    Text("Hủy")
                 }
             },
         )
@@ -149,8 +149,8 @@ fun QuickPhrasesScreen(
     pendingDeletePhrase?.let { phrase ->
         RuntimeAlertDialog(
             onDismissRequest = { pendingDeletePhraseId = null },
-            title = { Text("删除快捷短语", fontWeight = FontWeight.Bold) },
-            text = { Text("确定要删除「${phrase.title}」吗？删除后不可恢复。") },
+            title = { Text("Xóa cụm từ nhanh", fontWeight = FontWeight.Bold) },
+            text = { Text("Xác nhận xóa \"${phrase.title}\"? Không thể khôi phục sau khi xóa.") },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -158,12 +158,12 @@ fun QuickPhrasesScreen(
                         pendingDeletePhraseId = null
                     },
                 ) {
-                    Text("确认删除", color = MaterialTheme.colorScheme.error)
+                    Text("Xác nhận xóa", color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { pendingDeletePhraseId = null }) {
-                    Text("取消")
+                    Text("Hủy")
                 }
             },
         )
@@ -175,13 +175,13 @@ fun QuickPhrasesScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
             RuntimeTopBar(
-                title = "快捷短语与常用指令",
+                title = "Cụm từ nhanh và lệnh thường dùng",
                 onBack = onBack,
                 scrollBehavior = scrollBehavior,
                 actions = {
                     IconButton(
                         onClick = { showResetDialog = true },
-                        contentDescription = "重置快捷短语预设",
+                        contentDescription = "Đặt lại preset cụm từ nhanh",
                     ) {
                         RuntimeIcon(
                             name = RuntimeIconName.Refresh,
@@ -191,7 +191,7 @@ fun QuickPhrasesScreen(
                     }
                     IconButton(
                         onClick = { isCreating = true },
-                        contentDescription = "新增快捷短语",
+                        contentDescription = "Thêm cụm từ nhanh",
                     ) {
                         RuntimeIcon(
                             name = RuntimeIconName.Plus,
@@ -258,12 +258,12 @@ fun QuickPhrasesScreen(
                             tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                         )
                         Text(
-                            text = "暂无匹配的快捷短语",
+                            text = "Chưa có cụm từ nhanh phù hợp",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Button(onClick = { isCreating = true }) {
-                            Text("添加首条快捷短语")
+                            Text("Thêm cụm từ nhanh đầu tiên")
                         }
                     }
                 }
@@ -327,17 +327,17 @@ private fun QuickPhraseEditorDialog(
     )
 
     val projectTypeOptions = listOf(
-        null to "通用（所有会话可见）",
-        "ANDROID" to "Android 工程专属",
-        "FLUTTER" to "Flutter 工程专属",
-        "REVERSE" to "逆向分析专属",
+        null to "Chung (hiển thị mọi phiên)",
+        "ANDROID" to "Riêng cho dự án Android",
+        "FLUTTER" to "Riêng cho dự án Flutter",
+        "REVERSE" to "Riêng cho phân tích đảo ngược",
     )
 
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = if (phrase == null) "新增快捷短语" else "编辑快捷短语",
+                text = if (phrase == null) "Thêm cụm từ nhanh" else "Sửa cụm từ nhanh",
                 fontWeight = FontWeight.Bold,
             )
         },
@@ -352,8 +352,8 @@ private fun QuickPhraseEditorDialog(
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    label = { Text("短语标题") },
-                    placeholder = { Text("例如：运行代码 / 代码审查") },
+                    label = { Text("Tiêu đề cụm từ") },
+                    placeholder = { Text("VD: Chạy code / Review code") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -361,8 +361,8 @@ private fun QuickPhraseEditorDialog(
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text("简短说明（可选）") },
-                    placeholder = { Text("例如：执行当前工作区的单元测试") },
+                    label = { Text("Mô tả ngắn (tùy chọn)") },
+                    placeholder = { Text("VD: Chạy unit test của không gian làm việc hiện tại") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -370,8 +370,8 @@ private fun QuickPhraseEditorDialog(
                 OutlinedTextField(
                     value = content,
                     onValueChange = { content = it },
-                    label = { Text("提示词 / 命令模板") },
-                    placeholder = { Text("输入要自动填入或触发的指令/Prompt...") },
+                    label = { Text("Prompt / mẫu lệnh") },
+                    placeholder = { Text("Nhập lệnh/Prompt muốn tự điền hoặc kích hoạt...") },
                     minLines = 3,
                     maxLines = 8,
                     modifier = Modifier.fillMaxWidth(),
@@ -383,10 +383,10 @@ private fun QuickPhraseEditorDialog(
                     onExpandedChange = { projectTypeDropdownExpanded = !projectTypeDropdownExpanded },
                 ) {
                     OutlinedTextField(
-                        value = projectTypeOptions.firstOrNull { it.first == targetProjectType }?.second ?: "通用",
+                        value = projectTypeOptions.firstOrNull { it.first == targetProjectType }?.second ?: "Chung",
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("适用工程类型") },
+                        label = { Text("Loại dự án áp dụng") },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(projectTypeDropdownExpanded) },
                         modifier = Modifier
                             .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
@@ -409,7 +409,7 @@ private fun QuickPhraseEditorDialog(
                 }
 
                 // 图标选择器
-                Text("选择图标：", style = MaterialTheme.typography.labelMedium)
+                Text("Chọn biểu tượng:", style = MaterialTheme.typography.labelMedium)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -457,12 +457,12 @@ private fun QuickPhraseEditorDialog(
                 },
                 enabled = title.isNotBlank() && content.isNotBlank(),
             ) {
-                Text("保存")
+                Text("Lưu")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Hủy")
             }
         },
     )

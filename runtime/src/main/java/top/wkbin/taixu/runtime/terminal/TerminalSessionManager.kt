@@ -75,11 +75,11 @@ class TerminalSessionManager(
                     if (_handles.value.any { it.id == row.id }) continue
                     try {
                         synchronized(stateLock) { resources[row.id] }?.takeIf { it.failedCreation }?.let { release(it, deleteRow = false) }
-                        check(!row.distributionId.startsWith("ssh:") || row.executionTargetJson != null) { "旧终端未记录主机身份，请移除记录后新建" }
+                        check(!row.distributionId.startsWith("ssh:") || row.executionTargetJson != null) { "Terminal cũ chưa ghi danh tính host, hãy xóa bản ghi rồi tạo mới" }
                         createSession(row.label, row.workingDirectory, row.distributionId, row.id)
                     } catch (e: CancellationException) { throw e }
                     catch (e: Exception) {
-                        _restoreFailures.update { it + TerminalRestoreFailure(row.id, row.label, e.message?.take(180) ?: "恢复失败") }
+                        _restoreFailures.update { it + TerminalRestoreFailure(row.id, row.label, e.message?.take(180) ?: "Khôi phục thất bại") }
                         // Unconfirmed disposal must remain blocking and reachable for retry.
                         if (synchronized(stateLock) { resources.containsKey(row.id) }) throw e
                     }
@@ -95,7 +95,7 @@ class TerminalSessionManager(
     }
 
     suspend fun createSession(
-        label: String = "会话 ${_handles.value.size + 1}",
+        label: String = "Phiên ${_handles.value.size + 1}",
         workingDirectory: String = DEFAULT_CWD,
         distributionId: String? = null,
         id: String = UUID.randomUUID().toString(),
@@ -110,7 +110,7 @@ class TerminalSessionManager(
         try {
             val previous = terminalSessionDao.listAll().firstOrNull { it.id == id }
             check(previous?.distributionId?.startsWith("ssh:") != true || previous.executionTargetJson != null) {
-                "旧远程终端未记录主机身份，请关闭后新建终端"
+                "Terminal remote cũ chưa ghi danh tính host, hãy đóng rồi tạo terminal mới"
             }
             val targetJson = previous?.executionTargetJson ?: capturedTarget
             if (targetJson != null) environmentFactory?.restore("terminal:$id", "", targetJson)
@@ -165,7 +165,7 @@ class TerminalSessionManager(
         val existing = _handles.value.firstOrNull { it.workingDirectory == workingDirectory &&
             (distributionId == null || it.distributionId == distributionId) }
         if (existing != null) { _activeId.value = existing.id; return existing }
-        return createSession(project.ifBlank { "工作区" }, workingDirectory, distributionId)
+        return createSession(project.ifBlank { "Không gian làm việc" }, workingDirectory, distributionId)
     }
 
     fun switchTo(id: String) {
@@ -173,7 +173,7 @@ class TerminalSessionManager(
     }
 
     suspend fun removeFailedRestoration(id: String) = restoreMutex.withLock {
-        require(_restoreFailures.value.any { it.id == id } && _handles.value.none { it.id == id }) { "此记录不是恢复失败的终端" }
+        require(_restoreFailures.value.any { it.id == id } && _handles.value.none { it.id == id }) { "Bản ghi này không phải terminal khôi phục thất bại" }
         closeSession(id)
         terminalSessionDao.delete(id)
         _restoreFailures.update { failures -> failures.filterNot { it.id == id } }
@@ -195,7 +195,7 @@ class TerminalSessionManager(
             (owned.published && _handles.value.isEmpty() && !closingAll && generation == version && !fallbackPending)
                 .also { if (it) fallbackPending = true }
         }
-        if (fallback) try { createSession(label = "主终端", workingDirectory = DEFAULT_CWD) }
+        if (fallback) try { createSession(label = "Terminal chính", workingDirectory = DEFAULT_CWD) }
         finally { synchronized(stateLock) { fallbackPending = false } }
     }
 

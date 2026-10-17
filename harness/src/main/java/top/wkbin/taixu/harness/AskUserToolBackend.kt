@@ -37,7 +37,7 @@ class AskUserToolBackend(
                 createdAt = request.now,
                 toolCallId = request.toolCall.id,
                 success = false,
-                output = "该工具需要用户回答，但当前子智能体 Lane 不支持暂停等待用户输入，本次没有创建问题请求。请将问题交接给主智能体，由主会话重新发起 ask_user。",
+                output = "Công cụ này cần người dùng trả lời, nhưng Lane sub-agent hiện tại không hỗ trợ tạm dừng chờ nhập liệu, lần này không tạo yêu cầu câu hỏi. Hãy chuyển câu hỏi cho agent chính, để phiên chính khởi tạo lại ask_user.",
                 approvalDeferred = true,
             )
         }
@@ -48,11 +48,11 @@ class AskUserToolBackend(
             success = false,
             output = output,
         )
-        if (request.sessionId.isBlank()) return failure("ask_user 需要会话上下文（sessionId 为空）")
+        if (request.sessionId.isBlank()) return failure("ask_user cần ngữ cảnh phiên (sessionId trống)")
         val questions = runCatching { AskUserQuestions.parse(request.toolCall.args) }.getOrElse { error ->
-            return failure("ask_user 参数校验未通过：${error.message}。请修正参数后重新调用。")
+            return failure("ask_user kiểm tra tham số chưa qua: ${error.message}. Hãy sửa tham số rồi gọi lại.")
         }
-        val repository = approvalRepository ?: return failure("审批仓储未初始化，无法向用户提问")
+        val repository = approvalRepository ?: return failure("Kho phê duyệt chưa khởi tạo, không thể hỏi người dùng")
         val approvalRequest = approvalPolicyEngine.createRequest(
             sessionId = request.sessionId,
             toolCall = ToolCall(
@@ -67,21 +67,21 @@ class AskUserToolBackend(
                 required = true,
                 riskLevel = "none",
                 reason = questions.first().question.take(200),
-                summary = "智能体向你提问（${questions.size} 个问题）",
+                summary = "Agent hỏi bạn (${questions.size} câu hỏi)",
             ),
             operationId = request.operationId,
         )
         // 问题等待的是用户的思考与决策，TTL 比操作类审批（10 分钟）宽裕
         runCatching { repository.create(approvalRequest.copy(expiresAt = request.now + QUESTION_TTL_MS)) }
             .getOrElse { throwable ->
-                return failure("问题请求落库失败：${throwable.message ?: throwable::class.simpleName}")
+                return failure("Lưu yêu cầu câu hỏi thất bại: ${throwable.message ?: throwable::class.simpleName}")
             }
         return ToolResult(
             id = UUID.randomUUID().toString(),
             createdAt = request.now,
             toolCallId = request.toolCall.id,
             success = true,
-            output = "已向用户提出 ${questions.size} 个问题，等待回答。",
+            output = "Đã đặt ${questions.size} câu hỏi cho người dùng, đang chờ trả lời.",
             awaitingApproval = true,
             approvalRequestId = approvalRequest.id,
         )

@@ -44,9 +44,9 @@ import top.wkbin.taixu.ui.components.RuntimeOutlinedButton
 
 /** 重复方式的展示文案（列表与对话框共用）。 */
 fun scheduleRepeatLabel(entity: WorkflowScheduleEntity): String = when (WorkflowScheduleRepeat.valueOf(entity.repeatType)) {
-    WorkflowScheduleRepeat.DAILY -> "每天 ${"%02d".format(entity.hour ?: 0)}:${"%02d".format(entity.minute ?: 0)}"
-    WorkflowScheduleRepeat.INTERVAL -> "每 ${entity.intervalMinutes ?: WorkflowScheduleRepository.MIN_INTERVAL_MINUTES} 分钟"
-    WorkflowScheduleRepeat.ONCE -> "一次性 · ${
+    WorkflowScheduleRepeat.DAILY -> "Hằng ngày ${"%02d".format(entity.hour ?: 0)}:${"%02d".format(entity.minute ?: 0)}"
+    WorkflowScheduleRepeat.INTERVAL -> "Mỗi ${entity.intervalMinutes ?: WorkflowScheduleRepository.MIN_INTERVAL_MINUTES} phút"
+    WorkflowScheduleRepeat.ONCE -> "Một lần · ${
         SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date(entity.onceAtEpochMillis ?: 0L))
     }"
 }
@@ -90,7 +90,7 @@ fun WorkflowScheduleEditDialog(
 
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (existing == null) "新建定时计划" else "编辑定时计划") },
+        title = { Text(if (existing == null) "Tạo lịch định giờ mới" else "Sửa lịch định giờ") },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -99,65 +99,65 @@ fun WorkflowScheduleEditDialog(
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("计划名称") },
+                    label = { Text("Tên lịch") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 SimplePickerField(
-                    label = "目标工作流",
-                    value = definitions.firstOrNull { it.id == workflowId }?.name ?: "请选择",
+                    label = "Workflow đích",
+                    value = definitions.firstOrNull { it.id == workflowId }?.name ?: "Hãy chọn",
                     options = definitions.map { it.id to it.name },
                     onSelect = { workflowId = it },
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    FilterChip(selected = repeat == WorkflowScheduleRepeat.DAILY, onClick = { repeat = WorkflowScheduleRepeat.DAILY }, label = { Text("每天") })
-                    FilterChip(selected = repeat == WorkflowScheduleRepeat.INTERVAL, onClick = { repeat = WorkflowScheduleRepeat.INTERVAL }, label = { Text("周期") })
-                    FilterChip(selected = repeat == WorkflowScheduleRepeat.ONCE, onClick = { repeat = WorkflowScheduleRepeat.ONCE }, label = { Text("一次性") })
+                    FilterChip(selected = repeat == WorkflowScheduleRepeat.DAILY, onClick = { repeat = WorkflowScheduleRepeat.DAILY }, label = { Text("Hằng ngày") })
+                    FilterChip(selected = repeat == WorkflowScheduleRepeat.INTERVAL, onClick = { repeat = WorkflowScheduleRepeat.INTERVAL }, label = { Text("Chu kỳ") })
+                    FilterChip(selected = repeat == WorkflowScheduleRepeat.ONCE, onClick = { repeat = WorkflowScheduleRepeat.ONCE }, label = { Text("Một lần") })
                 }
                 when (repeat) {
                     WorkflowScheduleRepeat.DAILY -> Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         OutlinedTextField(
                             value = hour, onValueChange = { hour = it.filter(Char::isDigit).take(2) },
-                            label = { Text("时(0-23)") }, singleLine = true, modifier = Modifier.weight(1f),
+                            label = { Text("Giờ (0-23)") }, singleLine = true, modifier = Modifier.weight(1f),
                         )
                         OutlinedTextField(
                             value = minute, onValueChange = { minute = it.filter(Char::isDigit).take(2) },
-                            label = { Text("分(0-59)") }, singleLine = true, modifier = Modifier.weight(1f),
+                            label = { Text("Phút (0-59)") }, singleLine = true, modifier = Modifier.weight(1f),
                         )
                     }
                     WorkflowScheduleRepeat.INTERVAL -> OutlinedTextField(
                         value = intervalMinutes, onValueChange = { intervalMinutes = it.filter(Char::isDigit).take(4) },
-                        label = { Text("间隔分钟（≥15）") }, singleLine = true, modifier = Modifier.fillMaxWidth(),
+                        label = { Text("Số phút giãn cách (≥15)") }, singleLine = true, modifier = Modifier.fillMaxWidth(),
                     )
                     WorkflowScheduleRepeat.ONCE -> OutlinedTextField(
                         value = onceAt, onValueChange = { onceAt = it },
-                        label = { Text("触发时间（yyyy-MM-dd HH:mm）") }, singleLine = true, modifier = Modifier.fillMaxWidth(),
+                        label = { Text("Thời gian kích hoạt (yyyy-MM-dd HH:mm)") }, singleLine = true, modifier = Modifier.fillMaxWidth(),
                     )
                 }
                 OutlinedTextField(
                     value = variablesText,
                     onValueChange = { variablesText = it },
-                    label = { Text("变量（每行 KEY=VALUE，可空）") },
+                    label = { Text("Biến (mỗi dòng KEY=VALUE, có thể trống)") },
                     modifier = Modifier.fillMaxWidth().heightIn(min = 72.dp),
                     textStyle = TextStyle(fontFamily = FontFamily.Monospace, fontSize = MaterialTheme.typography.bodySmall.fontSize),
                 )
                 OutlinedTextField(
                     value = workspacePath,
                     onValueChange = { workspacePath = it },
-                    label = { Text("工作区路径") },
+                    label = { Text("Đường dẫn không gian làm việc") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 SimplePickerField(
-                    label = "模型（可选，默认走全局）",
-                    value = models.firstOrNull { it.id == modelId }?.name ?: "全局默认",
-                    options = listOf("" to "全局默认") + models.map { it.id to it.name },
+                    label = "Mô hình (tùy chọn, mặc định theo toàn cục)",
+                    value = models.firstOrNull { it.id == modelId }?.name ?: "Mặc định toàn cục",
+                    options = listOf("" to "Mặc định toàn cục") + models.map { it.id to it.name },
                     onSelect = { modelId = it },
                 )
                 error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
             }
         },
-        dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("取消") } },
+        dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("Hủy") } },
         confirmButton = {
             RuntimeButton(
                 onClick = {
@@ -173,7 +173,7 @@ fun WorkflowScheduleEditDialog(
                         onFailure = { error = it.message },
                     )
                 },
-            ) { Text("保存") }
+            ) { Text("Lưu") }
         },
     )
 }
@@ -192,8 +192,8 @@ private fun validateAndBuild(
     workspacePath: String,
     modelId: String,
 ): Result<WorkflowScheduleEntity> {
-    if (name.isBlank()) return Result.failure(IllegalArgumentException("请填写计划名称"))
-    if (definitions.none { it.id == workflowId }) return Result.failure(IllegalArgumentException("请选择目标工作流"))
+    if (name.isBlank()) return Result.failure(IllegalArgumentException("Hãy nhập tên lịch"))
+    if (definitions.none { it.id == workflowId }) return Result.failure(IllegalArgumentException("Hãy chọn workflow đích"))
     val variables = parseVariables(variablesText).fold(
         onSuccess = { it },
         onFailure = { return Result.failure(it) },
@@ -201,16 +201,16 @@ private fun validateAndBuild(
     val now = System.currentTimeMillis()
     return when (repeat) {
         WorkflowScheduleRepeat.DAILY -> {
-            val h = hour.toIntOrNull() ?: return Result.failure(IllegalArgumentException("时必须是数字"))
-            val m = minute.toIntOrNull() ?: return Result.failure(IllegalArgumentException("分必须是数字"))
-            if (h !in 0..23 || m !in 0..59) return Result.failure(IllegalArgumentException("时刻超出范围"))
+            val h = hour.toIntOrNull() ?: return Result.failure(IllegalArgumentException("Giờ phải là số"))
+            val m = minute.toIntOrNull() ?: return Result.failure(IllegalArgumentException("Phút phải là số"))
+            if (h !in 0..23 || m !in 0..59) return Result.failure(IllegalArgumentException("Giờ vượt phạm vi"))
             Result.success(buildEntity(existing, name, workflowId, repeat, h, m, null, null, variables, workspacePath, modelId, now))
         }
         WorkflowScheduleRepeat.INTERVAL -> {
             val minutes = intervalMinutes.toIntOrNull()
-                ?: return Result.failure(IllegalArgumentException("间隔必须是数字"))
+                ?: return Result.failure(IllegalArgumentException("Khoảng cách phải là số"))
             if (minutes < WorkflowScheduleRepository.MIN_INTERVAL_MINUTES) {
-                return Result.failure(IllegalArgumentException("间隔至少 ${WorkflowScheduleRepository.MIN_INTERVAL_MINUTES} 分钟"))
+                return Result.failure(IllegalArgumentException("Giãn cách tối thiểu ${WorkflowScheduleRepository.MIN_INTERVAL_MINUTES} phút"))
             }
             Result.success(buildEntity(existing, name, workflowId, repeat, null, null, minutes, null, variables, workspacePath, modelId, now))
         }
@@ -220,8 +220,8 @@ private fun validateAndBuild(
                 parser.parse(onceAt.trim())?.time
             } catch (_: ParseException) {
                 null
-            } ?: return Result.failure(IllegalArgumentException("触发时间格式应为 yyyy-MM-dd HH:mm"))
-            if (target <= now) return Result.failure(IllegalArgumentException("触发时间必须晚于当前时刻"))
+            } ?: return Result.failure(IllegalArgumentException("Định dạng thời gian kích hoạt phải là yyyy-MM-dd HH:mm"))
+            if (target <= now) return Result.failure(IllegalArgumentException("Thời gian kích hoạt phải sau thời điểm hiện tại"))
             Result.success(buildEntity(existing, name, workflowId, repeat, null, null, null, target, variables, workspacePath, modelId, now))
         }
     }
@@ -265,7 +265,7 @@ private fun parseVariables(text: String): Result<Map<String, String>> {
     text.lines().forEach { raw ->
         val line = raw.trim().takeIf { it.isNotEmpty() } ?: return@forEach
         val index = line.indexOf('=')
-        if (index <= 0) return Result.failure(IllegalArgumentException("变量行格式错误：$line"))
+        if (index <= 0) return Result.failure(IllegalArgumentException("Định dạng dòng biến sai: $line"))
         map[line.substring(0, index).trim()] = line.substring(index + 1).trim()
     }
     return Result.success(map)

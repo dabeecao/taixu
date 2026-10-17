@@ -206,8 +206,8 @@ class FtpServiceManager(
             hideNotification()
             ftpServer = null
             serviceDistroId = null
-            _state.value = FtpServiceState.Failed(distroId, throwable.message ?: "FTP 服务启动失败")
-            appendLog("FTP 服务启动失败: ${throwable.message}")
+            _state.value = FtpServiceState.Failed(distroId, throwable.message ?: "Khởi động dịch vụ FTP thất bại")
+            appendLog("Khởi động dịch vụ FTP thất bại: ${throwable.message}")
             throw throwable
         }
     }
@@ -296,7 +296,7 @@ class FtpServiceManager(
                     "太墟 Linux FTP 文件服务",
                     NotificationManager.IMPORTANCE_LOW,
                 ).apply {
-                    description = "用于展示 Linux 沙箱 FTP 远程文件访问运行状态的常驻通知"
+                    description = "Thông báo thường trú hiển thị trạng thái chạy của tính năng truy cập tệp từ xa qua FTP trong sandbox Linux"
                     setShowBadge(false)
                 },
             )
@@ -305,7 +305,7 @@ class FtpServiceManager(
         val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.stat_notify_sync)
             .setContentTitle("Linux FTP 远程文件服务运行中")
-            .setContentText("连接地址: $url")
+            .setContentText("Địa chỉ kết nối: $url")
             .setOngoing(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()

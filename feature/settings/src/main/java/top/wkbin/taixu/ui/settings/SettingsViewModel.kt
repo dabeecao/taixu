@@ -302,7 +302,7 @@ class SettingsViewModel(
             res.onSuccess { info ->
                 _updateCheckState.value = UpdateCheckState.Success(info)
             }.onFailure { err ->
-                _updateCheckState.value = UpdateCheckState.Error(err.message ?: "检查更新失败，请检查网络")
+                _updateCheckState.value = UpdateCheckState.Error(err.message ?: "Kiểm tra cập nhật thất bại, vui lòng kiểm tra mạng")
             }
         }
     }
@@ -324,7 +324,7 @@ class SettingsViewModel(
                 appUpdateManager.installApk(apkFile)
             }.onFailure { err ->
                 _downloadProgress.value = null
-                _updateCheckState.value = UpdateCheckState.Error("下载更新包失败：${err.message}")
+                _updateCheckState.value = UpdateCheckState.Error("Tải gói cập nhật thất bại: ${err.message}")
             }
         }
     }
@@ -939,7 +939,7 @@ class SettingsViewModel(
 
     fun prepareInstallMarketSkill(skillId: String) {
         val installer = skillInstallationManager ?: run {
-            _skillArchiveMessage.value = "技能安全审计与安装引擎未就绪"
+            _skillArchiveMessage.value = "Engine kiểm tra bảo mật & cài đặt skill chưa sẵn sàng"
             _skillArchiveMessageIsError.value = true
             return
         }
@@ -952,7 +952,7 @@ class SettingsViewModel(
                     _pendingSkillInspection.value = res.data
                 }
                 is AppResult.Failure -> {
-                    _skillArchiveMessage.value = "准备技能失败: ${res.error.message}"
+                    _skillArchiveMessage.value = "Chuẩn bị skill thất bại: ${res.error.message}"
                     _skillArchiveMessageIsError.value = true
                 }
             }
@@ -980,7 +980,7 @@ class SettingsViewModel(
                 val inspection = installer.inspectZipBytes(bos.toByteArray(), fallbackId = "custom_zip")
                 _pendingSkillInspection.value = inspection
             } catch (e: Throwable) {
-                _skillArchiveMessage.value = "解析或审计技能包失败: ${e.message}"
+                _skillArchiveMessage.value = "Phân tích hoặc kiểm tra gói skill thất bại: ${e.message}"
                 _skillArchiveMessageIsError.value = true
             }
         }
@@ -994,12 +994,12 @@ class SettingsViewModel(
             try {
                 val skillsDir = File(pathManager.attachmentsDir, "skills").apply { mkdirs() }
                 val skill = installer.commitInstallation(inspection, skillsDir)
-                _skillArchiveMessage.value = "技能“${skill.name}”已通过端侧静态审查并成功安装！"
+                _skillArchiveMessage.value = "Skill “${skill.name}” đã vượt qua kiểm tra tĩnh trên thiết bị và cài đặt thành công!"
                 _skillArchiveMessageIsError.value = false
                 _pendingSkillInspection.value = null
                 loadClawHubMarket()
             } catch (e: Throwable) {
-                _skillArchiveMessage.value = "安装失败: ${e.message}"
+                _skillArchiveMessage.value = "Cài đặt thất bại: ${e.message}"
                 _skillArchiveMessageIsError.value = true
             } finally {
                 _isCommittingInstallation.value = false
@@ -1094,13 +1094,13 @@ class SettingsViewModel(
         val skill = AgentSkill(
             id = id,
             name = trimmedName,
-            description = description.trim().ifBlank { "自定义技能" },
+            description = description.trim().ifBlank { "Skill tùy chỉnh" },
             systemPrompt = trimmedPrompt,
             triggerCommand = command?.trim()?.takeIf { it.isNotBlank() }?.let { if (it.startsWith("/")) it else "/$it" },
             iconName = "Code",
             isEnabled = true,
             isBuiltin = false,
-            category = "自定义",
+            category = "Tùy chỉnh",
         )
         viewModelScope.launch { agentSkillRepository.addCustom(skill) }
     }
@@ -1125,13 +1125,13 @@ class SettingsViewModel(
             }
             if (failures.isEmpty()) {
                 _skillArchiveMessageIsError.value = false
-                _skillArchiveMessage.value = if (successes.size == 1) successes.first() else "批量导入完成，共 ${successes.size} 个：\n${successes.joinToString("\n")}"
+                _skillArchiveMessage.value = if (successes.size == 1) successes.first() else "Nhập hàng loạt hoàn tất, tổng ${successes.size}:\n${successes.joinToString("\n")}"
             } else if (successes.isEmpty()) {
                 _skillArchiveMessageIsError.value = true
-                _skillArchiveMessage.value = if (failures.size == 1) failures.first() else "批量导入失败，共 ${failures.size} 个：\n${failures.joinToString("\n")}"
+                _skillArchiveMessage.value = if (failures.size == 1) failures.first() else "Nhập hàng loạt thất bại, tổng ${failures.size}:\n${failures.joinToString("\n")}"
             } else {
                 _skillArchiveMessageIsError.value = true
-                _skillArchiveMessage.value = "批量导入完成：成功 ${successes.size} 个，失败 ${failures.size} 个\n\n成功：\n${successes.joinToString("\n")}\n\n失败：\n${failures.joinToString("\n")}"
+                _skillArchiveMessage.value = "Nhập hàng loạt hoàn tất: thành công ${successes.size}, thất bại ${failures.size}\n\nThành công:\n${successes.joinToString("\n")}\n\nThất bại:\n${failures.joinToString("\n")}"
             }
         }
     }
@@ -1150,7 +1150,7 @@ class SettingsViewModel(
                 }
                 .onFailure {
                     _skillArchiveMessageIsError.value = true
-                    _skillArchiveMessage.value = it.message ?: "Skill 目录扫描失败"
+                    _skillArchiveMessage.value = it.message ?: "Quét thư mục Skill thất bại"
                 }
         }
     }
@@ -1175,7 +1175,7 @@ class SettingsViewModel(
                 _skillArchiveMessage.value = it
             }.onFailure {
                 _skillArchiveMessageIsError.value = true
-                _skillArchiveMessage.value = it.message ?: "自选目录导入失败"
+                _skillArchiveMessage.value = it.message ?: "Nhập từ thư mục tự chọn thất bại"
             }
         }
     }
@@ -1288,10 +1288,10 @@ class SettingsViewModel(
                 ?: markdown.lineSequence().firstOrNull { it.startsWith("# ") }?.removePrefix("# ")?.trim()
                 ?: promptFile.parentFile?.name
                 ?: id
-            val description = AgentSkillRepository.extractSkillMetadata(markdown, "description") ?: "从压缩包导入的 Skill"
+            val description = AgentSkillRepository.extractSkillMetadata(markdown, "description") ?: "Skill nhập từ file nén"
             val guestPath = "/attachments/skills/$id"
-            val prompt = markdown + "\n\n【Skill 资源目录】$guestPath\n如需执行该 Skill 附带的脚本，请先检查脚本内容与参数，再从此目录调用。"
-            agentSkillRepository.addCustom(AgentSkill(id, skillName, description, prompt, isBuiltin = false, category = "自定义", resourcePath = target.absolutePath))
+            val prompt = markdown + "\n\n【Thư mục tài nguyên Skill】$guestPath\nNếu cần chạy script đi kèm Skill này, hãy kiểm tra nội dung script và tham số trước, rồi gọi từ thư mục này."
+            agentSkillRepository.addCustom(AgentSkill(id, skillName, description, prompt, isBuiltin = false, category = "Tùy chỉnh", resourcePath = target.absolutePath))
             return "Skill“$skillName”导入成功，脚本资源位于 $guestPath"
         } catch (error: Throwable) {
             target?.let(::deleteOwnedSkillDirectory)
@@ -1353,7 +1353,7 @@ class SettingsViewModel(
             val profile = AgentSubagent(
                 id = normalizedId,
                 name = trimmedName,
-                description = description.trim().ifBlank { "自定义子智能体角色" },
+                description = description.trim().ifBlank { "Vai trò sub-agent tùy chỉnh" },
                 systemPrompt = trimmedPrompt,
                 defaultModelId = normalizedDefaultModelId,
                 defaultModelVariant = normalizedDefaultModelId?.let {
@@ -1402,7 +1402,7 @@ class SettingsViewModel(
             if (enabled) {
                 val distroId = linuxRuntime.activeDistroId.value
                 if (!QemuCompatibilityLayout.isReady(pathManager.taixuRootDir(distroId))) {
-                    _qemuCompatibilityMessage.value = "未检测到 QEMU x86_64 兼容环境，无法开启。请先在插件中心安装 qemu-x86-64-compat 插件。"
+                    _qemuCompatibilityMessage.value = "Chưa phát hiện môi trường tương thích QEMU x86_64, không thể bật. Hãy cài plugin qemu-x86-64-compat trong trung tâm plugin trước."
                     return@launch
                 }
             }
@@ -1444,18 +1444,18 @@ class SettingsViewModel(
             val discoveryKey = profileWriter.parseApiKeys(apiKey).firstOrNull() ?: providerRepository.readApiKey()
             // 对于要求 API Key 的服务商，空 key 不发请求，直接给出友好提示
             if (!provider.apiKeyOptional && discoveryKey.isNullOrBlank()) {
-                _modelDiscoveryError.value = "该服务商需要 API Key 才能获取模型列表，请先填写 API Key 后再刷新"
+                _modelDiscoveryError.value = "Nhà cung cấp này cần API Key mới lấy được danh sách mô hình, hãy điền API Key rồi làm mới"
                 _discoveringModels.value = false
                 return@launch
             }
             runCatching { modelDiscovery.discover(provider, cleanUrl, discoveryKey) }
                 .onSuccess { models ->
                     _discoveredModels.value = models
-                    if (models.isEmpty()) _modelDiscoveryError.value = "端点未返回可用的 Agent 模型"
+                    if (models.isEmpty()) _modelDiscoveryError.value = "Endpoint chưa trả về mô hình Agent khả dụng"
                 }
                 .onFailure {
                     logger.w("Model discovery failed: ${it.message}", it)
-                    _modelDiscoveryError.value = "获取模型列表失败，请检查 Base URL、API Key 与网络后重试"
+                    _modelDiscoveryError.value = "Lấy danh sách mô hình thất bại, vui lòng kiểm tra Base URL, API Key và mạng rồi thử lại"
                 }
             _discoveringModels.value = false
         }
@@ -1487,10 +1487,10 @@ class SettingsViewModel(
                     providerName = provider?.name,
                 )
             }
-                .onSuccess { _connectionResult.value = "连接成功" }
+                .onSuccess { _connectionResult.value = "Kết nối thành công" }
                 .onFailure {
                     logger.w("Connection test failed: ${it.message}", it)
-                    _connectionResult.value = "连接失败，请检查接口地址、密钥与网络后重试"
+                    _connectionResult.value = "Kết nối thất bại, vui lòng kiểm tra địa chỉ endpoint, khóa và mạng rồi thử lại"
                 }
             _testingConnection.value = false
         }
@@ -1537,7 +1537,7 @@ class SettingsViewModel(
     ): Boolean {
         val cleanUrl = ProviderEndpointPolicy.normalizeUrl(baseUrl)
         if (!ProviderEndpointPolicy.isSafeBaseUrl(cleanUrl)) {
-            _profileSaveError.value = "Base URL 无效：请填写合法的 http(s) 接口地址，且不能内嵌账号密码"
+            _profileSaveError.value = "Base URL không hợp lệ: hãy điền địa chỉ endpoint http(s) hợp lệ, không được nhúng tài khoản/mật khẩu"
             return false
         }
         _profileSaveError.value = null
@@ -1602,7 +1602,7 @@ class SettingsViewModel(
         // 无法解析）拒绝落库，否则请求期才在 OkHttp 解析处崩溃。
         val cleanUrl = ProviderEndpointPolicy.normalizeUrl(baseUrl)
         if (!ProviderEndpointPolicy.isSafeBaseUrl(cleanUrl)) {
-            _profileSaveError.value = "Base URL 无效：请填写合法的 http(s) 接口地址，且不能内嵌账号密码"
+            _profileSaveError.value = "Base URL không hợp lệ: hãy điền địa chỉ endpoint http(s) hợp lệ, không được nhúng tài khoản/mật khẩu"
             return false
         }
         _profileSaveError.value = null
@@ -1800,8 +1800,8 @@ private fun localLoopbackMcpCandidates(): List<DetectedLocalMcpServer> {
             DetectedLocalMcpServer(
                 server = McpServerConfig(
                     id = "local_probe_${port}_$path",
-                    name = "本机 MCP ($port)",
-                    description = "在 127.0.0.1:$port 上自动探测到的 MCP 服务",
+                    name = "MCP máy này ($port)",
+                    description = "Dịch vụ MCP tự phát hiện trên 127.0.0.1:$port",
                     transportType = McpTransportType.SSE,
                     serverUrl = url,
                     isEnabled = true,

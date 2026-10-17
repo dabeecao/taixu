@@ -196,7 +196,7 @@ class FtpSettingsViewModel(
             } catch (cancellation: CancellationException) {
                 throw cancellation
             } catch (throwable: Throwable) {
-                _message.value = throwable.message ?: "FTP 操作失败"
+                _message.value = throwable.message ?: "Thao tác FTP thất bại"
                 _messageIsError.value = true
             } finally {
                 if (showProgress) _operating.value = false

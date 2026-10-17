@@ -195,7 +195,7 @@ internal class ResponsesApi(
                         }
                         "response.failed" -> {
                             val error = (event["response"] as? JsonObject)?.get("error") as? JsonObject
-                            val message = error?.get("message")?.jsonPrimitive?.contentOrNull ?: "响应处理失败"
+                            val message = error?.get("message")?.jsonPrimitive?.contentOrNull ?: "Xử lý phản hồi thất bại"
                             throw providerStreamError(error?.toString() ?: message)
                         }
                         "response.incomplete" -> {
@@ -203,7 +203,7 @@ internal class ResponsesApi(
                             val reason = (incompleteResponse?.get("incomplete_details") as? JsonObject)
                                 ?.get("reason")?.jsonPrimitive?.contentOrNull
                             requireOutputCompletion(reason, ProviderClient.estimateApiMessageTokens(messages), receivedText.length + demuxer.fullReasoning.length)
-                            throw IllegalStateException("Responses 响应未完成：${reason ?: "未知原因"}")
+                            throw IllegalStateException("Responses phản hồi chưa xong: ${reason ?: "未知原因"}")
                         }
                         "error" -> {
                             throw providerStreamError(event.toString())
@@ -301,7 +301,7 @@ internal class ResponsesApi(
     /** 非 429/5xx 的 HTTP 错误：413 与上下文超限文案走可自愈类型，供引擎紧急压缩后重试。 */
     private fun httpError(code: Int, body: String): Exception {
         val detail = extractError(body)
-        val message = "Responses 请求失败 HTTP $code：$detail"
+        val message = "Request Responses thất bại HTTP $code: $detail"
         return when (ProviderClient.contextOverflowException(code, body)) {
             is LlmContextOverflowException -> LlmContextOverflowException(message)
             is LlmInvalidOutputTokensException -> LlmInvalidOutputTokensException(message)

@@ -75,7 +75,7 @@ internal object TaiXuTableComponent : A2uiComponent {
     private val columnsProperty = A2uiProperty.stringList(
         key = "columns",
         required = true,
-        description = "表头，从左到右。",
+        description = "Hàng tiêu đề, từ trái sang phải.",
         minItems = 1,
         maxItems = MAX_COLUMNS,
     )
@@ -83,7 +83,7 @@ internal object TaiXuTableComponent : A2uiComponent {
     private val cellsProperty = A2uiProperty.stringList(
         key = "cells",
         required = true,
-        description = "该行单元格，顺序和数量与 columns 一致。",
+        description = "Các ô của hàng này, thứ tự và số lượng khớp với columns.",
         minItems = 1,
         maxItems = MAX_COLUMNS,
     )
@@ -92,7 +92,7 @@ internal object TaiXuTableComponent : A2uiComponent {
         key = "rows",
         properties = listOf(cellsProperty),
         required = true,
-        description = "数据行。每项是 {cells: [字符串]}。",
+        description = "Hàng dữ liệu. Mỗi mục có dạng {cells: [chuỗi]}.",
         minItems = 1,
         maxItems = MAX_ROWS,
         isAdditionalPropertiesAllowed = false,
@@ -101,7 +101,7 @@ internal object TaiXuTableComponent : A2uiComponent {
     override val name: String = "Table"
 
     override val description: String =
-        "只读表格，用于对比、排行和看板。columns 是表头，rows[].cells 与 columns 等长。"
+        "Bảng chỉ đọc, dùng để so sánh, xếp hạng và kanban. columns là hàng tiêu đề, rows[].cells dài bằng columns."
 
     override val properties = listOf(columnsProperty, rowsProperty)
 

@@ -34,7 +34,7 @@ class SessionForkConversationRewinder(
         sessionDao.upsert(
             source.copy(
                 id = forkedSessionId,
-                title = "${source.title} · 回退分支",
+                title = "${source.title} · Nhánh quay về",
                 createdAt = now,
                 updatedAt = now,
             ),

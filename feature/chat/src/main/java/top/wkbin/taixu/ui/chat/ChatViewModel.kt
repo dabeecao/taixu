@@ -903,7 +903,7 @@ class ChatViewModel(
             } else {
                 try { harnessLoop.newSession(context.getString(R.string.chat_new_session)) }
                 catch (e: kotlinx.coroutines.CancellationException) { throw e }
-                catch (e: Exception) { _notice.value = e.message ?: "无法创建会话，请明确选择执行环境" }
+                catch (e: Exception) { _notice.value = e.message ?: "Không thể tạo phiên, vui lòng chọn rõ môi trường thực thi" }
             }
             _initializing.value = false
         }
@@ -1151,7 +1151,7 @@ class ChatViewModel(
         viewModelScope.launch {
             try { workspaceCatalogSource.validate(workspaceCatalog.value, workspace); harnessLoop.newSession(title.trim().ifBlank { context.getString(R.string.chat_new_session) }, workspace, projectType) }
             catch (e: kotlinx.coroutines.CancellationException) { throw e }
-            catch (e: Exception) { _notice.value = e.message ?: "会话创建失败，请检查执行环境" }
+            catch (e: Exception) { _notice.value = e.message ?: "Tạo phiên thất bại, vui lòng kiểm tra môi trường thực thi" }
         }
     }
 

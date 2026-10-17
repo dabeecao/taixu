@@ -90,7 +90,7 @@ class StorageUsageViewModel(
                         it.copy(
                             refreshing = false,
                             messageIsError = true,
-                            message = "读取存储占用失败，请点击刷新重试",
+                            message = "Đọc dung lượng lưu trữ thất bại, bấm làm mới để thử lại",
                         )
                     }
                 }

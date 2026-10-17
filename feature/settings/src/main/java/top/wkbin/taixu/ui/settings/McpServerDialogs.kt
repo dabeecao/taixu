@@ -146,7 +146,7 @@ internal fun McpServerDetailDialog(
                                 onClick = {
                                     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
                                     clipboard?.setPrimaryClip(ClipData.newPlainText("mcp_cmd", cmdText))
-                                    Toast.makeText(context, "命令已复制", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "Đã sao chép lệnh", Toast.LENGTH_SHORT).show()
                                 },
                                 modifier = Modifier.size(24.dp),
                             ) {
@@ -172,11 +172,11 @@ internal fun McpServerDetailDialog(
                             onClick = {
                                 val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
                                 clipboard?.setPrimaryClip(ClipData.newPlainText("mcp_json", jsonConfig))
-                                Toast.makeText(context, "JSON 配置已复制", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Đã sao chép cấu hình JSON", Toast.LENGTH_SHORT).show()
                             },
                             contentPadding = PaddingValues(horizontal = 6.dp, vertical = 2.dp),
                         ) {
-                            Text("复制 JSON", style = MaterialTheme.typography.labelSmall)
+                            Text("Sao chép JSON", style = MaterialTheme.typography.labelSmall)
                         }
                     }
                     Surface(
@@ -201,7 +201,7 @@ internal fun McpServerDetailDialog(
                 if (server.authMode == McpAuthMode.OAUTH) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text(
-                            "身份与授权",
+                            "Định danh và cấp quyền",
                             style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -211,18 +211,18 @@ internal fun McpServerDetailDialog(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
                             val label = when (authState) {
-                                McpAuthState.Unauthenticated -> "未授权"
-                                McpAuthState.Authorizing -> "授权中…"
-                                is McpAuthState.Authorized -> "已授权"
-                                is McpAuthState.Error -> "授权失败"
+                                McpAuthState.Unauthenticated -> "Chưa cấp quyền"
+                                McpAuthState.Authorizing -> "Đang cấp quyền…"
+                                is McpAuthState.Authorized -> "Đã cấp quyền"
+                                is McpAuthState.Error -> "Cấp quyền thất bại"
                                 McpAuthState.Unsupported -> "不支持"
                             }
                             Text(label, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodySmall)
                             when (authState) {
                                 McpAuthState.Unauthenticated, is McpAuthState.Error ->
-                                    Button(onClick = onAuthorize, enabled = server.oauthClientId.isNotBlank()) { Text("授权") }
+                                    Button(onClick = onAuthorize, enabled = server.oauthClientId.isNotBlank()) { Text("Cấp quyền") }
                                 is McpAuthState.Authorized ->
-                                    OutlinedButton(onClick = onLogout) { Text("退出授权") }
+                                    OutlinedButton(onClick = onLogout) { Text("Hủy cấp quyền") }
                                 McpAuthState.Authorizing ->
                                     CircularProgressIndicator(modifier = Modifier.size(18.dp))
                                 McpAuthState.Unsupported -> Unit
@@ -253,10 +253,10 @@ internal fun McpServerDetailDialog(
                                         testing = false
                                         res.onSuccess { tools ->
                                             discoveredTools = tools
-                                            Toast.makeText(context, "成功探测到 ${tools.size} 个工具", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(context, "Đã phát hiện ${tools.size} công cụ", Toast.LENGTH_SHORT).show()
                                         }.onFailure { err ->
                                             testError = err.message ?: "连接失败"
-                                            Toast.makeText(context, "连接失败：${err.message}", Toast.LENGTH_LONG).show()
+                                            Toast.makeText(context, "Kết nối thất bại: ${err.message}", Toast.LENGTH_LONG).show()
                                         }
                                     }
                                 }
@@ -268,7 +268,7 @@ internal fun McpServerDetailDialog(
                                 CircularProgressIndicator(Modifier.size(12.dp), strokeWidth = 2.dp)
                                 Spacer(Modifier.width(6.dp))
                             }
-                            Text("探测工具", style = MaterialTheme.typography.labelSmall)
+                            Text("Quét công cụ", style = MaterialTheme.typography.labelSmall)
                         }
                     }
 
@@ -324,11 +324,11 @@ internal fun McpServerDetailDialog(
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (!server.isBuiltin) {
                     TextButton(onClick = onDelete) {
-                        Text("删除服务", color = MaterialTheme.colorScheme.error)
+                        Text("Xóa dịch vụ", color = MaterialTheme.colorScheme.error)
                     }
                 }
                 Button(onClick = onDismiss) {
-                    Text("完成")
+                    Text("Xong")
                 }
             }
         },

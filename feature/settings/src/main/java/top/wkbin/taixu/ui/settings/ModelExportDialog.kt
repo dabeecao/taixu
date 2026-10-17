@@ -48,7 +48,7 @@ fun ModelExportDialog(
                         val output = context.contentResolver.openOutputStream(uri) ?: error("Export destination unavailable")
                         output.bufferedWriter().use { it.write(content) }
                     }
-                    Toast.makeText(context, "导出文件保存成功", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Lưu file xuất thành công", Toast.LENGTH_SHORT).show()
                     onDismiss()
                 } catch (cancelled: CancellationException) { throw cancelled
                 } catch (_: Exception) { failed = true
@@ -80,8 +80,8 @@ fun ModelExportDialog(
                 Row {
                     RuntimeCheckbox(checked = includeKeys, enabled = !busy, onCheckedChange = { includeKeys = it })
                     Column(Modifier.weight(1f)) {
-                        Text("包含 API Key 与自定义请求头", style = MaterialTheme.typography.titleSmall)
-                        Text(if (includeKeys) "包含敏感凭据，请妥善保管，切勿公开发送" else "默认不导出 API Key 与任何自定义请求头",
+                        Text("Bao gồm API Key và header tùy chỉnh", style = MaterialTheme.typography.titleSmall)
+                        Text(if (includeKeys) "Chứa credential nhạy cảm, hãy bảo quản cẩn thận, đừng gửi công khai" else "Mặc định không xuất API Key và mọi header tùy chỉnh",
                             style = MaterialTheme.typography.bodySmall,
                             color = if (includeKeys) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant)
                     }
@@ -91,29 +91,29 @@ fun ModelExportDialog(
                         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
                             ?: error("Clipboard unavailable")
                         clipboard.setPrimaryClip(ClipData.newPlainText("TaiXu Model Config", content))
-                        Toast.makeText(context, "已复制 JSON 配置到剪贴板", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Đã sao chép cấu hình JSON vào bộ nhớ tạm", Toast.LENGTH_SHORT).show()
                         onDismiss()
                     }
-                }) { Text("复制 JSON 到剪贴板") }
+                }) { Text("Sao chép JSON vào bộ nhớ tạm") }
                 RuntimeOutlinedButton(modifier = Modifier.fillMaxWidth(), enabled = !busy, onClick = {
                     generate { content -> pendingFile = content; createFile.launch(defaultFileName) }
-                }) { Text("保存为 .json 文件") }
+                }) { Text("Lưu thành file.json") }
                 RuntimeOutlinedButton(modifier = Modifier.fillMaxWidth(), enabled = !busy, onClick = {
                     generate { content ->
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"; putExtra(Intent.EXTRA_SUBJECT, "TaiXu Model Profiles")
                             putExtra(Intent.EXTRA_TEXT, content)
                         }
-                        context.startActivity(Intent.createChooser(intent, "分享模型配置"))
+                        context.startActivity(Intent.createChooser(intent, "Chia sẻ cấu hình model"))
                         onDismiss()
                     }
-                }) { Text("系统分享") }
+                }) { Text("Chia sẻ hệ thống") }
                 if (busy) RuntimeCircularProgressIndicator(Modifier.size(20.dp))
-                if (failed) Text("导出失败，请检查凭据、配置及文件访问权限后重试", color = MaterialTheme.colorScheme.error,
+                if (failed) Text("Xuất thất bại, hãy kiểm tra credential, cấu hình và quyền truy cập file rồi thử lại", color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodySmall)
             }
         },
         confirmButton = {},
-        dismissButton = { RuntimeTextButton(enabled = !busy, onClick = onDismiss) { Text("关闭") } },
+        dismissButton = { RuntimeTextButton(enabled = !busy, onClick = onDismiss) { Text("Đóng") } },
     )
 }

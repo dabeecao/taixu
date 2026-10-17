@@ -40,7 +40,7 @@ internal object SkillSuggestionActions {
             AgentSkill(
                 id = newId(),
                 name = trimmedName,
-                description = suggestion.description.trim().ifBlank { "自定义技能" },
+                description = suggestion.description.trim().ifBlank { "Skill tùy chỉnh" },
                 systemPrompt = trimmedPrompt,
                 triggerCommand = trigger,
                 iconName = "Code",

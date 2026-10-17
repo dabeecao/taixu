@@ -50,19 +50,19 @@ class RemoteServerViewModel(private val repository: RemoteServerRepository, priv
         viewModelScope.launch {
             try {
                 trusted.validate()
-                require(credentials.secret.isNotBlank()) { "请输入密码或私钥" }
+                require(credentials.secret.isNotBlank()) { "Hãy nhập mật khẩu hoặc khóa riêng" }
                 connector.test(trusted, credentials)
                 verified = Pending(trusted, credentials, save)
                 if (save) repository.save(trusted, credentials)
-                state.value = RemoteConnectionState(saved = save, tested = true, message = if (save) null else "连接测试成功，尚未保存")
+                state.value = RemoteConnectionState(saved = save, tested = true, message = if (save) null else "Kiểm tra kết nối thành công, chưa lưu")
             } catch (e: CancellationException) { throw e }
             catch (e: HostKeyConfirmationRequired) {
                 pending = Pending(server, credentials, save)
                 state.value = RemoteConnectionState(fingerprint = e.fingerprint)
             } catch (e: IllegalArgumentException) {
-                state.value = RemoteConnectionState(message = e.message ?: "连接配置无效")
+                state.value = RemoteConnectionState(message = e.message ?: "Cấu hình kết nối không hợp lệ")
             } catch (e: Exception) {
-                state.value = RemoteConnectionState(message = "连接失败：请检查网络、认证信息、主机指纹和远程目录。")
+                state.value = RemoteConnectionState(message = "Kết nối thất bại: hãy kiểm tra mạng, thông tin xác thực, fingerprint máy chủ và thư mục từ xa.")
             }
         }
     }
@@ -72,7 +72,7 @@ class RemoteServerViewModel(private val repository: RemoteServerRepository, priv
         viewModelScope.launch {
             try { block() }
             catch (e: CancellationException) { throw e }
-            catch (e: Exception) { state.value = RemoteConnectionState(message = "服务器配置保存失败") }
+            catch (e: Exception) { state.value = RemoteConnectionState(message = "Lưu cấu hình máy chủ thất bại") }
         }
     }
     fun clear() { if (!state.value.busy) { pending = null; verified = null; state.value = RemoteConnectionState() } }

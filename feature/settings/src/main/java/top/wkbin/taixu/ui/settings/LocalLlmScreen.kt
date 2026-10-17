@@ -81,10 +81,10 @@ internal fun LocalLlmContent(
     message?.let { currentMessage ->
         RuntimeAlertDialog(
             onDismissRequest = { viewModel?.consumeMessage() },
-            title = { Text(if (messageIsError) "操作未完成" else "本地 LLM") },
+            title = { Text(if (messageIsError) "Thao tác chưa hoàn tất" else "LLM cục bộ") },
             text = { Text(currentMessage) },
             confirmButton = {
-                RuntimeTextButton(onClick = { viewModel?.consumeMessage() }) { Text("知道了") }
+                RuntimeTextButton(onClick = { viewModel?.consumeMessage() }) { Text("Đã hiểu") }
             },
         )
     }
@@ -121,7 +121,7 @@ internal fun LocalLlmContent(
     }
 
     RuntimeSettingsScaffold(
-        title = "本地 LLM", onBack = onBack,
+        title = "LLM cục bộ", onBack = onBack,
         statusText = topBarStatus,
         actions = {
             if (serviceState is LocalLlmServiceState.Running) {
@@ -131,7 +131,7 @@ internal fun LocalLlmContent(
                 ) {
                     RuntimeIcon(RuntimeIconName.Stop, Modifier.size(16.dp))
                     Spacer(Modifier.size(4.dp))
-                    Text("停止")
+                    Text("Dừng")
                 }
             }
         },
@@ -149,7 +149,7 @@ internal fun LocalLlmContent(
                 ) {
                     RuntimeIcon(RuntimeIconName.Download, Modifier.size(18.dp))
                     Spacer(Modifier.size(6.dp))
-                    Text("网络下载", maxLines = 1)
+                    Text("Tải qua mạng", maxLines = 1)
                 }
                 RuntimeOutlinedButton(
                     onClick = { showPathDialog = true },
@@ -159,7 +159,7 @@ internal fun LocalLlmContent(
                 ) {
                     RuntimeIcon(RuntimeIconName.Folder, Modifier.size(18.dp))
                     Spacer(Modifier.size(6.dp))
-                    Text("从路径导入", maxLines = 1)
+                    Text("Nhập từ đường dẫn", maxLines = 1)
                 }
                 RuntimeOutlinedButton(
                     onClick = { filePicker.launch(arrayOf("application/octet-stream", "application/*", "*/*")) },
@@ -169,7 +169,7 @@ internal fun LocalLlmContent(
                 ) {
                     RuntimeIcon(RuntimeIconName.File, Modifier.size(18.dp))
                     Spacer(Modifier.size(6.dp))
-                    Text("选择文件", maxLines = 1)
+                    Text("Chọn tệp", maxLines = 1)
                 }
             }
         }
@@ -200,7 +200,7 @@ internal fun LocalLlmContent(
                             modifier = Modifier.fillMaxWidth(),
                         )
                         RuntimeTextButton(onClick = { viewModel?.cancelTransfer() }, modifier = Modifier.align(Alignment.End)) {
-                            Text("取消")
+                            Text("Hủy")
                         }
                     }
                 }
@@ -219,10 +219,10 @@ internal fun LocalLlmContent(
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                     ) {
                         RuntimeIcon(RuntimeIconName.Info, Modifier.size(23.dp), MaterialTheme.colorScheme.primary)
-                        Text("本地 LLM 推理", style = MaterialTheme.typography.titleMedium)
+                        Text("Suy luận LLM cục bộ", style = MaterialTheme.typography.titleMedium)
                     }
                     Text(
-                        "通过 llama.cpp 在 Linux 沙箱内运行 GGUF 模型，推理数据不离开设备。支持 HTTPS / Hugging Face 直链断点下载，也可从手机文件选择器导入。",
+                        "Chạy mô hình GGUF trong sandbox Linux qua llama.cpp, dữ liệu suy luận không rời khỏi thiết bị. Hỗ trợ tải tiếp qua link trực tiếp HTTPS / Hugging Face, hoặc nhập từ trình chọn tệp trên máy.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -232,10 +232,10 @@ internal fun LocalLlmContent(
                             color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f),
                         ) {
                             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Text("需要先安装 llama.cpp 推理引擎", fontWeight = FontWeight.SemiBold)
+                                Text("Cần cài đặt engine suy luận llama.cpp trước", fontWeight = FontWeight.SemiBold)
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    RuntimeButton(onClick = { viewModel?.installEngine() }) { Text("一键安装") }
-                                    RuntimeOutlinedButton(onClick = onOpenEngine) { Text("查看详情") }
+                                    RuntimeButton(onClick = { viewModel?.installEngine() }) { Text("Cài một chạm") }
+                                    RuntimeOutlinedButton(onClick = onOpenEngine) { Text("Xem chi tiết") }
                                 }
                             }
                         }
@@ -246,7 +246,7 @@ internal fun LocalLlmContent(
 
         item {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("手机小模型推荐", style = MaterialTheme.typography.titleMedium)
+                Text("Mô hình nhỏ đề xuất cho điện thoại", style = MaterialTheme.typography.titleMedium)
                 Text(
                     "本机内存 ${formatBytes(deviceRamBytes)} · 默认推荐 Q4_K_M，兼顾体积、速度和效果",
                     style = MaterialTheme.typography.bodySmall,
@@ -274,7 +274,7 @@ internal fun LocalLlmContent(
         }
 
         item {
-            Text("已导入模型", style = MaterialTheme.typography.titleMedium)
+            Text("Mô hình đã nhập", style = MaterialTheme.typography.titleMedium)
         }
 
         if (models.isEmpty()) {
@@ -290,8 +290,8 @@ internal fun LocalLlmContent(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         RuntimeIcon(RuntimeIconName.Model, Modifier.size(44.dp), MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.55f))
-                        Text("暂无模型", style = MaterialTheme.typography.titleSmall)
-                        Text("使用上方按钮下载或导入 GGUF 模型", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("Chưa có mô hình", style = MaterialTheme.typography.titleSmall)
+                        Text("Dùng nút bên trên để tải xuống hoặc nhập mô hình GGUF", color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
@@ -383,7 +383,7 @@ private fun MobileModelPresetCard(
                         Modifier.size(16.dp),
                     )
                     Spacer(Modifier.size(4.dp))
-                    Text(if (alreadyDownloaded) "已下载" else "下载")
+                    Text(if (alreadyDownloaded) "Đã tải xuống" else "Tải xuống")
                 }
             }
         }
@@ -439,7 +439,7 @@ private fun ServiceStatusCard(
                     RuntimeOutlinedButton(onClick = stop, contentPadding = PaddingValues(horizontal = 12.dp, vertical = 7.dp)) {
                         RuntimeIcon(RuntimeIconName.Stop, Modifier.size(16.dp))
                         Spacer(Modifier.size(4.dp))
-                        Text("停止")
+                        Text("Dừng")
                     }
                 }
             }
@@ -498,7 +498,7 @@ private fun ModelCard(
                     RuntimeIcon(RuntimeIconName.Play, Modifier.size(17.dp))
                     if (isStarting) {
                         Spacer(Modifier.size(4.dp))
-                        Text("启动中")
+                        Text("Đang khởi động…")
                     }
                 }
             }
@@ -521,7 +521,7 @@ private fun DownloadModelDialog(
         url.substringBefore('?').lowercase().endsWith(".gguf")
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("网络下载 GGUF") },
+        title = { Text("Tải GGUF qua mạng") },
         text = {
             Column(
                 modifier = Modifier
@@ -529,16 +529,16 @@ private fun DownloadModelDialog(
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                Text("粘贴以 .gguf 结尾的 HTTPS 直链。Hugging Face 文件页请复制 Download 链接。")
+                Text("Dán link trực tiếp HTTPS kết thúc bằng .gguf. Trên trang tệp Hugging Face, hãy sao chép link Download.")
                 RuntimeFilledTextField(
                     value = url,
                     onValueChange = { url = it },
-                    label = { Text("GGUF 下载地址") },
+                    label = { Text("Địa chỉ tải GGUF") },
                     placeholder = { Text("https://.../model.gguf") },
                     isError = url.isNotBlank() && !urlValid,
                     supportingText = {
                         if (url.isNotBlank() && !urlValid) {
-                            Text("请输入以 http(s):// 开头且指向 .gguf 文件的直链")
+                            Text("Nhập link trực tiếp bắt đầu bằng http(s):// và trỏ tới tệp .gguf")
                         }
                     },
                     singleLine = false,
@@ -547,16 +547,16 @@ private fun DownloadModelDialog(
                 RuntimeFilledTextField(
                     value = sha256,
                     onValueChange = { sha256 = it },
-                    label = { Text("SHA-256（可选）") },
+                    label = { Text("SHA-256 (tùy chọn)") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
         },
         confirmButton = {
-            RuntimeButton(onClick = { onDownload(url, sha256.ifBlank { null }) }, enabled = urlValid) { Text("开始下载") }
+            RuntimeButton(onClick = { onDownload(url, sha256.ifBlank { null }) }, enabled = urlValid) { Text("Bắt đầu tải xuống") }
         },
-        dismissButton = { RuntimeTextButton(onClick = onDismiss) { Text("取消") } },
+        dismissButton = { RuntimeTextButton(onClick = onDismiss) { Text("Hủy") } },
     )
 }
 
@@ -569,7 +569,7 @@ private fun ImportPathDialog(
     val pathValid = path.substringBefore('?').lowercase().endsWith(".gguf")
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("从路径导入") },
+        title = { Text("Nhập từ đường dẫn") },
         text = {
             Column(
                 modifier = Modifier
@@ -577,15 +577,15 @@ private fun ImportPathDialog(
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
-                Text("输入应用可读取的绝对路径，例如 /storage/emulated/0/Download/model.gguf。受 Android 存储权限限制时请改用“选择文件”。")
+                Text("Nhập đường dẫn tuyệt đối mà ứng dụng có thể đọc, ví dụ /storage/emulated/0/Download/model.gguf. Nếu bị giới hạn quyền lưu trữ của Android, hãy dùng Chọn tệp.")
                 RuntimeFilledTextField(
                     value = path,
                     onValueChange = { path = it },
-                    label = { Text("GGUF 文件路径") },
+                    label = { Text("Đường dẫn tệp GGUF") },
                     isError = path.isNotBlank() && !pathValid,
                     supportingText = {
                         if (path.isNotBlank() && !pathValid) {
-                            Text("路径需指向 .gguf 模型文件")
+                            Text("Đường dẫn phải trỏ tới tệp mô hình .gguf")
                         }
                     },
                     singleLine = false,
@@ -594,9 +594,9 @@ private fun ImportPathDialog(
             }
         },
         confirmButton = {
-            RuntimeButton(onClick = { onImport(path) }, enabled = pathValid) { Text("导入") }
+            RuntimeButton(onClick = { onImport(path) }, enabled = pathValid) { Text("Nhập") }
         },
-        dismissButton = { RuntimeTextButton(onClick = onDismiss) { Text("取消") } },
+        dismissButton = { RuntimeTextButton(onClick = onDismiss) { Text("Hủy") } },
     )
 }
 
@@ -632,7 +632,7 @@ private fun DeleteModelConfirmDialog(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Text(
-                    text = "• 删除后需要重新下载或导入才能再次使用",
+                    text = "• Xóa rồi muốn dùng lại phải tải xuống hoặc nhập lại",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.error,
                 )
@@ -653,7 +653,7 @@ private fun DeleteModelConfirmDialog(
                 )
             }
         },
-        dismissButton = { RuntimeTextButton(onClick = onDismiss) { Text("取消") } },
+        dismissButton = { RuntimeTextButton(onClick = onDismiss) { Text("Hủy") } },
     )
 }
 

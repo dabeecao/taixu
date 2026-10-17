@@ -7,45 +7,45 @@ object VirtualScreenWorkflowActions {
 
     private fun action(id: String, label: String, description: String, vararg fields: HostWorkflowField) =
         HostWorkflowActionDef(
-            id, label, "虚拟屏", HostWorkflowPrivilege.NONE, description,
-            listOf(field("session", "虚拟屏会话", "留空按本次工作流隔离；同一次运行的步骤共用屏幕")) + fields +
-                field("wait_ms", "操作后等待（毫秒）", "默认 0；0–600000，可用变量"),
+            id, label, "Màn hình ảo", HostWorkflowPrivilege.NONE, description,
+            listOf(field("session", "Phiên màn hình ảo", "Để trống để cách ly theo workflow lần này; các bước trong cùng một lần chạy dùng chung màn hình")) + fields +
+                field("wait_ms", "Chờ sau thao tác (ms)", "Mặc định 0; 0–600000, dùng được biến"),
         )
 
     val all = listOf(
-        action("virtual_screen_ensure", "创建虚拟屏", "创建独立虚拟屏，需要 Shower 服务可用。"),
-        action("virtual_screen_launch", "虚拟屏打开应用", "按包名启动应用，不调用模型。",
-            field("package", "应用包名", "例如 com.android.settings 或 \${PACKAGE}", true)),
-        action("virtual_screen_click", "虚拟屏点击", "0–1000 相对坐标，与截图缩放无关。",
-            field("x", "X（0–1000）", required = true), field("y", "Y（0–1000）", required = true)),
-        action("virtual_screen_double_click", "虚拟屏双击", "0–1000 相对坐标。",
-            field("x", "X（0–1000）", required = true), field("y", "Y（0–1000）", required = true)),
-        action("virtual_screen_long_press", "虚拟屏长按", "坐标和按住时长可分别调整。",
-            field("x", "X（0–1000）", required = true), field("y", "Y（0–1000）", required = true),
-            field("duration_ms", "按住时长（毫秒）", "默认 800；200–5000")),
-        action("virtual_screen_swipe", "虚拟屏滑动", "起终点均为 0–1000，手势时长与操作后等待分开。",
-            field("x1", "起点 X（0–1000）", required = true), field("y1", "起点 Y（0–1000）", required = true),
-            field("x2", "终点 X（0–1000）", required = true), field("y2", "终点 Y（0–1000）", required = true),
-            field("duration_ms", "手势时长（毫秒）", "默认 300；50–5000")),
-        action("virtual_screen_input_text", "虚拟屏追加输入", "追加到当前焦点，保留文本前后空白。",
-            field("text", "输入内容", "支持多行或 \${TEXT_1}", true)),
-        action("virtual_screen_set_text", "虚拟屏替换输入", "发送全选和粘贴按键；目标控件需支持，空文本用于清空。",
-            field("text", "替换内容", "支持多行或 \${TEXT_1}")),
-        action("virtual_screen_key", "虚拟屏按键", "向虚拟屏发送按键。",
-            field("key", "按键", "back / home / enter / delete / paste / recents", true)),
-        action("virtual_screen_wait", "虚拟屏等待", "只等待，不调用模型。",
-            field("duration_ms", "等待时长（毫秒）", "默认 1000；0–600000", true)),
-        action("virtual_screen_close", "关闭虚拟屏", "释放这次运行的屏幕。"),
+        action("virtual_screen_ensure", "Tạo màn hình ảo", "Tạo màn hình ảo độc lập, cần dịch vụ Shower khả dụng."),
+        action("virtual_screen_launch", "Mở app trên màn hình ảo", "Khởi động app theo tên package, không gọi mô hình.",
+            field("package", "Tên package của app", "Ví dụ: com.android.settings hoặc \${PACKAGE}", true)),
+        action("virtual_screen_click", "Chạm trên màn hình ảo", "Tọa độ tương đối 0–1000, không phụ thuộc thu phóng ảnh chụp.",
+            field("x", "X (0–1000)", required = true), field("y", "Y (0–1000)", required = true)),
+        action("virtual_screen_double_click", "Chạm đúp trên màn hình ảo", "Tọa độ tương đối 0–1000.",
+            field("x", "X (0–1000)", required = true), field("y", "Y (0–1000)", required = true)),
+        action("virtual_screen_long_press", "Nhấn giữ trên màn hình ảo", "Có thể chỉnh riêng tọa độ và thời gian giữ.",
+            field("x", "X (0–1000)", required = true), field("y", "Y (0–1000)", required = true),
+            field("duration_ms", "Thời gian giữ (ms)", "Mặc định 800; 200–5000")),
+        action("virtual_screen_swipe", "Vuốt trên màn hình ảo", "Điểm đầu/cuối đều 0–1000, thời gian cử chỉ tách riêng với chờ sau thao tác.",
+            field("x1", "X điểm đầu (0–1000)", required = true), field("y1", "Y điểm đầu (0–1000)", required = true),
+            field("x2", "X điểm cuối (0–1000)", required = true), field("y2", "Y điểm cuối (0–1000)", required = true),
+            field("duration_ms", "Thời gian cử chỉ (ms)", "Mặc định 300; 50–5000")),
+        action("virtual_screen_input_text", "Nhập thêm trên màn hình ảo", "Chèn thêm vào focus hiện tại, giữ khoảng trắng đầu/cuối văn bản.",
+            field("text", "Nội dung nhập", "Hỗ trợ nhiều dòng hoặc \${TEXT_1}", true)),
+        action("virtual_screen_set_text", "Thay thế nội dung nhập", "Gửi phím chọn tất cả và dán; control đích cần hỗ trợ, văn bản rỗng để xóa sạch.",
+            field("text", "Nội dung thay thế", "Hỗ trợ nhiều dòng hoặc \${TEXT_1}")),
+        action("virtual_screen_key", "Nhấn phím trên màn hình ảo", "Gửi phím tới màn hình ảo.",
+            field("key", "Phím", "back / home / enter / delete / paste / recents", true)),
+        action("virtual_screen_wait", "Chờ trên màn hình ảo", "Chỉ chờ, không gọi mô hình.",
+            field("duration_ms", "Thời gian chờ (ms)", "Mặc định 1000; 0–600000", true)),
+        action("virtual_screen_close", "Đóng màn hình ảo", "Giải phóng màn hình của lần chạy này."),
     )
 
     fun template(): WorkflowDefinition = PhoneOperationWorkflow.create(
-        id = "virtual_screen_template", name = "虚拟屏操作模板",
+        id = "virtual_screen_template", name = "Mẫu thao tác màn hình ảo",
         operations = listOf(
             PhoneWorkflowOperation("virtual_screen_launch", mapOf("package" to "\${PACKAGE}"), 900),
         ),
     ).copy(
         isBuiltin = true,
-        description = "复制后添加点击、滑动、输入和等待节点；每个步骤可独立微调。固定步骤重放不调用模型，运行前请确认应用页面。",
+        description = "Sao chép rồi thêm các node chạm, vuốt, nhập và chờ; từng bước có thể tinh chỉnh riêng. Phát lại bước cố định không gọi mô hình, hãy xác nhận trang app trước khi chạy.",
         defaultVariables = mapOf("PACKAGE" to "com.android.settings"),
     )
 }

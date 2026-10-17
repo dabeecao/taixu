@@ -518,7 +518,7 @@ fun TaiXuNavHost(
                         onOpenToolDetail = { toolId -> activeStack.push(ToolCenterDestination, ToolDetailDestination(toolId = toolId)) },
                         onStartAiHealing = { toolId, toolName, logs ->
                             val prompt = ToolSelfHealingHelper.buildHealingPrompt(toolId, toolName, logs)
-                            pendingHealingTask = HealingTask("🔧 自愈: $toolName", prompt)
+                            pendingHealingTask = HealingTask("🔧 Tự phục hồi: $toolName", prompt)
                             navigateMain(MainDestination.Agent)
                         },
                     )
@@ -538,7 +538,7 @@ fun TaiXuNavHost(
                             runCatching {
                                 context.startActivity(intent)
                             }.onFailure {
-                                Toast.makeText(context, "无法唤起外部浏览器: ${it.localizedMessage}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Không mở được trình duyệt ngoài: ${it.localizedMessage}", Toast.LENGTH_SHORT).show()
                             }
                         },
                     )
@@ -552,7 +552,7 @@ fun TaiXuNavHost(
                         onLaunchTerminal = { toolId -> activeStack.push(destination, TerminalDestination(toolId = toolId)) },
                         onStartAiHealing = { toolId, toolName, logs ->
                             val prompt = ToolSelfHealingHelper.buildHealingPrompt(toolId, toolName, logs)
-                            pendingHealingTask = HealingTask("🔧 自愈: $toolName", prompt)
+                            pendingHealingTask = HealingTask("🔧 Tự phục hồi: $toolName", prompt)
                             navigateMain(MainDestination.Agent)
                         },
                     )
@@ -670,7 +670,7 @@ fun TaiXuNavHost(
                     CustomIterationScreen(
                         onBack = ::popBack,
                         onNavigateToChat = { prompt ->
-                            pendingHealingTask = HealingTask("🚀 自定义迭代", prompt)
+                            pendingHealingTask = HealingTask("🚀 Lặp tùy chỉnh", prompt)
                             navigateMain(MainDestination.Agent)
                         },
                     )

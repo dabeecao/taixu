@@ -70,14 +70,14 @@ class TerminalViewModel(
     fun retryFailedRestorations() {
         viewModelScope.launch {
             runCatching { terminalManager.retryFailedRestorations() }
-                .onSuccess { _error.value = null }.onFailure { _error.value = it.message ?: "终端恢复失败" }
+                .onSuccess { _error.value = null }.onFailure { _error.value = it.message ?: "Khôi phục terminal thất bại" }
         }
     }
     fun removeFailedRestoration(id: String) {
         viewModelScope.launch {
             runCatching { terminalManager.removeFailedRestoration(id) }
                 .onSuccess { if (handles.value.isNotEmpty()) _error.value = null }
-                .onFailure { _error.value = it.message ?: "无法移除终端记录" }
+                .onFailure { _error.value = it.message ?: "Không thể xóa bản ghi terminal" }
         }
     }
 
@@ -199,7 +199,7 @@ class TerminalViewModel(
             runCatching {
                 if (remoteActive.value) {
                     // 远程目标由服务器决定：传 null 跟随当前选中环境，禁用本地发行版语义。
-                    val finalLabel = label.trim().ifBlank { "会话 ${handles.value.size + 1}" }
+                    val finalLabel = label.trim().ifBlank { "Phiên ${handles.value.size + 1}" }
                     terminalManager.createSession(
                         label = finalLabel,
                         workingDirectory = workingDirectory.trim().ifBlank { "/root" },
@@ -207,7 +207,7 @@ class TerminalViewModel(
                     )
                 } else {
                     val targetDistro = distroId?.takeIf { it.isNotBlank() }
-                    val distroShortName = targetDistro?.let { DistributionCatalog.require(it).id.replaceFirstChar { it.uppercase() } } ?: "会话"
+                    val distroShortName = targetDistro?.let { DistributionCatalog.require(it).id.replaceFirstChar { it.uppercase() } } ?: "Phiên"
                     val finalLabel = label.trim().ifBlank { "$distroShortName ${handles.value.size + 1}" }
                     terminalManager.createSession(
                         label = finalLabel,

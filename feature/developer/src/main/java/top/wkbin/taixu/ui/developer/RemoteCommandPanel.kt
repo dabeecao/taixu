@@ -22,21 +22,21 @@ internal fun RemoteCommandPanel(serverId: String, service: RemoteSystemService) 
     val target = runCatching { service.server(serverId) }.getOrNull()
     RuntimeCard(modifier = Modifier.fillMaxWidth(), contentPadding = PaddingValues(20.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text("服务器命令", style = MaterialTheme.typography.titleMedium)
-            Text("命令在当前服务器的工作目录执行，使用连接用户的实际权限。", style = MaterialTheme.typography.bodySmall,
+            Text("Lệnh máy chủ", style = MaterialTheme.typography.titleMedium)
+            Text("Lệnh chạy trong thư mục làm việc của máy chủ hiện tại, dùng đúng quyền của người dùng kết nối.", style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
             OutlinedTextField(command, { command = it }, modifier = Modifier.fillMaxWidth(), enabled = !busy,
-                label = { Text("命令") }, maxLines = 5, textStyle = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace))
+                label = { Text("Lệnh") }, maxLines = 5, textStyle = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace))
             RuntimeButton(enabled = !busy && command.isNotBlank(), onClick = {
                 val snapshot = command
                 scope.launch {
                     busy = true; output = ""
                     try { output = service.execute(serverId, snapshot, target) }
                     catch (e: CancellationException) { throw e }
-                    catch (e: Exception) { output = "执行失败，请检查服务器连接和权限" }
+                    catch (e: Exception) { output = "Thực thi thất bại, hãy kiểm tra kết nối máy chủ và quyền" }
                     finally { busy = false }
                 }
-            }) { Text(if (busy) "执行中…" else "执行") }
+            }) { Text(if (busy) "Đang thực thi…" else "Thực thi") }
             if (busy) RuntimeLinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             if (output.isNotBlank()) Text(output, style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace))
         }

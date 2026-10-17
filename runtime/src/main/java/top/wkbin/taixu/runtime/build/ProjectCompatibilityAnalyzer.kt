@@ -69,14 +69,14 @@ object ProjectCompatibilityAnalyzer {
             if (compileSdk > 34) findings += CompatibilityFinding(
                 id = "compile_sdk",
                 severity = CompatibilitySeverity.ERROR,
-                message = "项目 compileSdk 高于 TaiXu 内置 Android Platform 34",
+                message = "compileSdk của dự án cao hơn Android Platform 34 tích hợp sẵn của TaiXu",
                 current = compileSdk.toString(),
                 expected = "<= 34",
-                remediation = "由 mobile_project_align 生成最小降级方案，或安装匹配的 ARM64 Platform",
+                remediation = "Để mobile_project_align tạo phương án hạ cấp tối thiểu, hoặc cài ARM64 Platform tương ứng",
             ) else findings += CompatibilityFinding(
                 id = "compile_sdk",
                 severity = CompatibilitySeverity.INFO,
-                message = "项目 compileSdk 可使用内置 Platform",
+                message = "compileSdk của dự án dùng được Platform tích hợp sẵn",
                 current = compileSdk.toString(),
                 expected = "34",
             )
@@ -88,28 +88,28 @@ object ProjectCompatibilityAnalyzer {
         if (wrapperVersion != null && wrapperVersion != "8.14.2") findings += CompatibilityFinding(
             id = "gradle_wrapper",
             severity = CompatibilitySeverity.WARNING,
-            message = "项目 Gradle Wrapper 与 TaiXu 固定版本不同",
+            message = "Gradle Wrapper của dự án khác với phiên bản cố định của TaiXu",
             current = wrapperVersion,
             expected = "8.14.2",
-            remediation = "优先使用 TaiXu 本地 Gradle；需要改项目时先生成对齐计划",
+            remediation = "Ưu tiên dùng Gradle cục bộ của TaiXu; khi cần sửa dự án hãy tạo kế hoạch căn chỉnh trước",
         )
 
         agpPattern.find(allText)?.groupValues?.getOrNull(1)?.let { version ->
             findings += CompatibilityFinding(
                 id = "agp",
                 severity = CompatibilitySeverity.INFO,
-                message = "检测到 Android Gradle Plugin 版本",
+                message = "Phát hiện phiên bản Android Gradle Plugin",
                 current = version,
-                remediation = "若构建失败，再由对齐 Skill 判断兼容范围",
+                remediation = "Nếu build thất bại, để Skill căn chỉnh đánh giá phạm vi tương thích",
             )
         }
         kotlinPattern.find(allText)?.groupValues?.getOrNull(1)?.let { version ->
             findings += CompatibilityFinding(
                 id = "kotlin",
                 severity = CompatibilitySeverity.INFO,
-                message = "检测到 Kotlin 版本",
+                message = "Phát hiện phiên bản Kotlin",
                 current = version,
-                remediation = "不自动改写，待用户确认后对齐",
+                remediation = "Không tự ghi đè, căn chỉnh sau khi người dùng xác nhận",
             )
         }
 
@@ -117,18 +117,18 @@ object ProjectCompatibilityAnalyzer {
             findings += CompatibilityFinding(
                 id = "ndk_version",
                 severity = CompatibilitySeverity.INFO,
-                message = "项目显式声明了 NDK 版本",
+                message = "Dự án khai báo rõ phiên bản NDK",
                 current = version,
-                remediation = "构建时与工坊所选 NDK 的 source.properties 比对；不自动修改项目",
+                remediation = "Khi build, so sánh với source.properties của NDK đã chọn trong Xưởng; không tự sửa dự án",
             )
         }
         cmakeVersionPattern.find(allText)?.groupValues?.getOrNull(1)?.let { version ->
             findings += CompatibilityFinding(
                 id = "cmake_version",
                 severity = CompatibilitySeverity.INFO,
-                message = "项目显式声明了 CMake 版本",
+                message = "Dự án khai báo rõ phiên bản CMake",
                 current = version,
-                remediation = "构建时与工坊所选 CMake 比对；不自动修改项目",
+                remediation = "Khi build, so sánh với CMake đã chọn trong Xưởng; không tự sửa dự án",
             )
         }
 
@@ -136,9 +136,9 @@ object ProjectCompatibilityAnalyzer {
             findings += CompatibilityFinding(
                 id = "x86_abi",
                 severity = CompatibilitySeverity.ERROR,
-                message = "项目显式声明了非 ARM64 ABI",
+                message = "Dự án khai báo rõ ABI không phải ARM64",
                 expected = "arm64-v8a only",
-                remediation = "将 abiFilters 对齐为仅 arm64-v8a；生成的 lib/<abi> 目录由构建入口自动清理",
+                remediation = "Căn chỉnh abiFilters chỉ còn arm64-v8a; thư mục lib/<abi> được tạo ra sẽ do lối vào build dọn tự động",
             )
         }
 
@@ -150,14 +150,14 @@ object ProjectCompatibilityAnalyzer {
         if (offline && cacheHints.none { it.isDirectory }) findings += CompatibilityFinding(
             id = "offline_cache",
             severity = CompatibilitySeverity.ERROR,
-            message = "离线模式已开启，但本地项目依赖缓存不存在",
-            remediation = "先在线完成一次依赖解析，或把项目依赖缓存放入 TaiXu 离线缓存目录",
+            message = "Đã bật chế độ ngoại tuyến nhưng không có cache phụ thuộc dự án trên máy",
+            remediation = "Hoàn tất một lần phân giải phụ thuộc khi có mạng, hoặc đưa cache phụ thuộc dự án vào thư mục cache ngoại tuyến của TaiXu",
         )
 
         if (findings.isEmpty()) findings += CompatibilityFinding(
             id = "no_constraints",
             severity = CompatibilitySeverity.INFO,
-            message = "未发现超出当前 ARM64 工具链的显式约束",
+            message = "Không phát hiện ràng buộc tường minh nào vượt quá toolchain ARM64 hiện tại",
         )
         return ProjectCompatibilityReport(root.absolutePath, type, names, findings)
     }

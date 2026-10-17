@@ -23,7 +23,7 @@ fun SystemOverviewCard(name: String, address: String, workspace: String, loading
                     Text(address, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
-                Text(if (loading) "连接中" else if (error != null) "连接失败" else "已连接",
+                Text(if (loading) "Đang kết nối" else if (error != null) "Kết nối thất bại" else "Đã kết nối",
                     style = MaterialTheme.typography.labelMedium, color = if (error != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
             }
             Text(workspace, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,

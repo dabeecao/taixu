@@ -196,7 +196,7 @@ internal fun SubagentProfileCard(
                     modifier = Modifier
                         .minimumInteractiveComponentSize()
                         .size(48.dp),
-                    contentDescription = "编辑角色",
+                    contentDescription = "Chỉnh sửa vai trò",
                 ) {
                     RuntimeIcon(RuntimeIconName.Edit, Modifier.size(17.dp), MaterialTheme.colorScheme.onSurfaceVariant)
                 }
@@ -205,7 +205,7 @@ internal fun SubagentProfileCard(
                     modifier = Modifier
                         .minimumInteractiveComponentSize()
                         .size(48.dp),
-                    contentDescription = "删除角色",
+                    contentDescription = "Xóa vai trò",
                 ) {
                     RuntimeIcon(RuntimeIconName.Trash, Modifier.size(17.dp), MaterialTheme.colorScheme.error)
                 }

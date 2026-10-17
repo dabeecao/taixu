@@ -52,8 +52,8 @@ internal fun WorkflowSaveDocumentButton(raw: String?, name: String) {
         fileError = null
         writing = true
         try { picker.launch(WorkflowDocumentTransfer.fileName(name)) }
-        catch (_: Exception) { pending = null; writing = false; fileError = "无法打开系统文件保存窗口" }
-    }) { Text(if (writing) "正在保存…" else "保存为 JSON 文件", maxLines = 1) }
-    if (saved) Text("完整 JSON 文件已保存")
+        catch (_: Exception) { pending = null; writing = false; fileError = "Không mở được cửa sổ lưu tệp hệ thống" }
+    }) { Text(if (writing) "Đang lưu…" else "Lưu thành tệp JSON", maxLines = 1) }
+    if (saved) Text("Đã lưu tệp JSON đầy đủ")
     fileError?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
 }

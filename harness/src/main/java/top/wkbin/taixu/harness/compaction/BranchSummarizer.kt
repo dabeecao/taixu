@@ -70,7 +70,7 @@ class BranchSummarizer(
             repository.appendToLane(sessionId, laneName, entry)
             logger.i(
                 "分支摘要已注入会话 $sessionId：折叠被放弃分支 ${abandoned.size} 条消息" +
-                    "（${if (model != null && summarizer != null) "LLM 结构化" else "机械回退"}）",
+                    "（${if (model != null && summarizer != null) "LLM có cấu trúc" else "Fallback cơ học"}）",
             )
             true
         } catch (throwable: Throwable) {
@@ -101,7 +101,7 @@ class BranchSummarizer(
     }
 
     private suspend fun generateSummaryText(abandoned: List<HarnessMessage>, model: ModelConfig?): String {
-        val header = "[分支摘要] 切换分支时保留的上一条分支上下文：\n"
+        val header = "[Tóm tắt nhánh] Ngữ cảnh nhánh trước được giữ lại khi chuyển nhánh:\n"
         if (model != null && summarizer != null) {
             val llm = try {
                 summarizer.generateSummary(model, abandoned)

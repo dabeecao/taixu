@@ -22,17 +22,17 @@ internal fun WorkflowNodeDetails(run: WorkflowNodeRunState?) {
         RuntimeLinearProgressIndicator(modifier = Modifier.fillMaxWidth())
     }
     output?.let {
-        Text("耗时 ${it.durationMs / 1000.0} 秒 · 退出码 ${it.exitCode}", style = MaterialTheme.typography.labelSmall)
+        Text("Tốn ${it.durationMs / 1000.0} giây · mã thoát ${it.exitCode}", style = MaterialTheme.typography.labelSmall)
         it.error?.let { error -> SelectionContainer { Text(error, color = MaterialTheme.colorScheme.error) } }
         if (it.artifacts.isNotEmpty()) {
-            Text("产物路径", style = MaterialTheme.typography.labelLarge)
+            Text("Đường dẫn sản phẩm", style = MaterialTheme.typography.labelLarge)
             SelectionContainer { Text(it.artifacts.joinToString("\n"), fontFamily = FontFamily.Monospace) }
         }
         it.structuredResult?.let { result -> WorkflowStructuredResultButton(result) }
     }
     val log = output?.textOutput?.takeIf { it.isNotBlank() } ?: run?.progressMessage.orEmpty()
     if (log.isNotBlank()) {
-        RuntimeOutlinedButton(onClick = { expanded = !expanded }) { Text(if (expanded) "收起日志" else "展开日志 / Diff") }
+        RuntimeOutlinedButton(onClick = { expanded = !expanded }) { Text(if (expanded) "Thu gọn nhật ký" else "Mở rộng nhật ký / Diff") }
         if (expanded) SelectionContainer {
             Text(log, Modifier.fillMaxWidth().heightIn(max = 480.dp).verticalScroll(rememberScrollState()), style = MaterialTheme.typography.bodySmall, fontFamily = FontFamily.Monospace)
         }

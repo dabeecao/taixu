@@ -18,12 +18,12 @@ class RoomDatabaseBackupRepository(private val database: AppDatabase) : Database
 
     override suspend fun snapshot(): BackupRecords = database.withTransaction {
         check(sql.query("SELECT COUNT(*) FROM harness_operations").use { it.moveToFirst(); it.getLong(0) == 0L }) {
-            "请先停止正在运行的智能体任务，再执行备份或恢复"
+            "Hãy dừng tác vụ agent đang chạy trước, rồi mới sao lưu hoặc khôi phục"
         }
         BackupRecords(BackupRecordPolicy.tables.associateWith { table ->
             sql.query("SELECT * FROM `$table`").use { cursor -> buildList {
                 while (cursor.moveToNext()) {
-                    check(size < 100_000) { "记录数量超过备份上限" }
+                    check(size < 100_000) { "Số lượng bản ghi vượt quá giới hạn sao lưu" }
                     add(JsonObject(cursor.columnNames.mapIndexed { index, name -> name to cursor.value(index) }.toMap()))
                 }
             } }
@@ -31,26 +31,26 @@ class RoomDatabaseBackupRepository(private val database: AppDatabase) : Database
     }
 
     override suspend fun validate(records: BackupRecords) {
-        require(records.tables.keys == BackupRecordPolicy.tables.toSet()) { "备份数据分类不完整或不兼容" }
-        require(records.tables.values.sumOf { it.size } <= 100_000) { "记录数量超过备份上限" }
+        require(records.tables.keys == BackupRecordPolicy.tables.toSet()) { "Phân loại dữ liệu sao lưu chưa đầy đủ hoặc không tương thích" }
+        require(records.tables.values.sumOf { it.size } <= 100_000) { "Số lượng bản ghi vượt quá giới hạn sao lưu" }
         records.tables.forEach { (table, rows) ->
             val columns = sql.query("PRAGMA table_info(`$table`)").use { cursor -> buildList {
                 while (cursor.moveToNext()) add(Column(cursor.getString(1), cursor.getString(2), cursor.getInt(3) != 0))
             } }
             val keys = mutableSetOf<String>()
             rows.forEach { row ->
-                require(row.keys == columns.map { it.name }.toSet()) { "备份字段与当前版本不兼容" }
+                require(row.keys == columns.map { it.name }.toSet()) { "Trường sao lưu không tương thích với phiên bản hiện tại" }
                 columns.forEach { column ->
                     val value = row.getValue(column.name)
-                    require(value is JsonPrimitive && !(column.required && value == JsonNull)) { "备份字段类型无效" }
+                    require(value is JsonPrimitive && !(column.required && value == JsonNull)) { "Kiểu trường sao lưu không hợp lệ" }
                     if (value != JsonNull) require(when (column.type) {
                         "INTEGER" -> !value.jsonPrimitive.isString && (value.jsonPrimitive.longOrNull != null || value.jsonPrimitive.booleanOrNull != null)
                         "REAL" -> !value.jsonPrimitive.isString && value.jsonPrimitive.doubleOrNull?.isFinite() == true
                         "TEXT" -> value.jsonPrimitive.isString
                         else -> false
-                    }) { "备份字段类型无效" }
+                    }) { "Kiểu trường sao lưu không hợp lệ" }
                 }
-                require(keys.add(BackupRecordPolicy.key(table, row))) { "备份存在重复记录" }
+                require(keys.add(BackupRecordPolicy.key(table, row))) { "Bản sao lưu có bản ghi trùng lặp" }
             }
         }
         validateLinks(records)
@@ -58,7 +58,7 @@ class RoomDatabaseBackupRepository(private val database: AppDatabase) : Database
 
     override suspend fun merge(expected: BackupRecords, records: BackupRecords, operationId: String, prepare: suspend () -> Unit): Int =
         database.withTransaction {
-            check(snapshot() == expected) { "数据已变化，请重新选择备份并预览" }
+            check(snapshot() == expected) { "Dữ liệu đã thay đổi, hãy chọn lại bản sao lưu và xem trước" }
             validate(records)
             var count = 0
             BackupRecordPolicy.tables.forEach { table ->
@@ -89,15 +89,15 @@ class RoomDatabaseBackupRepository(private val database: AppDatabase) : Database
         val sessions = records.tables["harness_sessions"].orEmpty().mapTo(mutableSetOf()) { it["id"] }
         val entries = records.tables["harness_entries"].orEmpty().associateBy { it["id"] }
         BackupRecordPolicy.sessionChildren.forEach { table -> records.tables[table].orEmpty().forEach { row ->
-            require(row["sessionId"] in sessions) { "备份会话关联不完整" }
+            require(row["sessionId"] in sessions) { "Liên kết phiên sao lưu chưa đầy đủ" }
         } }
         entries.values.forEach { row ->
             val parent = row["parentId"]
-            require(parent == JsonNull || (parent in entries && entries[parent]?.get("sessionId") == row["sessionId"])) { "备份消息链不完整" }
+            require(parent == JsonNull || (parent in entries && entries[parent]?.get("sessionId") == row["sessionId"])) { "Chuỗi tin nhắn sao lưu chưa đầy đủ" }
         }
         records.tables["harness_lanes"].orEmpty().forEach { row ->
             val leaf = row["leafId"]
-            require(leaf == JsonNull || entries[leaf]?.get("sessionId") == row["sessionId"]) { "备份会话分支不完整" }
+            require(leaf == JsonNull || entries[leaf]?.get("sessionId") == row["sessionId"]) { "Nhánh phiên sao lưu chưa đầy đủ" }
         }
     }
 
@@ -107,6 +107,6 @@ class RoomDatabaseBackupRepository(private val database: AppDatabase) : Database
         Cursor.FIELD_TYPE_INTEGER -> JsonPrimitive(getLong(index))
         Cursor.FIELD_TYPE_FLOAT -> JsonPrimitive(getDouble(index))
         Cursor.FIELD_TYPE_STRING -> JsonPrimitive(getString(index))
-        else -> error("此数据类型不支持备份")
+        else -> error("Kiểu dữ liệu này không hỗ trợ sao lưu")
     }
 }

@@ -17,7 +17,7 @@ import top.wkbin.taixu.ui.components.*
 @Composable
 internal fun SystemEnvironmentPicker(localCount: Int, onInstallLocal: () -> Unit, viewModel: RemoteServerViewModel? = previewOrNull { koinViewModel() }) {
     if (viewModel == null) {
-        Text("运行后端", style = MaterialTheme.typography.titleMedium)
+        Text("Backend chạy", style = MaterialTheme.typography.titleMedium)
         return
     }
     val servers by viewModel.servers.collectAsStateWithLifecycle()
@@ -32,12 +32,12 @@ internal fun SystemEnvironmentPicker(localCount: Int, onInstallLocal: () -> Unit
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         configurationError?.let { NoticeBanner(text = it, isError = true) }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-            Text("运行后端", style = MaterialTheme.typography.titleMedium)
-            RuntimeButton(onClick = { choose = true }) { Text("添加系统") }
+            Text("Backend chạy", style = MaterialTheme.typography.titleMedium)
+            RuntimeButton(onClick = { choose = true }) { Text("Thêm hệ thống") }
         }
-        NoticeBanner(text = "主系统决定新对话、首页指标和工坊项目使用的环境。已有对话保留原环境，服务器文件不会自动复制到手机。")
-        BackendChoiceCard("本地 PRoot", "在手机上运行 Linux，使用本机工作区。", RuntimeIconName.Linux, active == null) { viewModel.select(null) }
-        BackendChoiceCard("SSH 远程运行时", servers.firstOrNull { it.id == active }?.name ?: "使用服务器的算力、工具链和项目目录。",
+        NoticeBanner(text = "Hệ thống chính quyết định môi trường cho cuộc trò chuyện mới, chỉ số trang chủ và dự án xưởng. Cuộc trò chuyện hiện có giữ nguyên môi trường, file máy chủ không tự sao chép về điện thoại.")
+        BackendChoiceCard("PRoot nội bộ", "Chạy Linux trên điện thoại, dùng không gian làm việc nội bộ.", RuntimeIconName.Linux, active == null) { viewModel.select(null) }
+        BackendChoiceCard("Runtime SSH từ xa", servers.firstOrNull { it.id == active }?.name ?: "Dùng sức mạnh tính toán, toolchain và thư mục dự án của máy chủ.",
             RuntimeIconName.Server, active != null) {
             when (servers.size) {
                 0 -> { viewModel.clear(); addRemote = true }
@@ -47,36 +47,36 @@ internal fun SystemEnvironmentPicker(localCount: Int, onInstallLocal: () -> Unit
         }
         connection.message?.let { Text(it, color = if (connection.tested) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error) }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
-            Text("连接档案 (${servers.size})", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
-            RuntimeTextButton(onClick = { viewModel.clear(); addRemote = true }) { Text("新增连接") }
+            Text("Hồ sơ kết nối (${servers.size})", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+            RuntimeTextButton(onClick = { viewModel.clear(); addRemote = true }) { Text("Thêm kết nối mới") }
         }
-        if (servers.isEmpty()) Text("添加 SSH 连接后，可选择它作为主系统。", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (servers.isEmpty()) Text("Sau khi thêm kết nối SSH, có thể chọn nó làm hệ thống chính.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         servers.forEach { server ->
             ConnectionProfileCard(server, server.id == active, onSelect = { viewModel.select(server.id) },
                 onEdit = { viewModel.clear(); editing = server }, onRemove = { remove = server })
         }
     }
     if (choose) RuntimeAlertDialog(
-        onDismissRequest = { choose = false }, title = { Text("选择系统来源") },
+        onDismissRequest = { choose = false }, title = { Text("Chọn nguồn hệ thống") },
         text = { Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            RuntimeOutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = { choose = false; onInstallLocal() }) { Text("安装本地 Linux") }
-            RuntimeOutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = { choose = false; viewModel.clear(); addRemote = true }) { Text("连接服务器") }
+            RuntimeOutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = { choose = false; onInstallLocal() }) { Text("Cài Linux nội bộ") }
+            RuntimeOutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = { choose = false; viewModel.clear(); addRemote = true }) { Text("Kết nối máy chủ") }
         } },
-        confirmButton = { RuntimeTextButton(onClick = { choose = false }) { Text("取消") } },
+        confirmButton = { RuntimeTextButton(onClick = { choose = false }) { Text("Hủy") } },
     )
     if (addRemote) RemoteServerDialog(viewModel) { addRemote = false }
     editing?.let { target -> key(target.id) { RemoteServerDialog(viewModel, target) { editing = null } } }
-    if (chooseRemote) RuntimeAlertDialog(onDismissRequest = { chooseRemote = false }, title = { Text("选择连接档案") },
+    if (chooseRemote) RuntimeAlertDialog(onDismissRequest = { chooseRemote = false }, title = { Text("Chọn hồ sơ kết nối") },
         text = { Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             servers.forEach { server -> RuntimeOutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = { viewModel.select(server.id); chooseRemote = false }) {
                 Text(server.name, maxLines = 1, overflow = TextOverflow.Ellipsis)
             } }
-        } }, confirmButton = { RuntimeTextButton(onClick = { chooseRemote = false }) { Text("取消") } })
+        } }, confirmButton = { RuntimeTextButton(onClick = { chooseRemote = false }) { Text("Hủy") } })
     remove?.let { server -> RuntimeAlertDialog(
-        onDismissRequest = { remove = null }, title = { Text("移除 ${server.name}？") },
-        text = { Text("仅移除手机保存的连接与凭证，服务器文件保留。已有会话需结束后重新选择环境。") },
-        confirmButton = { RuntimeTextButton(onClick = { viewModel.remove(server.id); remove = null }) { Text("移除") } },
-        dismissButton = { RuntimeTextButton(onClick = { remove = null }) { Text("取消") } },
+        onDismissRequest = { remove = null }, title = { Text("Gỡ ${server.name}?") },
+        text = { Text("Chỉ gỡ kết nối và credential lưu trên điện thoại, file máy chủ được giữ lại. Phiên hiện có cần kết thúc rồi chọn lại môi trường.") },
+        confirmButton = { RuntimeTextButton(onClick = { viewModel.remove(server.id); remove = null }) { Text("Gỡ bỏ") } },
+        dismissButton = { RuntimeTextButton(onClick = { remove = null }) { Text("Hủy") } },
     ) }
 }
 

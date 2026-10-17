@@ -212,11 +212,11 @@ internal fun ToolCard(
                 // Status Badge
                 StatusBadge(
                     text = when {
-                        isInstalling -> "安装中"
-                        isUpdateAvailable -> "可更新"
+                        isInstalling -> "Đang cài đặt"
+                        isUpdateAvailable -> "Có bản cập nhật"
                         isInstalled -> "已就绪"
-                        isFailed -> "安装失败"
-                        else -> "未安装"
+                        isFailed -> "Cài đặt thất bại"
+                        else -> "Chưa cài đặt"
                     },
                     color = when {
                         isUpdateAvailable -> MaterialTheme.colorScheme.primary
@@ -298,14 +298,14 @@ internal fun ToolCard(
                         shape = RoundedCornerShape(50),
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
                     ) {
-                        Text("详情配置", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, softWrap = false)
+                        Text("Cấu hình chi tiết", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold, maxLines = 1, softWrap = false)
                     }
 
                     TextButton(
                         onClick = onViewLogs,
                         contentPadding = PaddingValues(horizontal = 6.dp, vertical = 4.dp),
                     ) {
-                        Text("日志", style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
+                        Text("Nhật ký", style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
                     }
 
                     if (isInstalled) {
@@ -313,7 +313,7 @@ internal fun ToolCard(
                             onClick = onUninstall,
                             contentPadding = PaddingValues(horizontal = 6.dp, vertical = 4.dp),
                         ) {
-                            Text("卸载", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error, maxLines = 1, softWrap = false)
+                            Text("Gỡ cài đặt", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error, maxLines = 1, softWrap = false)
                         }
                     }
                 }
@@ -329,7 +329,7 @@ internal fun ToolCard(
                             shape = RoundedCornerShape(50),
                             contentPadding = PaddingValues(horizontal = 10.dp, vertical = 5.dp),
                         ) {
-                            Text("更新", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
+                            Text("Cập nhật", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
                         }
                     } else if (isFailed) {
                         Button(
@@ -342,7 +342,7 @@ internal fun ToolCard(
                                 modifier = Modifier.size(14.dp),
                             )
                             Spacer(Modifier.width(3.dp))
-                            Text("AI 自愈", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
+                            Text("Tự phục hồi bằng AI", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
                         }
                         FilledTonalButton(
                             onClick = onInstall,
@@ -354,7 +354,7 @@ internal fun ToolCard(
                                 modifier = Modifier.size(13.dp),
                             )
                             Spacer(Modifier.width(3.dp))
-                            Text("重试", fontWeight = FontWeight.Medium, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
+                            Text("Thử lại", fontWeight = FontWeight.Medium, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
                         }
                     } else if (!isInstalled && !isInstalling) {
                         Button(
@@ -367,7 +367,7 @@ internal fun ToolCard(
                                 modifier = Modifier.size(14.dp),
                             )
                             Spacer(Modifier.width(4.dp))
-                            Text("安装", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
+                            Text("Cài đặt", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.labelSmall, maxLines = 1, softWrap = false)
                         }
                     }
                 }

@@ -108,9 +108,9 @@ fun WorkflowScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         snackbarHost = { SnackbarHost(snackbar) },
         topBar = {
-            if (catalogVisible) RuntimeTopBar(title = "太墟工作流", onBack = onBack, scrollBehavior = scrollBehavior)
+            if (catalogVisible) RuntimeTopBar(title = "Workflow TaiXu", onBack = onBack, scrollBehavior = scrollBehavior)
             else RuntimeTopBar(
-                title = activeState?.definition?.name ?: editorState?.definition?.name ?: "太墟工作流",
+                title = activeState?.definition?.name ?: editorState?.definition?.name ?: "Workflow TaiXu",
                 statusText = projectName.takeIf(String::isNotBlank)?.let { "工作区 · $it" },
                 onBack = {
                     when {
@@ -212,11 +212,11 @@ fun WorkflowScreen(
     if (discardRequested) {
         RuntimeAlertDialog(
             onDismissRequest = { discardRequested = false },
-            title = { Text("放弃未保存更改？") },
-            text = { Text("当前工作流还有未保存的编辑。") },
-            dismissButton = { RuntimeOutlinedButton(onClick = { discardRequested = false }) { Text("继续编辑") } },
+            title = { Text("Bỏ các thay đổi chưa lưu?") },
+            text = { Text("Workflow hiện tại còn chỉnh sửa chưa lưu.") },
+            dismissButton = { RuntimeOutlinedButton(onClick = { discardRequested = false }) { Text("Tiếp tục chỉnh sửa") } },
             confirmButton = {
-                RuntimeButton(onClick = { discardRequested = false; viewModel?.closeEditor() }) { Text("放弃更改") }
+                RuntimeButton(onClick = { discardRequested = false; viewModel?.closeEditor() }) { Text("Bỏ thay đổi") }
             },
         )
     }
@@ -252,7 +252,7 @@ private fun WorkflowRunView(
                 Column(Modifier.width(320.dp).verticalScroll(rememberScrollState()).padding(12.dp).padding(bottom = bottomPadding), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     RunSummary(state)
                     val node = state.definition.nodes.firstOrNull { it.id == selectedNode }
-                    if (node == null) Text("点选节点查看日志、错误与产物")
+                    if (node == null) Text("Chạm nút để xem nhật ký, lỗi và kết quả")
                     else {
                         Text(node.title, style = MaterialTheme.typography.titleMedium)
                         WorkflowNodeDetails(state.nodeStates[node.id])
@@ -267,7 +267,7 @@ private fun WorkflowRunView(
                 onClick = onCancel,
                 modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp).padding(bottom = bottomPadding),
                 contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
-            ) { Text("取消", maxLines = 1) }
+            ) { Text("Hủy", maxLines = 1) }
         }
     }
 }
@@ -386,7 +386,7 @@ internal fun statusLabel(status: NodeRunStatus) = when (status) {
     NodeRunStatus.SUCCESS -> "成功"
     NodeRunStatus.FAILED -> "失败"
     NodeRunStatus.SKIPPED -> "已跳过"
-    NodeRunStatus.CANCELLED -> "已取消"
+    NodeRunStatus.CANCELLED -> "Đã hủy"
 }
 
 internal fun workflowStatusLabel(status: WorkflowRunStatus) = when (status) {
@@ -395,5 +395,5 @@ internal fun workflowStatusLabel(status: WorkflowRunStatus) = when (status) {
     WorkflowRunStatus.WAITING_APPROVAL -> "等待人工确认"
     WorkflowRunStatus.SUCCESS -> "工作流已完成"
     WorkflowRunStatus.FAILED -> "工作流执行失败"
-    WorkflowRunStatus.CANCELLED -> "工作流已取消"
+    WorkflowRunStatus.CANCELLED -> "Workflow đã hủy"
 }

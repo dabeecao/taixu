@@ -108,7 +108,7 @@ class DeveloperViewModel(
         if (_adbBusy.value) return
         viewModelScope.launch {
             _adbBusy.value = true
-            _adbMessage.value = if (pairingPort != null) "正在使用指定配对端口 $pairingPort 进行安全配对…" else "正在使用自动发现的配对端口进行安全配对…"
+            _adbMessage.value = if (pairingPort != null) "Đang ghép nối an toàn qua cổng ghép nối chỉ định $pairingPort…" else "Đang ghép nối an toàn qua cổng ghép nối tự phát hiện…"
             val result = embeddedAdbManager.pair(pairingPort, code.trim())
             _adbMessage.value = result.fold(
                 onSuccess = { "配对并连接成功；密钥已安全保存，后续将自动发现端口并重连。" },
@@ -122,7 +122,7 @@ class DeveloperViewModel(
         if (_adbBusy.value) return
         viewModelScope.launch {
             _adbBusy.value = true
-            _adbMessage.value = if (explicitPort != null) "正在连接指定端口 $explicitPort…" else "正在连接自动发现的无线调试端口…"
+            _adbMessage.value = if (explicitPort != null) "Đang kết nối tới cổng chỉ định $explicitPort…" else "Đang kết nối tới cổng gỡ lỗi không dây tự phát hiện…"
             val result = embeddedAdbManager.connect(explicitPort)
             _adbMessage.value = result.fold(
                 onSuccess = { "无线 ADB 已连接。" },
@@ -134,23 +134,23 @@ class DeveloperViewModel(
 
     fun restartAdbDiscovery() {
         embeddedAdbManager.restartDiscovery()
-        _adbMessage.value = "已重新启动 mDNS 端口探测。"
+        _adbMessage.value = "Đã khởi động lại dò cổng mDNS."
     }
 
     fun captureLogcat(packageName: String, tag: String, priority: Char, keyword: String, lines: Int) {
         if (_adbBusy.value) return
         viewModelScope.launch {
             _adbBusy.value = true
-            _adbMessage.value = "正在抓取日志…"
+            _adbMessage.value = "Đang lấy nhật ký…"
             runCatching {
                 embeddedAdbManager.captureLogcat(
                     EmbeddedAdbManager.LogcatRequest(packageName.trim(), tag.trim(), priority, keyword, lines),
                 )
             }.onSuccess { result ->
                 _logcatOutput.value = result.output
-                _adbMessage.value = if (result.success) "日志抓取完成。" else result.output
+                _adbMessage.value = if (result.success) "Đã lấy nhật ký xong." else result.output
             }.onFailure { error ->
-                _adbMessage.value = error.message ?: "日志抓取失败"
+                _adbMessage.value = error.message ?: "Lấy nhật ký thất bại"
             }
             _adbBusy.value = false
         }
@@ -162,7 +162,7 @@ class DeveloperViewModel(
             _adbBusy.value = true
             val result = embeddedAdbManager.clearLogcat()
             if (result.success) _logcatOutput.value = ""
-            _adbMessage.value = if (result.success) "设备 Logcat 缓冲区已清空。" else result.output
+            _adbMessage.value = if (result.success) "Đã xóa bộ đệm Logcat của thiết bị." else result.output
             _adbBusy.value = false
         }
     }

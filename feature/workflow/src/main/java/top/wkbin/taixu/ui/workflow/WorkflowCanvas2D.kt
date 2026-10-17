@@ -314,7 +314,7 @@ fun WorkflowCanvas2D(
         )
 
         Text(
-            text = "双指缩放 · 拖动画布 · 双击适配",
+            text = "Chụm 2 ngón thu/phóng · kéo canvas · chạm 2 lần vừa khung",
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.align(Alignment.BottomStart).padding(start = 14.dp, bottom = 10.dp),
@@ -527,7 +527,7 @@ private fun WorkflowNodeCard(
                             modifier = Modifier.weight(1f),
                         ) {
                             Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(vertical = 4.dp)) {
-                                Text("⚙ 调参", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, maxLines = 1)
+                                Text("⚙ Chỉnh tham số", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, maxLines = 1)
                             }
                         }
                         Surface(
@@ -537,7 +537,7 @@ private fun WorkflowNodeCard(
                             modifier = Modifier.weight(1f),
                         ) {
                             Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(vertical = 4.dp)) {
-                                Text("🔗 连线", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, maxLines = 1)
+                                Text("🔗 Nối dây", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, maxLines = 1)
                             }
                         }
                         Surface(
@@ -547,7 +547,7 @@ private fun WorkflowNodeCard(
                             modifier = Modifier.weight(1f),
                         ) {
                             Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(vertical = 4.dp)) {
-                                Text("🗑 删除", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error, maxLines = 1)
+                                Text("🗑 Xóa", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error, maxLines = 1)
                             }
                         }
                     }
@@ -558,9 +558,9 @@ private fun WorkflowNodeCard(
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         val previewText = when (node.type) {
-                            WorkflowNodeType.BASH_COMMAND -> ">_ ${node.config["command"]?.trim() ?: "待配置命令"}"
+                            WorkflowNodeType.BASH_COMMAND -> ">_ ${node.config["command"]?.trim() ?: "Lệnh chờ cấu hình"}"
                             WorkflowNodeType.CONDITION_BRANCH -> "🔀 ${node.config["expression"]?.trim() ?: "exitCode == 0"}"
-                            WorkflowNodeType.AGENT_INFERENCE -> "✨ ${node.config["prompt"]?.trim()?.take(20) ?: "AI 提示词"}"
+                            WorkflowNodeType.AGENT_INFERENCE -> "✨ ${node.config["prompt"]?.trim()?.take(20) ?: "Prompt AI"}"
                             WorkflowNodeType.TAIXU_BUILD -> "📦 ${node.config["projectType"] ?: "android"} · ${node.config["task"] ?: "assemble"}"
                             WorkflowNodeType.HUMAN_APPROVAL -> "🛡️ 需要人工确认"
                             WorkflowNodeType.HOST_ACTION -> "📱 ${node.config["action"] ?: "status"}"
@@ -607,7 +607,7 @@ private fun ViewportControls(
             RuntimeIconButton(
                 onClick = onZoomOut,
                 modifier = Modifier.size(32.dp),
-                contentDescription = "缩小",
+                contentDescription = "Thu nhỏ",
             ) {
                 Text("−", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             }
@@ -628,7 +628,7 @@ private fun ViewportControls(
             RuntimeIconButton(
                 onClick = onZoomIn,
                 modifier = Modifier.size(32.dp),
-                contentDescription = "放大",
+                contentDescription = "Phóng to",
             ) {
                 RuntimeIcon(RuntimeIconName.Plus, Modifier.size(15.dp))
             }

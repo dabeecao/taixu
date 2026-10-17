@@ -56,7 +56,7 @@ fun CustomIterationScreen(
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = { RuntimeTopBar(title = "自定义迭代（实验）", onBack = onBack) }
+        topBar = { RuntimeTopBar(title = "Lặp tùy chỉnh (thử nghiệm)", onBack = onBack) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -85,29 +85,29 @@ fun CustomIterationScreen(
             }
 
             // 特性清单
-            SectionHeader(title = "核心能力矩阵", subtitle = "一次准备，持续共建")
+            SectionHeader(title = "Ma trận năng lực cốt lõi", subtitle = "Chuẩn bị một lần, cùng xây dựng liên tục")
 
             IterationFeatureItem(
-                title = "隔离迭代工作区",
-                description = "独立路径 ~/custom_taixu，所有修改与宿主环境完全物理隔离。",
+                title = "Không gian làm việc lặp cách ly",
+                description = "Đường dẫn độc lập ~/custom_taixu, mọi thay đổi cách ly vật lý hoàn toàn khỏi môi trường host.",
                 badgeColor = MaterialTheme.colorScheme.primary
             )
 
             IterationFeatureItem(
-                title = "专属 Agent 规范 Skill",
-                description = "内置 taixu-custom-iteration Skill，严格遵循多模块、Compose 与安全规则。",
+                title = "Skill chuẩn Agent chuyên dụng",
+                description = "Tích hợp sẵn skill taixu-custom-iteration, tuân thủ nghiêm ngặt quy tắc đa module, Compose và bảo mật.",
                 badgeColor = MaterialTheme.colorScheme.secondary
             )
 
             IterationFeatureItem(
-                title = "GitHub Actions 云端 CI 构建",
-                description = "免去手机端繁琐编译，自动化生成 TaiXuDev（top.wkbin.taixu.dev）独立 APK。",
+                title = "Build CI đám mây GitHub Actions",
+                description = "Bỏ qua bước biên dịch rườm rà trên máy, tự động tạo APK độc lập TaiXuDev (top.wkbin.taixu.dev).",
                 badgeColor = MaterialTheme.colorScheme.tertiary
             )
 
             IterationFeatureItem(
-                title = "双包共存与开源 PR 闭环",
-                description = "测试版与正式版完美共存，功能验证完毕后一键提交标准 PR 参与社区共建。",
+                title = "Cùng tồn tại hai package và vòng lặp PR mã nguồn mở khép kín",
+                description = "Bản test và bản chính thức cùng tồn tại hoàn hảo; sau khi xác minh tính năng, một chạm gửi PR chuẩn để cùng cộng đồng xây dựng.",
                 badgeColor = MaterialTheme.colorScheme.primary
             )
 
@@ -142,7 +142,7 @@ fun CustomIterationScreen(
                         strokeWidth = 2.dp,
                     )
                     Spacer(Modifier.width(8.dp))
-                    Text("正在准备迭代工作区…")
+                    Text("Đang chuẩn bị không gian làm việc lặp…")
                 } else {
                     Text(
                         text = "开启自定义迭代",

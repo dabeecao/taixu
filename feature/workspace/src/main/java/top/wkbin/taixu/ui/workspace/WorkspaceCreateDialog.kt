@@ -179,8 +179,8 @@ internal fun CreateProjectDialog(
             ) {
                 when (state.step) {
                     CreateProjectStep.PROJECT_TYPE -> {
-                        Text("选择项目类型", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                        Text("先选择要创建的项目平台", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("Chọn loại dự án", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                        Text("Chọn nền tảng dự án cần tạo trước", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         val projectTypes = projectTemplates.map { it.manifest.projectType }.distinct()
                         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                             // 空项目：跳过平台与模板选择，直接输入名称创建空文件夹
@@ -204,7 +204,7 @@ internal fun CreateProjectDialog(
                                 ) {
                                     RuntimeIcon(RuntimeIconName.Folder, Modifier.size(36.dp), MaterialTheme.colorScheme.primary)
                                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                        Text("空项目", fontWeight = FontWeight.SemiBold)
+                                        Text("Dự án trống", fontWeight = FontWeight.SemiBold)
                                         Text(
                                             "只创建一个空文件夹，随时手动添加内容",
                                             style = MaterialTheme.typography.bodySmall,
@@ -255,8 +255,8 @@ internal fun CreateProjectDialog(
                     }
 
                     CreateProjectStep.EMPTY_DETAILS -> {
-                        Text("新建空项目", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                        Text("输入名称即创建一个空文件夹", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("Tạo dự án trống", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                        Text("Nhập tên là tạo ngay một thư mục trống", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         RuntimeFilledTextField(
                             value = state.projectName,
                             onValueChange = { state.projectName = it },
@@ -275,8 +275,8 @@ internal fun CreateProjectDialog(
                     }
 
                     CreateProjectStep.TEMPLATE -> {
-                        Text("选择模板", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                        Text("选择一个具体模板后继续", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("Chọn mẫu", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                        Text("Chọn một mẫu cụ thể rồi tiếp tục", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         val filteredTemplates = projectTemplates.filter { it.manifest.projectType == state.selectedProjectType }
                         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                             filteredTemplates.groupBy { it.manifest.category }.forEach { (category, templates) ->

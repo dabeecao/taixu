@@ -25,7 +25,7 @@ import top.wkbin.taixu.ui.components.*
 internal fun WorkflowStructuredResultButton(result: JsonObject) {
     var snapshot by remember { mutableStateOf<JsonObject?>(null) }
     RuntimeOutlinedButton(onClick = { snapshot = result }, modifier = Modifier.fillMaxWidth()) {
-        Text("查看结构化结果", maxLines = 1)
+        Text("Xem kết quả có cấu trúc", maxLines = 1)
     }
     snapshot?.let { source -> WorkflowStructuredResultDialog(source) { snapshot = null } }
 }
@@ -51,27 +51,27 @@ private fun WorkflowStructuredResultDialog(result: JsonObject, onDismiss: () -> 
             pages = document.second
             raw = document.first
         } catch (cancelled: CancellationException) { throw cancelled }
-        catch (failure: Exception) { error = failure.message ?: "无法生成结果 JSON" }
+        catch (failure: Exception) { error = failure.message ?: "Không tạo được JSON kết quả" }
     }
-    RuntimeAlertDialog(onDismissRequest = onDismiss, title = { Text("结构化结果 JSON") }, text = {
+    RuntimeAlertDialog(onDismissRequest = onDismiss, title = { Text("Kết quả JSON có cấu trúc") }, text = {
         Column(Modifier.fillMaxWidth().verticalScroll(scroll), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text("查看打开窗口时的结果。复制和保存包含完整 JSON；结果文件用于核对和分析，不是工作流定义。", style = MaterialTheme.typography.bodySmall)
+            Text("Xem kết quả tại thời điểm mở cửa sổ. Sao chép và lưu chứa đầy đủ JSON; tệp kết quả dùng để đối chiếu và phân tích, không phải định nghĩa workflow.", style = MaterialTheme.typography.bodySmall)
             raw?.let { text ->
-                Text("${text.length} 个字符 · 第 ${page + 1} / ${pages.size} 页", style = MaterialTheme.typography.labelSmall)
+                Text("${text.length} ký tự · Trang ${page + 1} / ${pages.size}", style = MaterialTheme.typography.labelSmall)
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    RuntimeOutlinedButton(enabled = page > 0, onClick = { if (page > 0) page-- }, modifier = Modifier.weight(1f)) { Text("上一页", maxLines = 1) }
-                    RuntimeOutlinedButton(enabled = page < pages.lastIndex, onClick = { if (page < pages.lastIndex) page++ }, modifier = Modifier.weight(1f)) { Text("下一页", maxLines = 1) }
+                    RuntimeOutlinedButton(enabled = page > 0, onClick = { if (page > 0) page-- }, modifier = Modifier.weight(1f)) { Text("Trang trước", maxLines = 1) }
+                    RuntimeOutlinedButton(enabled = page < pages.lastIndex, onClick = { if (page < pages.lastIndex) page++ }, modifier = Modifier.weight(1f)) { Text("Trang sau", maxLines = 1) }
                 }
                 key(page) {
                     SelectionContainer { Text(pages[page], style = MaterialTheme.typography.bodySmall, fontFamily = FontFamily.Monospace) }
                 }
                 WorkflowSaveDocumentButton(text, "workflow_result")
             }
-            if (raw == null && error == null) Text("正在生成…")
+            if (raw == null && error == null) Text("Đang tạo…")
             error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
-            if (copied) Text("完整结果 JSON 已复制", style = MaterialTheme.typography.bodySmall)
+            if (copied) Text("Đã sao chép đầy đủ JSON kết quả", style = MaterialTheme.typography.bodySmall)
         }
-    }, dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("关闭", maxLines = 1) } }, confirmButton = {
+    }, dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("Đóng", maxLines = 1) } }, confirmButton = {
         RuntimeButton(enabled = raw != null && !copying, onClick = {
             if (copying) return@RuntimeButton
             val text = raw ?: return@RuntimeButton
@@ -86,9 +86,9 @@ private fun WorkflowStructuredResultDialog(result: JsonObject, onDismiss: () -> 
                     copied = true
                     error = null
                 } catch (cancelled: CancellationException) { throw cancelled }
-                catch (_: Exception) { error = "复制失败，请重试" }
+                catch (_: Exception) { error = "Sao chép thất bại, hãy thử lại" }
                 finally { copying = false }
             }
-        }) { Text(if (copying) "正在复制" else "复制完整 JSON", maxLines = 1) }
+        }) { Text(if (copying) "Đang sao chép" else "Sao chép đầy đủ JSON", maxLines = 1) }
     })
 }

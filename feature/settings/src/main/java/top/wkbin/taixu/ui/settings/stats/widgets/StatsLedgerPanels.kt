@@ -48,7 +48,7 @@ fun LedgerUsagePanel(
     modifier: Modifier = Modifier,
 ) {
     StatsSectionCard(
-        title = "用量",
+        title = "Mức dùng",
         modifier = modifier,
         trailing = {
             IconButton(onClick = onOpenDetail, modifier = Modifier.size(24.dp)) {
@@ -62,18 +62,18 @@ fun LedgerUsagePanel(
     ) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(18.dp)) {
             Column(modifier = Modifier.weight(1f)) {
-                LedgerMetricRow("Token 合计", ledgerCompact(ledger.totalTokens))
-                LedgerMetricRow("输入", ledgerCompact(ledger.inputTokens))
-                LedgerMetricRow("推理", ledgerCompact(ledger.reasoningTokens))
-                LedgerMetricRow("缓存读取", ledgerCompact(ledger.cacheReadTokens))
-                LedgerMetricRow("平均单次", ledgerCompact(ledger.averageTokensPerCall()))
+                LedgerMetricRow("Tổng token", ledgerCompact(ledger.totalTokens))
+                LedgerMetricRow("Đầu vào", ledgerCompact(ledger.inputTokens))
+                LedgerMetricRow("Suy luận", ledgerCompact(ledger.reasoningTokens))
+                LedgerMetricRow("Đọc cache", ledgerCompact(ledger.cacheReadTokens))
+                LedgerMetricRow("Trung bình/lần", ledgerCompact(ledger.averageTokensPerCall()))
             }
             Column(modifier = Modifier.weight(1f)) {
-                LedgerMetricRow("LLM 调用", "${ledger.calls}")
-                LedgerMetricRow("输出", ledgerCompact(ledger.outputTokens))
-                LedgerMetricRow("缓存命中率", ledgerPercent(ledger.cacheHitRate))
-                LedgerMetricRow("缓存写入", ledgerCompact(ledger.cacheWriteTokens))
-                LedgerMetricRow("成本", "未计算")
+                LedgerMetricRow("Lượt gọi LLM", "${ledger.calls}")
+                LedgerMetricRow("Đầu ra", ledgerCompact(ledger.outputTokens))
+                LedgerMetricRow("Tỉ lệ trúng cache", ledgerPercent(ledger.cacheHitRate))
+                LedgerMetricRow("Ghi cache", ledgerCompact(ledger.cacheWriteTokens))
+                LedgerMetricRow("Chi phí", "Chưa tính")
             }
         }
 
@@ -85,13 +85,13 @@ fun LedgerUsagePanel(
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            LedgerCounter("对话", "$conversations", Modifier.weight(1f))
-            LedgerCounter("消息", ledgerCompact(messages.toLong()), Modifier.weight(1f))
-            LedgerCounter("启动", "$launches", Modifier.weight(1f))
+            LedgerCounter("Cuộc trò chuyện", "$conversations", Modifier.weight(1f))
+            LedgerCounter("Tin nhắn", ledgerCompact(messages.toLong()), Modifier.weight(1f))
+            LedgerCounter("Lượt mở", "$launches", Modifier.weight(1f))
         }
 
         Text(
-            text = "以上均为用量账本记录的真实计量值；底部三项是与 token 无关的行为指标。成本暂未计算——目前还没有定价表可用。",
+            text = "Trên đây đều là số liệu thực tế do sổ mức dùng ghi lại; ba mục dưới là chỉ số hành vi không liên quan token. Chi phí chưa được tính — hiện chưa có bảng giá.",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 10.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
@@ -170,10 +170,10 @@ fun LedgerTrendPanel(
     days: List<StatsTrendDay>,
     modifier: Modifier = Modifier,
 ) {
-    StatsSectionCard(title = "用量趋势", modifier = modifier) {
+    StatsSectionCard(title = "Xu hướng mức dùng", modifier = modifier) {
         if (days.isEmpty()) {
             Text(
-                text = "所选范围内没有账本记录",
+                text = "Không có bản ghi sổ trong phạm vi đã chọn",
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontSize = 11.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
@@ -183,7 +183,7 @@ fun LedgerTrendPanel(
         } else {
             StatsUsageChart(days = days, modifier = Modifier.fillMaxWidth())
             Text(
-                text = "点立柱看当日各模型用量，左右滑动可看更早区间。",
+                text = "Chạm vào cột để xem mức dùng từng mô hình trong ngày, vuốt ngang để xem khoảng thời gian sớm hơn.",
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontSize = 10.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
@@ -207,13 +207,13 @@ fun LedgerBreakdownPanel(
     onGroupChange: (StatsLedgerGroupDim) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    StatsSectionCard(title = "分解", modifier = modifier) {
+    StatsSectionCard(title = "Phân rã", modifier = modifier) {
         LedgerGroupControls(groupDim = groupDim, onGroupChange = onGroupChange)
         Spacer(modifier = Modifier.height(12.dp))
 
         if (rows.isEmpty()) {
             Text(
-                text = "该作用域下没有可分解的数据",
+                text = "Không có dữ liệu để phân rã trong phạm vi này",
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontSize = 11.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
@@ -242,7 +242,7 @@ fun LedgerBreakdownPanel(
                         modifier = Modifier.weight(1f, fill = false),
                     )
                     Text(
-                        text = "${ledgerCompact(row.totalTokens)} · ${ledgerPercent(row.totalTokens.toDouble() / sumTokens)} · ${row.calls} 次",
+                        text = "${ledgerCompact(row.totalTokens)} · ${ledgerPercent(row.totalTokens.toDouble() / sumTokens)} · ${row.calls} lần",
                         style = MaterialTheme.typography.bodySmall.copy(
                             fontSize = 10.5.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -266,7 +266,7 @@ fun LedgerBreakdownPanel(
                     )
                 }
                 Text(
-                    text = "入 ${ledgerCompact(row.inputTokens)} · 出 ${ledgerCompact(row.outputTokens)} · 推 ${ledgerCompact(row.reasoningTokens)}",
+                    text = "Vào ${ledgerCompact(row.inputTokens)} · Ra ${ledgerCompact(row.outputTokens)} · Suy luận ${ledgerCompact(row.reasoningTokens)}",
                     style = MaterialTheme.typography.bodySmall.copy(
                         fontSize = 10.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
@@ -289,16 +289,16 @@ fun LedgerCompositionPanel(
     modifier: Modifier = Modifier,
 ) {
     val segments = listOf(
-        Triple("输入", ledger.inputTokens, MaterialTheme.colorScheme.primary),
-        Triple("输出", ledger.outputTokens, MaterialTheme.colorScheme.secondary),
-        Triple("推理", ledger.reasoningTokens, MaterialTheme.colorScheme.tertiary),
-        Triple("缓存写入", ledger.cacheWriteTokens, MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)),
+        Triple("Đầu vào", ledger.inputTokens, MaterialTheme.colorScheme.primary),
+        Triple("Đầu ra", ledger.outputTokens, MaterialTheme.colorScheme.secondary),
+        Triple("Suy luận", ledger.reasoningTokens, MaterialTheme.colorScheme.tertiary),
+        Triple("Ghi cache", ledger.cacheWriteTokens, MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)),
     ).filter { (_, value, _) -> value > 0L }
 
-    StatsSectionCard(title = "构成", modifier = modifier) {
+    StatsSectionCard(title = "Cơ cấu", modifier = modifier) {
         if (segments.isEmpty()) {
             Text(
-                text = "所选范围内没有账本记录",
+                text = "Không có bản ghi sổ trong phạm vi đã chọn",
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontSize = 11.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
@@ -351,7 +351,7 @@ fun LedgerCompositionPanel(
         }
 
         Text(
-            text = "缓存命中读取 ${ledgerCompact(ledger.cacheReadTokens)} 不计入合计：它是输入前缀的复用部分，计入会与输入双重计算。",
+            text = "Đọc trúng cache ${ledgerCompact(ledger.cacheReadTokens)} không tính vào tổng: đó là phần tái sử dụng của tiền tố đầu vào, nếu tính sẽ trùng với đầu vào.",
             style = MaterialTheme.typography.bodySmall.copy(
                 fontSize = 10.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),

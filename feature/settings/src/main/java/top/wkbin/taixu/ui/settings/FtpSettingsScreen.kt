@@ -75,9 +75,9 @@ fun FtpSettingsScreen(
     message?.let { current ->
         RuntimeAlertDialog(
             onDismissRequest = { viewModel?.consumeMessage() },
-            title = { Text(if (messageIsError) "FTP 操作未完成" else "FTP 远程文件服务") },
+            title = { Text(if (messageIsError) "Thao tác FTP chưa hoàn tất" else "Dịch vụ tệp từ xa FTP") },
             text = { Text(current) },
-            confirmButton = { RuntimeTextButton(onClick = { viewModel?.consumeMessage() }) { Text("知道了") } },
+            confirmButton = { RuntimeTextButton(onClick = { viewModel?.consumeMessage() }) { Text("Đã rõ") } },
         )
     }
 
@@ -108,38 +108,38 @@ fun FtpSettingsScreen(
     }
 
     val statusText = when (serviceState) {
-        is FtpServiceState.Stopped -> "已停止"
-        is FtpServiceState.Starting -> "正在启动"
-        is FtpServiceState.Running -> "运行中"
-        is FtpServiceState.Failed -> "启动失败"
+        is FtpServiceState.Stopped -> "Đã dừng"
+        is FtpServiceState.Starting -> "Đang khởi động"
+        is FtpServiceState.Running -> "Đang chạy"
+        is FtpServiceState.Failed -> "Khởi động thất bại"
     }
     val busy = operating || serviceState is FtpServiceState.Starting
 
     RuntimeSettingsScaffold(
-        title = "FTP 远程文件访问", onBack = onBack,
+        title = "Truy cập tệp từ xa FTP", onBack = onBack,
         statusText = statusText,
     ) {
         item {
             NoticeBanner(
-                text = "FTP 直连当前 Linux 容器根文件系统（/），在同一 Wi-Fi 或网络下可使用电脑 FileZilla、Cyberduck、Windows 资源管理器快速上传/下载大文件与管理目录。",
+                text = "FTP kết nối trực tiếp vào hệ thống tệp gốc (/) của container Linux hiện tại; trong cùng mạng Wi-Fi, có thể dùng FileZilla, Cyberduck trên máy tính hoặc Windows Explorer để tải lên/tải xuống tệp lớn và quản lý thư mục nhanh chóng.",
             )
         }
 
         item {
-            SectionLabel("服务状态")
+            SectionLabel("Trạng thái dịch vụ")
             SettingsGroup {
                 SettingsRow(
                     icon = RuntimeIconName.Server,
-                    title = "启用 FTP 服务",
-                    subtitle = "保持启用并随 Linux 运行时自动启动",
+                    title = "Bật dịch vụ FTP",
+                    subtitle = "Giữ bật và tự khởi động cùng runtime Linux",
                     value = if (busy) {
-                        "正在处理..."
+                        "Đang xử lý..."
                     } else {
                         when (serviceState) {
-                            is FtpServiceState.Running -> "运行中"
-                            is FtpServiceState.Starting -> "启动中"
-                            is FtpServiceState.Failed -> "失败"
-                            is FtpServiceState.Stopped -> "已停止"
+                            is FtpServiceState.Running -> "Đang chạy"
+                            is FtpServiceState.Starting -> "Đang khởi động"
+                            is FtpServiceState.Failed -> "Thất bại"
+                            is FtpServiceState.Stopped -> "Đã dừng"
                         }
                     },
                     trailing = {
@@ -173,7 +173,7 @@ fun FtpSettingsScreen(
         }
 
         item {
-            SectionLabel("连接地址与客户端配置参数")
+            SectionLabel("Địa chỉ kết nối và tham số cấu hình client")
             SettingsDetailCard(
                 modifier = Modifier.fillMaxWidth(),
                 containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -181,53 +181,53 @@ fun FtpSettingsScreen(
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text(
-                        text = "外部 App 连接参数 (分项填入)：",
+                        text = "Tham số kết nối cho app bên ngoài (điền từng mục):",
                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                     ParamRow(
-                        label = "服务端口 (Port)",
+                        label = "Cổng dịch vụ (Port)",
                         value = settings.port.toString(),
                         highlight = true,
-                        onCopy = { copyText(context, settings.port.toString(), "FTP 端口 (${settings.port}) 已复制") },
+                        onCopy = { copyText(context, settings.port.toString(), "Đã sao chép cổng FTP (${settings.port})") },
                     )
                     ParamRow(
-                        label = "本机主机 IP (Host - 手机其他 App 连接)",
+                        label = "IP máy chủ nội bộ (Host - app khác trên điện thoại kết nối)",
                         value = "127.0.0.1",
                         highlight = true,
-                        onCopy = { copyText(context, "127.0.0.1", "本机 IP (127.0.0.1) 已复制") },
+                        onCopy = { copyText(context, "127.0.0.1", "Đã sao chép IP nội bộ (127.0.0.1)") },
                     )
                     ParamRow(
-                        label = "局域网主机 IP (Host - 电脑/外部设备连接)",
+                        label = "IP máy chủ mạng LAN (Host - máy tính/thiết bị ngoài kết nối)",
                         value = settings.connectionHost,
-                        onCopy = { copyText(context, settings.connectionHost, "局域网 IP (${settings.connectionHost}) 已复制") },
+                        onCopy = { copyText(context, settings.connectionHost, "Đã sao chép IP mạng LAN (${settings.connectionHost})") },
                     )
                     ParamRow(
-                        label = "登录用户名 (Username)",
+                        label = "Tên đăng nhập (Username)",
                         value = settings.username,
-                        onCopy = { copyText(context, settings.username, "用户名 (${settings.username}) 已复制") },
+                        onCopy = { copyText(context, settings.username, "Đã sao chép tên người dùng (${settings.username})") },
                     )
 
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f))
 
                     Text(
-                        text = "快速连接 URL：",
+                        text = "URL kết nối nhanh:",
                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                     ParamRow(
-                        label = "局域网 / 电脑访问 URL",
+                        label = "URL truy cập mạng LAN / máy tính",
                         value = settings.connectionUrl,
-                        onCopy = { copyText(context, settings.connectionUrl, "局域网 FTP 地址已复制") },
+                        onCopy = { copyText(context, settings.connectionUrl, "Đã sao chép địa chỉ FTP mạng LAN") },
                     )
                     ParamRow(
-                        label = "手机本机其他 App 访问 URL",
+                        label = "URL truy cập cho app khác trên điện thoại",
                         value = settings.localUrl,
-                        onCopy = { copyText(context, settings.localUrl, "本机 FTP 地址已复制") },
+                        onCopy = { copyText(context, settings.localUrl, "Đã sao chép địa chỉ FTP nội bộ") },
                     )
 
                     Text(
-                        text = "使用提示：在手机第三方文件管理器 (如 MT管理器/Solid Explorer/CX文件管理器) 中添加 FTP 时，主机填写 127.0.0.1，端口填 ${settings.port}；同一 Wi-Fi 下电脑连接主机填 ${settings.connectionHost}。",
+                        text = "Gợi ý sử dụng: khi thêm FTP trong trình quản lý tệp bên thứ ba trên điện thoại (như MT Manager/Solid Explorer/CX File Manager), host điền 127.0.0.1, cổng điền ${settings.port}; máy tính trong cùng Wi-Fi điền host là ${settings.connectionHost}.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -238,40 +238,40 @@ fun FtpSettingsScreen(
         if (vpnActive) {
             item {
                 NoticeBanner(
-                    text = "检测到手机正处于 VPN 连接中，VPN 可能接管局域网流量导致外部设备无法连接。若连接超时请先暂停 VPN 或将本应用加入直连白名单。",
+                    text = "Phát hiện điện thoại đang kết nối VPN, VPN có thể chiếm lưu lượng mạng LAN khiến thiết bị ngoài không kết nối được. Nếu kết nối quá thời gian, hãy tạm dừng VPN hoặc thêm ứng dụng này vào danh sách trắng kết nối trực tiếp.",
                     isError = true,
                 )
             }
         }
 
         item {
-            SectionLabel("登录认证与权限")
+            SectionLabel("Xác thực đăng nhập và quyền")
             SettingsGroup {
                 SettingsRow(
                     icon = RuntimeIconName.Admin,
-                    title = "登录用户名",
-                    subtitle = "FTP 客户端连接时使用的用户名",
+                    title = "Tên đăng nhập",
+                    subtitle = "Tên người dùng khi FTP client kết nối",
                     value = settings.username,
                     onClick = { showUsernameDialog = true },
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 val passwordSubtitle = if (settings.passwordConfigured) {
-                    "密码已单独配置并加密保存，点击修改或清除"
+                    "Mật khẩu đã được cấu hình riêng và lưu mã hóa, chạm để sửa hoặc xóa"
                 } else if (settings.sshPasswordConfigured) {
-                    "未单独设置，已自动使用 SSH 登录密码"
+                    "Chưa đặt riêng, đang tự động dùng mật khẩu đăng nhập SSH"
                 } else {
-                    "未设置密码（免密登录，客户端密码留空或填任意内容即可）"
+                    "Chưa đặt mật khẩu (đăng nhập không cần mật khẩu, client để trống hoặc điền gì cũng được)"
                 }
                 val passwordValue = if (settings.passwordConfigured) {
-                    "已设置"
+                    "Đã đặt"
                 } else if (settings.sshPasswordConfigured) {
-                    "同 SSH 密码"
+                    "Giống mật khẩu SSH"
                 } else {
-                    "免密"
+                    "Không cần mật khẩu"
                 }
                 SettingsRow(
                     icon = RuntimeIconName.Key,
-                    title = "登录密码",
+                    title = "Mật khẩu đăng nhập",
                     subtitle = passwordSubtitle,
                     value = passwordValue,
                     onClick = { showPasswordDialog = true },
@@ -279,8 +279,8 @@ fun FtpSettingsScreen(
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Shield,
-                    title = "允许匿名访问",
-                    subtitle = if (settings.anonymousEnabled) "外部客户端无需用户名/密码即可登录" else "要求输入用户名与密码认证",
+                    title = "Cho phép truy cập ẩn danh",
+                    subtitle = if (settings.anonymousEnabled) "Client bên ngoài đăng nhập không cần tên người dùng/mật khẩu" else "Yêu cầu nhập tên người dùng và mật khẩu để xác thực",
                     trailing = {
                         RuntimeSwitch(
                             checked = settings.anonymousEnabled,
@@ -292,8 +292,8 @@ fun FtpSettingsScreen(
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Storage,
-                    title = "只读保护模式",
-                    subtitle = if (settings.readOnly) "只读模式生效：禁止外部写入、修改、重命名或删除文件" else "读写模式：允许外部自由上传、重命名与删除文件",
+                    title = "Chế độ bảo vệ chỉ đọc",
+                    subtitle = if (settings.readOnly) "Chế độ chỉ đọc đang bật: cấm ghi, sửa, đổi tên hoặc xóa tệp từ bên ngoài" else "Chế độ đọc/ghi: cho phép tải lên, đổi tên và xóa tệp tự do từ bên ngoài",
                     trailing = {
                         RuntimeSwitch(
                             checked = settings.readOnly,
@@ -306,28 +306,28 @@ fun FtpSettingsScreen(
         }
 
         item {
-            SectionLabel("网络配置")
+            SectionLabel("Cấu hình mạng")
             SettingsGroup {
                 val portValue = portText.toIntOrNull()
                 val portValid = portValue != null && portValue in 1024..65535
                 SettingsPortEditor(
-                    label = "FTP 端口", value = portText,
+                    label = "Cổng FTP", value = portText,
                     onValueChange = { portText = it.filter(Char::isDigit).take(5) },
                     isError = portText.isNotBlank() && !portValid,
-                    supportingText = if (portText.isNotBlank() && !portValid) "端口需在 1024–65535 范围内" else "默认端口：2121（范围 1024–65535）",
+                    supportingText = if (portText.isNotBlank() && !portValid) "Cổng phải trong khoảng 1024–65535" else "Cổng mặc định: 2121 (khoảng 1024–65535)",
                 ) {
                     RuntimeOutlinedButton(
-                        onClick = { copyText(context, settings.port.toString(), "FTP 端口 (${settings.port}) 已复制") },
+                        onClick = { copyText(context, settings.port.toString(), "Đã sao chép cổng FTP (${settings.port})") },
                     ) {
                         RuntimeIcon(RuntimeIconName.Copy, Modifier.size(14.dp))
                         Spacer(Modifier.size(4.dp))
-                        Text("复制")
+                        Text("Sao chép")
                     }
                     RuntimeOutlinedButton(
                         onClick = { viewModel?.savePort(portText) },
                         enabled = !busy && portValid && portText != settings.port.toString(),
                     ) {
-                        Text("保存")
+                        Text("Lưu")
                     }
                 }
             }
@@ -335,7 +335,7 @@ fun FtpSettingsScreen(
 
         if (logs.isNotEmpty()) {
             item {
-                SectionLabel("最近访问日志")
+                SectionLabel("Nhật ký truy cập gần đây")
                 SettingsDetailCard(
                     modifier = Modifier.fillMaxWidth(),
                     containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
@@ -380,7 +380,7 @@ private fun FtpPasswordDialog(
     val matches = password == confirmation
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (passwordConfigured) "修改 FTP 登录密码" else "设置 FTP 登录密码") },
+        title = { Text(if (passwordConfigured) "Đổi mật khẩu đăng nhập FTP" else "Đặt mật khẩu đăng nhập FTP") },
         text = {
             Column(
                 modifier = Modifier
@@ -389,15 +389,15 @@ private fun FtpPasswordDialog(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(
-                    "密码将通过 Android Keystore 加密保存，外部客户端连接时需输入此密码。",
+                    "Mật khẩu sẽ được lưu mã hóa qua Android Keystore, client bên ngoài cần nhập mật khẩu này khi kết nối.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 RuntimeFilledTextField(
                     value = password,
                     onValueChange = { password = it.take(128) },
-                    label = { Text("新密码") },
-                    supportingText = { Text("至少 4 个字符") },
+                    label = { Text("Mật khẩu mới") },
+                    supportingText = { Text("Ít nhất 4 ký tự") },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     singleLine = true,
@@ -406,10 +406,10 @@ private fun FtpPasswordDialog(
                 RuntimeFilledTextField(
                     value = confirmation,
                     onValueChange = { confirmation = it.take(128) },
-                    label = { Text("再次输入密码") },
+                    label = { Text("Nhập lại mật khẩu") },
                     isError = confirmation.isNotEmpty() && !matches,
                     supportingText = {
-                        if (confirmation.isNotEmpty() && !matches) Text("两次输入的密码不一致")
+                        if (confirmation.isNotEmpty() && !matches) Text("Hai lần nhập mật khẩu không khớp")
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -422,14 +422,14 @@ private fun FtpPasswordDialog(
             RuntimeButton(
                 onClick = { onSave(password) },
                 enabled = password.length >= 4 && matches,
-            ) { Text("保存") }
+            ) { Text("Lưu") }
         },
         dismissButton = {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 if (passwordConfigured) {
-                    RuntimeTextButton(onClick = onClear) { Text("清除密码") }
+                    RuntimeTextButton(onClick = onClear) { Text("Xóa mật khẩu") }
                 }
-                RuntimeTextButton(onClick = onDismiss) { Text("取消") }
+                RuntimeTextButton(onClick = onDismiss) { Text("Hủy") }
             }
         },
     )
@@ -444,13 +444,13 @@ private fun FtpUsernameDialog(
     var username by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf(currentUsername) }
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("修改 FTP 登录用户名") },
+        title = { Text("Đổi tên đăng nhập FTP") },
         text = { SettingsDialogForm {
             RuntimeFilledTextField(
                 value = username,
                 onValueChange = { username = it.take(32) },
-                label = { Text("用户名") },
-                supportingText = { Text("默认为 root") },
+                label = { Text("Tên người dùng") },
+                supportingText = { Text("Mặc định là root") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -459,10 +459,10 @@ private fun FtpUsernameDialog(
             RuntimeButton(
                 onClick = { onSave(username.trim().ifBlank { "root" }) },
                 enabled = username.isNotBlank(),
-            ) { Text("保存") }
+            ) { Text("Lưu") }
         },
         dismissButton = {
-            RuntimeTextButton(onClick = onDismiss) { Text("取消") }
+            RuntimeTextButton(onClick = onDismiss) { Text("Hủy") }
         },
     )
 }
@@ -502,7 +502,7 @@ private fun ParamRow(
         ) {
             RuntimeIcon(RuntimeIconName.Copy, Modifier.size(13.dp))
             Spacer(Modifier.size(4.dp))
-            Text("复制", style = MaterialTheme.typography.labelSmall)
+            Text("Sao chép", style = MaterialTheme.typography.labelSmall)
         }
     }
 }

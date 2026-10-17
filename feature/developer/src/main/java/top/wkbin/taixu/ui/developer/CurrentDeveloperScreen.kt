@@ -33,11 +33,11 @@ internal fun RemoteDeveloperScreen(serverId: String, onBack: () -> Unit, service
         service?.observe(serverId, target) ?: kotlinx.coroutines.flow.flowOf(RemoteSystemInspection(loading = false))
     }.collectAsStateWithLifecycle(RemoteSystemInspection(loading = service != null))
     Scaffold(containerColor = MaterialTheme.colorScheme.background,
-        topBar = { RuntimeTopBar(title = "系统运行状态", statusText = target?.name ?: "服务器", onBack = onBack,
-            actions = { RuntimeIconButton(onClick = { refresh++ }, contentDescription = "刷新") { RuntimeIcon(RuntimeIconName.Refresh) } }) },
+        topBar = { RuntimeTopBar(title = "Trạng thái vận hành hệ thống", statusText = target?.name ?: "Máy chủ", onBack = onBack,
+            actions = { RuntimeIconButton(onClick = { refresh++ }, contentDescription = "Làm mới") { RuntimeIcon(RuntimeIconName.Refresh) } }) },
     ) { padding ->
         Column(Modifier.fillMaxSize().then(top.wkbin.taixu.ui.components.runtimeScrollViewport(padding)).verticalScroll(rememberScrollState()).padding(bottom = padding.calculateBottomPadding()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            SystemOverviewCard(target?.name ?: "服务器", target?.let { "${it.username}@${it.host}:${it.port}" }.orEmpty(),
+            SystemOverviewCard(target?.name ?: "Máy chủ", target?.let { "${it.username}@${it.host}:${it.port}" }.orEmpty(),
                 target?.workspace.orEmpty(), state.loading, state.error, state.metrics?.let { listOf(
                     "发行版" to it.distribution, "架构" to it.architecture, "内核" to it.kernel,
                     "进程" to it.processCount.toString(), "内存" to "${it.memoryUsedMb} / ${it.memoryTotalMb} MB", "负载" to it.load,

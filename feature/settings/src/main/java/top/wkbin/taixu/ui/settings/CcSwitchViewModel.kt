@@ -264,7 +264,7 @@ class CcSwitchViewModel(
                     val failure = statusRes.exceptionOrNull() ?: snapshotRes.exceptionOrNull()
                     statusRes.onSuccess { _daemonStatus.value = it }
                     snapshotRes.onSuccess { _providers.value = it.providers }
-                    _errorMessage.value = failure?.let { "读取中枢数据失败：${it.message}" }
+                    _errorMessage.value = failure?.let { "Đọc dữ liệu trung tâm thất bại: ${it.message}" }
                 } else {
                     _daemonStatus.value = null
                 }
@@ -291,7 +291,7 @@ class CcSwitchViewModel(
             linuxRuntime.execute(ShellCommand(commandLine = cmd, timeoutMs = 5000L))
             _webPassword.value = newPassword
             withContext(Dispatchers.Main.immediate) {
-                _successMessage.value = "Web 访问密码已重置为：$newPassword（重启中枢生效）"
+                _successMessage.value = "Mật khẩu truy cập Web đã đặt lại thành: $newPassword (khởi động lại trung tâm để có hiệu lực)"
             }
         }
     }
@@ -675,7 +675,7 @@ EOF
             }
         }
 
-        _installLogs.value = listOf("[${timeFormatter.format(Date())}] [*] 准备安装/升级 ${agent.type.displayName} (目标版本: ${targetVersion ?: "最新版本"})...")
+        _installLogs.value = listOf("[${timeFormatter.format(Date())}] [*] Chuẩn bị cài đặt/nâng cấp ${agent.type.displayName} (phiên bản mục tiêu: ${targetVersion ?: "Mới nhất"})...")
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -985,7 +985,7 @@ EOF
                         .takeLast(3)
                         .joinToString("; ")
                     withContext(Dispatchers.Main.immediate) {
-                        _errorMessage.value = "安装未完成：${lastErr.ifBlank { "未在沙箱中生成 ${agent.type.defaultExecutable} 命令，请点击下方查看日志排查" }}"
+                        _errorMessage.value = "Cài đặt chưa hoàn tất: ${lastErr.ifBlank { "Chưa tạo lệnh ${agent.type.defaultExecutable} trong sandbox, bấm bên dưới xem nhật ký để tra" }}"
                     }
                 }
 

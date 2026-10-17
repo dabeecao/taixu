@@ -86,7 +86,7 @@ fun StorageMountSettingsScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
             RuntimeTopBar(
-                title = "存储挂载与共享",
+                title = "Mount bộ nhớ & chia sẻ",
                 onBack = onBack,
                 scrollBehavior = scrollBehavior,
             )
@@ -131,7 +131,7 @@ fun StorageMountSettingsScreen(
                     Column {
                         MountToggleRow(
                             icon = RuntimeIconName.FolderDownload,
-                            title = "下载目录 (Download)",
+                            title = "Thư mục tải xuống (Download)",
                             hostPath = "/storage/emulated/0/Download",
                             guestPath = "/sdcard/Download",
                             checked = downloadEnabled,
@@ -141,7 +141,7 @@ fun StorageMountSettingsScreen(
                         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
                         MountToggleRow(
                             icon = RuntimeIconName.Document,
-                            title = "文档目录 (Documents)",
+                            title = "Thư mục tài liệu (Documents)",
                             hostPath = "/storage/emulated/0/Documents",
                             guestPath = "/sdcard/Documents",
                             checked = documentsEnabled,
@@ -151,7 +151,7 @@ fun StorageMountSettingsScreen(
                         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
                         MountToggleRow(
                             icon = RuntimeIconName.SdCard,
-                            title = "完整共享存储 (/sdcard)",
+                            title = "Bộ nhớ dùng chung đầy đủ (/sdcard)",
                             hostPath = "/storage/emulated/0",
                             guestPath = "/sdcard",
                             checked = sharedStorageEnabled,
@@ -183,7 +183,7 @@ fun StorageMountSettingsScreen(
                     ) {
                         RuntimeIcon(RuntimeIconName.Plus, Modifier.size(14.dp))
                         Spacer(Modifier.size(4.dp))
-                        Text("新增挂载", style = MaterialTheme.typography.labelSmall)
+                        Text("Thêm mount", style = MaterialTheme.typography.labelSmall)
                     }
                 }
             }
@@ -208,7 +208,7 @@ fun StorageMountSettingsScreen(
                                 color = MaterialTheme.colorScheme.onSurface,
                             )
                             Text(
-                                "点击上方“新增挂载”将 Android 目录映射进 Linux 沙箱（仅终端 / 智枢 / 构建可见）",
+                                "Bấm “Thêm mount” ở trên để ánh xạ thư mục Android vào sandbox Linux (chỉ Terminal / Agent / Build thấy được)",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -273,7 +273,7 @@ fun StorageMountSettingsScreen(
                                     .minimumInteractiveComponentSize()
                                     .size(48.dp),
                                 enabled = !localMountsOnly,
-                                contentDescription = "删除挂载点 ${binding.name}",
+                                contentDescription = "Xóa điểm mount ${binding.name}",
                             ) {
                                 RuntimeIcon(
                                     name = RuntimeIconName.Trash,
@@ -291,9 +291,9 @@ fun StorageMountSettingsScreen(
     pendingDeleteBinding?.let { binding ->
         RuntimeAlertDialog(
             onDismissRequest = { pendingDeleteBindingId = null },
-            title = { Text("删除挂载点", fontWeight = FontWeight.Bold) },
+            title = { Text("Xóa điểm gắn", fontWeight = FontWeight.Bold) },
             text = {
-                Text("确定要删除挂载点「${binding.name}」（${binding.hostPath} ➔ ${binding.guestPath}）吗？删除后新建的终端 / 构建任务将不再映射该目录。")
+                Text("Chắc chắn xóa điểm mount 「${binding.name}」(${binding.hostPath} ➔ ${binding.guestPath})? Terminal / tác vụ build mới sau này sẽ không ánh xạ thư mục đó nữa.")
             },
             confirmButton = {
                 Button(
@@ -309,7 +309,7 @@ fun StorageMountSettingsScreen(
                 }
             },
             dismissButton = {
-                TextButton(onClick = { pendingDeleteBindingId = null }) { Text("取消") }
+                TextButton(onClick = { pendingDeleteBindingId = null }) { Text("Hủy") }
             },
         )
     }

@@ -117,7 +117,7 @@ class DualAgentCoordinator(
                 providerClient.chat(effectivePlannerModel, plannerMessages)
             }.getOrElse { throwable ->
                 return@withContext DualAgentOutcome.Failed(
-                    message = "Planner 模型调用失败：${throwable.message}",
+                    message = "Gọi mô hình Planner thất bại: ${throwable.message}",
                     plan = steps,
                     failedStep = steps.lastOrNull { it.status == StepStatus.RUNNING },
                 )
@@ -239,7 +239,7 @@ class DualAgentCoordinator(
         }
 
         DualAgentOutcome.Failed(
-            message = "已达到最大规划步数上限（$maxSteps 步），未能全部完成",
+            message = "Đã đạt giới hạn tối đa số bước lập kế hoạch ($maxSteps bước), chưa hoàn thành hết",
             plan = steps,
             failedStep = steps.lastOrNull { it.status != StepStatus.COMPLETED },
         )

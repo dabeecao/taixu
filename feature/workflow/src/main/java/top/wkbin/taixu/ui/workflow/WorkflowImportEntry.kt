@@ -29,11 +29,11 @@ import top.wkbin.taixu.ui.components.RuntimeOutlinedButton
 internal fun WorkflowCatalogEntry(onCreate: () -> Unit, onImport: (WorkflowDefinition) -> Unit) {
     var importing by remember { mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text("把构建、诊断、逆向与 Git 操作编排成可观察、可暂停的 DAG。",
+        Text("Sắp xếp các thao tác build, chẩn đoán, dịch ngược và Git thành DAG có thể quan sát và tạm dừng.",
             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            RuntimeButton(onClick = onCreate, modifier = Modifier.weight(1f)) { Text("新建", maxLines = 1) }
-            RuntimeOutlinedButton(onClick = { importing = true }, modifier = Modifier.weight(1f)) { Text("导入 JSON", maxLines = 1) }
+            RuntimeButton(onClick = onCreate, modifier = Modifier.weight(1f)) { Text("Tạo mới", maxLines = 1) }
+            RuntimeOutlinedButton(onClick = { importing = true }, modifier = Modifier.weight(1f)) { Text("Nhập JSON", maxLines = 1) }
         }
     }
     if (importing) WorkflowImportDialog(onDismiss = { importing = false }, onImport = { definition ->
@@ -87,26 +87,26 @@ private fun WorkflowImportDialog(onDismiss: () -> Unit, onImport: (WorkflowDefin
         error = result.exceptionOrNull()?.message
         checking = false
     }
-    RuntimeAlertDialog(onDismissRequest = onDismiss, title = { Text("导入工作流 JSON") }, text = {
+    RuntimeAlertDialog(onDismissRequest = onDismiss, title = { Text("Nhập JSON workflow") }, text = {
         Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text("选择 UTF-8 JSON 文件或粘贴完整定义，校验后作为新工作流进入编辑器，再保存和运行。导入采用手动触发，节点 ID 与变量引用保持原样。")
+            Text("Chọn tệp JSON UTF-8 hoặc dán định nghĩa đầy đủ; sau khi kiểm tra sẽ đưa vào trình chỉnh sửa dưới dạng workflow mới, rồi lưu và chạy. Việc nhập được kích hoạt thủ công; ID nút và tham chiếu biến giữ nguyên.")
             RuntimeOutlinedButton(enabled = !reading, modifier = Modifier.fillMaxWidth(), onClick = {
                 if (reading) return@RuntimeOutlinedButton
                 reading = true
                 fileError = null
                 try { picker.launch(arrayOf("application/json", "text/*", "application/octet-stream")) }
                 catch (_: Exception) { reading = false; fileError = "无法打开系统文件选择窗口" }
-            }) { Text(if (reading) "正在读取…" else "选择 JSON 文件", maxLines = 1) }
+            }) { Text(if (reading) "Đang đọc…" else "Chọn tệp JSON", maxLines = 1) }
             OutlinedTextField(value = raw, onValueChange = { if (!reading) { raw = it; preview = null; error = null; fileError = null; checking = it.isNotBlank() } },
-                enabled = !reading, label = { Text("工作流 JSON") }, minLines = 4, maxLines = 8, isError = error != null || fileError != null,
+                enabled = !reading, label = { Text("JSON workflow") }, minLines = 4, maxLines = 8, isError = error != null || fileError != null,
                 modifier = Modifier.fillMaxWidth())
-            if (checking) Text("正在校验…", style = MaterialTheme.typography.bodySmall)
+            if (checking) Text("Đang kiểm tra…", style = MaterialTheme.typography.bodySmall)
             error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
             fileError?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
-            preview?.let { Text("${it.name}\n${it.nodes.size} 个节点 · ${it.edges.size} 条连接 · 最大执行并发 ${it.maxParallelNodes}",
+            preview?.let { Text("${it.name}\n${it.nodes.size} nút · ${it.edges.size} kết nối · Thực thi đồng thời tối đa ${it.maxParallelNodes}",
                 style = MaterialTheme.typography.bodyMedium) }
         }
-    }, dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("取消", maxLines = 1) } },
+    }, dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("Hủy", maxLines = 1) } },
         confirmButton = { RuntimeButton(enabled = preview != null && !checking && !reading && fileError == null,
-            onClick = { if (!checking && !reading && fileError == null) preview?.let(onImport) }) { Text("导入并编辑", maxLines = 1) } })
+            onClick = { if (!checking && !reading && fileError == null) preview?.let(onImport) }) { Text("Nhập và chỉnh sửa", maxLines = 1) } })
 }

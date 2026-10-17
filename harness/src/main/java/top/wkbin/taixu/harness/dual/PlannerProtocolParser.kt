@@ -53,7 +53,7 @@ object PlannerProtocolParser {
                 // 兜底 id 避开既有步骤 id：撞 id 时协调器会按旧状态保留而静默丢弃新指令
                 val step = PlanStep(
                     id = nextFallbackStepId(currentSteps),
-                    title = "执行下一步",
+                    title = "Thực hiện bước tiếp theo",
                     instruction = text.take(500),
                 )
                 PlannerDecision.ExecuteStep(step = step, updatedPlan = currentSteps + step)
@@ -71,7 +71,7 @@ object PlannerProtocolParser {
                 PlannerDecision.Finish(finalReport = report, completedSteps = currentSteps)
             }
             "REPLAN" -> {
-                val reason = if (thought.isNotBlank()) thought else "规划方案微调"
+                val reason = if (thought.isNotBlank()) thought else "Tinh chỉnh kế hoạch"
                 val planList = parsePlanArray(parsed) ?: currentSteps
                 PlannerDecision.Replan(reason = reason, newSteps = planList)
             }
@@ -102,7 +102,7 @@ object PlannerProtocolParser {
                     } else {
                         PlanStep(
                             id = fallbackId,
-                            title = "工序 $fallbackId",
+                            title = "Công đoạn $fallbackId",
                             instruction = thought.ifBlank { text },
                         )
                     }
@@ -130,7 +130,7 @@ object PlannerProtocolParser {
 
     private fun parseStepObject(stepObj: JsonObject, defaultId: String, defaultInstruction: String): PlanStep {
         val stepId = stepObj["id"]?.jsonPrimitive?.contentOrNull ?: defaultId
-        val title = stepObj["title"]?.jsonPrimitive?.contentOrNull ?: "工序 $stepId"
+        val title = stepObj["title"]?.jsonPrimitive?.contentOrNull ?: "Công đoạn $stepId"
         val instruction = stepObj["instruction"]?.jsonPrimitive?.contentOrNull ?: defaultInstruction
         val expected = stepObj["expectedOutcome"]?.jsonPrimitive?.contentOrNull.orEmpty()
         val dependencies = runCatching {

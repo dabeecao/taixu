@@ -64,7 +64,7 @@ internal fun LedgerDetailDialog(
                 ) {
                     LedgerDetailHeader(ledger = ledger)
 
-                    DetailBlock(title = "按" + ledgerGroupDimLabel(groupDim) + "拆分") {
+                    DetailBlock(title = "Theo" + ledgerGroupDimLabel(groupDim) + "phân tách") {
                         val rows = ledger.groupsOf(groupDim)
                         if (rows.isEmpty()) {
                             DetailEmpty(text = "所选范围内没有账本记录")
@@ -75,7 +75,7 @@ internal fun LedgerDetailDialog(
                         }
                     }
 
-                    DetailBlock(title = "最近调用") {
+                    DetailBlock(title = "Lần gọi gần đây") {
                         if (ledger.recentCalls.isEmpty()) {
                             DetailEmpty(text = "所选范围内没有账本记录")
                         } else {
@@ -89,7 +89,7 @@ internal fun LedgerDetailDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("关闭")
+                Text("Đóng")
             }
         },
     )

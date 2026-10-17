@@ -98,9 +98,9 @@ internal fun RunModeSelectorRow(
                 RuntimeIcon(RuntimeIconName.Code, Modifier.size(18.dp), MaterialTheme.colorScheme.primary)
             }
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                Text("新会话默认运行意图", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold))
+                Text("Ý định chạy mặc định cho phiên mới", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold))
                 Text(
-                    "仅作为新建会话初始值，已存在会话可在聊天顶部单独切换。",
+                    "Chỉ dùng làm giá trị khởi tạo cho phiên mới; phiên đã có thể chuyển riêng ở đầu khung chat.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

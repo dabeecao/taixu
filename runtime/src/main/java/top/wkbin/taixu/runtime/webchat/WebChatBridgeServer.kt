@@ -208,7 +208,7 @@ class WebChatBridgeServer(
             val assetPath = if (path.isBlank() || !hasFileExtension(path)) "webchat/index.html" else "webchat/$path"
             val stream: InputStream = runCatching { context.assets.open(assetPath) }.getOrElse {
                 if (hasFileExtension(path)) {
-                    sendText(exchange, 404, "资源不存在")
+                    sendText(exchange, 404, "Tài nguyên không tồn tại")
                     return
                 }
                 context.assets.open("webchat/index.html")
@@ -328,7 +328,7 @@ class WebChatBridgeServer(
                     parts.size == 2 && parts[1] == "runs" && exchange.requestMethod == "POST" -> {
                         startRun(exchange, parts[0])
                     }
-                    else -> sendText(exchange, 404, "接口不存在")
+                    else -> sendText(exchange, 404, "Endpoint không tồn tại")
                 }
             } catch (cancellation: CancellationException) {
                 throw cancellation
@@ -364,7 +364,7 @@ class WebChatBridgeServer(
                 val taskId = parts[0]
                 sendJson(exchange, 200, buildJsonObject { put("cancelled", runTracker.cancel(taskId)) })
             } else {
-                sendText(exchange, 404, "任务接口不存在")
+                sendText(exchange, 404, "Endpoint tác vụ không tồn tại")
             }
         }
     }
@@ -400,10 +400,10 @@ class WebChatBridgeServer(
                     suffix == "download" && exchange.requestMethod == "GET" -> downloadWorkspaceFile(exchange)
                     suffix == "upload" && exchange.requestMethod == "POST" -> uploadWorkspaceFile(exchange)
                     suffix == "item" && exchange.requestMethod == "POST" -> workspaceItemAction(exchange)
-                    else -> sendText(exchange, 404, "工作区接口不存在")
+                    else -> sendText(exchange, 404, "Endpoint không gian làm việc không tồn tại")
                 }
             } catch (throwable: Throwable) {
-                sendJson(exchange, 400, errorJson(throwable.message ?: "工作区操作失败"))
+                sendJson(exchange, 400, errorJson(throwable.message ?: "Thao tác workspace thất bại"))
             }
         }
     }
@@ -558,17 +558,17 @@ class WebChatBridgeServer(
             manager.createNotificationChannel(
                 NotificationChannel(
                     NOTIFICATION_CHANNEL_ID,
-                    "太墟智枢 Web 协作台",
+                    "Bàn cộng tác Web TaiXu Agent",
                     NotificationManager.IMPORTANCE_LOW,
-                ).apply { description = "太墟智枢局域网协作服务"; setShowBadge(false) },
+                ).apply { description = "Dịch vụ cộng tác mạng nội bộ TaiXu Agent"; setShowBadge(false) },
             )
         }
         manager.notify(
             NOTIFICATION_ID,
             NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.stat_notify_sync)
-                .setContentTitle("太墟智枢 Web 协作台运行中")
-                .setContentText("$url（配对码：$pin）")
+                .setContentTitle("Bàn cộng tác Web TaiXu Agent đang chạy")
+                .setContentText("$url (mã ghép nối: $pin)")
                 .setOngoing(true)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .build(),

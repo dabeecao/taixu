@@ -201,11 +201,11 @@ class WorkspaceBuildRunner(
             if (keystore == null) {
                 send(
                     BuildRunProgress(
-                        step = "缺少签名",
+                        step = "Thiếu chữ ký",
                         isRunning = false,
                         isSuccess = false,
-                        message = "Release 构建需要签名文件，请先在【工坊设置 - 签名管理】中创建或导入签名",
-                        logOutput = "[TaiXu Build] ❌ Release 构建未选择签名文件\n",
+                        message = "Build Release cần tệp chữ ký, hãy tạo hoặc nhập chữ ký trong [Cài đặt xưởng - Quản lý chữ ký] trước",
+                        logOutput = "[TaiXu Build] ❌ Build Release chưa chọn tệp chữ ký\n",
                     )
                 )
                 return@channelFlow
@@ -215,11 +215,11 @@ class WorkspaceBuildRunner(
             if (env == null) {
                 send(
                     BuildRunProgress(
-                        step = "签名准备失败",
+                        step = "Chuẩn bị chữ ký thất bại",
                         isRunning = false,
                         isSuccess = false,
-                        message = prepared.errorOrNull()?.message ?: "签名文件准备失败",
-                        logOutput = "[TaiXu Build] ❌ ${prepared.errorOrNull()?.message ?: "签名文件准备失败"}\n",
+                        message = prepared.errorOrNull()?.message ?: "Chuẩn bị tệp chữ ký thất bại",
+                        logOutput = "[TaiXu Build] ❌ ${prepared.errorOrNull()?.message ?: "Chuẩn bị tệp chữ ký thất bại"}\n",
                     )
                 )
                 return@channelFlow
@@ -350,8 +350,8 @@ class WorkspaceBuildRunner(
         try {
         when (project.projectType) {
             ProjectType.ANDROID -> {
-                log("[TaiXu Build] Linux 路径: ${project.linuxPath}")
-                send(BuildRunProgress(step = "正在预检 Android 构建环境...", progress = 0.15f, logOutput = snapshotLogs()))
+                log("[TaiXu Build] Đường dẫn Linux: ${project.linuxPath}")
+                send(BuildRunProgress(step = "Đang kiểm tra môi trường build Android...", progress = 0.15f, logOutput = snapshotLogs()))
 
                 // 1. 预检完整 Android 工具链；失败时不启动 Gradle。
                 val qemuEnabled = runtimePreferences.qemuCompatibilityEnabled.first()
@@ -384,10 +384,10 @@ class WorkspaceBuildRunner(
                     log("[TaiXu Build] 💡 提示：请先在【插件与工具中心】中装配【Android & 移动全栈开发套件】")
                     send(
                         BuildRunProgress(
-                            step = "缺少 Android 构建环境",
+                            step = "Thiếu môi trường build Android",
                             isRunning = false,
                             isSuccess = false,
-                            message = "Android 构建前置检查失败：${missing ?: reason.ifBlank { "工具链不完整" }}",
+                            message = "Kiểm tra tiền điều kiện build Android thất bại: ${missing ?: reason.ifBlank { "Chuỗi công cụ chưa đầy đủ" }}",
                             logOutput = snapshotLogs(),
                             suggestedSuiteId = "android-suite",
                         )
@@ -402,7 +402,7 @@ class WorkspaceBuildRunner(
                 val buildStartTime = System.currentTimeMillis()
                 val stepHistory = mutableListOf<StepDuration>()
                 var lastStepTime = buildStartTime
-                var previousStep = "正在执行 Gradle 构建任务..."
+                var previousStep = "Đang chạy tác vụ build Gradle..."
                 fun recordStepDuration(newStep: String) {
                     val now = System.currentTimeMillis()
                     val duration = now - lastStepTime
@@ -419,7 +419,7 @@ class WorkspaceBuildRunner(
                     "/bin/sh $androidScriptPath \"${project.linuxPath}\" $androidTask"
                 } + if (useQemuBuild) " --qemu" else ""
                 var lastEmitTime = System.currentTimeMillis()
-                var currentStep = "正在执行 Gradle 构建任务..."
+                var currentStep = "Đang chạy tác vụ build Gradle..."
                 var currentProgress = 0.35f
 
                 var outcome = linuxRuntime.execute(
@@ -531,14 +531,14 @@ class WorkspaceBuildRunner(
                         .take(8)
                         .joinToString("\n")
                     val errLog = (diagnostic.ifBlank { rawFailureLog.takeLast(1600) }).takeLast(1600)
-                    log("[TaiXu Build] ❌ Gradle 构建失败，Exit Code: ${outcome.exitCode}")
-                    recordStepDuration("编译失败")
+                    log("[TaiXu Build] ❌ Build Gradle thất bại, Exit Code: ${outcome.exitCode}")
+                    recordStepDuration("Biên dịch thất bại")
                     send(
                         BuildRunProgress(
-                            step = "编译失败",
+                            step = "Biên dịch thất bại",
                             isRunning = false,
                             isSuccess = false,
-                            message = errLog.ifBlank { "Gradle 构建失败 (exit code ${outcome.exitCode})" },
+                            message = errLog.ifBlank { "Build Gradle thất bại (exit code ${outcome.exitCode})" },
                             logOutput = snapshotLogs(),
                             stepDurations = stepHistory.toList(),
                             totalDurationMs = System.currentTimeMillis() - buildStartTime,
@@ -567,10 +567,10 @@ class WorkspaceBuildRunner(
                     log("[TaiXu Build] ❌ 未在 outputs 目录找到 APK 产物")
                     send(
                         BuildRunProgress(
-                            step = "未找到生成的 APK 产物",
+                            step = "Không tìm thấy APK đã tạo",
                             isRunning = false,
                             isSuccess = false,
-                            message = "构建完成但未在 outputs 目录找到 APK",
+                            message = "Build xong nhưng không tìm thấy APK trong thư mục outputs",
                             logOutput = snapshotLogs(),
                         )
                     )
@@ -681,10 +681,10 @@ class WorkspaceBuildRunner(
                     log("[TaiXu Build] 💡 提示：请先在【插件与工具中心】中装配【Android & 移动全栈开发套件 (含 Flutter)】")
                     send(
                         BuildRunProgress(
-                            step = "缺少 Flutter 构建环境",
+                            step = "Thiếu môi trường build Flutter",
                             isRunning = false,
                             isSuccess = false,
-                            message = "Flutter 构建前置检查失败：${missing ?: reason.ifBlank { "工具链不完整" }}",
+                            message = "Kiểm tra tiền điều kiện build Flutter thất bại: ${missing ?: reason.ifBlank { "Chuỗi công cụ chưa đầy đủ" }}",
                             logOutput = snapshotLogs(),
                             suggestedSuiteId = "flutter-suite",
                         )
@@ -773,10 +773,10 @@ class WorkspaceBuildRunner(
                     flushLogBuffer()
                     send(
                         BuildRunProgress(
-                            step = "Flutter 编译失败",
+                            step = "Biên dịch Flutter thất bại",
                             isRunning = false,
                             isSuccess = false,
-                            message = errLog.ifBlank { "Flutter 构建失败 (exit code ${outcome.exitCode})" },
+                            message = errLog.ifBlank { "Build Flutter thất bại (exit code ${outcome.exitCode})" },
                             logOutput = snapshotLogs(),
                             totalDurationMs = outcome.durationMs,
                         )
@@ -806,7 +806,7 @@ class WorkspaceBuildRunner(
                             step = "未找到生成的 Flutter APK 产物",
                             isRunning = false,
                             isSuccess = false,
-                            message = "构建完成但未在 outputs 目录找到 APK",
+                            message = "Build xong nhưng không tìm thấy APK trong thư mục outputs",
                             logOutput = snapshotLogs(),
                         )
                     )
@@ -876,10 +876,10 @@ class WorkspaceBuildRunner(
                 log("[TaiXu Build] APK 逆向工程，无编译流程；直接提供 jadx / apktool 分析指引")
                 send(
                     BuildRunProgress(
-                        step = "APK 逆向工程",
+                        step = "Dịch ngược APK",
                         isRunning = false,
                         isSuccess = true,
-                        message = "逆向工程无需编译。打开专属终端或对话 Agent，使用 jadx / apktool 对工程内 APK 进行解包反编译（详见工程内 REVERSE.md）",
+                        message = "Dịch ngược không cần biên dịch. Mở terminal riêng hoặc hội thoại Agent, dùng jadx / apktool để bung và dịch ngược APK trong dự án (xem REVERSE.md trong dự án)",
                         logOutput = snapshotLogs(),
                     )
                 )

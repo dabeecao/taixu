@@ -61,7 +61,7 @@ fun WebChatBridgeDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 RuntimeIcon(RuntimeIconName.Globe, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("太墟智枢 Web 协作台")
+                Text("Trạm cộng tác Web Agent TaiXu")
             }
         },
         text = {
@@ -103,7 +103,7 @@ fun WebChatBridgeDialog(
                             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
 
                             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text("浏览器访问地址", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("Địa chỉ truy cập trên trình duyệt", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Row(
                                     Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -117,15 +117,15 @@ fun WebChatBridgeDialog(
                                     TextButton(
                                         onClick = {
                                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                                            clipboard.setPrimaryClip(ClipData.newPlainText("太墟智枢协作地址", status.accessUrl))
-                                            Toast.makeText(context, "已复制基础链接", Toast.LENGTH_SHORT).show()
+                                            clipboard.setPrimaryClip(ClipData.newPlainText("Địa chỉ cộng tác Agent TaiXu", status.accessUrl))
+                                            Toast.makeText(context, "Đã sao chép link cơ bản", Toast.LENGTH_SHORT).show()
                                         }
-                                    ) { Text("复制") }
+                                    ) { Text("Sao chép") }
                                 }
                             }
 
                             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text("安全配对码 (PIN)", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("Mã ghép nối an toàn (PIN)", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Row(
                                     Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -140,9 +140,9 @@ fun WebChatBridgeDialog(
                                         onClick = {
                                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                                             clipboard.setPrimaryClip(ClipData.newPlainText("PIN", status.pinCode))
-                                            Toast.makeText(context, "已复制配对码", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(context, "Đã sao chép mã ghép nối", Toast.LENGTH_SHORT).show()
                                         }
-                                    ) { Text("复制") }
+                                    ) { Text("Sao chép") }
                                 }
                             }
 
@@ -150,15 +150,15 @@ fun WebChatBridgeDialog(
                             Button(
                                 onClick = {
                                     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                                    clipboard.setPrimaryClip(ClipData.newPlainText("太墟智枢直连地址", directUrl))
-                                    Toast.makeText(context, "已复制免密直达链接，在电脑浏览器打开即可！", Toast.LENGTH_SHORT).show()
+                                    clipboard.setPrimaryClip(ClipData.newPlainText("Địa chỉ kết nối trực tiếp Agent TaiXu", directUrl))
+                                    Toast.makeText(context, "Đã sao chép link truy cập không cần mật khẩu, mở trên trình duyệt máy tính là dùng được!", Toast.LENGTH_SHORT).show()
                                 },
                                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
                                 shape = RoundedCornerShape(10.dp),
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                     RuntimeIcon(RuntimeIconName.Copy, Modifier.size(16.dp))
-                                    Text("一键复制免密直达链接 (免输PIN)")
+                                    Text("Sao chép một chạm link truy cập không mật khẩu (không cần PIN)")
                                 }
                             }
 
@@ -174,7 +174,7 @@ fun WebChatBridgeDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("完成")
+                Text("Xong")
             }
         },
     )

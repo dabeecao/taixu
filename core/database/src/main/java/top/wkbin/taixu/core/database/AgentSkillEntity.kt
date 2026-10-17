@@ -130,7 +130,7 @@ class AgentSkillRepository(
                 ?.take(MAX_DESCRIPTION_CHARS) ?: "从目录自动发现的 Skill",
             systemPrompt = markdown + "\n\n【Skill 资源目录】$guestPath\n如需执行该 Skill 附带的脚本，请先检查脚本内容与参数，再从此目录调用。",
             isBuiltin = false,
-            category = "自定义",
+            category = "Tùy chỉnh",
             resourcePath = dir.absolutePath,
         )
         dao.upsert(skill.toEntity())

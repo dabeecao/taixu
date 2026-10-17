@@ -16,8 +16,8 @@ internal fun WorkflowDelayFields(config: MutableMap<String, String>) {
         OutlinedTextField(
             value = config[key] ?: config["delaySeconds"] ?: "1",
             onValueChange = { config[key] = it },
-            label = { Text(if (milliseconds) "等待毫秒数" else "等待秒数") },
-            supportingText = { Text(if (milliseconds) "0–600000 整数，支持 \${VAR}" else "0–600 秒，可写小数或 \${VAR}") },
+            label = { Text(if (milliseconds) "Số mili giây chờ" else "Số giây chờ") },
+            supportingText = { Text(if (milliseconds) "Số nguyên 0–600000, hỗ trợ \${VAR}" else "0–600 giây, có thể nhập số thập phân hoặc \${VAR}") },
             singleLine = true, modifier = Modifier.fillMaxWidth(),
         )
         RuntimeTextButton(onClick = {
@@ -28,7 +28,7 @@ internal fun WorkflowDelayFields(config: MutableMap<String, String>) {
             config.remove("delaySeconds")
             config[if (milliseconds) "seconds" else "milliseconds"] = converted ?: raw
         }, enabled = (config[key] ?: config["delaySeconds"] ?: "1").toDoubleOrNull()?.isFinite() == true) {
-            Text(if (milliseconds) "改用秒（数值自动换算）" else "改用毫秒（数值自动换算）")
+            Text(if (milliseconds) "Chuyển sang giây (tự động quy đổi giá trị)" else "Chuyển sang mili giây (tự động quy đổi giá trị)")
         }
     }
 }

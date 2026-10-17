@@ -71,6 +71,15 @@ extensions.configure<ApplicationExtension> {
     }
 
     signingConfigs {
+        // Keystore debug cố định, commit kèm repo để mọi bản build CI ký cùng một key:
+        // cài bản build mới đè lên bản cũ không bị lỗi sai chữ ký.
+        // (AGP đã tự tạo sẵn signingConfig "debug", nên dùng getByName để ghi đè.)
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
         create("release") {
             if (signingConfigured) {
                 val storeFilePath = requireNotNull(signingStoreFilePath)
@@ -96,8 +105,11 @@ extensions.configure<ApplicationExtension> {
                 applicationIdSuffix = ".debug"
             }
             versionNameSuffix = if (taiXuDevBuild) "-dev" else "-debug"
-            if (signingConfigured) {
-                signingConfig = signingConfigs.getByName("release")
+            // Ưu tiên ký release nếu có cấu hình, ngược lại dùng debug keystore cố định của repo.
+            signingConfig = if (signingConfigured) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
             }
         }
         release {

@@ -28,8 +28,8 @@ private fun CatalogCardPreview() {
             ModelProfileCard(profile, onEdit = {}, onActivate = {}, onDelete = {}, onExport = {})
             ModelProfileCard(profile.copy(id = "inactive", isActive = false),
                 onEdit = {}, onActivate = {}, onDelete = {}, onExport = {})
-            QuickPhraseCard(QuickPhrase(id = "phrase", title = "检查当前项目并整理构建结果",
-                description = "用于检查工程状态的常用提示词", content = "检查项目结构，说明当前状态和需要人工处理的事项。",
+            QuickPhraseCard(QuickPhrase(id = "phrase", title = "Kiểm tra dự án hiện tại và tổng hợp kết quả build",
+                description = "Prompt thường dùng để kiểm tra trạng thái dự án", content = "Kiểm tra cấu trúc dự án, mô tả trạng thái hiện tại và các việc cần xử lý thủ công.",
                 iconName = "Code"), onToggle = {}, onEdit = {}, onDelete = {})
         }
     }

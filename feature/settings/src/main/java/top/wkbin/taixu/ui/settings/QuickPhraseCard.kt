@@ -73,8 +73,8 @@ internal fun QuickPhraseCard(
                             { RuntimeIcon(RuntimeIconName.Check, Modifier.size(16.dp), MaterialTheme.colorScheme.onPrimaryContainer) }
                         } else null)
                 }
-                RuntimeFilledTonalButton(onClick = onEdit) { Text("编辑", maxLines = 1) }
-                RuntimeTextButton(onClick = onDelete) { Text("删除", color = MaterialTheme.colorScheme.error, maxLines = 1) }
+                RuntimeFilledTonalButton(onClick = onEdit) { Text("Chỉnh sửa", maxLines = 1) }
+                RuntimeTextButton(onClick = onDelete) { Text("Xóa", color = MaterialTheme.colorScheme.error, maxLines = 1) }
             }
         }
     }

@@ -243,7 +243,7 @@ fun WorkflowEditorView(
                                                 onSelectNode(null)
                                             },
                                             modifier = Modifier.size(32.dp),
-                                            contentDescription = "关闭面板",
+                                            contentDescription = "Đóng panel",
                                         ) {
                                             RuntimeIcon(RuntimeIconName.Close, Modifier.size(18.dp))
                                         }
@@ -309,12 +309,12 @@ fun WorkflowEditorView(
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     RuntimeIcon(RuntimeIconName.Trash, Modifier.size(20.dp), tint = MaterialTheme.colorScheme.error)
-                    Text("确认删除节点", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    Text("Xác nhận xóa node", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 }
             },
             text = {
                 Text(
-                    text = "是否确定删除「${target.title}」？\n与该节点相连的所有输入和输出连线也将被一并断开移除。",
+                    text = "Bạn chắc chắn muốn xóa 「${target.title}」?\nMọi đường nối vào/ra của node này cũng sẽ bị ngắt và gỡ bỏ.",
                     style = MaterialTheme.typography.bodyMedium,
                 )
             },
@@ -326,12 +326,12 @@ fun WorkflowEditorView(
                         if (state.selectedNodeId == id) onRemoveNode() else onRemoveNodeById(id)
                     },
                 ) {
-                    Text("确认删除")
+                    Text("Xác nhận xóa")
                 }
             },
             dismissButton = {
                 RuntimeOutlinedButton(onClick = { nodePendingDelete = null }) {
-                    Text("取消")
+                    Text("Hủy")
                 }
             },
         )
@@ -441,7 +441,7 @@ private fun EditorBottomSheetLayout(
                             RuntimeIconButton(
                                 onClick = { onSheetExpandedChange(false) },
                                 modifier = Modifier.size(32.dp),
-                                contentDescription = "收起面板",
+                                contentDescription = "Thu gọn panel",
                             ) {
                                 RuntimeIcon(RuntimeIconName.Close, Modifier.size(18.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
@@ -500,7 +500,7 @@ private fun EditorBottomDock(
             // 添加节点
             DockActionButton(
                 icon = RuntimeIconName.Plus,
-                label = "添加",
+                label = "Thêm",
                 onClick = { addDialogVisible = true },
                 tint = MaterialTheme.colorScheme.primary,
             )
@@ -509,14 +509,14 @@ private fun EditorBottomDock(
             if (isRunning) {
                 DockActionButton(
                     icon = RuntimeIconName.Stop,
-                    label = "停止",
+                    label = "Dừng",
                     onClick = onCancelRun,
                     tint = MaterialTheme.colorScheme.error,
                 )
             } else {
                 DockActionButton(
                     icon = RuntimeIconName.Play,
-                    label = "运行",
+                    label = "Chạy",
                     onClick = onRun,
                     tint = MaterialTheme.colorScheme.primary,
                 )
@@ -526,7 +526,7 @@ private fun EditorBottomDock(
             if (activeRunState != null) {
                 DockActionButton(
                     icon = RuntimeIconName.Terminal,
-                    label = if (isRunning) "运行中" else "日志",
+                    label = if (isRunning) "Đang chạy" else "Nhật ký",
                     onClick = onToggleConsole,
                     tint = if (isRunning) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                     badge = if (isRunning) {
@@ -546,7 +546,7 @@ private fun EditorBottomDock(
             if (state.selectedNodeId != null && !isRunning) {
                 DockActionButton(
                     icon = RuntimeIconName.Trash,
-                    label = "删除",
+                    label = "Xóa",
                     onClick = onDeleteSelectedNode,
                     tint = MaterialTheme.colorScheme.error,
                 )
@@ -555,14 +555,14 @@ private fun EditorBottomDock(
             // 自动排版
             DockActionButton(
                 icon = RuntimeIconName.Tune,
-                label = "排版",
+                label = "Sắp xếp",
                 onClick = onAutoLayout,
             )
 
             // 撤销
             DockActionButton(
                 icon = RuntimeIconName.Back,
-                label = "撤销",
+                label = "Hoàn tác",
                 enabled = state.canUndo && !isRunning,
                 onClick = onUndo,
             )
@@ -570,7 +570,7 @@ private fun EditorBottomDock(
             // 重做
             DockActionButton(
                 icon = RuntimeIconName.Reverse,
-                label = "重做",
+                label = "Làm lại",
                 enabled = state.canRedo && !isRunning,
                 onClick = onRedo,
             )
@@ -579,8 +579,8 @@ private fun EditorBottomDock(
             DockActionButton(
                 icon = RuntimeIconName.Save,
                 label = when {
-                    state.isSaving -> "保存中"
-                    state.isDirty -> "保存*"
+                    state.isSaving -> "Đang lưu"
+                    state.isDirty -> "Lưu*"
                     else -> "已保存"
                 },
                 enabled = !state.isSaving && state.isDirty && !isRunning,
@@ -664,22 +664,22 @@ private fun RunConsoleModal(
 
     val consoleOutput = remember(activeRunState) {
         buildString {
-            appendLine("=== 太墟工作流「${activeRunState.definition.name}」控制台输出 ===")
-            appendLine("全局状态: ${runStatusLabel(activeRunState.status)}  |  执行耗时: ${durationMs}ms")
+            appendLine("=== Đầu ra console của workflow TaiXu 「${activeRunState.definition.name}」 ===")
+            appendLine("Trạng thái tổng: ${runStatusLabel(activeRunState.status)}  |  Thời gian chạy: ${durationMs}ms")
             activeRunState.error?.let {
-                appendLine("❌ 异常信息: $it")
+                appendLine("❌ Thông tin ngoại lệ: $it")
             }
             appendLine()
             activeRunState.definition.nodes.forEach { node ->
                 val run = activeRunState.nodeStates[node.id]
                 val status = run?.status ?: NodeRunStatus.PENDING
                 appendLine("--------------------------------------------------")
-                appendLine("[${statusLabel(status)}] 节点: ${node.title} (${node.id})")
+                appendLine("[${statusLabel(status)}] Node: ${node.title} (${node.id})")
                 val progress = run?.progressMessage
                 val textOutput = run?.output?.textOutput
                 val errorOutput = run?.output?.error
                 if (!progress.isNullOrBlank()) {
-                    appendLine("进度: $progress")
+                    appendLine("Tiến độ: $progress")
                 }
                 if (!textOutput.isNullOrBlank()) {
                     appendLine(textOutput)
@@ -689,7 +689,7 @@ private fun RunConsoleModal(
                 }
             }
             appendLine("--------------------------------------------------")
-            appendLine("=== 执行输出结束 ===")
+            appendLine("=== Kết thúc đầu ra ===")
         }
     }
 
@@ -707,7 +707,7 @@ private fun RunConsoleModal(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 RuntimeIcon(RuntimeIconName.Terminal, Modifier.size(20.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("运行调试控制台", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text("Console chạy & gỡ lỗi", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
                 Surface(
                     color = runStatusColor(activeRunState.status).copy(alpha = 0.16f),
                     shape = RoundedCornerShape(50),
@@ -785,21 +785,21 @@ private fun RunConsoleModal(
                         clipboard.setClipEntry(ClipEntry(ClipData.newPlainText("workflow_console", consoleOutput)))
                     }
                 }) {
-                    Text("复制日志")
+                    Text("Sao chép nhật ký")
                 }
                 if (isRunning) {
                     RuntimeOutlinedButton(onClick = onCancelRun) {
-                        Text("停止运行", color = MaterialTheme.colorScheme.error)
+                        Text("Dừng chạy", color = MaterialTheme.colorScheme.error)
                     }
                 } else {
                     RuntimeButton(onClick = onRerun) {
-                        Text("重新运行")
+                        Text("Chạy lại")
                     }
                 }
             }
         },
         dismissButton = {
-            RuntimeOutlinedButton(onClick = onDismiss) { Text("关闭") }
+            RuntimeOutlinedButton(onClick = onDismiss) { Text("Đóng") }
         },
     )
 }
@@ -823,12 +823,12 @@ private fun runStatusColor(status: WorkflowRunStatus): Color = when (status) {
 }
 
 private fun runStatusLabel(status: WorkflowRunStatus): String = when (status) {
-    WorkflowRunStatus.IDLE -> "未运行"
-    WorkflowRunStatus.RUNNING -> "运行中"
-    WorkflowRunStatus.WAITING_APPROVAL -> "等待审批"
-    WorkflowRunStatus.SUCCESS -> "执行成功"
-    WorkflowRunStatus.FAILED -> "执行失败"
-    WorkflowRunStatus.CANCELLED -> "已取消"
+    WorkflowRunStatus.IDLE -> "Chưa chạy"
+    WorkflowRunStatus.RUNNING -> "Đang chạy"
+    WorkflowRunStatus.WAITING_APPROVAL -> "Chờ phê duyệt"
+    WorkflowRunStatus.SUCCESS -> "Chạy thành công"
+    WorkflowRunStatus.FAILED -> "Chạy thất bại"
+    WorkflowRunStatus.CANCELLED -> "Đã hủy"
 }
 
 
@@ -840,7 +840,7 @@ private fun NodePickerModal(
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text("添加工作流节点", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text("Thêm node workflow", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
         },
         text = {
             Column(
@@ -850,7 +850,7 @@ private fun NodePickerModal(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Text(
-                    text = "选择要加入画布的节点类型，创建后可在检查面板配置参数：",
+                    text = "Chọn loại node để thêm vào canvas, sau khi tạo có thể cấu hình tham số trong panel kiểm tra:",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -891,7 +891,7 @@ private fun NodePickerModal(
         },
         confirmButton = {},
         dismissButton = {
-            RuntimeOutlinedButton(onClick = onDismiss) { Text("取消") }
+            RuntimeOutlinedButton(onClick = onDismiss) { Text("Hủy") }
         },
     )
 }
@@ -921,7 +921,7 @@ private fun EditorInspector(
 
         if (selected == null) {
             RuntimeCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(16.dp)) {
-                Text("请点击画布中的节点以配置参数、管理连线或查看执行日志", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Chạm vào node trên canvas để cấu hình tham số, quản lý đường nối hoặc xem nhật ký chạy", color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         } else {
             val nodeRun = activeRunState?.nodeStates?.get(selected.id)
@@ -933,7 +933,7 @@ private fun EditorInspector(
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("调试运行状态", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                            Text("Trạng thái chạy gỡ lỗi", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
                             Surface(
                                 color = statusColor(nodeRun.status).copy(alpha = 0.16f),
                                 shape = RoundedCornerShape(50),
@@ -949,7 +949,7 @@ private fun EditorInspector(
                         WorkflowNodeDetails(nodeRun)
                         RuntimeOutlinedButton(onClick = onOpenConsole, modifier = Modifier.fillMaxWidth()) {
                             RuntimeIcon(RuntimeIconName.Terminal, Modifier.size(16.dp))
-                            Text("打开完整终端控制台日志", maxLines = 1)
+                            Text("Mở đầy đủ nhật ký console terminal", maxLines = 1)
                         }
                     }
                 }
@@ -1038,7 +1038,7 @@ private fun NodeInspectorCard(
                     contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
                 ) {
                     RuntimeIcon(RuntimeIconName.Trash, Modifier.size(14.dp), tint = MaterialTheme.colorScheme.error)
-                    Text("删除", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                    Text("Xóa", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
                 }
             }
 
@@ -1049,7 +1049,7 @@ private fun NodeInspectorCard(
             ) {
                 Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
-                        text = "💡 节点作用：${meta.summary}",
+                        text = "💡 Chức năng node: ${meta.summary}",
                         style = MaterialTheme.typography.labelMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.primary,
@@ -1065,20 +1065,20 @@ private fun NodeInspectorCard(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("节点标题") },
+                label = { Text("Tiêu đề node") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
             )
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("节点备注 / 说明") },
+                label = { Text("Ghi chú / mô tả node") },
                 minLines = 1,
                 maxLines = 2,
                 modifier = Modifier.fillMaxWidth(),
             )
 
-            Text("核心参数配置", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+            Text("Cấu hình tham số chính", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
 
             when (node.type) {
                 WorkflowNodeType.BASH_COMMAND -> {
@@ -1091,26 +1091,26 @@ private fun NodeInspectorCard(
                         Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                 RuntimeIcon(RuntimeIconName.Terminal, Modifier.size(16.dp), tint = top.wkbin.taixu.ui.theme.semanticColors().info)
-                                Text("终端 Shell 命令行（在沙箱环境中执行）", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = top.wkbin.taixu.ui.theme.semanticColors().info)
+                                Text("Dòng lệnh Shell terminal (chạy trong môi trường sandbox)", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = top.wkbin.taixu.ui.theme.semanticColors().info)
                             }
                             OutlinedTextField(
                                 value = configMap["command"].orEmpty(),
                                 onValueChange = { configMap["command"] = it },
-                                label = { Text("Bash 命令（在此输入执行的命令）") },
-                                placeholder = { Text("例如：git status --short && git diff") },
-                                supportingText = { Text("支持引用上游输出：\${previous.output}、工作区：\${WORKSPACE_PATH}") },
+                                label = { Text("Lệnh Bash (nhập lệnh cần chạy tại đây)") },
+                                placeholder = { Text("Ví dụ: git status --short && git diff") },
+                                supportingText = { Text("Hỗ trợ tham chiếu đầu ra node trước: \${previous.output}, không gian làm việc: \${WORKSPACE_PATH}") },
                                 minLines = 3,
                                 maxLines = 6,
                                 modifier = Modifier.fillMaxWidth(),
                             )
-                            Text("常用命令预设（点击直接填入）：", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text("Preset lệnh thường dùng (chạm để điền ngay):", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Row(modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                 listOf(
-                                    "系统内核" to "echo '=== 系统内核 ===' && uname -a && cat /etc/os-release | head -n 8",
-                                    "内存磁盘" to "echo '=== 资源使用 ===' && free -h && df -h /",
-                                    "Git 状态" to "git status --short && git diff --stat",
-                                    "测试网络" to "curl -I -s -m 5 https://www.baidu.com | head -n 4",
-                                    "工具排查" to "for cmd in git python3 curl make; do which \$cmd && echo \"✔ \$cmd\" || echo \"✘ \$cmd\"; done",
+                                    "Kernel hệ thống" to "echo '=== Kernel hệ thống ===' && uname -a && cat /etc/os-release | head -n 8",
+                                    "RAM & ổ đĩa" to "echo '=== 资源使用 ===' && free -h && df -h /",
+                                    "Trạng thái Git" to "git status --short && git diff --stat",
+                                    "Kiểm tra mạng" to "curl -I -s -m 5 https://www.baidu.com | head -n 4",
+                                    "Kiểm tra công cụ" to "for cmd in git python3 curl make; do which \$cmd && echo \"✔ \$cmd\" || echo \"✘ \$cmd\"; done",
                                 ).forEach { (name, cmd) ->
                                     Surface(
                                         onClick = { configMap["command"] = cmd },
@@ -1129,8 +1129,8 @@ private fun NodeInspectorCard(
                             OutlinedTextField(
                                 value = configMap["workingDirectory"].orEmpty(),
                                 onValueChange = { configMap["workingDirectory"] = it },
-                                label = { Text("工作目录（可选）") },
-                                placeholder = { Text("留空默认为当前工程根目录") },
+                                label = { Text("Thư mục làm việc (tùy chọn)") },
+                                placeholder = { Text("Để trống = thư mục gốc project hiện tại") },
                                 singleLine = true,
                                 modifier = Modifier.fillMaxWidth(),
                             )
@@ -1145,10 +1145,10 @@ private fun NodeInspectorCard(
                             configMap["expression"] = it
                             configMap.remove("condition")
                         },
-                        label = { Text("条件表达式") },
-                        placeholder = { Text("exitCode == 0  或  \${HOST_PRIVILEGED} == true") },
+                        label = { Text("Biểu thức điều kiện") },
+                        placeholder = { Text("exitCode == 0  hoặc  \${HOST_PRIVILEGED} == true") },
                         supportingText = {
-                            Text("支持 exitCode / output contains / \${VAR} 比较，以及 && ||。成立→exit 0，否则 exit 1。")
+                            Text("Hỗ trợ so sánh exitCode / output contains / \${VAR}, cùng && ||. Đúng → exit 0, sai → exit 1.")
                         },
                         minLines = 2,
                         maxLines = 4,
@@ -1166,9 +1166,9 @@ private fun NodeInspectorCard(
                     OutlinedTextField(
                         value = configMap["command"].orEmpty(),
                         onValueChange = { configMap["command"] = it },
-                        label = { Text("后台服务启动命令（必填）") },
-                        placeholder = { Text("例如：python3 -m http.server 8080") },
-                        supportingText = { Text("将在沙箱后台常驻运行，进程 ID 保存于 \${PROCESS_ID}") },
+                        label = { Text("Lệnh khởi động dịch vụ nền (bắt buộc)") },
+                        placeholder = { Text("Ví dụ: python3 -m http.server 8080") },
+                        supportingText = { Text("Sẽ chạy thường trú dưới nền sandbox, ID tiến trình lưu tại \${PROCESS_ID}") },
                         minLines = 2,
                         maxLines = 4,
                         modifier = Modifier.fillMaxWidth(),
@@ -1176,8 +1176,8 @@ private fun NodeInspectorCard(
                     OutlinedTextField(
                         value = configMap["workingDirectory"].orEmpty(),
                         onValueChange = { configMap["workingDirectory"] = it },
-                        label = { Text("工作目录（可选）") },
-                        placeholder = { Text("留空默认为工程根目录") },
+                        label = { Text("Thư mục làm việc (tùy chọn)") },
+                        placeholder = { Text("Để trống = thư mục gốc project") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                     )
@@ -1195,17 +1195,17 @@ private fun NodeInspectorCard(
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Column(Modifier.weight(1f)) {
                             RuntimeOutlinedButton(onClick = { modeExpanded = true }, modifier = Modifier.fillMaxWidth()) {
-                                Text("模式：$currentMode", maxLines = 1)
+                                Text("Chế độ: $currentMode", maxLines = 1)
                             }
                             DropdownMenu(expanded = modeExpanded, onDismissRequest = { modeExpanded = false }) {
-                                listOf("build" to "标准构建", "doctor" to "环境体检", "analyze" to "静态分析").forEach { (m, l) ->
+                                listOf("build" to "Build chuẩn", "doctor" to "Kiểm tra môi trường", "analyze" to "Phân tích tĩnh").forEach { (m, l) ->
                                     DropdownMenuItem(text = { Text("$l ($m)") }, onClick = { configMap["mode"] = m; modeExpanded = false })
                                 }
                             }
                         }
                         Column(Modifier.weight(1f)) {
                             RuntimeOutlinedButton(onClick = { typeExpanded = true }, modifier = Modifier.fillMaxWidth()) {
-                                Text("类型：$currentType", maxLines = 1)
+                                Text("Loại: $currentType", maxLines = 1)
                             }
                             DropdownMenu(expanded = typeExpanded, onDismissRequest = { typeExpanded = false }) {
                                 listOf("android", "cmake", "cargo", "gradle").forEach { t ->
@@ -1217,8 +1217,8 @@ private fun NodeInspectorCard(
                     OutlinedTextField(
                         value = configMap["task"] ?: "assembleDebug",
                         onValueChange = { configMap["task"] = it },
-                        label = { Text("构建 Task 任务") },
-                        placeholder = { Text("例如：assembleDebug 或 build") },
+                        label = { Text("Task build") },
+                        placeholder = { Text("Ví dụ: assembleDebug hoặc build") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                     )
@@ -1236,9 +1236,9 @@ private fun NodeInspectorCard(
                     OutlinedTextField(
                         value = configMap["variables"].orEmpty(),
                         onValueChange = { configMap["variables"] = it },
-                        label = { Text("变量赋值（每行 KEY=value）") },
+                        label = { Text("Gán biến (mỗi dòng KEY=value)") },
                         placeholder = { Text("FOO=bar\nPATH=\${WORKSPACE_PATH}") },
-                        supportingText = { Text("支持 \${VAR} / \${previous.output} / \${nodeId.output}") },
+                        supportingText = { Text("Hỗ trợ \${VAR} / \${previous.output} / \${nodeId.output}") },
                         minLines = 3,
                         maxLines = 8,
                         modifier = Modifier.fillMaxWidth(),
@@ -1251,7 +1251,7 @@ private fun NodeInspectorCard(
 
                 WorkflowNodeType.TRIGGER -> {
                     Text(
-                        text = "工作流启动入口。在顶部点击“运行调试”即可从此处触发整个 DAG 流程。",
+                        text = "Điểm bắt đầu workflow. Nhấn “Chạy gỡ lỗi” ở phía trên để kích hoạt toàn bộ luồng DAG từ đây.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -1260,7 +1260,7 @@ private fun NodeInspectorCard(
                 WorkflowNodeType.PLUGIN_ACTION -> PluginNodeConfigFields(configMap)
                 WorkflowNodeType.TERMINAL_OUTPUT -> {
                     Text(
-                        text = "工作流终点节点。将自动收集并归档上游所有步骤的标准输出、错误日志与产物文件。",
+                        text = "Node kết thúc workflow. Sẽ tự thu thập và lưu trữ stdout, nhật ký lỗi cùng tệp sản phẩm của mọi bước phía trước.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -1275,7 +1275,7 @@ private fun NodeInspectorCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = if (showAdvancedJson) "收起高级配置 (JSON)" else "展开高级配置 (JSON)",
+                    text = if (showAdvancedJson) "Thu gọn cấu hình nâng cao (JSON)" else "Mở rộng cấu hình nâng cao (JSON)",
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.weight(1f),
@@ -1296,7 +1296,7 @@ private fun NodeInspectorCard(
                             configMap.putAll(parsed)
                         }
                     },
-                    label = { Text("原始 JSON 配置") },
+                    label = { Text("Cấu hình JSON gốc") },
                     isError = parsedConfig == null,
                     minLines = 3,
                     maxLines = 6,
@@ -1311,7 +1311,7 @@ private fun NodeInspectorCard(
                     onClick = if (isConnecting) onCancelConnection else onBeginConnection,
                     modifier = Modifier.weight(1f),
                 ) {
-                    Text(if (isConnecting) "取消连线" else "在画布连线…", maxLines = 1)
+                    Text(if (isConnecting) "Hủy nối" else "Nối trên canvas…", maxLines = 1)
                 }
                 RuntimeButton(
                     onClick = {
@@ -1332,7 +1332,7 @@ private fun NodeInspectorCard(
                         (!showAdvancedJson || parsedConfig != null),
                     modifier = Modifier.weight(1f),
                 ) {
-                    Text("应用参数更改", maxLines = 1)
+                    Text("Áp dụng thay đổi tham số", maxLines = 1)
                 }
             }
         }
@@ -1352,7 +1352,7 @@ private fun HostActionConfigFields(configMap: MutableMap<String, String>) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Column(modifier = Modifier.weight(1f)) {
                 RuntimeOutlinedButton(onClick = { categoryExpanded = true }, modifier = Modifier.fillMaxWidth()) {
-                    Text("分类：$currentCategory", maxLines = 1)
+                    Text("Phân loại: $currentCategory", maxLines = 1)
                 }
                 DropdownMenu(expanded = categoryExpanded, onDismissRequest = { categoryExpanded = false }) {
                     grouped.keys.forEach { category ->
@@ -1378,7 +1378,7 @@ private fun HostActionConfigFields(configMap: MutableMap<String, String>) {
                                 Text(
                                     buildString {
                                         append(action.label)
-                                        if (action.privilege == HostWorkflowPrivilege.PRIVILEGED) append(" · 需特权")
+                                        if (action.privilege == HostWorkflowPrivilege.PRIVILEGED) append(" · Cần đặc quyền")
                                     },
                                 )
                             },
@@ -1395,7 +1395,7 @@ private fun HostActionConfigFields(configMap: MutableMap<String, String>) {
         currentDef?.let { def ->
             Text(
                 text = def.description + if (def.privilege == HostWorkflowPrivilege.PRIVILEGED) {
-                    "\n⚠ 需要 Shizuku 或 Root 生效。"
+                    "\n⚠ Cần Shizuku hoặc Root mới có hiệu lực."
                 } else "",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -1415,8 +1415,8 @@ private fun HostActionConfigFields(configMap: MutableMap<String, String>) {
         } ?: OutlinedTextField(
             value = configMap["command"].orEmpty(),
             onValueChange = { configMap["command"] = it },
-            label = { Text("自定义宿主命令（逃逸舱）") },
-            supportingText = { Text("未知 action 时将按特权 shell 执行此命令") },
+            label = { Text("Lệnh host tùy chỉnh (escape hatch)") },
+            supportingText = { Text("Khi action không xác định, lệnh này sẽ chạy dưới shell đặc quyền") },
             minLines = 2,
             maxLines = 4,
             modifier = Modifier.fillMaxWidth(),
@@ -1451,7 +1451,7 @@ private fun BranchRouterCard(
         Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 RuntimeIcon(RuntimeIconName.Link, Modifier.size(16.dp), tint = Color(0xFFEAB308))
-                Text("可视化条件分支路由器", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Color(0xFFEAB308))
+                Text("Bộ định tuyến nhánh điều kiện trực quan", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, color = Color(0xFFEAB308))
             }
 
             Surface(
@@ -1460,8 +1460,8 @@ private fun BranchRouterCard(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "💡 节点会求值上方表达式：成立 exitCode=0，不成立 exitCode=1（节点本身仍成功，便于分流）。\n" +
-                        "下面可快速把成功/失败分支连到目标节点。",
+                    text = "💡 Node sẽ tính biểu thức phía trên: đúng thì exitCode=0, sai thì exitCode=1 (bản thân node vẫn thành công, để tiện rẽ nhánh).\n" +
+                        "Bên dưới có thể nhanh chóng nối nhánh thành công/thất bại tới node đích.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(8.dp),
@@ -1470,7 +1470,7 @@ private fun BranchRouterCard(
 
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Surface(shape = RoundedCornerShape(50), color = top.wkbin.taixu.ui.theme.semanticColors().success.copy(alpha = 0.18f)) {
-                    Text("✔ 成功分支 (exitCode == 0)", style = MaterialTheme.typography.labelSmall, color = top.wkbin.taixu.ui.theme.semanticColors().success, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                    Text("✔ Nhánh thành công (exitCode == 0)", style = MaterialTheme.typography.labelSmall, color = top.wkbin.taixu.ui.theme.semanticColors().success, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                 }
                 if (successEdge != null) {
                     val target = state.definition.nodes.firstOrNull { it.id == successEdge.toNodeId }
@@ -1479,12 +1479,12 @@ private fun BranchRouterCard(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Text("已连接至: ${target?.title ?: successEdge.toNodeId}", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
+                        Text("Đã nối tới: ${target?.title ?: successEdge.toNodeId}", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
                         RuntimeOutlinedButton(
                             onClick = { onRemoveEdge(successEdge.id) },
                             contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
                         ) {
-                            Text("断开", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                            Text("Ngắt", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
                         }
                     }
                 } else if (otherNodes.isNotEmpty()) {
@@ -1492,7 +1492,7 @@ private fun BranchRouterCard(
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Box(Modifier.weight(1f)) {
                             RuntimeOutlinedButton(onClick = { successExpanded = true }, modifier = Modifier.fillMaxWidth()) {
-                                Text("目标: ${currentSuccessNode.title}", maxLines = 1, overflow = TextOverflow.Ellipsis)
+                                Text("Đích: ${currentSuccessNode.title}", maxLines = 1, overflow = TextOverflow.Ellipsis)
                             }
                             DropdownMenu(expanded = successExpanded, onDismissRequest = { successExpanded = false }) {
                                 otherNodes.forEach { target ->
@@ -1507,7 +1507,7 @@ private fun BranchRouterCard(
                             onClick = { onConnectNodes(node.id, currentSuccessNode.id, "output", "exitCode == 0") },
                             contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
                         ) {
-                            Text("连接", maxLines = 1)
+                            Text("Nối", maxLines = 1)
                         }
                     }
                 }
@@ -1515,7 +1515,7 @@ private fun BranchRouterCard(
 
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Surface(shape = RoundedCornerShape(50), color = Color(0xFFF43F5E).copy(alpha = 0.18f)) {
-                    Text("✘ 失败分支 (exitCode != 0)", style = MaterialTheme.typography.labelSmall, color = Color(0xFFF43F5E), modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                    Text("✘ Nhánh thất bại (exitCode != 0)", style = MaterialTheme.typography.labelSmall, color = Color(0xFFF43F5E), modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                 }
                 if (failureEdge != null) {
                     val target = state.definition.nodes.firstOrNull { it.id == failureEdge.toNodeId }
@@ -1524,12 +1524,12 @@ private fun BranchRouterCard(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Text("已连接至: ${target?.title ?: failureEdge.toNodeId}", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
+                        Text("Đã nối tới: ${target?.title ?: failureEdge.toNodeId}", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
                         RuntimeOutlinedButton(
                             onClick = { onRemoveEdge(failureEdge.id) },
                             contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
                         ) {
-                            Text("断开", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                            Text("Ngắt", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
                         }
                     }
                 } else if (otherNodes.isNotEmpty()) {
@@ -1537,7 +1537,7 @@ private fun BranchRouterCard(
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Box(Modifier.weight(1f)) {
                             RuntimeOutlinedButton(onClick = { failureExpanded = true }, modifier = Modifier.fillMaxWidth()) {
-                                Text("目标: ${currentFailureNode.title}", maxLines = 1, overflow = TextOverflow.Ellipsis)
+                                Text("Đích: ${currentFailureNode.title}", maxLines = 1, overflow = TextOverflow.Ellipsis)
                             }
                             DropdownMenu(expanded = failureExpanded, onDismissRequest = { failureExpanded = false }) {
                                 otherNodes.forEach { target ->
@@ -1552,7 +1552,7 @@ private fun BranchRouterCard(
                             onClick = { onConnectNodes(node.id, currentFailureNode.id, "output", "exitCode != 0") },
                             contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
                         ) {
-                            Text("连接", maxLines = 1)
+                            Text("Nối", maxLines = 1)
                         }
                     }
                 }
@@ -1589,7 +1589,7 @@ private fun NodeConnectionsCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RuntimeIcon(RuntimeIconName.Link, Modifier.size(16.dp), tint = MaterialTheme.colorScheme.primary)
                 Spacer(Modifier.width(6.dp))
-                Text("节点连线与拓扑 (${allConnected.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text("Đường nối & topology của node (${allConnected.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
                 if (allConnected.isNotEmpty()) {
                     Surface(
                         onClick = { onDisconnectAll(node.id) },
@@ -1597,7 +1597,7 @@ private fun NodeConnectionsCard(
                         color = MaterialTheme.colorScheme.error.copy(alpha = 0.14f),
                     ) {
                         Text(
-                            text = "一键断开全部",
+                            text = "Ngắt tất cả một chạm",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.error,
                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
@@ -1606,9 +1606,9 @@ private fun NodeConnectionsCard(
                 }
             }
 
-            Text("传出连线（连向后续节点）：", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
+            Text("Đường nối ra (tới node tiếp theo):", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
             if (outgoingEdges.isEmpty()) {
-                Text("暂无传出连线", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Chưa có đường nối ra", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else {
                 outgoingEdges.forEach { edge ->
                     val targetNode = state.definition.nodes.firstOrNull { it.id == edge.toNodeId }
@@ -1646,7 +1646,7 @@ private fun NodeConnectionsCard(
                                 }
                                 if (!edge.conditionExpression.isNullOrBlank()) {
                                     Text(
-                                        text = "条件: ${edge.conditionExpression}",
+                                        text = "Điều kiện: ${edge.conditionExpression}",
                                         style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
                                         color = MaterialTheme.colorScheme.tertiary,
                                         maxLines = 1,
@@ -1658,16 +1658,16 @@ private fun NodeConnectionsCard(
                                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
                             ) {
                                 RuntimeIcon(RuntimeIconName.Close, Modifier.size(12.dp), tint = MaterialTheme.colorScheme.error)
-                                Text("断开", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                                Text("Ngắt", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
                             }
                         }
                     }
                 }
             }
 
-            Text("传入连线（来自前序节点）：", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
+            Text("Đường nối vào (từ node trước):", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
             if (incomingEdges.isEmpty()) {
-                Text("暂无传入连线", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Chưa có đường nối vào", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else {
                 incomingEdges.forEach { edge ->
                     val sourceNode = state.definition.nodes.firstOrNull { it.id == edge.fromNodeId }
@@ -1691,11 +1691,11 @@ private fun NodeConnectionsCard(
                                         overflow = TextOverflow.Ellipsis,
                                     )
                                     Text("──►", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                    Text("本节点", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                                    Text("Node này", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                                 }
                                 if (!edge.conditionExpression.isNullOrBlank()) {
                                     Text(
-                                        text = "条件: ${edge.conditionExpression}",
+                                        text = "Điều kiện: ${edge.conditionExpression}",
                                         style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
                                         color = MaterialTheme.colorScheme.tertiary,
                                         maxLines = 1,
@@ -1707,7 +1707,7 @@ private fun NodeConnectionsCard(
                                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
                             ) {
                                 RuntimeIcon(RuntimeIconName.Close, Modifier.size(12.dp), tint = MaterialTheme.colorScheme.error)
-                                Text("断开", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                                Text("Ngắt", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
                             }
                         }
                     }
@@ -1716,9 +1716,9 @@ private fun NodeConnectionsCard(
 
             HorizontalDivider()
 
-            Text("➕ 添加连线到其他节点：", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
+            Text("➕ Thêm đường nối tới node khác:", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold)
             if (otherNodes.isEmpty()) {
-                Text("画布中尚无其他可用节点", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Canvas chưa có node nào khác", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             } else {
                 val currentTargetNode = otherNodes.firstOrNull { it.id == selectedTargetId } ?: otherNodes.first()
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -1727,7 +1727,7 @@ private fun NodeConnectionsCard(
                             onClick = { targetExpanded = true },
                             modifier = Modifier.fillMaxWidth(),
                         ) {
-                            Text("目标: ${currentTargetNode.title}", maxLines = 1, overflow = TextOverflow.Ellipsis)
+                            Text("Đích: ${currentTargetNode.title}", maxLines = 1, overflow = TextOverflow.Ellipsis)
                         }
                         DropdownMenu(expanded = targetExpanded, onDismissRequest = { targetExpanded = false }) {
                             otherNodes.forEach { target ->
@@ -1748,7 +1748,7 @@ private fun NodeConnectionsCard(
                                 onClick = { portExpanded = true },
                                 modifier = Modifier.fillMaxWidth(),
                             ) {
-                                Text("端口: ${selectedPort.portLabel()}", maxLines = 1)
+                                Text("Cổng: ${selectedPort.portLabel()}", maxLines = 1)
                             }
                             DropdownMenu(expanded = portExpanded, onDismissRequest = { portExpanded = false }) {
                                 EdgePorts.forEach { port ->
@@ -1765,8 +1765,8 @@ private fun NodeConnectionsCard(
                         OutlinedTextField(
                             value = conditionText,
                             onValueChange = { conditionText = it },
-                            label = { Text("条件（可选）") },
-                            placeholder = { Text("如 exitCode == 0") },
+                            label = { Text("Điều kiện (tùy chọn)") },
+                            placeholder = { Text("VD: exitCode == 0") },
                             singleLine = true,
                             modifier = Modifier.weight(1.5f),
                         )
@@ -1780,7 +1780,7 @@ private fun NodeConnectionsCard(
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         RuntimeIcon(RuntimeIconName.Plus, Modifier.size(16.dp))
-                        Text("立即建立连线", maxLines = 1)
+                        Text("Tạo đường nối ngay", maxLines = 1)
                     }
                 }
             }
@@ -1791,9 +1791,9 @@ private fun NodeConnectionsCard(
 private fun WorkflowNodeType.editorLabel() = metadata().label
 
 private fun String.portLabel() = when (lowercase()) {
-    "success" -> "成功 (success)"
-    "failure" -> "失败 (failure)"
-    else -> "任意输出 (output)"
+    "success" -> "Thành công (success)"
+    "failure" -> "Thất bại (failure)"
+    else -> "Đầu ra bất kỳ (output)"
 }
 
 private val EdgePorts = listOf("output", "success", "failure")

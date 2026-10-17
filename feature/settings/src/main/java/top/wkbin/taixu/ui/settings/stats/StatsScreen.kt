@@ -59,7 +59,7 @@ fun StatsScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             RuntimeTopBar(
-                title = "数据统计与用量分析",
+                title = "Thống kê dữ liệu & phân tích mức dùng",
                 onBack = onBack,
             )
         },
@@ -78,10 +78,10 @@ fun StatsScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 val presets = listOf(
-                    StatsDateRangePreset.ALL_TIME to "全部时间",
-                    StatsDateRangePreset.LAST_30_DAYS to "近30天",
-                    StatsDateRangePreset.PREVIOUS_MONTH to "上个月",
-                    StatsDateRangePreset.PREVIOUS_QUARTER to "上季度",
+                    StatsDateRangePreset.ALL_TIME to "Toàn thời gian",
+                    StatsDateRangePreset.LAST_30_DAYS to "30 ngày qua",
+                    StatsDateRangePreset.PREVIOUS_MONTH to "Tháng trước",
+                    StatsDateRangePreset.PREVIOUS_QUARTER to "Quý trước",
                 )
 
                 for ((preset, label) in presets) {
@@ -142,7 +142,7 @@ fun StatsScreen(
                             RuntimeButton(
                                 onClick = { viewModel?.refresh() },
                             ) {
-                                Text("重试")
+                                Text("Thử lại")
                             }
                         }
                     }
@@ -154,7 +154,7 @@ fun StatsScreen(
                 Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
                     RuntimeCard(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "暂无统计数据。开始使用 Agent 对话与工具后，这里会展示活跃度与 Token 用量。",
+                            text = "Chưa có dữ liệu thống kê. Hãy bắt đầu dùng trò chuyện Agent & công cụ, ở đây sẽ hiện mức hoạt động và lượng Token dùng.",
                             modifier = Modifier.fillMaxWidth().padding(24.dp),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -172,7 +172,7 @@ fun StatsScreen(
                 ) {
                     // 1. 活跃度打卡热力图（与用量无关的独立维度，原样保留）
                     item {
-                        StatsSectionCard(title = "活跃度打卡热力图") {
+                        StatsSectionCard(title = "Heatmap điểm danh hoạt động") {
                             StatsHeatmap(days = snapshot.heatmap)
                         }
                     }
@@ -214,12 +214,12 @@ fun StatsScreen(
                         // 否则这些用户整页只剩一张热力图——与「估算口径要覆盖账本落库之前的历史」
                         // 这一设计前提直接矛盾。
                         item {
-                            StatsSectionCard(title = "核心指标概览") {
+                            StatsSectionCard(title = "Tổng quan chỉ số cốt lõi") {
                                 StatsMetricGrid(summary = snapshot.summary)
                             }
                         }
                         item {
-                            StatsSectionCard(title = "Token 用量与消耗趋势") {
+                            StatsSectionCard(title = "Xu hướng dùng & tiêu thụ Token") {
                                 StatsUsageChart(days = snapshot.trend)
                             }
                         }

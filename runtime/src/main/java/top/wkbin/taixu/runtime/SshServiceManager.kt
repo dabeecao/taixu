@@ -285,7 +285,7 @@ class SshServiceManager(
         } catch (throwable: Throwable) {
             serviceProcess = null
             serviceDistroId = null
-            _state.value = SshServiceState.Failed(distroId, throwable.message ?: "SSH 服务启动失败")
+            _state.value = SshServiceState.Failed(distroId, throwable.message ?: "Khởi động dịch vụ SSH thất bại")
             throw throwable
         }
     }

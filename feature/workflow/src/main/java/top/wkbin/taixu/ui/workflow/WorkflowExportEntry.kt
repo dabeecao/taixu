@@ -26,7 +26,7 @@ import top.wkbin.taixu.ui.components.RuntimeOutlinedButton
 @Composable
 internal fun WorkflowExportButton(definition: WorkflowDefinition, isDirty: Boolean) {
     var snapshot by remember { mutableStateOf<Pair<WorkflowDefinition, Boolean>?>(null) }
-    RuntimeOutlinedButton(onClick = { snapshot = definition to isDirty }, modifier = Modifier.fillMaxWidth()) { Text("导出 JSON", maxLines = 1) }
+    RuntimeOutlinedButton(onClick = { snapshot = definition to isDirty }, modifier = Modifier.fillMaxWidth()) { Text("Xuất JSON", maxLines = 1) }
     snapshot?.let { (source, dirty) -> WorkflowExportDialog(source, dirty, onDismiss = { snapshot = null }) }
 }
 
@@ -43,22 +43,22 @@ private fun WorkflowExportDialog(definition: WorkflowDefinition, isDirty: Boolea
         raw = result.getOrNull()
         error = result.exceptionOrNull()?.message
     }
-    RuntimeAlertDialog(onDismissRequest = onDismiss, title = { Text("导出工作流 JSON") }, text = {
+    RuntimeAlertDialog(onDismissRequest = onDismiss, title = { Text("Xuất workflow JSON") }, text = {
         Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(if (isDirty) "导出当前已应用的编辑草稿，包含未保存修改。" else "导出当前编辑器中的工作流定义。")
-            Text("JSON 包含节点配置和默认变量，复制前可在这里核对内容；再次导入会创建新的手动工作流。", style = MaterialTheme.typography.bodySmall)
+            Text(if (isDirty) "Xuất bản nháp chỉnh sửa đã áp dụng, gồm thay đổi chưa lưu." else "Xuất định nghĩa workflow trong trình chỉnh sửa hiện tại.")
+            Text("JSON chứa cấu hình nút và biến mặc định, kiểm tra nội dung ở đây trước khi sao chép; nhập lại sẽ tạo workflow thủ công mới.", style = MaterialTheme.typography.bodySmall)
             raw?.let { text ->
-                Text("${definition.nodes.size} 个节点 · ${definition.edges.size} 条连接 · ${text.length} 个字符", style = MaterialTheme.typography.labelSmall)
+                Text("${definition.nodes.size} nút · ${definition.edges.size} kết nối · ${text.length} ký tự", style = MaterialTheme.typography.labelSmall)
                 OutlinedTextField(value = text.take(24_000), onValueChange = {}, readOnly = true,
-                    label = { Text("JSON 预览") }, minLines = 4, maxLines = 8, modifier = Modifier.fillMaxWidth())
-                if (text.length > 24_000) Text("预览展示前 24000 个字符，“复制完整 JSON”会复制全部内容。", style = MaterialTheme.typography.bodySmall)
+                    label = { Text("Xem trước JSON") }, minLines = 4, maxLines = 8, modifier = Modifier.fillMaxWidth())
+                if (text.length > 24_000) Text("Xem trước 24000 ký tự đầu, “Sao chép toàn bộ JSON” sẽ sao chép toàn bộ nội dung.", style = MaterialTheme.typography.bodySmall)
             }
-            if (raw == null && error == null) Text("正在生成…", style = MaterialTheme.typography.bodySmall)
+            if (raw == null && error == null) Text("Đang tạo…", style = MaterialTheme.typography.bodySmall)
             error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
-            if (copied) Text("完整 JSON 已复制", style = MaterialTheme.typography.bodySmall)
+            if (copied) Text("Đã sao chép toàn bộ JSON", style = MaterialTheme.typography.bodySmall)
             WorkflowSaveDocumentButton(raw, definition.name)
         }
-    }, dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("关闭", maxLines = 1) } }, confirmButton = {
+    }, dismissButton = { RuntimeOutlinedButton(onClick = onDismiss) { Text("Đóng", maxLines = 1) } }, confirmButton = {
         RuntimeButton(enabled = raw != null && !copying, onClick = {
             val text = raw ?: return@RuntimeButton
             copying = true
@@ -71,9 +71,9 @@ private fun WorkflowExportDialog(definition: WorkflowDefinition, isDirty: Boolea
                     copied = true
                     error = null
                 } catch (cancelled: CancellationException) { throw cancelled }
-                catch (_: Exception) { error = "复制失败，请重试" }
+                catch (_: Exception) { error = "Sao chép thất bại, thử lại" }
                 finally { copying = false }
             }
-        }) { Text(if (copying) "正在复制" else "复制完整 JSON", maxLines = 1) }
+        }) { Text(if (copying) "Đang sao chép" else "Sao chép JSON đầy đủ", maxLines = 1) }
     })
 }

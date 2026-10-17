@@ -36,22 +36,22 @@ internal fun WorkflowMetadataCard(state: WorkflowEditorUiState, onApply: (String
     RuntimeCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(14.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded }, verticalAlignment = Alignment.CenterVertically) {
-                Text("工作流信息", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-                Text(if (expanded) "收起" else "修改", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                Text("Thông tin workflow", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text(if (expanded) "Thu gọn" else "Chỉnh sửa", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
             }
             WorkflowExportButton(state.definition, state.isDirty)
             if (expanded) {
-                OutlinedTextField(name, { name = it }, label = { Text("工作流名称") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(category, { category = it }, label = { Text("分类") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(description, { description = it }, label = { Text("说明") }, minLines = 2, maxLines = 3, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(parallel, { parallel = it }, label = { Text("最大执行并发（1–8）") },
-                    supportingText = { Text(if (parallelValue == null) "请输入 1–8 的整数" else "人工审批节点不占名额；设为 1 可串行执行普通节点。") },
+                OutlinedTextField(name, { name = it }, label = { Text("Tên workflow") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(category, { category = it }, label = { Text("Phân loại") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(description, { description = it }, label = { Text("Mô tả") }, minLines = 2, maxLines = 3, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(parallel, { parallel = it }, label = { Text("Số luồng chạy đồng thời tối đa (1–8)") },
+                    supportingText = { Text(if (parallelValue == null) "Hãy nhập số nguyên 1–8" else "Node phê duyệt thủ công không chiếm suất; đặt 1 để chạy tuần tự các node thường.") },
                     isError = parallelValue == null, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true, modifier = Modifier.fillMaxWidth())
                 RuntimeOutlinedButton(enabled = parallelValue != null, onClick = { parallelValue?.let { onApply(name, description, category, it) } },
-                    modifier = Modifier.align(Alignment.End)) { Text("应用信息") }
+                    modifier = Modifier.align(Alignment.End)) { Text("Áp dụng thông tin") }
             } else {
-                Text("${state.definition.name} · [${state.definition.category}] · 最大并发 ${state.definition.maxParallelNodes}",
+                Text("${state.definition.name} · [${state.definition.category}] · Tối đa ${state.definition.maxParallelNodes} luồng",
                     style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 2, overflow = TextOverflow.Ellipsis)
             }

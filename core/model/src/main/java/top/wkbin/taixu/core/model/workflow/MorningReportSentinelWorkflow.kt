@@ -11,23 +11,23 @@ object MorningReportSentinel {
 
     val definition: WorkflowDefinition = WorkflowDefinition(
         id = WORKFLOW_ID,
-        name = "晨报哨兵",
-        description = "只读巡检当前工作区：Git 未提交变更、最近提交与改动统计，AI 汇总成晨间简报并推送系统通知。",
-        category = "巡检",
+        name = "Lính gác bản tin sáng",
+        description = "Tuần tra chỉ-đọc không gian làm việc hiện tại: thay đổi Git chưa commit, commit gần đây và thống kê sửa đổi, AI tổng hợp thành bản tin buổi sáng và đẩy thông báo hệ thống.",
+        category = "Tuần tra",
         isBuiltin = true,
         trigger = WorkflowTrigger.Manual("/wf $WORKFLOW_ID"),
         nodes = listOf(
-            WorkflowNode("start", WorkflowNodeType.TRIGGER, "开始", canvasX = 40f, canvasY = 120f),
+            WorkflowNode("start", WorkflowNodeType.TRIGGER, "Bắt đầu", canvasX = 40f, canvasY = 120f),
             WorkflowNode(
                 "git_survey",
                 WorkflowNodeType.BASH_COMMAND,
-                "Git 巡检",
+                "Kiểm tra Git",
                 config = mapOf(
                     "command" to
                         "git rev-parse --is-inside-work-tree 2>/dev/null && " +
-                        "{ echo '=== 未提交变更 ==='; git status --short; echo '=== 最近提交 ==='; " +
-                        "git log --oneline -8; echo '=== 改动统计 ==='; git diff --stat; } || " +
-                        "echo '当前工作区不是 git 仓库，本次跳过 Git 巡检'",
+                        "{ echo '=== Thay đổi chưa commit ==='; git status --short; echo '=== Commit gần đây ==='; " +
+                        "git log --oneline -8; echo '=== Thống kê thay đổi ==='; git diff --stat; } || " +
+                        "echo 'Workspace hiện tại không phải repo git, bỏ qua kiểm tra Git lần này'",
                 ),
                 timeoutSeconds = 120,
                 canvasX = 280f,
@@ -36,7 +36,7 @@ object MorningReportSentinel {
             WorkflowNode(
                 "summarize",
                 WorkflowNodeType.AGENT_INFERENCE,
-                "AI 汇总晨报",
+                "AI tổng hợp bản tin sáng",
                 config = mapOf(
                     "prompt" to
                         "你是晨报哨兵。以下是对工作区（路径：\${'$'}{WORKSPACE_PATH}）的只读巡检输出。" +
@@ -52,17 +52,17 @@ object MorningReportSentinel {
             WorkflowNode(
                 "notify",
                 WorkflowNodeType.HOST_ACTION,
-                "推送晨报通知",
+                "Đẩy thông báo bản tin sáng",
                 config = mapOf(
                     "action" to "notification",
-                    "title" to "晨报哨兵",
+                    "title" to "Lính gác bản tin sáng",
                     "text" to "\${'$'}{summarize.output}",
                 ),
                 failurePolicy = FailurePolicy.CONTINUE,
                 canvasX = 760f,
                 canvasY = 120f,
             ),
-            WorkflowNode("done", WorkflowNodeType.TERMINAL_OUTPUT, "晨报完成", canvasX = 1000f, canvasY = 120f),
+            WorkflowNode("done", WorkflowNodeType.TERMINAL_OUTPUT, "Xong bản tin sáng", canvasX = 1000f, canvasY = 120f),
         ),
         edges = chain("start", "git_survey", "summarize", "notify", "done"),
     )

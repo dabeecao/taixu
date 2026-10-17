@@ -66,7 +66,7 @@ class AgentForegroundService : Service() {
                 getString(R.string.taixu_agent_notification_channel),
                 NotificationManager.IMPORTANCE_HIGH,
             ).apply {
-                description = "用于展示 AI 深度思考与任务进度的常驻通知"
+                description = "Thông báo thường trực hiển thị quá trình suy luận sâu của AI và tiến độ tác vụ"
                 enableVibration(false)
                 setSound(null, null)
                 setShowBadge(true)
@@ -248,7 +248,7 @@ class AgentForegroundService : Service() {
             status
         }
         return runningNotification(
-            title = "太墟 · $title",
+            title = "TaiXu · $title",
             contentText = contentText,
             stopPendingIntent = stopPending,
         )

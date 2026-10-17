@@ -39,7 +39,7 @@ object PhoneOperationWorkflow {
         }
         return WorkflowLayout.arrange(WorkflowDefinition(
             id, name.trim().ifBlank { "手机操作工作流" },
-            description = "从手机模型操作记录生成。点击、滑动、输入和等待均可编辑；重放前需要相同应用页面，输入发出不代表业务操作成功。",
+            description = "Tạo từ bản ghi thao tác của model trên máy. Chạm, vuốt, nhập liệu và chờ đều chỉnh sửa được; trước khi phát lại cần đúng trang ứng dụng, input đã gửi không đồng nghĩa thao tác nghiệp vụ thành công.",
             category = "虚拟屏", nodes = nodes,
             edges = nodes.zipWithNext().mapIndexed { index, (from, to) ->
                 WorkflowEdge("edge_$index", from.id, "success", to.id)

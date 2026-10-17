@@ -246,7 +246,7 @@ object A2uiSurfaceBus {
         require(surfaceId.length <= MAX_ID_CHARS && SURFACE_ID_REGEX.matches(surfaceId)) {
             "surfaceId 仅允许字母数字与 _ . : -，且不超过 $MAX_ID_CHARS 字符"
         }
-        val title = args["title"]?.jsonPrimitive?.contentOrNull?.trim().takeIf { !it.isNullOrBlank() } ?: "A2UI 界面"
+        val title = args["title"]?.jsonPrimitive?.contentOrNull?.trim().takeIf { !it.isNullOrBlank() } ?: "Giao diện A2UI"
         require(title.length <= MAX_TITLE_CHARS) { "title 不超过 $MAX_TITLE_CHARS 字符" }
         val rawMessages = args["messages"]?.jsonPrimitive?.contentOrNull?.trim().orEmpty()
         require(rawMessages.length in MIN_JSON_CHARS..MAX_JSON_CHARS) {

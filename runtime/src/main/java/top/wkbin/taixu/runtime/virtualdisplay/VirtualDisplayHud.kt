@@ -69,18 +69,18 @@ object VirtualDisplayHud {
         private set
 
     /** 标题栏上的当前步骤。窗口还没挂上时先记着，挂上后写进去。 */
-    private var stepText: String = "等待操作"
+    private var stepText: String = "Đang chờ thao tác"
     private var statusView: TextView? = null
 
     /** 把当前做到哪一步写到悬浮窗标题上，用户不用翻聊天记录也能看到。 */
     fun setStep(step: String) {
-        val text = step.trim().ifBlank { "等待操作" }
+        val text = step.trim().ifBlank { "Đang chờ thao tác" }
         stepText = text
         mainHandler.post { statusView?.text = titleFor(showingSessionId, text) }
     }
 
     private fun titleFor(sessionId: String?, step: String): String =
-        "虚拟屏 · ${sessionId.orEmpty()} · $step"
+        "Màn hình ảo · ${sessionId.orEmpty()} · $step"
 
     /**
      * 显示指定会话的虚拟屏悬浮窗。
@@ -163,7 +163,7 @@ object VirtualDisplayHud {
             setTextColor(Color.parseColor("#AAAAAA"))
             textSize = 14f
             setPadding(px(12), px(4), px(12), px(4))
-            contentDescription = "停止任务并隐藏虚拟屏"
+            contentDescription = "Dừng tác vụ và ẩn màn hình ảo"
             setOnClickListener { coordinator.phoneTasks.cancel(sessionId); hide() }
         }
         titleBar.addView(title)
@@ -207,7 +207,7 @@ object VirtualDisplayHud {
             forwardScopeSupplier = { scope }
             onManualTouch = {
                 coordinator.phoneTasks.pause(sessionId, manual = true)
-                setStep("人工操作中 · 点继续后重新观察")
+                setStep("Đang thao tác thủ công · bấm tiếp tục để quan sát lại")
             }
         }
 

@@ -193,7 +193,7 @@ class SubagentOrchestrator(
             spec = spec,
             subSessionId = spec.taskId.orEmpty(),
             isSuccess = false,
-            summary = "子任务执行异常（${failure::class.simpleName ?: "Throwable"}）：" +
+            summary = "Tác vụ con chạy lỗi (${failure::class.simpleName ?: "Throwable"}）：" +
                 (failure.message ?: "无错误消息"),
             toolCallCount = 0,
             termination = SubagentTermination.FAILED,
@@ -221,7 +221,7 @@ class SubagentOrchestrator(
                     spec = spec,
                     subSessionId = resumeLaneName,
                     isSuccess = false,
-                    summary = "task_id=$resumeLaneName 不存在或不是本会话的子任务 Lane，无法续跑。" +
+                    summary = "task_id=$resumeLaneName không tồn tại hoặc không phải Lane tác vụ con của phiên này, không thể tiếp tục chạy." +
                         "请从最近一次 invoke_subagent 汇总中原样复制 task_id；Lane 已删除时改为派发全新任务。",
                     toolCallCount = 0,
                     termination = SubagentTermination.INCOMPLETE,
@@ -235,7 +235,7 @@ class SubagentOrchestrator(
                     spec = spec,
                     subSessionId = resumeLaneName,
                     isSuccess = false,
-                    summary = "续跑 Lane 的角色已禁用或删除，无法续跑；请改为派发全新任务。",
+                    summary = "Vai trò của Lane cần tiếp tục đã bị tắt hoặc xóa, không thể tiếp tục chạy; hãy tạo tác vụ hoàn toàn mới.",
                     toolCallCount = 0,
                     termination = SubagentTermination.FAILED,
                 )
@@ -282,7 +282,7 @@ class SubagentOrchestrator(
                 spec = spec,
                 subSessionId = resumeLaneName ?: "",
                 isSuccess = false,
-                summary = failure.message ?: "无法解析子智能体模型",
+                summary = failure.message ?: "Không phân tích được mô hình Agent con",
                 toolCallCount = 0,
                 resolvedProfileId = profile.id,
                 resolvedProfileName = profile.name,
@@ -296,7 +296,7 @@ class SubagentOrchestrator(
                 spec = spec,
                 subSessionId = laneName,
                 isSuccess = false,
-                summary = "task_id=$laneName 正在运行，拒绝并发续跑；请等待当前执行完成后再提交新指令。",
+                summary = "task_id=$laneName đang chạy, từ chối tiếp tục chạy đồng thời; hãy đợi lần chạy hiện tại hoàn tất rồi gửi lệnh mới.",
                 toolCallCount = 0,
                 resolvedProfileId = profile.id,
                 resolvedProfileName = profile.name,

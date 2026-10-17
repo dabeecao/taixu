@@ -176,8 +176,8 @@ object BuiltinMcpPresets {
     val presets: List<McpServerConfig> = listOf(
         McpServerConfig(
             id = "mcp_sqlite",
-            name = "SQLite 数据库探索器",
-            description = "查询、分析与操作沙箱或工作区内的 SQLite 数据库文件",
+            name = "Trình khám phá cơ sở dữ liệu SQLite",
+            description = "Truy vấn, phân tích và thao tác file cơ sở dữ liệu SQLite trong sandbox hoặc không gian làm việc",
             transportType = McpTransportType.STDIO,
             command = "python3",
             args = listOf("-u", "/opt/taixu/scripts/sqlite_mcp_server.py", "--db-path", "/root/taixu.db"),
@@ -186,8 +186,8 @@ object BuiltinMcpPresets {
         ),
         McpServerConfig(
             id = "mcp_git",
-            name = "Git 仓库协同中心",
-            description = "深入分析 Git 历史提交、分支拓扑、Diff 差异与工作区状态",
+            name = "Trung tâm cộng tác kho Git",
+            description = "Phân tích sâu lịch sử commit Git, cấu trúc nhánh, khác biệt Diff và trạng thái không gian làm việc",
             transportType = McpTransportType.STDIO,
             command = "python3",
             args = listOf("-u", "/opt/taixu/scripts/git_mcp_server.py", "--repository", "/workspace"),
@@ -196,8 +196,8 @@ object BuiltinMcpPresets {
         ),
         McpServerConfig(
             id = "mcp_apktool",
-            name = "Android 逆向与 APK 审计",
-            description = "自动化反编译 APK、解析清单权限、提取硬编码凭据、Smali 敏感代码检索与重打包签名（太墟内置 MCP 服务，依赖 android-suite 的 apktool/jadx/aapt 工具链）",
+            name = "Dịch ngược Android & kiểm toán APK",
+            description = "Tự động dịch ngược APK, phân tích quyền trong manifest, trích xuất credential hardcode, tìm code nhạy cảm Smali và đóng gói lại kèm ký (dịch vụ MCP tích hợp của TaiXu, phụ thuộc toolchain apktool/jadx/aapt của android-suite)",
             transportType = McpTransportType.STDIO,
             command = "python3",
             args = listOf("-u", "/opt/taixu/scripts/apktool_mcp_server.py"),
@@ -207,7 +207,7 @@ object BuiltinMcpPresets {
         McpServerConfig(
             id = BROWSER_BUILTIN_ID,
             name = "TaiXu Browser (Built-in)",
-            description = "TaiXu 内置 in-app WebView 的 MCP server（in-process loopback 127.0.0.1:8787，Streamable HTTP POST /mcp 请求-响应，Bearer 认证）；由 harness 层 BrowserMcpBootstrap 启动，暴露 mcp__browser__* 工具给 Agent 与外接 IDE。",
+            description = "MCP server WebView in-app tích hợp của TaiXu (loopback in-process 127.0.0.1:8787, Streamable HTTP POST /mcp request-response, xác thực Bearer); do BrowserMcpBootstrap ở tầng harness khởi động, cung cấp công cụ mcp__browser__* cho Agent và IDE ngoài.",
             transportType = McpTransportType.SSE,
             serverUrl = "http://127.0.0.1:8787/mcp",
             isEnabled = true,

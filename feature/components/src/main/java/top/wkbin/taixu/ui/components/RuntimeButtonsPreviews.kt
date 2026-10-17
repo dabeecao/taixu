@@ -28,14 +28,14 @@ private fun RuntimeButtonsPreview() {
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    RuntimeButton(onClick = {}) { Text("开始") }
-                    RuntimeFilledTonalButton(onClick = {}) { Text("编辑配置") }
-                    RuntimeOutlinedButton(onClick = {}) { Text("导入") }
-                    RuntimeTextButton(onClick = {}) { Text("取消") }
+                    RuntimeButton(onClick = {}) { Text("Bắt đầu") }
+                    RuntimeFilledTonalButton(onClick = {}) { Text("Sửa cấu hình") }
+                    RuntimeOutlinedButton(onClick = {}) { Text("Nhập") }
+                    RuntimeTextButton(onClick = {}) { Text("Hủy") }
                 }
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    RuntimeButton(onClick = {}, enabled = false) { Text("暂不可用") }
-                    RuntimeIconButton(onClick = {}, contentDescription = "添加") {
+                    RuntimeButton(onClick = {}, enabled = false) { Text("Tạm không khả dụng") }
+                    RuntimeIconButton(onClick = {}, contentDescription = "Thêm") {
                         RuntimeIcon(name = RuntimeIconName.Plus)
                     }
                 }

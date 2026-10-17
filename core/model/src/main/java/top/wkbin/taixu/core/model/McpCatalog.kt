@@ -176,8 +176,8 @@ object McpCatalog {
     val entries: List<McpCatalogEntry> = listOf(
         McpCatalogEntry(
             id = "mcp_websearch",
-            name = "Web 搜索（Open-WebSearch）",
-            summary = "免 API Key 的多引擎网络搜索与网页正文抓取",
+            name = "Tìm kiếm web (Open-WebSearch)",
+            summary = "Tìm kiếm web đa engine và trích xuất nội dung trang không cần API Key",
             channel = McpCatalogChannel.NPM,
             packageSpec = "open-websearch@2.2.0",
             packageName = "open-websearch",
@@ -193,8 +193,8 @@ object McpCatalog {
         ),
         McpCatalogEntry(
             id = "mcp_codegraph",
-            name = "CodeGraph 代码知识图谱",
-            summary = "tree-sitter 解析 + SQLite 索引，提供符号检索、调用链与影响面",
+            name = "CodeGraph Đồ thị tri thức code",
+            summary = "Phân tích tree-sitter + chỉ mục SQLite, cung cấp tìm kiếm ký hiệu, chuỗi gọi và phạm vi ảnh hưởng",
             channel = McpCatalogChannel.NPM,
             packageSpec = "@colbymchenry/codegraph@1.6.2",
             packageName = "@colbymchenry/codegraph",
@@ -212,7 +212,7 @@ object McpCatalog {
         McpCatalogEntry(
             id = "mcp_memory",
             name = "Knowledge Graph Memory",
-            summary = "跨会话持久化的实体 / 关系知识图谱，本地 JSON 存储",
+            summary = "Đồ thị tri thức thực thể / quan hệ bền vững xuyên phiên, lưu JSON cục bộ",
             channel = McpCatalogChannel.NPM,
             packageSpec = "@modelcontextprotocol/server-memory@1.0.0",
             packageName = "@modelcontextprotocol/server-memory",
@@ -229,7 +229,7 @@ object McpCatalog {
         McpCatalogEntry(
             id = "mcp_sequential_thinking",
             name = "Sequential Thinking",
-            summary = "显式多步推理链，纯计算无副作用",
+            summary = "Chuỗi suy luận nhiều bước tường minh, thuần tính toán không tác dụng phụ",
             channel = McpCatalogChannel.NPM,
             packageSpec = "@modelcontextprotocol/server-sequential-thinking@1.0.0",
             packageName = "@modelcontextprotocol/server-sequential-thinking",
@@ -244,8 +244,8 @@ object McpCatalog {
         ),
         McpCatalogEntry(
             id = "mcp_context7",
-            name = "Context7 库文档检索",
-            summary = "按库名拉取最新官方文档片段，降低 SDK 用法幻觉",
+            name = "Tra cứu tài liệu thư viện Context7",
+            summary = "Lấy đoạn tài liệu chính thức mới nhất theo tên thư viện, giảm ảo giác cách dùng SDK",
             channel = McpCatalogChannel.NPM,
             packageSpec = "@upstash/context7-mcp@4.3.0",
             packageName = "@upstash/context7-mcp",
@@ -260,8 +260,8 @@ object McpCatalog {
         ),
         McpCatalogEntry(
             id = "mcp_github",
-            name = "GitHub 平台集成",
-            summary = "Issues / PR / 搜索 / 文件操作",
+            name = "Tích hợp nền tảng GitHub",
+            summary = "Issues / PR / Tìm kiếm / Thao tác tệp",
             channel = McpCatalogChannel.NPM,
             packageSpec = "@modelcontextprotocol/server-github@2025.4.8",
             packageName = "@modelcontextprotocol/server-github",
@@ -281,8 +281,8 @@ object McpCatalog {
         // 成本高于 npm 通道；在 pip 通道落地前这些条目只作为可见的规划项，不入开发套件。
         McpCatalogEntry(
             id = "mcp_fetch",
-            name = "Fetch 网页抓取（官方）",
-            summary = "把给定 URL 的 HTML 转 Markdown 并返回正文",
+            name = "Fetch cào web (chính thức)",
+            summary = "Chuyển HTML của URL cho trước thành Markdown và trả về nội dung chính",
             channel = McpCatalogChannel.PYPI,
             packageSpec = "mcp-server-fetch==2026.10.10",
             packageName = "mcp-server-fetch",
@@ -297,8 +297,8 @@ object McpCatalog {
         ),
         McpCatalogEntry(
             id = "mcp_time",
-            name = "Time 时区工具（官方）",
-            summary = "时区换算与当前时间",
+            name = "Time công cụ múi giờ (chính thức)",
+            summary = "Đổi múi giờ & giờ hiện tại",
             channel = McpCatalogChannel.PYPI,
             packageSpec = "mcp-server-time==2026.10.10",
             packageName = "mcp-server-time",
@@ -313,8 +313,8 @@ object McpCatalog {
         ),
         McpCatalogEntry(
             id = "mcp_pandoc",
-            name = "Pandoc 文档格式转换",
-            summary = "Office / Markdown / HTML / PDF 等格式互转",
+            name = "Chuyển đổi định dạng tài liệu Pandoc",
+            summary = "Chuyển đổi qua lại Office / Markdown / HTML / PDF",
             channel = McpCatalogChannel.PYPI,
             packageSpec = "mcp-pandoc==0.11.1",
             packageName = "mcp-pandoc",

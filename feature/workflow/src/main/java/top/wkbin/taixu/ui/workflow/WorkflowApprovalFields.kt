@@ -12,15 +12,15 @@ import top.wkbin.taixu.core.model.workflow.WorkflowApprovalTimeout
 internal fun WorkflowApprovalFields(config: MutableMap<String, String>) {
     OutlinedTextField(value = config[WorkflowApprovalTimeout.CONFIG_KEY].orEmpty(), onValueChange = {
         if (it.isBlank()) config.remove(WorkflowApprovalTimeout.CONFIG_KEY) else config[WorkflowApprovalTimeout.CONFIG_KEY] = it.trim()
-    }, label = { Text("审批等待上限（秒，可选）") },
+    }, label = { Text("Giới hạn chờ phê duyệt tối đa (giây, tùy chọn)") },
         isError = WorkflowApprovalTimeout.validationError(config[WorkflowApprovalTimeout.CONFIG_KEY]) != null,
-        supportingText = { Text("留空不限时；填写 1–3600 秒，超时按失败策略处理。通用节点超时不用于审批等待。") },
+        supportingText = { Text("Để trống là không giới hạn; nhập 1–3600 giây, quá timeout xử lý theo chính sách thất bại. Timeout nút chung không áp dụng cho chờ phê duyệt.") },
         singleLine = true, modifier = Modifier.fillMaxWidth())
     OutlinedTextField(value = config["prompt"].orEmpty(), onValueChange = { config["prompt"] = it },
-        label = { Text("审批确认说明（必填）") }, minLines = 2, maxLines = 4, modifier = Modifier.fillMaxWidth())
+        label = { Text("Mô tả xác nhận phê duyệt (bắt buộc)") }, minLines = 2, maxLines = 4, modifier = Modifier.fillMaxWidth())
     OutlinedTextField(value = config[WorkflowExpansions.SOURCE_KEY].orEmpty(), onValueChange = {
         if (it.isBlank()) config.remove(WorkflowExpansions.SOURCE_KEY) else config[WorkflowExpansions.SOURCE_KEY] = it.trim()
-    }, label = { Text("动态扩图结果源节点 ID（可选）") },
-        supportingText = { Text("填写后确认该智能体的结构化 nodes/edges 提案；需以 success 边直接连接。") },
+    }, label = { Text("ID nút nguồn kết quả mở rộng đồ thị động (tùy chọn)") },
+        supportingText = { Text("Điền xong xác nhận đề xuất nodes/edges có cấu trúc của Agent đó; cần nối trực tiếp qua cạnh success.") },
         singleLine = true, modifier = Modifier.fillMaxWidth())
 }

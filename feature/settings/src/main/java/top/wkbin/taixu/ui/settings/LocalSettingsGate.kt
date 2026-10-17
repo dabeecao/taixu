@@ -22,27 +22,27 @@ internal fun LocalSettingsGate(title: String, onBack: () -> Unit, content: @Comp
     if (active == null) content()
     else Scaffold(topBar = { RuntimeTopBar(title = title, onBack = onBack) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            NoticeBanner(text = "此功能管理手机上的 Linux、插件和配置，当前主系统无法使用。请先在「Linux 系统管理」中切回本地系统。")
-            Text("服务器工具链可通过智枢命令管理；手机目录不会自动挂载或同步到服务器。", style = MaterialTheme.typography.bodyMedium)
-            RuntimeTextButton(onClick = onBack) { Text("返回") }
+            NoticeBanner(text = "Tính năng này quản lý Linux, plugin và cấu hình trên điện thoại, hiện không dùng được trên hệ thống chính. Hãy chuyển về hệ thống cục bộ trong "Quản lý hệ thống Linux" trước.")
+            Text("Chuỗi công cụ máy chủ quản lý được qua lệnh Agent; thư mục điện thoại không tự mount hay đồng bộ lên máy chủ.", style = MaterialTheme.typography.bodyMedium)
+            RuntimeTextButton(onClick = onBack) { Text("Quay lại") }
         }
     }
 }
 
 @Composable
 fun LocalLlmScreen(onBack: () -> Unit, onOpenEngine: () -> Unit, viewModel: LocalLlmViewModel? = null) =
-    LocalSettingsGate("本地 LLM", onBack) { LocalLlmContent(onBack, onOpenEngine, viewModel ?: koinViewModel()) }
+    LocalSettingsGate("LLM cục bộ", onBack) { LocalLlmContent(onBack, onOpenEngine, viewModel ?: koinViewModel()) }
 
 @Composable
 fun ToolDetailScreen(toolId: String, onBack: () -> Unit, onLaunchTerminal: (String) -> Unit,
     onStartAiHealing: (String, String, List<String>) -> Unit = { _, _, _ -> }, viewModel: ToolDetailViewModel? = null) =
-    LocalSettingsGate("本机插件", onBack) { LocalToolDetailContent(toolId, onBack, onLaunchTerminal, onStartAiHealing, viewModel ?: koinViewModel()) }
+    LocalSettingsGate("Plugin trên máy", onBack) { LocalToolDetailContent(toolId, onBack, onLaunchTerminal, onStartAiHealing, viewModel ?: koinViewModel()) }
 
 @Composable
 fun CcSwitchScreen(onBack: () -> Unit, onLaunchTerminal: (String) -> Unit, onOpenBrowser: (String) -> Unit, viewModel: CcSwitchViewModel? = null) =
-    LocalSettingsGate("本机智能体中枢", onBack) { LocalCcSwitchContent(onBack, onLaunchTerminal, onOpenBrowser, viewModel ?: koinViewModel()) }
+    LocalSettingsGate("Agent trung tâm trên máy", onBack) { LocalCcSwitchContent(onBack, onLaunchTerminal, onOpenBrowser, viewModel ?: koinViewModel()) }
 
 @Composable
 fun ToolCenterScreen(onBack: () -> Unit, onLaunchPty: (String) -> Unit, onOpenToolDetail: (String) -> Unit = {},
     onStartAiHealing: (String, String, List<String>) -> Unit = { _, _, _ -> }, viewModel: ToolCenterViewModel? = null) =
-    LocalSettingsGate("插件与底层工具中心", onBack) { LocalToolCenterContent(onBack, onLaunchPty, onOpenToolDetail, onStartAiHealing, viewModel ?: koinViewModel()) }
+    LocalSettingsGate("Trung tâm plugin và công cụ nền", onBack) { LocalToolCenterContent(onBack, onLaunchPty, onOpenToolDetail, onStartAiHealing, viewModel ?: koinViewModel()) }

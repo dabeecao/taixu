@@ -42,14 +42,14 @@ internal fun RemoteWorkspaceScreen(serverId: String, onNavigate: (MainDestinatio
         loading = true; entries = emptyList(); message = null
         try { entries = if (path.isEmpty()) current.projects(serverId, target) else current.list(serverId, path, target) }
         catch (e: CancellationException) { throw e }
-        catch (e: Exception) { message = "无法读取服务器目录，请检查连接、工作目录和权限" }
+        catch (e: Exception) { message = "Không đọc được thư mục máy chủ, hãy kiểm tra kết nối, thư mục làm việc và quyền" }
         finally { loading = false }
     }
     BackHandler(path.isNotBlank()) { path = path.substringBeforeLast('/', "") }
     Scaffold(containerColor = MaterialTheme.colorScheme.background,
-        topBar = { RuntimeTopBar(title = if (path.isBlank()) "工坊" else path.substringAfterLast('/'),
-            statusText = target?.name ?: "当前服务器", onBack = { if (path.isNotBlank()) path = path.substringBeforeLast('/', "") else onBack() },
-            actions = { RuntimeIconButton(onClick = { refresh++ }, contentDescription = "刷新") { RuntimeIcon(RuntimeIconName.Refresh) } }) },
+        topBar = { RuntimeTopBar(title = if (path.isBlank()) "Xưởng" else path.substringAfterLast('/'),
+            statusText = target?.name ?: "Máy chủ hiện tại", onBack = { if (path.isNotBlank()) path = path.substringBeforeLast('/', "") else onBack() },
+            actions = { RuntimeIconButton(onClick = { refresh++ }, contentDescription = "Làm mới") { RuntimeIcon(RuntimeIconName.Refresh) } }) },
     ) { padding ->
         LazyColumn(Modifier.fillMaxSize().then(top.wkbin.taixu.ui.components.runtimeScrollViewport(padding)), contentPadding = top.wkbin.taixu.ui.components.runtimeScrollContentPadding(padding, PaddingValues(16.dp, 16.dp, 16.dp,
             24.dp)), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -59,19 +59,19 @@ internal fun RemoteWorkspaceScreen(serverId: String, onNavigate: (MainDestinatio
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             IconTile(RuntimeIconName.FolderOpen, size = 40.dp, color = MaterialTheme.colorScheme.primary)
                             Column(Modifier.weight(1f)) {
-                                Text(if (path.isBlank()) "服务器项目" else "项目文件", style = MaterialTheme.typography.titleMedium)
+                                Text(if (path.isBlank()) "Dự án máy chủ" else "File dự án", style = MaterialTheme.typography.titleMedium)
                                 Text((target?.workspace.orEmpty().trimEnd('/') + "/" + path).trimEnd('/'), style = MaterialTheme.typography.bodySmall,
                                     maxLines = 1, overflow = TextOverflow.Ellipsis, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                         }
-                        if (path.isBlank()) RuntimeFilledTonalButton(onClick = { projectName = ""; message = null; createProject = true }) { Text("新建项目") }
+                        if (path.isBlank()) RuntimeFilledTonalButton(onClick = { projectName = ""; message = null; createProject = true }) { Text("Tạo dự án mới") }
                     }
                 }
             }
             if (loading) item { RuntimeLinearProgressIndicator(modifier = Modifier.fillMaxWidth()) }
             message?.let { item { Text(it, color = MaterialTheme.colorScheme.error) } }
             if (!loading && entries.isEmpty() && message == null) item {
-                Text(if (path.isBlank()) "工作目录中还没有项目，可在此新建项目或将已有工程放入服务器工作目录。" else "此目录为空。",
+                Text(if (path.isBlank()) "Thư mục làm việc chưa có dự án, có thể tạo dự án mới tại đây hoặc chép project có sẵn vào thư mục làm việc của máy chủ." else "Thư mục này trống.",
                     style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             items(entries, key = { it.name }) { item ->
@@ -85,7 +85,7 @@ internal fun RemoteWorkspaceScreen(serverId: String, onNavigate: (MainDestinatio
                         loading = true
                         try { val content = current.read(serverId, relative, target); if (path == parent) editor = relative to content }
                         catch (e: CancellationException) { throw e }
-                        catch (e: Exception) { message = "无法打开文件，仅支持 1 MiB 内的 UTF-8 文本文件" }
+                        catch (e: Exception) { message = "Không mở được file, chỉ hỗ trợ file văn bản UTF-8 trong 1 MiB" }
                         finally { loading = false }
                     }
                 }) {
@@ -93,7 +93,7 @@ internal fun RemoteWorkspaceScreen(serverId: String, onNavigate: (MainDestinatio
                         IconTile(if (item.directory) RuntimeIconName.Folder else RuntimeIconName.Code, size = 36.dp, color = MaterialTheme.colorScheme.primary)
                         Column(Modifier.weight(1f)) {
                             Text(item.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                            Text(if (item.directory) "浏览目录" else "${item.size / 1024} KB · 点击编辑", style = MaterialTheme.typography.bodySmall,
+                            Text(if (item.directory) "Duyệt thư mục" else "${item.size / 1024} KB · bấm để sửa", style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         RuntimeIcon(RuntimeIconName.ChevronRight, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -102,10 +102,10 @@ internal fun RemoteWorkspaceScreen(serverId: String, onNavigate: (MainDestinatio
             }
         }
     }
-    if (createProject) RuntimeAlertDialog(onDismissRequest = { if (!creating) createProject = false }, title = { Text("新建服务器项目") },
+    if (createProject) RuntimeAlertDialog(onDismissRequest = { if (!creating) createProject = false }, title = { Text("Tạo dự án máy chủ mới") },
         text = { Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text("将在当前服务器的工作目录下创建项目目录。")
-            OutlinedTextField(projectName, { projectName = it }, modifier = Modifier.fillMaxWidth(), singleLine = true, enabled = !creating, label = { Text("项目名称") })
+            Text("Sẽ tạo thư mục dự án trong thư mục làm việc của máy chủ hiện tại.")
+            OutlinedTextField(projectName, { projectName = it }, modifier = Modifier.fillMaxWidth(), singleLine = true, enabled = !creating, label = { Text("Tên dự án") })
             message?.let { Text(it, color = MaterialTheme.colorScheme.error) }
         } }, confirmButton = { RuntimeTextButton(enabled = !creating && projectName.isNotBlank(), onClick = {
             val snapshot = projectName.trim()
@@ -114,11 +114,11 @@ internal fun RemoteWorkspaceScreen(serverId: String, onNavigate: (MainDestinatio
                 creating = true
                 try { current.createProject(serverId, snapshot, target); createProject = false; refresh++ }
                 catch (e: CancellationException) { throw e }
-                catch (e: Exception) { message = "创建失败，请检查名称是否有效、是否重复及目录权限" }
+                catch (e: Exception) { message = "Tạo thất bại, hãy kiểm tra tên có hợp lệ, có trùng và quyền thư mục không" }
                 finally { creating = false }
             }
-        }) { Text(if (creating) "创建中…" else "创建") } },
-        dismissButton = { RuntimeTextButton(enabled = !creating, onClick = { createProject = false }) { Text("取消") } })
+        }) { Text(if (creating) "Đang tạo…" else "Tạo") } },
+        dismissButton = { RuntimeTextButton(enabled = !creating, onClick = { createProject = false }) { Text("Hủy") } })
     service?.let { current -> editor?.let { (file, original) -> RemoteFileEditor(serverId, file, original, current, target) { editor = null; refresh++ } } }
 }
 
@@ -140,9 +140,9 @@ private fun RemoteFileEditor(serverId: String, path: String, original: String, s
                 busy = true
                 try { service.save(serverId, path, original, snapshot, target); onDismiss() }
                 catch (e: CancellationException) { throw e }
-                catch (e: Exception) { error = "保存失败，文件可能已被外部修改，请重新打开并检查连接、权限" }
+                catch (e: Exception) { error = "Lưu thất bại, file có thể đã bị sửa từ ngoài, hãy mở lại và kiểm tra kết nối, quyền" }
                 finally { busy = false }
             }
-        }) { Text(if (busy) "保存中…" else "保存到服务器") } },
-        dismissButton = { RuntimeTextButton(enabled = !busy, onClick = onDismiss) { Text("关闭") } })
+        }) { Text(if (busy) "Đang lưu…" else "Lưu lên máy chủ") } },
+        dismissButton = { RuntimeTextButton(enabled = !busy, onClick = onDismiss) { Text("Đóng") } })
 }

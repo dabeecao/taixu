@@ -86,7 +86,7 @@ internal fun BundleComponentSetupDialog(
                     modifier = Modifier.size(22.dp),
                     tint = MaterialTheme.colorScheme.primary,
                 )
-                Text("装配 ${bundle.name}", fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text("Lắp ráp ${bundle.name}", fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         },
         text = {
@@ -111,7 +111,7 @@ internal fun BundleComponentSetupDialog(
                 val uninstalled = bundle.components.filter { it.id !in installedComponentIds }
                 val installed = bundle.components.filter { it.id in installedComponentIds }
                 if (uninstalled.isNotEmpty()) {
-                    SectionLabel("待装配组件 (${uninstalled.size})：", MaterialTheme.colorScheme.primary)
+                    SectionLabel("Linh kiện chờ lắp ráp (${uninstalled.size}):", MaterialTheme.colorScheme.primary)
                     uninstalled.forEach { component ->
                         UninstalledComponentRow(
                             component = component,
@@ -123,7 +123,7 @@ internal fun BundleComponentSetupDialog(
                 }
                 if (installed.isNotEmpty()) {
                     BundleSectionHeader(
-                        text = "已装配就绪 (${installed.size})：",
+                        text = "Đã lắp ráp sẵn sàng (${installed.size}):",
                         color = successStatusColor(),
                         checking = checkingUpdates,
                         enabled = !isInstallingComponents,
@@ -160,18 +160,18 @@ internal fun BundleComponentSetupDialog(
         confirmButton = {
             val uninstalled = bundle.components.filter { it.id !in installedComponentIds }
             if (uninstalled.isEmpty()) {
-                Button(onClick = onDismiss) { Text("完成") }
+                Button(onClick = onDismiss) { Text("Xong") }
             } else {
                 Button(
                     onClick = onInstall,
                     enabled = !isInstallingComponents && selectedComponents.isNotEmpty(),
                 ) {
-                    Text(if (selectedComponents.isEmpty()) "请勾选待装配组件" else "开始装配 (${selectedComponents.size})")
+                    Text(if (selectedComponents.isEmpty()) "Hãy tick chọn linh kiện cần lắp ráp" else "Bắt đầu lắp ráp (${selectedComponents.size})")
                 }
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消") }
+            TextButton(onClick = onDismiss) { Text("Hủy") }
         },
     )
     pendingUninstall?.let { component ->
@@ -191,7 +191,7 @@ internal fun BundleComponentSetupDialog(
                 }
             },
             dismissButton = {
-                TextButton(onClick = { pendingUninstallId = null }) { Text("取消") }
+                TextButton(onClick = { pendingUninstallId = null }) { Text("Hủy") }
             },
         )
     }
@@ -207,7 +207,7 @@ private fun InstallProgress(progress: String?) {
         Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 RuntimeCircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)
-                Text(progress ?: "正在执行批量原子装配流水线...", style = MaterialTheme.typography.bodySmall, maxLines = 2)
+                Text(progress ?: "Đang chạy pipeline lắp ráp nguyên tử hàng loạt...", style = MaterialTheme.typography.bodySmall, maxLines = 2)
             }
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp)))
         }
@@ -258,7 +258,7 @@ private fun UninstalledComponentRow(
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(component.name, style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     if (locked) {
-                        Badge("必选基座", MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+                        Badge("Base bắt buộc", MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
                     }
                 }
                 Text(component.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)

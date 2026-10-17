@@ -106,14 +106,14 @@ fun ModelProfilesScreen(
         containerColor = MaterialTheme.colorScheme.surface,
         topBar = {
             RuntimeTopBar(
-                title = "模型档案",
+                title = "Hồ sơ mô hình",
                 onBack = onBack,
                 scrollBehavior = scrollBehavior,
                 actions = {
                     // 📥 导入按钮
                     RuntimeIconButton(
                         onClick = { showImportDialog = true },
-                        contentDescription = "导入模型配置",
+                        contentDescription = "Nhập cấu hình mô hình",
                     ) {
                         RuntimeIcon(
                             name = RuntimeIconName.Download,
@@ -125,12 +125,12 @@ fun ModelProfilesScreen(
                     RuntimeIconButton(
                         onClick = {
                             if (models.isEmpty()) {
-                                Toast.makeText(context, "暂无模型档案可导出", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Không có hồ sơ mô hình nào để xuất", Toast.LENGTH_SHORT).show()
                             } else {
                                 showExportAllDialog = true
                             }
                         },
-                        contentDescription = "导出全部模型配置",
+                        contentDescription = "Xuất toàn bộ cấu hình mô hình",
                     ) {
                         RuntimeIcon(
                             name = RuntimeIconName.OpenInNew,
@@ -168,11 +168,11 @@ fun ModelProfilesScreen(
                     importing = false
                     result?.fold(
                         onSuccess = { count ->
-                            Toast.makeText(context, "成功导入 $count 个模型档案", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Đã nhập thành công $count hồ sơ mô hình", Toast.LENGTH_SHORT).show()
                             showImportDialog = false
                         },
                         onFailure = { _ ->
-                            Toast.makeText(context, "导入失败：JSON 无法解析或配置无效，请检查后重试", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "Nhập thất bại: không phân tích được JSON hoặc cấu hình không hợp lệ, hãy kiểm tra rồi thử lại", Toast.LENGTH_LONG).show()
                         }
                     )
                 }
@@ -183,8 +183,8 @@ fun ModelProfilesScreen(
     // 批量导出弹窗
     if (showExportAllDialog) {
         ModelExportDialog(
-            title = "批量导出模型档案",
-            subtitle = "准备导出 ${models.size} 个模型档案配置",
+            title = "Xuất hàng loạt hồ sơ mô hình",
+            subtitle = "Chuẩn bị xuất ${models.size} cấu hình hồ sơ mô hình",
             onDismiss = { showExportAllDialog = false },
             onGenerateJson = { includeKeys ->
                 viewModel?.exportAllProfilesJson(includeKeys).orEmpty()
@@ -195,8 +195,8 @@ fun ModelProfilesScreen(
     // 单项导出弹窗
     singleExportModel?.let { targetModel ->
         ModelExportDialog(
-            title = "导出模型档案配置",
-            subtitle = "模型: ${targetModel.name} (${targetModel.provider})",
+            title = "Xuất cấu hình hồ sơ mô hình",
+            subtitle = "Mô hình: ${targetModel.name} (${targetModel.provider})",
             defaultFileName = "taixu_model_${targetModel.name.replace(" ", "_")}.json",
             onDismiss = { singleExportModel = null },
             onGenerateJson = { includeKeys ->
@@ -212,10 +212,10 @@ fun ModelProfilesScreen(
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     RuntimeIcon(RuntimeIconName.Alert, Modifier.size(20.dp), MaterialTheme.colorScheme.error)
-                    Text("删除模型档案", fontWeight = FontWeight.Bold)
+                    Text("Xóa hồ sơ mô hình", fontWeight = FontWeight.Bold)
                 }
             },
-            text = { Text("确定要删除模型档案「${target.name}」吗？此操作将同时清理该模型保存的 API Key。") },
+            text = { Text("Bạn có chắc muốn xóa hồ sơ mô hình «${target.name}» không? Thao tác này đồng thời xóa API Key đã lưu của mô hình này.") },
             confirmButton = {
                 RuntimeButton(
                     onClick = {
@@ -223,12 +223,12 @@ fun ModelProfilesScreen(
                         modelPendingDelete = null
                     },
                 ) {
-                    Text("确认删除")
+                    Text("Xác nhận xóa")
                 }
             },
             dismissButton = {
                 RuntimeTextButton(onClick = { modelPendingDelete = null }) {
-                    Text("取消")
+                    Text("Hủy")
                 }
             },
         )
@@ -259,7 +259,7 @@ private fun ModelProfilesContent(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     RuntimeIcon(RuntimeIconName.Plus, Modifier.size(16.dp), MaterialTheme.colorScheme.onPrimary)
-                    Text("新增模型档案", fontWeight = FontWeight.Bold)
+                    Text("Thêm hồ sơ mô hình mới", fontWeight = FontWeight.Bold)
                 }
             }
         }
@@ -272,9 +272,9 @@ private fun ModelProfilesContent(
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
                     IconTile(RuntimeIconName.Model, color = MaterialTheme.colorScheme.primary, size = 42.dp)
-                    Text("暂无模型档案", style = MaterialTheme.typography.titleMedium)
+                    Text("Chưa có hồ sơ mô hình", style = MaterialTheme.typography.titleMedium)
                     Text(
-                        "点击上方新增或从右上角导入 OpenAI / DeepSeek / Claude / 本地模型配置",
+                        "Chạm Thêm mới ở trên hoặc nhập cấu hình mô hình OpenAI / DeepSeek / Claude / cục bộ từ góc phải trên",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

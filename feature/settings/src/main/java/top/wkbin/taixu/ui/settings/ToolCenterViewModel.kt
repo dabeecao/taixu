@@ -84,7 +84,7 @@ class ToolCenterViewModel(
                 toolManager.syncRegistry()
             } catch (e: Exception) {
                 logger.w("Failed to sync tool registry: ${e.message}", e)
-                _operationError.value = "刷新插件目录失败，请检查网络后重试"
+                _operationError.value = "Làm mới thư mục plugin thất bại, vui lòng kiểm tra mạng rồi thử lại"
             } finally {
                 _isSyncing.value = false
             }
@@ -126,7 +126,7 @@ class ToolCenterViewModel(
      */
     private fun blockedByRemote(): Boolean {
         if (remoteServers.activeId.value == null) return false
-        _operationError.value = "当前主系统为 SSH 远程服务器，插件与底层工具仅安装在本机 PRoot，不会同步到服务器；请先在「Linux 系统管理」切回本地系统。"
+        _operationError.value = "Hệ thống chính hiện tại là máy chủ SSH từ xa, plugin và công cụ tầng thấp chỉ cài trên PRoot cục bộ, không đồng bộ lên máy chủ; hãy chuyển về hệ thống cục bộ trong [Quản lý hệ thống Linux] trước."
         return true
     }
 
@@ -147,7 +147,7 @@ class ToolCenterViewModel(
                 toolManager.uninstall(toolId)
             } catch (e: Exception) {
                 logger.w("Tool uninstall failed: $toolId, ${e.message}", e)
-                _operationError.value = "卸载「$toolId」失败，请稍后重试；可查看日志了解详情"
+                _operationError.value = "Gỡ cài đặt 「$toolId」thất bại, vui lòng thử lại sau; có thể xem nhật ký để biết chi tiết"
             }
         }
     }
@@ -285,7 +285,7 @@ class ToolCenterViewModel(
             _installedComponentIds.value,
         )
         if (blockers.isEmpty()) return null
-        val message = "请先卸载依赖「${component.name}」的组件：${blockers.joinToString("、") { it.name }}"
+        val message = "Hãy gỡ các thành phần phụ thuộc 「${component.name}」 trước: ${blockers.joinToString("、") { it.name }}"
         _operationError.value = message
         return message
     }

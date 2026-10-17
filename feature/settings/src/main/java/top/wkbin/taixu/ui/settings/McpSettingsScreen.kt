@@ -155,7 +155,7 @@ fun McpSettingsScreen(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        "可用 MCP 插件服务 (${servers.size})",
+                        "Dịch vụ plugin MCP khả dụng (${servers.size})",
                         style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.primary,
                     )
@@ -174,13 +174,13 @@ fun McpSettingsScreen(
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                 RuntimeIcon(RuntimeIconName.Search, Modifier.size(14.dp), MaterialTheme.colorScheme.primary)
-                                Text("探测本机", style = MaterialTheme.typography.labelMedium)
+                                Text("Quét máy này", style = MaterialTheme.typography.labelMedium)
                             }
                         }
                         TextButton(onClick = { showAddDialog = true }) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                 RuntimeIcon(RuntimeIconName.Plus, Modifier.size(14.dp), MaterialTheme.colorScheme.primary)
-                                Text("添加服务", style = MaterialTheme.typography.labelMedium)
+                                Text("Thêm dịch vụ", style = MaterialTheme.typography.labelMedium)
                             }
                         }
                     }
@@ -193,9 +193,9 @@ fun McpSettingsScreen(
             if (builtinServers.isNotEmpty()) {
                 item(key = "mcp_section_builtin") {
                     McpSectionHeader(
-                        title = "系统核心 MCP",
-                        subtitle = "太墟内置系统级能力，默认关闭；开启后常驻本会话，harness 随时可调用（不参与 @ 唤醒）。" +
-                            "标注「需先安装」的能力来自上游包，请到「工具中心 → MCP 能力仓库」按需安装",
+                        title = "MCP lõi hệ thống",
+                        subtitle = "Tính năng hệ thống tích hợp sẵn của TaiXu, mặc định tắt; khi bật sẽ chạy xuyên suốt phiên, harness gọi được bất cứ lúc nào (không tham gia đánh thức bằng @)." +
+                            "Các tính năng gắn nhãn «Cần cài đặt trước» đến từ gói thượng nguồn, vui lòng vào «Trung tâm công cụ → Kho năng lực MCP» để cài đặt theo nhu cầu",
                         count = builtinServers.size,
                     )
                 }
@@ -219,8 +219,8 @@ fun McpSettingsScreen(
             if (customServers.isNotEmpty()) {
                 item(key = "mcp_section_custom") {
                     McpSectionHeader(
-                        title = "自定义与三方 MCP",
-                        subtitle = "通过「添加服务」导入的外部 MCP 服务，可 @ 唤醒",
+                        title = "MCP tùy chỉnh và bên thứ ba",
+                        subtitle = "Dịch vụ MCP bên ngoài được nhập qua «Thêm dịch vụ», có thể đánh thức bằng @",
                         count = customServers.size,
                     )
                 }
@@ -280,9 +280,9 @@ fun McpSettingsScreen(
     pendingDeleteServer?.let { server ->
         RuntimeAlertDialog(
             onDismissRequest = { pendingDeleteServerId = null },
-            title = { Text("删除 MCP 服务", fontWeight = FontWeight.Bold) },
+            title = { Text("Xóa dịch vụ MCP", fontWeight = FontWeight.Bold) },
             text = {
-                Text("确定要删除「${server.name}」吗？删除后将停止向智枢 Agent 注入该服务的工具能力；系统核心 MCP 重新开启即可恢复。")
+                Text("Bạn có chắc muốn xóa «${server.name}» không? Sau khi xóa sẽ ngừng nạp năng lực công cụ của dịch vụ này cho Agent TaiXu; bật lại MCP lõi hệ thống là khôi phục được.")
             },
             confirmButton = {
                 Button(
@@ -294,11 +294,11 @@ fun McpSettingsScreen(
                         containerColor = MaterialTheme.colorScheme.error,
                     ),
                 ) {
-                    Text("确认删除")
+                    Text("Xác nhận xóa")
                 }
             },
             dismissButton = {
-                TextButton(onClick = { pendingDeleteServerId = null }) { Text("取消") }
+                TextButton(onClick = { pendingDeleteServerId = null }) { Text("Hủy") }
             },
         )
     }
@@ -322,9 +322,9 @@ fun McpSettingsScreen(
                     runCatching { viewModel?.beginMcpAuthorization(server) }
                         .onSuccess {
                             runCatching { screenContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it))) }
-                                .onFailure { error -> Toast.makeText(screenContext, "授权启动失败：${error.message}", Toast.LENGTH_SHORT).show() }
+                                .onFailure { error -> Toast.makeText(screenContext, "Khởi động ủy quyền thất bại: ${error.message}", Toast.LENGTH_SHORT).show() }
                         }
-                        .onFailure { Toast.makeText(screenContext, "授权启动失败：${it.message}", Toast.LENGTH_SHORT).show() }
+                        .onFailure { Toast.makeText(screenContext, "Khởi động ủy quyền thất bại: ${it.message}", Toast.LENGTH_SHORT).show() }
                 }
             },
             onLogout = { viewModel?.logoutMcpAuthorization(server.id) },
@@ -343,14 +343,14 @@ private fun LocalMcpDiscoveryDialog(
     var addedIds by remember { mutableStateOf(emptySet<String>()) }
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("探测本机 MCP", fontWeight = FontWeight.Bold) },
+        title = { Text("Quét MCP trên máy này", fontWeight = FontWeight.Bold) },
         text = {
             Column(
                 modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Text(
-                    "正在检查 127.0.0.1 的监听端口，并用 MCP 协议验证。仅显示真正可用的服务，不会自动添加。",
+                    "Đang kiểm tra các cổng lắng nghe trên 127.0.0.1 và xác thực bằng giao thức MCP. Chỉ hiển thị dịch vụ thật sự khả dụng, không tự động thêm.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -363,7 +363,7 @@ private fun LocalMcpDiscoveryDialog(
                         ) {
                             CircularProgressIndicator(Modifier.size(20.dp))
                             Spacer(Modifier.width(10.dp))
-                            Text("正在探测本机服务…", style = MaterialTheme.typography.bodyMedium)
+                            Text("Đang quét dịch vụ trên máy này…", style = MaterialTheme.typography.bodyMedium)
                         }
                     }
                     is LocalMcpDiscoveryState.Error -> {
@@ -372,7 +372,7 @@ private fun LocalMcpDiscoveryDialog(
                     is LocalMcpDiscoveryState.Results -> {
                         if (state.servers.isEmpty()) {
                             Text(
-                                "没有发现可用的本机 MCP 服务。请确认服务已启动，并监听在 127.0.0.1。",
+                                "Không tìm thấy dịch vụ MCP khả dụng nào trên máy này. Hãy xác nhận dịch vụ đã khởi động và đang lắng nghe trên 127.0.0.1.",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -392,14 +392,14 @@ private fun LocalMcpDiscoveryDialog(
                                                 overflow = TextOverflow.Ellipsis,
                                             )
                                             Text(
-                                                "已验证 · ${detected.toolCount} 个工具",
+                                                "Đã xác thực · ${detected.toolCount} công cụ",
                                                 style = MaterialTheme.typography.bodySmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                             )
                                         }
                                         Spacer(Modifier.width(8.dp))
                                         if (detected.server.id in addedIds) {
-                                            Text("已添加", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                                            Text("Đã thêm", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                                         } else {
                                             OutlinedButton(
                                                 onClick = {
@@ -407,7 +407,7 @@ private fun LocalMcpDiscoveryDialog(
                                                     addedIds = addedIds + detected.server.id
                                                 },
                                                 contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-                                            ) { Text("添加", style = MaterialTheme.typography.labelSmall) }
+                                            ) { Text("Thêm", style = MaterialTheme.typography.labelSmall) }
                                         }
                                     }
                                 }
@@ -420,10 +420,10 @@ private fun LocalMcpDiscoveryDialog(
         confirmButton = {
             when (state) {
                 LocalMcpDiscoveryState.Scanning -> Unit
-                else -> Button(onClick = onRetry) { Text("重新探测") }
+                else -> Button(onClick = onRetry) { Text("Quét lại") }
             }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("关闭") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Đóng") } },
     )
 }
 
@@ -440,12 +440,12 @@ private fun BrowserGatesCard(gates: BrowserGateState, viewModel: SettingsViewMod
         verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Text(
-            "浏览器 MCP 安全门禁",
+            "Cổng an toàn MCP trình duyệt",
             style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
             color = MaterialTheme.colorScheme.primary,
         )
         Text(
-            "内置浏览器服务的危险能力开关，默认全部关闭；修改后需重启应用生效",
+            "Công tắc các năng lực nguy hiểm của dịch vụ trình duyệt tích hợp, mặc định tắt hết; sửa đổi cần khởi động lại ứng dụng mới có hiệu lực",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -457,32 +457,32 @@ private fun BrowserGatesCard(gates: BrowserGateState, viewModel: SettingsViewMod
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             BrowserGateRow(
-                title = "远程连接",
-                description = "允许局域网设备连接浏览器 MCP 服务（绑定 0.0.0.0）；关闭时仅限本机回环，仍强制 Bearer 认证",
+                title = "Kết nối từ xa",
+                description = "Cho phép thiết bị mạng LAN kết nối dịch vụ MCP của trình duyệt (ràng buộc 0.0.0.0); khi tắt chỉ cho phép loopback nội bộ, vẫn bắt buộc xác thực Bearer",
                 checked = gates.allowRemoteConnect,
                 onCheckedChange = { arg0 -> viewModel?.setBrowserAllowRemoteConnect(arg0) },
             )
             BrowserGateRow(
-                title = "页面 JS 执行",
-                description = "允许 Agent 在页面上下文执行任意 JavaScript（browser.evaluate）",
+                title = "Thực thi JS trên trang",
+                description = "Cho phép Agent thực thi JavaScript tùy ý trong ngữ cảnh trang (browser.evaluate)",
                 checked = gates.allowEvalJs,
                 onCheckedChange = { arg0 -> viewModel?.setBrowserAllowEvalJs(arg0) },
             )
             BrowserGateRow(
-                title = "注入式 Hook",
-                description = "允许注入脚本拦截/改写页面网络请求与 JS 函数（log/block/redirect/mock）",
+                title = "Hook dạng inject",
+                description = "Cho phép script inject chặn/sửa request mạng và hàm JS của trang (log/block/redirect/mock)",
                 checked = gates.allowHooks,
                 onCheckedChange = { arg0 -> viewModel?.setBrowserAllowHooks(arg0) },
             )
             BrowserGateRow(
-                title = "CDP 调试（断点）",
-                description = "允许通过 DevTools 协议 attach 页面：真断点、暂停时读写变量、Worker 级请求拦截；开启会暴露本进程 DevTools socket（同设备其他应用理论上可连），仅在受控环境使用",
+                title = "Gỡ lỗi CDP (điểm dừng)",
+                description = "Cho phép attach trang qua giao thức DevTools: breakpoint thật, đọc/ghi biến khi tạm dừng, chặn request cấp Worker; khi bật sẽ lộ DevTools socket của tiến trình này (về lý thuyết app khác trên cùng thiết bị có thể kết nối), chỉ dùng trong môi trường được kiểm soát",
                 checked = gates.allowCdp,
                 onCheckedChange = { arg0 -> viewModel?.setBrowserAllowCdp(arg0) },
             )
             BrowserGateRow(
-                title = "页面调试面板（vConsole）",
-                description = "在每个页面注入 vConsole 浮动面板（console / 网络 / 存储），供人工浏览时排查；与 Agent 工具门禁无关，重启后对新开 tab 生效",
+                title = "Bảng gỡ lỗi trang (vConsole)",
+                description = "Inject bảng nổi vConsole vào mỗi trang (console / mạng / bộ nhớ) để kiểm tra khi duyệt thủ công; không liên quan đến cổng kiểm soát công cụ của Agent, có hiệu lực với tab mới sau khi khởi động lại",
                 checked = gates.allowVConsole,
                 onCheckedChange = { arg0 -> viewModel?.setBrowserAllowVConsole(arg0) },
             )
@@ -550,12 +550,12 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
         verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Text(
-            "服务端（被控方）",
+            "Phía máy chủ (bên bị điều khiển)",
             style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
             color = MaterialTheme.colorScheme.primary,
         )
         Text(
-            "让外部 AI 客户端（Claude Desktop / Cursor 等）通过 MCP 控制本机：读写工作区文件、执行沙箱命令、操作宿主应用",
+            "Cho phép AI client bên ngoài (Claude Desktop / Cursor v.v.) điều khiển máy này qua MCP: đọc/ghi tệp không gian làm việc, thực thi lệnh sandbox, thao tác ứng dụng máy chủ",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -567,8 +567,8 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             BrowserGateRow(
-                title = "启用被控端",
-                description = "在本机启动独立的 MCP 服务端点；关闭后立即停止监听",
+                title = "Bật phía bị điều khiển",
+                description = "Khởi động endpoint dịch vụ MCP độc lập trên máy này; tắt là ngừng lắng nghe ngay",
                 checked = state.enabled,
                 onCheckedChange = { arg0 -> viewModel?.setAgentServerEnabled(arg0) },
             )
@@ -576,14 +576,14 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
             AnimatedVisibility(visible = state.enabled) {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     BrowserGateRow(
-                        title = "允许局域网连接",
-                        description = "绑定 0.0.0.0，同网段设备可连接；关闭时仅限本机回环，两种模式均强制 Bearer 认证",
+                        title = "Cho phép kết nối LAN",
+                        description = "Ràng buộc 0.0.0.0, thiết bị cùng mạng có thể kết nối; khi tắt chỉ cho phép loopback nội bộ, cả hai chế độ đều bắt buộc xác thực Bearer",
                         checked = state.allowRemote,
                         onCheckedChange = { arg0 -> viewModel?.setAgentServerAllowRemote(arg0) },
                     )
                     BrowserGateRow(
-                        title = "允许写入与执行",
-                        description = "开放 write/edit/base/process/download 及 host 的写操作；关闭时仅提供 read 与只读 host/memory 动作",
+                        title = "Cho phép ghi và thực thi",
+                        description = "Mở các thao tác ghi của write/edit/base/process/download và host; khi tắt chỉ cung cấp read và các action chỉ đọc của host/memory",
                         checked = state.allowWriteTools,
                         onCheckedChange = { arg0 -> viewModel?.setAgentServerAllowWriteTools(arg0) },
                     )
@@ -595,12 +595,12 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
                             portText = input.filter { it.isDigit() }.take(5)
                             portText.toIntOrNull()?.let({ arg0 -> viewModel?.setAgentServerPort(arg0) })
                         },
-                        label = { Text("监听端口") },
+                        label = { Text("Cổng lắng nghe") },
                         singleLine = true,
                         keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
                             keyboardType = androidx.compose.ui.text.input.KeyboardType.Number,
                         ),
-                        supportingText = { Text("默认 8890；被占用时自动顺延 10 个相邻端口", style = MaterialTheme.typography.bodySmall) },
+                        supportingText = { Text("Mặc định 8890; khi bị chiếm sẽ tự động dời sang 10 cổng lân cận", style = MaterialTheme.typography.bodySmall) },
                         modifier = Modifier.fillMaxWidth(),
                     )
 
@@ -617,23 +617,23 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
                                     .background(if (running) successStatusColor() else MaterialTheme.colorScheme.outline),
                             )
                             Text(
-                                if (running) "运行中 · 监听 ${boundPort}" else "已停止",
+                                if (running) "Đang chạy · Lắng nghe ${boundPort}" else "Đã dừng",
                                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
                                 color = MaterialTheme.colorScheme.onSurface,
                             )
                         }
                         val loopbackUrl = "http://127.0.0.1:$boundPort/mcp"
                         val lanUrl = lanIp?.let { "http://$it:$boundPort/mcp" }
-                        CopyableLine(label = "本机地址", value = loopbackUrl, context = context)
+                        CopyableLine(label = "Địa chỉ máy này", value = loopbackUrl, context = context)
                         if (state.allowRemote && lanUrl != null) {
-                            CopyableLine(label = "局域网地址", value = lanUrl, context = context)
+                            CopyableLine(label = "Địa chỉ mạng LAN", value = lanUrl, context = context)
                         }
                     }
 
                     // 持久化令牌
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
-                            "访问令牌（Bearer）",
+                            "Token truy cập (Bearer)",
                             style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -648,7 +648,7 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
                                 horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
                                 Text(
-                                    text = state.token.ifBlank { "启用后自动生成" },
+                                    text = state.token.ifBlank { "Tự động tạo sau khi bật" },
                                     style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace, fontSize = 11.sp),
                                     color = MaterialTheme.colorScheme.onSurface,
                                     modifier = Modifier.weight(1f),
@@ -659,7 +659,7 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
                                     onClick = {
                                         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
                                         clipboard?.setPrimaryClip(ClipData.newPlainText("mcp_agent_token", state.token))
-                                        Toast.makeText(context, "令牌已复制", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "Đã sao chép token", Toast.LENGTH_SHORT).show()
                                     },
                                     enabled = state.token.isNotBlank(),
                                     modifier = Modifier.size(24.dp),
@@ -674,25 +674,25 @@ private fun AgentServerCard(state: AgentServerState, viewModel: SettingsViewMode
                             horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
                             Text(
-                                "令牌持久保存，外部客户端可长期复用；重置后需同步更新客户端配置",
+                                "Token được lưu bền vững, client bên ngoài có thể tái sử dụng lâu dài; sau khi đặt lại cần đồng bộ cập nhật cấu hình client",
                                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.weight(1f),
                             )
                             TextButton(onClick = { viewModel?.resetAgentServerToken() }) {
-                                Text("重置令牌", style = MaterialTheme.typography.labelSmall)
+                                Text("Đặt lại token", style = MaterialTheme.typography.labelSmall)
                             }
                         }
                     }
 
                     Text(
-                        "外部客户端配置示例：在 MCP 配置中填写上述地址，并在请求头带 Authorization: Bearer <令牌>。",
+                        "Ví dụ cấu hình client bên ngoài: điền địa chỉ trên vào cấu hình MCP, và gửi kèm Authorization: Bearer <token> trong header request.",
                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
 
                     Text(
-                        "启用后会显示一条常驻通知用于后台保活，避免 App 退到后台时连接被系统掐断。",
+                        "Sau khi bật sẽ hiển thị thông báo thường trú để giữ tiến trình nền, tránh bị hệ thống ngắt kết nối khi App chạy nền.",
                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -727,7 +727,7 @@ private fun CopyableLine(label: String, value: String, context: Context) {
             onClick = {
                 val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
                 clipboard?.setPrimaryClip(ClipData.newPlainText("mcp_agent_url", value))
-                Toast.makeText(context, "地址已复制", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Đã sao chép địa chỉ", Toast.LENGTH_SHORT).show()
             },
             modifier = Modifier.size(24.dp),
         ) {
@@ -799,7 +799,7 @@ private fun AddMcpServerDialog(
         onDismissRequest = onDismiss,
         title = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("添加 MCP 服务", fontWeight = FontWeight.Bold)
+                Text("Thêm dịch vụ MCP", fontWeight = FontWeight.Bold)
                 SecondaryTabRow(
                     selectedTabIndex = selectedTab,
                     containerColor = Color.Transparent,
@@ -808,12 +808,12 @@ private fun AddMcpServerDialog(
                     Tab(
                         selected = selectedTab == 0,
                         onClick = { selectedTab = 0 },
-                        text = { Text("📝 表单模式", style = MaterialTheme.typography.labelMedium) },
+                        text = { Text("📝 Chế độ biểu mẫu", style = MaterialTheme.typography.labelMedium) },
                     )
                     Tab(
                         selected = selectedTab == 1,
                         onClick = { selectedTab = 1 },
-                        text = { Text("📋 JSON 导入", style = MaterialTheme.typography.labelMedium) },
+                        text = { Text("📋 Nhập JSON", style = MaterialTheme.typography.labelMedium) },
                     )
                 }
             }
@@ -830,22 +830,22 @@ private fun AddMcpServerDialog(
                     OutlinedTextField(
                         value = name,
                         onValueChange = { name = it },
-                        label = { Text("服务名称") },
-                        placeholder = { Text("如: sqlite / github / fetch") },
+                        label = { Text("Tên dịch vụ") },
+                        placeholder = { Text("VD: sqlite / github / fetch") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                     )
                     OutlinedTextField(
                         value = description,
                         onValueChange = { description = it },
-                        label = { Text("描述（可选）") },
+                        label = { Text("Mô tả (tùy chọn)") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                     )
 
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text(
-                            "传输协议类型",
+                            "Loại giao thức truyền tải",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -879,7 +879,7 @@ private fun AddMcpServerDialog(
                                         color = if (isStdio) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
                                     Text(
-                                        "沙箱进程",
+                                        "Tiến trình sandbox",
                                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                                         color = if (isStdio) MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f) else MaterialTheme.colorScheme.outline,
                                     )
@@ -905,7 +905,7 @@ private fun AddMcpServerDialog(
                                         color = if (isSse) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
                                     Text(
-                                        "远程 HTTP",
+                                        "HTTP từ xa",
                                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                                         color = if (isSse) MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f) else MaterialTheme.colorScheme.outline,
                                     )
@@ -918,14 +918,14 @@ private fun AddMcpServerDialog(
                         OutlinedTextField(
                             value = command,
                             onValueChange = { command = it },
-                            label = { Text("执行命令（如 npx / uvx / python3）") },
+                            label = { Text("Lệnh thực thi (VD: npx / uvx / python3)") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                         )
                         OutlinedTextField(
                             value = argsStr,
                             onValueChange = { argsStr = it },
-                            label = { Text("参数（空格分隔）") },
+                            label = { Text("Tham số (cách nhau bằng dấu cách)") },
                             placeholder = { Text("-y @modelcontextprotocol/server-sqlite") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
@@ -934,7 +934,7 @@ private fun AddMcpServerDialog(
                         OutlinedTextField(
                             value = serverUrl,
                             onValueChange = { serverUrl = it },
-                            label = { Text("HTTP / SSE 端点 URL") },
+                            label = { Text("URL endpoint HTTP / SSE") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                         )
@@ -945,7 +945,7 @@ private fun AddMcpServerDialog(
                         ) {
                             Column(Modifier.weight(1f)) {
                                 Text("OAuth 2.0 + PKCE", style = MaterialTheme.typography.labelMedium)
-                                Text("授权码模式；token 加密保存且不会导出", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("Chế độ mã ủy quyền; token được lưu mã hóa và không bị xuất ra ngoài", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                             Switch(checked = oauthEnabled, onCheckedChange = { oauthEnabled = it })
                         }
@@ -953,21 +953,21 @@ private fun AddMcpServerDialog(
                             OutlinedTextField(oauthClientId, { oauthClientId = it }, label = { Text("OAuth client ID") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                             OutlinedTextField(oauthAuthorizationEndpoint, { oauthAuthorizationEndpoint = it }, label = { Text("Authorization endpoint") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                             OutlinedTextField(oauthTokenEndpoint, { oauthTokenEndpoint = it }, label = { Text("Token endpoint") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                            OutlinedTextField(oauthScope, { oauthScope = it }, label = { Text("Scope（可选）") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                            OutlinedTextField(oauthResource, { oauthResource = it }, label = { Text("Resource（可选）") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                            OutlinedTextField(oauthScope, { oauthScope = it }, label = { Text("Scope (tùy chọn)") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                            OutlinedTextField(oauthResource, { oauthResource = it }, label = { Text("Resource (tùy chọn)") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                         }
                     }
                 } else {
                     // 📋 JSON 模式
                     Text(
-                        "直接粘贴 Claude Desktop / Cursor 标准配置：",
+                        "Dán trực tiếp cấu hình chuẩn của Claude Desktop / Cursor:",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     OutlinedTextField(
                         value = jsonText,
                         onValueChange = { jsonText = it },
-                        label = { Text("MCP JSON 配置") },
+                        label = { Text("Cấu hình MCP JSON") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(180.dp),
@@ -985,14 +985,14 @@ private fun AddMcpServerDialog(
                             modifier = Modifier.fillMaxWidth(),
                         ) {
                             Text(
-                                "✅ 成功解析 ${list.size} 个服务: " + list.joinToString(", ") { it.name },
+                                "✅ Đã phân tích thành công ${list.size} dịch vụ: " + list.joinToString(", ") { it.name },
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
                             )
                         }
                     } else {
-                        val errMsg = parsedServers.exceptionOrNull()?.message ?: "JSON 语法解析错误"
+                        val errMsg = parsedServers.exceptionOrNull()?.message ?: "Lỗi phân tích cú pháp JSON"
                         Text(
                             "❌ $errMsg",
                             style = MaterialTheme.typography.labelSmall,
@@ -1031,7 +1031,7 @@ private fun AddMcpServerDialog(
                     enabled = name.isNotBlank() && (transport != McpTransportType.STDIO || command.isNotBlank()) &&
                         (!oauthEnabled || (oauthClientId.isNotBlank() && oauthAuthorizationEndpoint.isNotBlank() && oauthTokenEndpoint.isNotBlank())),
                 ) {
-                    Text("添加")
+                    Text("Thêm")
                 }
             } else {
                 Button(
@@ -1043,12 +1043,12 @@ private fun AddMcpServerDialog(
                     },
                     enabled = parsedServers.isSuccess && parsedServers.getOrNull()?.isNotEmpty() == true,
                 ) {
-                    Text("导入 (${parsedServers.getOrNull()?.size ?: 0} 个服务)")
+                    Text("Nhập (${parsedServers.getOrNull()?.size ?: 0} dịch vụ)")
                 }
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消") }
+            TextButton(onClick = onDismiss) { Text("Hủy") }
         },
     )
 }
@@ -1056,13 +1056,13 @@ private fun AddMcpServerDialog(
 /** 解析用户粘贴的各类 MCP JSON 格式 */
 private fun parseMcpJson(rawJson: String): Result<List<McpServerConfig>> = runCatching {
     val trimmed = rawJson.trim()
-    if (trimmed.isBlank()) error("请输入 JSON 内容")
+    if (trimmed.isBlank()) error("Vui lòng nhập nội dung JSON")
     val element = Json.parseToJsonElement(trimmed)
     val list = mutableListOf<McpServerConfig>()
     val rootObj = element.jsonObject
 
     if (rootObj.containsKey("mcpServers")) {
-        val serversObj = rootObj["mcpServers"]?.jsonObject ?: error("mcpServers 不是有效的 JSON 对象")
+        val serversObj = rootObj["mcpServers"]?.jsonObject ?: error("mcpServers không phải là đối tượng JSON hợp lệ")
         for ((serverName, serverVal) in serversObj) {
             val sObj = serverVal.jsonObject
             val url = sObj["url"]?.jsonPrimitive?.contentOrNull.orEmpty()
@@ -1082,7 +1082,7 @@ private fun parseMcpJson(rawJson: String): Result<List<McpServerConfig>> = runCa
                 McpServerConfig(
                     id = "custom_${serverName.lowercase().replace(Regex("[^a-z0-9_]"), "_")}_${System.currentTimeMillis()}",
                     name = serverName,
-                    description = desc.ifBlank { if (isSse) "远程 HTTP 服务: $url" else "本地 Stdio: $command ${args.joinToString(" ")}" },
+                    description = desc.ifBlank { if (isSse) "Dịch vụ HTTP từ xa: $url" else "Dịch vụ Stdio cục bộ: $command ${args.joinToString(" ")}" },
                     transportType = if (isSse) McpTransportType.SSE else McpTransportType.STDIO,
                     command = command,
                     args = args,
@@ -1109,12 +1109,12 @@ private fun parseMcpJson(rawJson: String): Result<List<McpServerConfig>> = runCa
         val desc = rootObj["description"]?.jsonPrimitive?.contentOrNull.orEmpty()
 
         val isSse = url.isNotBlank() || (command.isBlank() && rootObj.containsKey("url"))
-        if (command.isBlank() && url.isBlank()) error("配置中必须包含 command 或 url 字段")
+        if (command.isBlank() && url.isBlank()) error("Cấu hình phải chứa trường command hoặc url")
         list.add(
             McpServerConfig(
                 id = "custom_${name.lowercase().replace(Regex("[^a-z0-9_]"), "_")}_${System.currentTimeMillis()}",
                 name = name,
-                description = desc.ifBlank { if (isSse) "远程 HTTP 服务: $url" else "本地 Stdio: $command ${args.joinToString(" ")}" },
+                description = desc.ifBlank { if (isSse) "Dịch vụ HTTP từ xa: $url" else "Dịch vụ Stdio cục bộ: $command ${args.joinToString(" ")}" },
                 transportType = if (isSse) McpTransportType.SSE else McpTransportType.STDIO,
                 command = command,
                 args = args,
@@ -1125,6 +1125,6 @@ private fun parseMcpJson(rawJson: String): Result<List<McpServerConfig>> = runCa
             )
         )
     }
-    if (list.isEmpty()) error("未找到有效的 MCP 服务配置")
+    if (list.isEmpty()) error("Không tìm thấy cấu hình dịch vụ MCP hợp lệ")
     list
 }

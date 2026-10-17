@@ -615,7 +615,7 @@ internal class AnthropicApi(
     /** 非 429/5xx 的 HTTP 错误：413 与上下文超限文案走可自愈类型，供引擎紧急压缩后重试。 */
     private fun httpError(code: Int, body: String): Exception {
         val detail = extractError(body)
-        val message = "Claude 请求失败 HTTP $code：$detail"
+        val message = "Yêu cầu Claude thất bại HTTP $code: $detail"
         return when (ProviderClient.contextOverflowException(code, body)) {
             is LlmContextOverflowException -> LlmContextOverflowException(message)
             is LlmInvalidOutputTokensException -> LlmInvalidOutputTokensException(message)

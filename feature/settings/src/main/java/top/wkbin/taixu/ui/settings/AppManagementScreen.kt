@@ -71,18 +71,18 @@ fun AppManagementScreen(
             item {
                 RuntimeCard(contentPadding = PaddingValues(16.dp)) {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text("受控应用索引", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("Chỉ mục ứng dụng được kiểm soát", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Text(
-                            "任何模式均可读取应用并写入 Room；以后进入只增量对比包名。Shizuku/Root 会额外读取冻结和后台联网限制状态，冻结或授权等执行操作在 PRoot 模式会提示权限不足。",
+                            "Mọi chế độ đều đọc được ứng dụng và ghi vào Room; lần sau vào chỉ so sánh tăng dần theo tên gói. Shizuku/Root còn đọc thêm trạng thái đóng băng và hạn chế mạng nền; các thao tác đóng băng/cấp quyền ở chế độ PRoot sẽ báo thiếu quyền.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                             RuntimeButton(onClick = { viewModel?.synchronize() }, enabled = !syncing) {
                                 if (syncing) RuntimeCircularProgressIndicator(Modifier.size(18.dp)) else RuntimeIcon(RuntimeIconName.Refresh, Modifier.size(18.dp))
-                                Text(if (syncing) "同步中" else "立即同步", modifier = Modifier.padding(start = 8.dp))
+                                Text(if (syncing) "Đang đồng bộ" else "Đồng bộ ngay", modifier = Modifier.padding(start = 8.dp))
                             }
-                            Text("共 ${apps.size} 个", style = MaterialTheme.typography.labelLarge)
+                            Text("Tổng ${apps.size}", style = MaterialTheme.typography.labelLarge)
                         }
                         message?.let {
                             Text(it, color = if (messageIsError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.bodySmall)
@@ -104,12 +104,12 @@ fun AppManagementScreen(
                     FilterChip(
                         selected = showSystemApps,
                         onClick = { showSystemApps = !showSystemApps },
-                        label = { Text("显示系统应用 (${systemApps.size})") },
+                        label = { Text("Hiện ứng dụng hệ thống (${systemApps.size})") },
                     )
                 }
             }
             if (userApps.isEmpty() && !syncing) {
-                item { Text("暂无应用数据，请执行一次同步。", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                item { Text("Chưa có dữ liệu ứng dụng, hãy đồng bộ một lần.", color = MaterialTheme.colorScheme.onSurfaceVariant) }
             }
             items(userApps, key = { it.packageName }) { app -> AndroidAppRow(app) }
             if (showSystemApps && systemApps.isNotEmpty()) {

@@ -99,7 +99,7 @@ object ContextWindowPolicy {
      */
     fun compactToolOutput(toolName: String?, args: JsonObject?, output: String, success: Boolean): String {
         val statusLabel = if (success) "成功" else "失败"
-        val header = "【历史执行结果·状态:$statusLabel】"
+        val header = ""
         val name = toolName?.trim()?.lowercase().orEmpty()
         val body = when (name) {
             "read" -> compactRead(args, output)
@@ -803,7 +803,7 @@ object ContextWindowPolicy {
             if (!toolName.isNullOrBlank()) append("工具:$toolName ")
             if (!path.isNullOrBlank()) append("对象:${path.take(180)} ")
         }.trim()
-        return "【当前轮执行结果·状态:$status】$hint\n${compactActiveText(output)}"
+        return "【Kết quả chạy vòng hiện tại·Trạng thái:$status】$hint\\n${compactActiveText(output)}"
     }
 
     private fun compactActiveText(output: String): String {

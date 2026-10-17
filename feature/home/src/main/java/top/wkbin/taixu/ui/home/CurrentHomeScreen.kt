@@ -40,25 +40,25 @@ internal fun RemoteHomeScreen(serverId: String, onNavigate: (MainDestination) ->
     val scrollBehavior = androidx.compose.material3.TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection), containerColor = MaterialTheme.colorScheme.surface,
         topBar = { RuntimeTopBar(title = androidx.compose.ui.res.stringResource(top.wkbin.taixu.feature.home.R.string.home_dashboard_title), onBack = onBack, scrollBehavior = scrollBehavior, actions = {
-            RuntimeIconButton(onClick = { refresh++ }, contentDescription = "刷新") { RuntimeIcon(RuntimeIconName.Refresh) }
+            RuntimeIconButton(onClick = { refresh++ }, contentDescription = "Làm mới") { RuntimeIcon(RuntimeIconName.Refresh) }
         }) },
     ) { padding ->
         Column(Modifier.fillMaxSize().then(top.wkbin.taixu.ui.components.runtimeScrollViewport(padding)).verticalScroll(rememberScrollState()).padding(bottom = padding.calculateBottomPadding()).padding(runtimeContentPadding(horizontal = 16.dp, top = 16.dp, bottom = 16.dp))
             .padding(bottom = 16.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
-            Text("主系统概览", style = MaterialTheme.typography.titleMedium)
-            SystemOverviewCard(target?.name ?: "服务器", target?.let { "${it.username}@${it.host}:${it.port}" }.orEmpty(),
+            Text("Tổng quan hệ thống chính", style = MaterialTheme.typography.titleMedium)
+            SystemOverviewCard(target?.name ?: "Máy chủ", target?.let { "${it.username}@${it.host}:${it.port}" }.orEmpty(),
                 target?.workspace.orEmpty(), state.loading, state.error, metrics?.let { listOf(
-                    "发行版" to it.distribution, "架构" to it.architecture,
+                    "Bản phân phối" to it.distribution, "Kiến trúc" to it.architecture,
                     "内存" to "${it.memoryUsedMb} / ${it.memoryTotalMb} MB",
                     "存储" to String.format(Locale.ROOT, "%.1f / %.1f GB", it.diskUsedGb, it.diskTotalGb),
                     "负载 · 1/5/15 分钟" to it.load, "进程" to it.processCount.toString(),
-                    "运行时间" to "${it.uptimeSeconds / 3600} 小时", "内核" to it.kernel,
+                    "Thời gian chạy" to "${it.uptimeSeconds / 3600} giờ", "Kernel" to it.kernel,
                 ) }.orEmpty())
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                RuntimeButton(modifier = Modifier.weight(1f), onClick = { onNavigate(MainDestination.Agent) }) { Text("打开智枢") }
-                RuntimeFilledTonalButton(modifier = Modifier.weight(1f), onClick = { onNavigate(MainDestination.Workspace) }) { Text("打开工坊") }
+                RuntimeButton(modifier = Modifier.weight(1f), onClick = { onNavigate(MainDestination.Agent) }) { Text("Mở trung tâm Agent") }
+                RuntimeFilledTonalButton(modifier = Modifier.weight(1f), onClick = { onNavigate(MainDestination.Workspace) }) { Text("Mở xưởng") }
             }
-            Text("指标采集自当前服务器，每 15 秒刷新。工作区文件与服务器保持一致。", style = MaterialTheme.typography.bodySmall,
+            Text("Chỉ số thu thập từ máy chủ hiện tại, làm mới mỗi 15 giây. Tệp không gian làm việc đồng bộ với máy chủ.", style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }

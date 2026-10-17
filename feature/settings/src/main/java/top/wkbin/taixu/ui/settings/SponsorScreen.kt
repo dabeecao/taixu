@@ -84,7 +84,7 @@ fun SponsorScreen(
 
     if (showAlipayQrDialog) {
         SponsorQrDialog(
-            title = "支付宝赞赏码",
+            title = "Mã ủng hộ Alipay",
             qrRes = SPONSOR_ALIPAY_QR_RES,
             accent = Color(0xFF1677FF),
             onDismiss = { showAlipayQrDialog = false },
@@ -92,7 +92,7 @@ fun SponsorScreen(
     }
     if (showWeChatQrDialog) {
         SponsorQrDialog(
-            title = "微信赞赏码",
+            title = "Mã ủng hộ WeChat",
             qrRes = SPONSOR_WECHAT_QR_RES,
             accent = SponsorAccent,
             onDismiss = { showWeChatQrDialog = false },
@@ -103,10 +103,10 @@ fun SponsorScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             RuntimeTopBar(
-                title = "赞助支持",
+                title = "Ủng hộ",
                 onBack = onBack,
                 actions = {
-                    IconButton(onClick = { viewModel?.refresh() }, contentDescription = "刷新名单") {
+                    IconButton(onClick = { viewModel?.refresh() }, contentDescription = "Làm mới danh sách") {
                         RuntimeIcon(
                             RuntimeIconName.Refresh,
                             Modifier.size(20.dp),
@@ -142,12 +142,12 @@ fun SponsorScreen(
                                 RuntimeIcon(RuntimeIconName.Sponsor, Modifier.size(22.dp), tint = SponsorAccent)
                             }
                             Text(
-                                "感谢你考虑赞助太墟",
+                                "Cảm ơn bạn đã cân nhắc ủng hộ TaiXu",
                                 style = MaterialTheme.typography.titleMedium,
                             )
                         }
                         Text(
-                            "太墟（TaiXu）完全免费且开源，由作者在业余时间独立维护。你的每一份赞助都将用于购买 API Token 与持续的开发迭代，帮助我们把项目做得更好。",
+                            "TaiXu hoàn toàn miễn phí và mã nguồn mở, do tác giả duy trì độc lập trong thời gian rảnh. Mọi khoản ủng hộ của bạn sẽ dùng để mua API Token và phát triển liên tục, giúp chúng tôi làm dự án tốt hơn.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -158,7 +158,7 @@ fun SponsorScreen(
             // 赞助方式
             item {
                 Text(
-                    text = "赞助方式",
+                    text = "Cách ủng hộ",
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(start = 4.dp, bottom = 4.dp),
@@ -166,22 +166,22 @@ fun SponsorScreen(
                 SettingsGroup {
                     SettingsRow(
                         icon = RuntimeIconName.Sponsor,
-                        title = "支付宝赞赏码",
-                        subtitle = "支付宝扫一扫，随心赞赏",
+                        title = "Mã ủng hộ Alipay",
+                        subtitle = "Quét Alipay, ủng hộ tùy tâm",
                         onClick = { showAlipayQrDialog = true },
                     )
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                     SettingsRow(
                         icon = RuntimeIconName.Sponsor,
-                        title = "微信赞赏码",
-                        subtitle = "微信扫一扫，随心赞赏",
+                        title = "Mã ủng hộ WeChat",
+                        subtitle = "Quét WeChat, ủng hộ tùy tâm",
                         onClick = { showWeChatQrDialog = true },
                     )
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                     SettingsRow(
                         icon = RuntimeIconName.Mail,
-                        title = "Token 赞助",
-                        subtitle = "邮箱: wangkebin1997@gmail.com · 发邮件即可",
+                        title = "Ủng hộ Token",
+                        subtitle = "Email: wangkebin1997@gmail.com · gửi email là được",
                         onClick = { sendSponsorEmail(context) },
                     )
                 }
@@ -190,7 +190,7 @@ fun SponsorScreen(
             // 回馈与鸣谢
             item {
                 Text(
-                    text = "回馈与鸣谢",
+                    text = "Phản hồi & tri ân",
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(start = 4.dp, bottom = 4.dp),
@@ -206,7 +206,7 @@ fun SponsorScreen(
                                 CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
                                 Spacer(Modifier.size(10.dp))
                                 Text(
-                                    "正在加载鸣谢名单…",
+                                    "Đang tải danh sách tri ân…",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -218,21 +218,21 @@ fun SponsorScreen(
                                 verticalArrangement = Arrangement.spacedBy(8.dp),
                             ) {
                                 Text(
-                                    "名单加载失败：${s.message}",
+                                    "Tải danh sách thất bại: ${s.message}",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                                 TextButton(onClick = { viewModel?.refresh() }) {
-                                    Text("重试")
+                                    Text("Thử lại")
                                 }
                             }
                         }
                         is SponsorListUiState.Success -> {
-                            SponsorKindGroup("资金赞助", s.entries.filter { it.kind == SponsorKind.Funding })
+                            SponsorKindGroup("Ủng hộ tiền", s.entries.filter { it.kind == SponsorKind.Funding })
                             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                            SponsorKindGroup("资源赞助", s.entries.filter { it.kind == SponsorKind.Resource })
+                            SponsorKindGroup("Ủng hộ tài nguyên", s.entries.filter { it.kind == SponsorKind.Resource })
                             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                            SponsorKindGroup("贡献者", s.entries.filter { it.kind == SponsorKind.Contribution })
+                            SponsorKindGroup("Người đóng góp", s.entries.filter { it.kind == SponsorKind.Contribution })
                         }
                     }
                 }
@@ -254,10 +254,10 @@ private fun saveSponsorQrToGallery(context: Context, qrRes: Int, namePrefix: Str
     val target = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values) ?: return false
     return runCatching {
         val bitmap = BitmapFactory.decodeResource(context.resources, qrRes)
-            ?: error("无法解码赞赏码资源")
+            ?: error("Không giải mã được tài nguyên mã ủng hộ")
         resolver.openOutputStream(target)?.use { output ->
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
-        } ?: error("无法写入目标文件")
+        } ?: error("Không ghi được file đích")
         resolver.update(
             target,
             ContentValues().apply { put(MediaStore.Images.Media.IS_PENDING, 0) },
@@ -305,7 +305,7 @@ private fun SponsorQrDialog(
                 ) {
                     SubcomposeAsyncImage(
                         model = qrRes,
-                        contentDescription = "$title 图片",
+                        contentDescription = "Ảnh $title",
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Fit,
                         error = {
@@ -316,7 +316,7 @@ private fun SponsorQrDialog(
                             ) {
                                 RuntimeIcon(RuntimeIconName.Sponsor, Modifier.size(32.dp), tint = accent.copy(alpha = 0.6f))
                                 Text(
-                                    "二维码加载失败，请稍后重试",
+                                    "Tải mã QR thất bại, vui lòng thử lại sau",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -325,7 +325,7 @@ private fun SponsorQrDialog(
                     )
                 }
                 Text(
-                    "打开对应 App 扫一扫即可赞赏，感谢支持",
+                    "Mở App tương ứng quét là có thể ủng hộ, cảm ơn đã ủng hộ",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -334,12 +334,12 @@ private fun SponsorQrDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    val prefix = if (title.contains("微信")) "wechat" else "alipay"
+                    val prefix = if (title.contains("WeChat")) "wechat" else "alipay"
                     val success = saveSponsorQrToGallery(context, qrRes, prefix)
                     if (success) {
-                        Toast.makeText(context, "二维码已保存至相册", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Đã lưu mã QR vào album ảnh", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(context, "保存失败，请稍后重试", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Lưu thất bại, vui lòng thử lại sau", Toast.LENGTH_SHORT).show()
                     }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = accent),
@@ -349,13 +349,13 @@ private fun SponsorQrDialog(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     RuntimeIcon(RuntimeIconName.Download, Modifier.size(16.dp), tint = Color.White)
-                    Text("保存到相册", color = Color.White)
+                    Text("Lưu vào album ảnh", color = Color.White)
                 }
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("关闭")
+                Text("Đóng")
             }
         },
     )
@@ -364,16 +364,16 @@ private fun SponsorQrDialog(
 /** 唤起邮件客户端撰写 Token 赞助邮件（正文预填模板）；无邮件客户端时复制邮箱兜底 */
 private fun sendSponsorEmail(context: Context) {
     val body = buildString {
-        appendLine("你好，我想赞助太墟一个 Token，支持你继续开发：")
+        appendLine("Xin chào, tôi muốn ủng hộ TaiXu một Token để bạn tiếp tục phát triển:")
         appendLine()
         appendLine("API Base URL：")
         appendLine("API Key：")
-        appendLine("模型名称（可选）：")
+        appendLine("Tên model (tùy chọn):")
         appendLine()
-        appendLine("感谢你的付出！")
+        appendLine("Cảm ơn sự đóng góp của bạn!")
     }
     val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$SPONSOR_EMAIL")).apply {
-        putExtra(Intent.EXTRA_SUBJECT, "太墟 Token 赞助")
+        putExtra(Intent.EXTRA_SUBJECT, "Ủng hộ TaiXu bằng Token")
         putExtra(Intent.EXTRA_TEXT, body)
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
@@ -381,8 +381,8 @@ private fun sendSponsorEmail(context: Context) {
         context.startActivity(intent)
     }.onFailure {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-        clipboard?.setPrimaryClip(ClipData.newPlainText("太墟赞助邮箱", SPONSOR_EMAIL))
-        Toast.makeText(context, "已复制赞助邮箱：$SPONSOR_EMAIL，请打开邮箱写信", Toast.LENGTH_LONG).show()
+        clipboard?.setPrimaryClip(ClipData.newPlainText("Email ủng hộ TaiXu", SPONSOR_EMAIL))
+        Toast.makeText(context, "Đã sao chép email ủng hộ: $SPONSOR_EMAIL, hãy mở email để viết thư", Toast.LENGTH_LONG).show()
     }
 }
 
@@ -403,7 +403,7 @@ private fun SponsorKindGroup(
         )
         if (entries.isEmpty()) {
             Text(
-                text = "暂无，感谢每一位默默支持的朋友",
+                text = "Chưa có, cảm ơn từng người bạn đã lặng lẽ ủng hộ",
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.5.sp),
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
             )

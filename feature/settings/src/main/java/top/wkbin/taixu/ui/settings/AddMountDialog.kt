@@ -46,30 +46,30 @@ internal fun AddMountDialog(
 
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("新增存储挂载点", fontWeight = FontWeight.Bold) },
+        title = { Text("Thêm điểm gắn lưu trữ", fontWeight = FontWeight.Bold) },
         text = {
             Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("挂载点名称") },
-                    placeholder = { Text("例如：相册照片、项目源码") },
+                    label = { Text("Tên điểm gắn") },
+                    placeholder = { Text("Ví dụ: ảnh album, source dự án") },
                     isError = !nameValid,
-                    supportingText = { if (!nameValid) Text("请输入挂载点名称") },
+                    supportingText = { if (!nameValid) Text("Vui lòng nhập tên điểm gắn") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 OutlinedTextField(
                     value = hostPath,
                     onValueChange = { hostPath = it },
-                    label = { Text("宿主路径 (Android)") },
+                    label = { Text("Đường dẫn host (Android)") },
                     placeholder = { Text("/storage/emulated/0/...") },
                     isError = hostPath.isNotBlank() && !hostPathValid,
                     supportingText = {
                         when {
-                            hostPath.isNotBlank() && hostCharInvalid -> Text("宿主路径不能包含冒号等非法字符")
+                            hostPath.isNotBlank() && hostCharInvalid -> Text("Đường dẫn host không được chứa ký tự không hợp lệ như dấu hai chấm")
                             hostPath.isNotBlank() && !hostRootAllowed ->
-                                Text("宿主路径必须位于 /storage/emulated/0 内")
+                                Text("Đường dẫn host phải nằm trong /storage/emulated/0")
                             else -> {}
                         }
                     },
@@ -79,17 +79,17 @@ internal fun AddMountDialog(
                 OutlinedTextField(
                     value = guestPath,
                     onValueChange = { guestPath = it },
-                    label = { Text("容器挂载路径 (Linux)") },
+                    label = { Text("Đường dẫn gắn trong container (Linux)") },
                     placeholder = { Text("/mnt/my_folder") },
                     isError = guestPath.isNotBlank() && !guestPathValid,
                     supportingText = {
                         when {
-                            guestPath.isNotBlank() && !guestPath.trim().startsWith("/") -> Text("路径必须以 / 开头")
-                            guestPath.isNotBlank() && guestNormalized == null -> Text("容器路径不允许包含 ..")
-                            guestPath.isNotBlank() && guestCharInvalid -> Text("容器路径不能包含冒号等非法字符")
+                            guestPath.isNotBlank() && !guestPath.trim().startsWith("/") -> Text("Đường dẫn phải bắt đầu bằng /")
+                            guestPath.isNotBlank() && guestNormalized == null -> Text("Đường dẫn container không được chứa ..")
+                            guestPath.isNotBlank() && guestCharInvalid -> Text("Đường dẫn container không được chứa ký tự không hợp lệ như dấu hai chấm")
                             guestPath.isNotBlank() && !guestRootAllowed ->
-                                Text("容器路径必须位于 /mnt 或 /sdcard 内")
-                            guestDuplicate -> Text("该容器路径已被其他挂载点使用")
+                                Text("Đường dẫn container phải nằm trong /mnt hoặc /sdcard")
+                            guestDuplicate -> Text("Đường dẫn container này đã được điểm gắn khác dùng")
                             else -> {}
                         }
                     },
@@ -103,11 +103,11 @@ internal fun AddMountDialog(
                 onClick = { onConfirm(name, hostPath, guestPath) },
                 enabled = nameValid && hostPathValid && guestPathValid,
             ) {
-                Text("添加挂载")
+                Text("Thêm điểm gắn")
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消") }
+            TextButton(onClick = onDismiss) { Text("Hủy") }
         },
     )
 }

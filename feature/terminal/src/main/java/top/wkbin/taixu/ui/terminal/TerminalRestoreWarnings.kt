@@ -17,21 +17,21 @@ internal fun TerminalRestoreWarnings(viewModel: TerminalViewModel?) {
     val failures by viewModel.restoreFailures.collectAsStateWithLifecycle()
     var expanded by remember { mutableStateOf(false) }
     if (failures.isEmpty()) return
-    RuntimeTextButton(onClick = { expanded = true }) { Text("${failures.size} 个终端未恢复 · 查看记录") }
+    RuntimeTextButton(onClick = { expanded = true }) { Text("${failures.size} Terminal chưa khôi phục · Xem bản ghi") }
     if (expanded) RuntimeAlertDialog(
         onDismissRequest = { expanded = false },
-        title = { Text("未恢复的终端") },
+        title = { Text("Terminal chưa khôi phục") },
         text = {
             Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text("已保留原连接身份。这些终端不会改连其它服务器；移除记录仅删除本机的终端配置。", style = MaterialTheme.typography.bodySmall)
-                RuntimeTextButton(onClick = viewModel::retryFailedRestorations) { Text("重试恢复") }
+                Text("Đã giữ nguyên danh tính kết nối ban đầu. Các Terminal này sẽ không chuyển sang máy chủ khác; xóa bản ghi chỉ xóa cấu hình Terminal trên máy này.", style = MaterialTheme.typography.bodySmall)
+                RuntimeTextButton(onClick = viewModel::retryFailedRestorations) { Text("Thử khôi phục lại") }
                 failures.forEach { failure ->
                     Text(failure.label, style = MaterialTheme.typography.titleSmall)
                     Text(failure.message, style = MaterialTheme.typography.bodySmall)
-                    RuntimeTextButton(onClick = { viewModel.removeFailedRestoration(failure.id) }) { Text("移除记录") }
+                    RuntimeTextButton(onClick = { viewModel.removeFailedRestoration(failure.id) }) { Text("Xóa bản ghi") }
                 }
             }
         },
-        confirmButton = { RuntimeTextButton(onClick = { expanded = false }) { Text("关闭") } },
+        confirmButton = { RuntimeTextButton(onClick = { expanded = false }) { Text("Đóng") } },
     )
 }

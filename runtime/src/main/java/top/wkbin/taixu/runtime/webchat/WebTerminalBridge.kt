@@ -77,9 +77,9 @@ internal class WebTerminalBridge(
                 } catch (cancellation: CancellationException) {
                     throw cancellation
                 } catch (throwable: Throwable) {
-                    logger.e("太墟智枢 Web 终端请求失败：${exchange.requestURI.path}", throwable)
+                    logger.e("Yêu cầu Web terminal TaiXu Hub thất bại: ${exchange.requestURI.path}", throwable)
                     if (!exchange.isResponseStarted) {
-                        runCatching { sendJson(exchange, 500, errorJson(throwable.message ?: "终端请求失败")) }
+                        runCatching { sendJson(exchange, 500, errorJson(throwable.message ?: "Yêu cầu terminal thất bại")) }
                     }
                     runCatching { exchange.close() }
                 } finally {
@@ -95,7 +95,7 @@ internal class WebTerminalBridge(
             return
         }
         if (!isAuthenticated(exchange)) {
-            sendJson(exchange, 401, errorJson("请先使用配对码连接"))
+            sendJson(exchange, 401, errorJson("Hãy kết nối bằng mã ghép nối trước"))
             return
         }
         val suffix = exchange.requestURI.path.substringAfter("/terminal", "").trim('/')
@@ -113,7 +113,7 @@ internal class WebTerminalBridge(
                 inputTerminal(exchange, parts[0])
             parts.size == 2 && parts[1] == "resize" && exchange.requestMethod == "POST" ->
                 resizeTerminal(exchange, parts[0])
-            else -> sendText(exchange, 404, "终端接口不存在")
+            else -> sendText(exchange, 404, "Giao diện terminal không tồn tại")
         }
     }
 
@@ -145,7 +145,7 @@ internal class WebTerminalBridge(
         val workingDirectory = body["workingDirectory"]?.jsonPrimitive?.content?.trim()
             ?.takeIf(String::isNotEmpty) ?: DEFAULT_CWD
         val label = body["label"]?.jsonPrimitive?.content?.trim()
-            ?.takeIf(String::isNotEmpty) ?: "Web 终端 ${handles.size + 1}"
+            ?.takeIf(String::isNotEmpty) ?: "Web terminal ${handles.size + 1}"
         val distroId = linuxRuntime.activeDistroId.value
 
         val session = try {
@@ -160,8 +160,8 @@ internal class WebTerminalBridge(
                 distroId = distroId,
             )
         } catch (throwable: Throwable) {
-            logger.e("太墟智枢 Web 终端创建失败", throwable)
-            throw IllegalArgumentException("终端启动失败：${throwable.message ?: "PTY 不可用"}")
+            logger.e("Tạo Web terminal TaiXu Hub thất bại", throwable)
+            throw IllegalArgumentException("Khởi động terminal thất bại: ${throwable.message ?: "PTY 不可用"}")
         }
 
         val id = UUID.randomUUID().toString()
@@ -171,7 +171,7 @@ internal class WebTerminalBridge(
         }
         handles[id] = handle
         startPump(handle)
-        logger.i("太墟智枢 Web 终端已创建：$id（$label，$columns×$rows，$distroId）")
+        logger.i("Đã tạo Web terminal TaiXu Hub: $id ($label, $columns×$rows, $distroId)")
         sendJson(exchange, 200, buildJsonObject {
             put("id", id)
             put("label", handle.label)
@@ -188,13 +188,13 @@ internal class WebTerminalBridge(
         val handle = requireTerminal(terminalId)
         val body = requestJson(exchange)
         val encoded = body["data"]?.jsonPrimitive?.content.orEmpty()
-        require(encoded.isNotBlank()) { "缺少输入数据" }
+        require(encoded.isNotBlank()) { "Thiếu dữ liệu nhập" }
         val bytes = try {
             Base64.getDecoder().decode(encoded)
         } catch (_: IllegalArgumentException) {
-            throw IllegalArgumentException("输入数据不是有效的 base64")
+            throw IllegalArgumentException("Dữ liệu nhập không phải base64 hợp lệ")
         }
-        require(bytes.size <= MAX_INPUT_BYTES) { "输入过大（上限 ${MAX_INPUT_BYTES / 1024} KB）" }
+        require(bytes.size <= MAX_INPUT_BYTES) { "Dữ liệu nhập quá lớn (tối đa ${MAX_INPUT_BYTES / 1024} KB)" }
         handle.session.write(bytes)
         sendJson(exchange, 200, buildJsonObject { put("written", bytes.size) })
     }
@@ -203,9 +203,9 @@ internal class WebTerminalBridge(
         val handle = requireTerminal(terminalId)
         val body = requestJson(exchange)
         val columns = body["columns"]?.jsonPrimitive?.content?.toIntOrNull()
-            ?: throw IllegalArgumentException("缺少 columns")
+            ?: throw IllegalArgumentException("Thiếu columns")
         val rows = body["rows"]?.jsonPrimitive?.content?.toIntOrNull()
-            ?: throw IllegalArgumentException("缺少 rows")
+            ?: throw IllegalArgumentException("Thiếu rows")
         handle.session.resize(columns, rows)
         handle.columns = columns.coerceIn(MIN_COLUMNS, MAX_COLUMNS)
         handle.rows = rows.coerceIn(MIN_ROWS, MAX_ROWS)
@@ -219,7 +219,7 @@ internal class WebTerminalBridge(
      */
     private suspend fun streamTerminal(exchange: AndroidHttpExchange, terminalId: String) {
         val handle = handles[terminalId] ?: run {
-            sendJson(exchange, 404, errorJson("终端会话不存在"))
+            sendJson(exchange, 404, errorJson("Phiên terminal không tồn tại"))
             return
         }
         val channel = Channel<TerminalOutput>(LISTENER_BUFFER)
@@ -258,7 +258,7 @@ internal class WebTerminalBridge(
             } catch (cancellation: CancellationException) {
                 throw cancellation
             } catch (throwable: Throwable) {
-                logger.e("太墟智枢 Web 终端输出转发异常：${handle.id}", throwable)
+                logger.e("Chuyển tiếp output Web terminal TaiXu Hub bất thường: ${handle.id}", throwable)
             }
             closeTerminal(handle.id)
         }
@@ -282,11 +282,11 @@ internal class WebTerminalBridge(
         handle.listeners.forEach { runCatching { it.close() } }
         handle.listeners.clear()
         runCatching { handle.session.close() }
-        logger.i("太墟智枢 Web 终端已关闭：$id（${handle.label}）")
+        logger.i("Web terminal TaiXu Hub đã đóng: $id (${handle.label})")
     }
 
     private suspend fun requireTerminal(id: String): WebTerminalHandle =
-        handles[id] ?: throw IllegalArgumentException("终端会话不存在")
+        handles[id] ?: throw IllegalArgumentException("Phiên terminal không tồn tại")
 
     private fun terminalJson(handle: WebTerminalHandle) = buildJsonObject {
         put("id", handle.id)

@@ -67,8 +67,8 @@ class PhoneAgentSettingsViewModel(
             val result = runCatching {
                 connectionTester.test(baseUrl.trim(), model.trim(), apiKey.trim())
             }.fold(
-                onSuccess = { "连接成功" },
-                onFailure = { it.message?.take(180) ?: "连接失败，请检查接口地址、密钥与网络" },
+                onSuccess = { "Kết nối thành công" },
+                onFailure = { it.message?.take(180) ?: "Kết nối thất bại, vui lòng kiểm tra địa chỉ endpoint, khóa và mạng" },
             )
             _testing.value = false
             onResult(result)
@@ -84,9 +84,9 @@ internal fun PhoneAgentSettingsEntry(
     val config by viewModel?.config?.collectAsStateWithLifecycle(PhoneAgentEndpoint()) ?: previewStateOf(PhoneAgentEndpoint())
     SettingsRow(
         icon = RuntimeIconName.Android,
-        title = "手机操作模型",
-        subtitle = "单独的接口、模型名和密钥，不会出现在聊天模型里",
-        value = config.model.ifBlank { "未配置" },
+        title = "Mô hình điều khiển điện thoại",
+        subtitle = "Endpoint, tên mô hình và khóa riêng, sẽ không hiện trong mô hình trò chuyện",
+        value = config.model.ifBlank { "Chưa cấu hình" },
         onClick = onOpen,
     )
 }
@@ -105,7 +105,7 @@ fun PhoneAgentSettingsScreen(
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = { RuntimeTopBar("手机操作模型", onBack) },
+        topBar = { RuntimeTopBar("Mô hình điều khiển điện thoại", onBack) },
     ) { padding ->
         Column(
             Modifier
@@ -116,7 +116,7 @@ fun PhoneAgentSettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Text(
-                "这里只给虚拟屏用，看画面、点击、滑动和输入。聊天主模型仍在「模型档案管理」里配置，两边互不影响。",
+                "Chỗ này chỉ dùng cho màn hình ảo: xem màn hình, chạm, vuốt và nhập liệu. Model chính cho chat vẫn cấu hình ở 「Quản lý hồ sơ mô hình」, hai bên không ảnh hưởng nhau.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -129,9 +129,9 @@ fun PhoneAgentSettingsScreen(
                         value = baseUrl,
                         onValueChange = { baseUrl = it },
                         modifier = Modifier.fillMaxWidth(),
-                        label = { Text("接口地址") },
+                        label = { Text("Địa chỉ giao diện") },
                         placeholder = { Text("https://open.bigmodel.cn/api/paas/v4") },
-                        supportingText = { Text("智谱开放平台用上面这个地址") },
+                        supportingText = { Text("Nền tảng mở ZhiPu dùng địa chỉ trên") },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
                     )
@@ -139,16 +139,16 @@ fun PhoneAgentSettingsScreen(
                         value = model,
                         onValueChange = { model = it },
                         modifier = Modifier.fillMaxWidth(),
-                        label = { Text("模型名") },
+                        label = { Text("Tên model") },
                         placeholder = { Text("autoglm-phone") },
-                        supportingText = { Text("智谱的手机操作模型名是 autoglm-phone") },
+                        supportingText = { Text("Tên mô hình điều khiển điện thoại của ZhiPu là autoglm-phone") },
                         singleLine = true,
                     )
                     OutlinedTextField(
                         value = apiKey,
                         onValueChange = { apiKey = it },
                         modifier = Modifier.fillMaxWidth(),
-                        label = { Text("API 密钥") },
+                        label = { Text("Khóa API") },
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                         singleLine = true,
@@ -163,10 +163,10 @@ fun PhoneAgentSettingsScreen(
                 if (testing) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         RuntimeCircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)
-                        Text("正在测试…")
+                        Text("Đang kiểm tra…")
                     }
                 } else {
-                    Text("测试连接")
+                    Text("Kiểm tra kết nối")
                 }
             }
             RuntimeButton(
@@ -176,22 +176,22 @@ fun PhoneAgentSettingsScreen(
                         message = error
                     } else {
                         viewModel?.save(PhoneAgentEndpoint(baseUrl.trim(), model.trim(), apiKey.trim()))
-                        message = "已保存。聊天主模型不会用到这里。"
+                        message = "Đã lưu. Mô hình chính của trò chuyện sẽ không dùng tới đây."
                     }
                 },
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(vertical = 12.dp),
-            ) { Text("保存") }
+            ) { Text("Lưu") }
             RuntimeTextButton(
                 onClick = {
                     baseUrl = ""
                     model = ""
                     apiKey = ""
                     viewModel?.save(PhoneAgentEndpoint())
-                    message = "已清除"
+                    message = "Đã xóa"
                 },
                 modifier = Modifier.fillMaxWidth(),
-            ) { Text("清除") }
+            ) { Text("Xóa") }
             message?.let {
                 Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
@@ -201,7 +201,7 @@ fun PhoneAgentSettingsScreen(
 
 private fun phoneAgentConfigError(baseUrl: String, model: String, apiKey: String): String? {
     val url = baseUrl.trim()
-    if (url.isBlank() || model.isBlank() || apiKey.isBlank()) return "接口地址、模型名和密钥都要填写"
+    if (url.isBlank() || model.isBlank() || apiKey.isBlank()) return "Phải điền đầy đủ địa chỉ endpoint, tên mô hình và khóa"
     val local = url.startsWith("http://127.0.0.1") || url.startsWith("http://localhost")
     if (!url.startsWith("https://") && !local) return "外部接口必须使用 https://"
     return null

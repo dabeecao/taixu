@@ -24,9 +24,9 @@ private fun PluginManagerScreenPreview() {
             extensions = listOf(PluginExtension("home", PluginExtensionPoint.PAGE)),
         ),
         pages = listOf(NativePluginPage("home") { }),
-        title = { "示例插件" },
-        description = { "折叠屏预览用的插件卡片" },
-        entries = listOf(NativePluginEntry("open", "home", PluginEntryLocation.MENU) { "打开" }),
+        title = { "Plugin mẫu" },
+        description = { "Thẻ plugin dùng để xem trước trên màn hình gập" },
+        entries = listOf(NativePluginEntry("open", "home", PluginEntryLocation.MENU) { "Mở" }),
     )
     RuntimePreview {
         PluginManagerScreen(

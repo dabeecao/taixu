@@ -42,7 +42,7 @@ internal fun providerStreamError(body: String): Exception {
             ProviderClient.transientHttpException(503, body, null)
         else -> ProviderClient.contextOverflowException(400, body)
     }
-    val message = "上游流内错误：" + (error?.get("message")?.let {
+    val message = "Lỗi trong luồng upstream:" + (error?.get("message")?.let {
         it as? JsonPrimitive
     }?.contentOrNull ?: body).take(300)
     return when (classified) {

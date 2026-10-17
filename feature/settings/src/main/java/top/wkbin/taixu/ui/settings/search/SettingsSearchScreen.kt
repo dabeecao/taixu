@@ -81,8 +81,8 @@ fun SettingsSearchScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             RuntimeTopBar(
-                title = "搜索功能与设置",
-                statusText = "全局核心能力一键直达",
+                title = "Tìm kiếm tính năng & cài đặt",
+                statusText = "Truy cập nhanh mọi năng lực cốt lõi",
                 onBack = onBack,
             )
         },
@@ -107,7 +107,7 @@ fun SettingsSearchScreen(
                         .focusRequester(focusRequester),
                     placeholder = {
                         Text(
-                            text = "搜索功能名称、设置项、拼音或关键词...",
+                            text = "Tìm tên tính năng, mục cài đặt hoặc từ khóa...",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                             maxLines = 1,
@@ -125,7 +125,7 @@ fun SettingsSearchScreen(
                         if (searchQuery.isNotEmpty()) {
                             RuntimeIconButton(
                                 onClick = { searchQuery = "" },
-                                contentDescription = "清除输入",
+                                contentDescription = "Xóa nội dung nhập",
                             ) {
                                 RuntimeIcon(
                                     name = RuntimeIconName.Close,
@@ -158,7 +158,7 @@ fun SettingsSearchScreen(
                     item {
                         Column(modifier = Modifier.padding(vertical = 4.dp)) {
                             Text(
-                                text = "热门快捷检索",
+                                text = "Tìm kiếm nhanh phổ biến",
                                 style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(bottom = 8.dp, start = 2.dp),
@@ -201,7 +201,7 @@ fun SettingsSearchScreen(
                     item {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "全局所有功能选项 (${SettingsSearchRegistry.allItems.size})",
+                            text = "Tất cả tính năng (${SettingsSearchRegistry.allItems.size})",
                             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(bottom = 2.dp, start = 2.dp),
@@ -246,7 +246,7 @@ fun SettingsSearchScreen(
                                     )
                                 }
                                 Text(
-                                    text = "未找到包含「$searchQuery」的功能选项",
+                                    text = "Không tìm thấy tính năng nào chứa \"$searchQuery\"",
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -254,7 +254,7 @@ fun SettingsSearchScreen(
                                     onClick = { searchQuery = "" },
                                     modifier = Modifier.padding(top = 4.dp),
                                 ) {
-                                    Text("清空关键词")
+                                    Text("Xóa từ khóa")
                                 }
                             }
                         }
@@ -263,7 +263,7 @@ fun SettingsSearchScreen(
                     // 结果统计
                     item {
                         Text(
-                            text = "找到 ${searchResults.size} 个相关功能选项",
+                            text = "Tìm thấy ${searchResults.size} tính năng liên quan",
                             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(bottom = 2.dp, start = 2.dp),

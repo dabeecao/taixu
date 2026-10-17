@@ -92,7 +92,7 @@ fun AdbLogcatScreen(
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
-        topBar = { RuntimeTopBar("无线 ADB 与日志抓取", onBack) },
+        topBar = { RuntimeTopBar("ADB không dây và lấy log", onBack) },
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -114,14 +114,14 @@ fun AdbLogcatScreen(
                         color = if (connected != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                        Text("内置无线 ADB 客户端", style = MaterialTheme.typography.titleMedium)
+                        Text("Máy khách ADB không dây tích hợp", style = MaterialTheme.typography.titleMedium)
                         Text(
                             when (val current = adbState) {
-                                EmbeddedAdbManager.ConnectionState.Disconnected -> "未连接"
-                                EmbeddedAdbManager.ConnectionState.Discovering -> "正在通过 mDNS 自动发现调试端口…"
-                                EmbeddedAdbManager.ConnectionState.Pairing -> "正在安全配对…"
-                                EmbeddedAdbManager.ConnectionState.Connecting -> "正在建立 ADB 连接…"
-                                is EmbeddedAdbManager.ConnectionState.Connected -> "已连接：${current.host}:${current.port}"
+                                EmbeddedAdbManager.ConnectionState.Disconnected -> "Chưa kết nối"
+                                EmbeddedAdbManager.ConnectionState.Discovering -> "Đang tự dò cổng gỡ lỗi qua mDNS…"
+                                EmbeddedAdbManager.ConnectionState.Pairing -> "Đang ghép nối an toàn…"
+                                EmbeddedAdbManager.ConnectionState.Connecting -> "Đang thiết lập kết nối ADB…"
+                                is EmbeddedAdbManager.ConnectionState.Connected -> "Đã kết nối: ${current.host}:${current.port}"
                                 is EmbeddedAdbManager.ConnectionState.Failed -> current.message
                             },
                             style = MaterialTheme.typography.bodySmall,
@@ -136,12 +136,12 @@ fun AdbLogcatScreen(
                     }
                     StatusBadge(
                         text = when (adbState) {
-                            is EmbeddedAdbManager.ConnectionState.Connected -> "已连接"
-                            EmbeddedAdbManager.ConnectionState.Discovering -> "探测中"
-                            EmbeddedAdbManager.ConnectionState.Pairing -> "配对中"
-                            EmbeddedAdbManager.ConnectionState.Connecting -> "连接中"
-                            is EmbeddedAdbManager.ConnectionState.Failed -> "异常"
-                            EmbeddedAdbManager.ConnectionState.Disconnected -> "未就绪"
+                            is EmbeddedAdbManager.ConnectionState.Connected -> "Đã kết nối"
+                            EmbeddedAdbManager.ConnectionState.Discovering -> "Đang dò"
+                            EmbeddedAdbManager.ConnectionState.Pairing -> "Đang ghép nối"
+                            EmbeddedAdbManager.ConnectionState.Connecting -> "Đang kết nối"
+                            is EmbeddedAdbManager.ConnectionState.Failed -> "Lỗi"
+                            EmbeddedAdbManager.ConnectionState.Disconnected -> "Chưa sẵn sàng"
                         },
                         color = when (adbState) {
                             is EmbeddedAdbManager.ConnectionState.Connected -> MaterialTheme.colorScheme.secondary
@@ -158,7 +158,7 @@ fun AdbLogcatScreen(
 
                 Spacer(Modifier.height(10.dp))
                 Text(
-                    "mDNS 自动探测：发现配对端点 ${adbDiscovery.pairingEndpoints.size} 个 · 连接端点 ${adbDiscovery.connectEndpoints.size} 个",
+                    "Tự dò mDNS: tìm thấy ${adbDiscovery.pairingEndpoints.size} điểm ghép nối · ${adbDiscovery.connectEndpoints.size} điểm kết nối",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -171,11 +171,11 @@ fun AdbLogcatScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            "通知栏配对助手",
+                            "Trợ lý ghép nối trên thanh thông báo",
                             style = MaterialTheme.typography.bodyMedium.copy(fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold),
                         )
                         Text(
-                            "在系统通知栏常驻展示配对码输入框，支持免切屏快捷输入",
+                            "Luôn hiển thị ô nhập mã ghép nối trên thanh thông báo hệ thống, nhập nhanh không cần chuyển màn hình",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -187,10 +187,10 @@ fun AdbLogcatScreen(
             }
 
             // ── 2. 配对与重连控制台 ──────────────────────────────────────────
-            SectionHeader("安全配对与连接", "密钥持久化保存在应用私有目录；完成一次配对后无需再查端口")
+            SectionHeader("Ghép nối và kết nối an toàn", "Khóa được lưu bền trong thư mục riêng của ứng dụng; sau một lần ghép nối không cần dò cổng nữa")
             RuntimeCard(Modifier.fillMaxWidth()) {
                 NoticeBanner(
-                    text = "💡 通知栏快捷配对推荐：Android 系统在开启「使用配对码配对设备」弹窗时，切出设置会关闭弹窗并使配对码失效。开启上方「通知栏配对助手」后，可在系统开发者选项弹窗中直接下拉通知栏输入 6 位配对码并提交，无需切屏！",
+                    text = "💡 Gợi ý ghép nối nhanh qua thanh thông báo: khi Android hiện popup \"Ghép nối thiết bị bằng mã ghép nối\", việc rời khỏi Cài đặt sẽ đóng popup và làm mã hết hiệu lực. Sau khi bật \"Trợ lý ghép nối trên thanh thông báo\" ở trên, bạn có thể kéo thanh thông báo ngay trong popup tùy chọn nhà phát triển để nhập mã 6 chữ số và gửi, không cần chuyển màn hình!",
                     isError = false,
                 )
                 Spacer(Modifier.height(10.dp))
@@ -203,12 +203,12 @@ fun AdbLogcatScreen(
                             }
                             context.startActivity(intent)
                         }.onFailure {
-                            Toast.makeText(context, "无法直接打开开发者选项，请在系统设置中手动开启", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Không mở trực tiếp được tùy chọn nhà phát triển, hãy bật thủ công trong cài đặt hệ thống", Toast.LENGTH_SHORT).show()
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Text("前往系统开发者选项（开启无线调试）")
+                    Text("Mở tùy chọn nhà phát triển hệ thống (bật gỡ lỗi không dây)")
                 }
 
                 Spacer(Modifier.height(12.dp))
@@ -218,18 +218,18 @@ fun AdbLogcatScreen(
                         value = pairingCode,
                         onValueChange = { value -> pairingCode = value.filter(Char::isDigit).take(6) },
                         modifier = Modifier.weight(1.1f),
-                        label = { Text("6 位配对码") },
-                        placeholder = { Text("例如：123456") },
-                        supportingText = { Text("首次配对时填入") },
+                        label = { Text("Mã ghép nối 6 chữ số") },
+                        placeholder = { Text("Ví dụ: 123456") },
+                        supportingText = { Text("Điền khi ghép nối lần đầu") },
                         singleLine = true,
                     )
                     OutlinedTextField(
                         value = explicitPort,
                         onValueChange = { value -> explicitPort = value.filter(Char::isDigit).take(5) },
                         modifier = Modifier.weight(0.9f),
-                        label = { Text("连接端口（可选）") },
-                        placeholder = { Text("如：41235") },
-                        supportingText = { Text("留空由 mDNS 探测") },
+                        label = { Text("Cổng kết nối (tùy chọn)") },
+                        placeholder = { Text("Ví dụ: 41235") },
+                        supportingText = { Text("Để trống để mDNS tự dò") },
                         singleLine = true,
                     )
                 }
@@ -241,14 +241,14 @@ fun AdbLogcatScreen(
                         enabled = !adbBusy && pairingCode.length == 6 && (adbDiscovery.pairingEndpoints.isNotEmpty() || explicitPort.isNotBlank()),
                         modifier = Modifier.weight(1f),
                     ) {
-                        Text("完成配对并连接")
+                        Text("Hoàn tất ghép nối và kết nối")
                     }
                     OutlinedButton(
                         onClick = { viewModel?.connectWirelessAdb(explicitPort.toIntOrNull()) },
                         enabled = !adbBusy && (adbDiscovery.connectEndpoints.isNotEmpty() || explicitPort.isNotBlank() || adbState is EmbeddedAdbManager.ConnectionState.Connected),
                         modifier = Modifier.weight(1f),
                     ) {
-                        Text(if (explicitPort.isNotBlank()) "连接指定端口" else "重新连接")
+                        Text(if (explicitPort.isNotBlank()) "Kết nối cổng đã chỉ định" else "Kết nối lại")
                     }
                 }
 
@@ -259,7 +259,7 @@ fun AdbLogcatScreen(
                         enabled = !adbBusy,
                         contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
                     ) {
-                        Text("重新探测端口", style = MaterialTheme.typography.labelSmall)
+                        Text("Dò lại cổng", style = MaterialTheme.typography.labelSmall)
                     }
                 }
 
@@ -274,13 +274,13 @@ fun AdbLogcatScreen(
             }
 
             // ── 3. 日志抓取工作台 ───────────────────────────────────────────
-            SectionHeader("Logcat 日志抓取", "指定目标应用包名、Tag 与过滤条件，就地抓取与分析运行日志")
+            SectionHeader("Lấy log Logcat", "Chỉ định tên gói ứng dụng, tag và điều kiện lọc để lấy và phân tích log ngay tại chỗ")
             RuntimeCard(Modifier.fillMaxWidth()) {
                 OutlinedTextField(
                     value = logcatPackage,
                     onValueChange = { logcatPackage = it },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("目标应用包名（留空抓取全系统）") },
+                    label = { Text("Tên gói ứng dụng mục tiêu (để trống để lấy log toàn hệ thống)") },
                     singleLine = true,
                 )
                 Spacer(Modifier.height(6.dp))
@@ -289,13 +289,13 @@ fun AdbLogcatScreen(
                         onClick = { logcatPackage = "top.wkbin.taixu" },
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
                     ) {
-                        Text("填入太墟", style = MaterialTheme.typography.labelSmall)
+                        Text("Điền TaiXu", style = MaterialTheme.typography.labelSmall)
                     }
                     OutlinedButton(
                         onClick = { logcatPackage = "" },
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
                     ) {
-                        Text("全系统日志", style = MaterialTheme.typography.labelSmall)
+                        Text("Nhật ký toàn hệ thống", style = MaterialTheme.typography.labelSmall)
                     }
                 }
                 Spacer(Modifier.height(10.dp))
@@ -305,14 +305,14 @@ fun AdbLogcatScreen(
                         value = logcatTag,
                         onValueChange = { logcatTag = it },
                         modifier = Modifier.weight(1f),
-                        label = { Text("Tag 过滤（可选）") },
+                        label = { Text("Lọc tag (tùy chọn)") },
                         singleLine = true,
                     )
                     OutlinedTextField(
                         value = logcatLines,
                         onValueChange = { logcatLines = it.filter(Char::isDigit).take(4) },
                         modifier = Modifier.weight(0.6f),
-                        label = { Text("行数") },
+                        label = { Text("Số dòng") },
                         singleLine = true,
                     )
                 }
@@ -322,12 +322,12 @@ fun AdbLogcatScreen(
                     value = logcatKeyword,
                     onValueChange = { logcatKeyword = it },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("关键词过滤（可选，忽略大小写）") },
+                    label = { Text("Lọc từ khóa (tùy chọn, không phân biệt hoa/thường)") },
                     singleLine = true,
                 )
                 Spacer(Modifier.height(10.dp))
 
-                Text("日志等级", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Mức độ log", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(4.dp))
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     listOf('V' to "Verbose", 'D' to "Debug", 'I' to "Info", 'W' to "Warn", 'E' to "Error", 'F' to "Fatal").forEach { (priority, _) ->
@@ -366,19 +366,19 @@ fun AdbLogcatScreen(
                         enabled = connected != null && !adbBusy,
                         modifier = Modifier.weight(1f),
                     ) {
-                        Text("抓取日志")
+                        Text("Lấy log")
                     }
                     OutlinedButton(
                         onClick = { viewModel?.clearDeviceLogcat() },
                         enabled = connected != null && !adbBusy,
                     ) {
-                        Text("清空缓冲区")
+                        Text("Xóa bộ đệm")
                     }
                 }
 
                 if (logcatOutput.isNotBlank()) {
                     Spacer(Modifier.height(14.dp))
-                    Text("抓取结果", style = MaterialTheme.typography.labelLarge)
+                    Text("Kết quả", style = MaterialTheme.typography.labelLarge)
                     Spacer(Modifier.height(6.dp))
                     Surface(
                         modifier = Modifier
@@ -406,22 +406,22 @@ fun AdbLogcatScreen(
                         onClick = {
                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                             clipboard.setPrimaryClip(ClipData.newPlainText("Logcat", logcatOutput))
-                            Toast.makeText(context, "日志已复制到剪贴板", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Đã sao chép log vào bộ nhớ tạm", Toast.LENGTH_SHORT).show()
                         },
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        Text("复制完整日志")
+                        Text("Sao chép toàn bộ log")
                     }
                 }
             }
 
             // ── 4. 沙箱 CLI 与 Agent 联动说明 ──────────────────────────────
-            SectionHeader("沙箱终端与 Agent 联动", "在 Linux 命令行或 AI 对话中直接调用")
+            SectionHeader("Terminal sandbox và phối hợp Agent", "Gọi trực tiếp trong dòng lệnh Linux hoặc cuộc trò chuyện AI")
             RuntimeCard(Modifier.fillMaxWidth()) {
                 Text(
-                    "• 终端命令：已预置 logcat-grabber <包名>、logcat-tail <包名> 与 logcat-export <包名> <路径>\n" +
-                    "• 宿主接口：通过 taixu-host logcat 跨沙箱直接调用\n" +
-                    "• AI 协同：在智枢对话中直接吩咐 Agent“帮我抓取崩溃日志”，将自动调用 host.logcat 工具分析排查",
+                    "• Lệnh terminal: đã cài sẵn logcat-grabber <tên gói>, logcat-tail <tên gói> và logcat-export <tên gói> <đường dẫn>\n" +
+                    "• Giao diện máy chủ: gọi trực tiếp xuyên sandbox qua taixu-host logcat\n" +
+                    "• Phối hợp AI: trong cuộc trò chuyện, hãy yêu cầu Agent \"lấy giúp tôi log crash\", hệ thống sẽ tự gọi công cụ host.logcat để phân tích",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

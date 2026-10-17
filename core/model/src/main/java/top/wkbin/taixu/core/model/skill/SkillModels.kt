@@ -14,38 +14,38 @@ enum class SkillPermission(
 ) {
     EXEC_COMMAND(
         id = "exec_command",
-        label = "命令执行",
-        description = "允许在 Linux PRoot 沙箱中执行 Shell 指令或调用附带脚本",
+        label = "Thực thi lệnh",
+        description = "Cho phép chạy lệnh Shell hoặc gọi script kèm theo trong sandbox Linux PRoot",
         isHighRisk = true,
     ),
     NETWORK(
         id = "network",
-        label = "网络访问",
-        description = "允许向外部公网或局域网主机发起网络请求",
+        label = "Truy cập mạng",
+        description = "Cho phép gửi request mạng tới máy chủ internet hoặc LAN",
         isHighRisk = true,
     ),
     FILE_WRITE(
         id = "file_write",
-        label = "文件系统写",
-        description = "允许在工作区或沙箱内部创建、修改或删除文件",
+        label = "Ghi hệ thống tệp",
+        description = "Cho phép tạo, sửa hoặc xóa tệp trong không gian làm việc hoặc sandbox",
         isHighRisk = false,
     ),
     BROWSER_AUTOMATION(
         id = "browser_automation",
-        label = "浏览器控制",
-        description = "允许控制内置无头浏览器进行页面渲染、快照抓取或 DOM 分析",
+        label = "Điều khiển trình duyệt",
+        description = "Cho phép điều khiển trình duyệt headless tích hợp để render trang, chụp snapshot hoặc phân tích DOM",
         isHighRisk = true,
     ),
     BACKGROUND_SERVICE(
         id = "background_service",
-        label = "后台常驻",
-        description = "允许在沙箱中注册并启动长期常驻的后台进程服务",
+        label = "Chạy nền thường trú",
+        description = "Cho phép đăng ký và khởi động dịch vụ tiến trình nền thường trú trong sandbox",
         isHighRisk = false,
     ),
     SYSTEM_PROBE(
         id = "system_probe",
-        label = "系统探测",
-        description = "允许探测沙箱 CPU、内存利用率及运行中进程列表",
+        label = "Dò hệ thống",
+        description = "Cho phép dò CPU, mức dùng bộ nhớ và danh sách tiến trình đang chạy của sandbox",
         isHighRisk = false,
     );
 

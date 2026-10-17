@@ -19,8 +19,8 @@ object WorkflowResultSchema {
     }
 
     fun validateResult(raw: String, schema: JsonObject): JsonObject {
-        require(raw.length <= MAX_RESULT_LENGTH) { "结构化结果超过 64 KiB" }
-        val value = parseBounded(raw.trim(), MAX_DEPTH + 1) as? JsonObject ?: error("结果必须为 JSON 对象，不能包含 Markdown 或说明文字")
+        require(raw.length <= MAX_RESULT_LENGTH) { "Kết quả có cấu trúc vượt quá 64 KiB" }
+        val value = parseBounded(raw.trim(), MAX_DEPTH + 1) as? JsonObject ?: error("Kết quả phải là đối tượng JSON, không được chứa Markdown hay chữ giải thích")
         checkValue(value, schema, "$", 0)
         return value
     }

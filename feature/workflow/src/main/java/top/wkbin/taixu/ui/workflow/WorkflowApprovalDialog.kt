@@ -41,7 +41,7 @@ internal fun ApprovalDialog(request: WorkflowApprovalRequest, onDecision: (Boole
                 }
             }
         },
-        dismissButton = { RuntimeOutlinedButton(onClick = { onDecision(false, emptyMap()) }) { Text("拒绝", maxLines = 1) } },
-        confirmButton = { RuntimeButton(enabled = request.reviewToken == null || reviewed, onClick = { onDecision(true, values.toMap()) }) { Text("确认执行", maxLines = 1) } },
+        dismissButton = { RuntimeOutlinedButton(onClick = { onDecision(false, emptyMap()) }) { Text("Từ chối", maxLines = 1) } },
+        confirmButton = { RuntimeButton(enabled = request.reviewToken == null || reviewed, onClick = { onDecision(true, values.toMap()) }) { Text("Xác nhận thực thi", maxLines = 1) } },
     )
 }

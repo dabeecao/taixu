@@ -34,14 +34,14 @@ object ApkArtifactVerifier {
                         isValid = false,
                         nativeAbis = abis,
                         rejectedEntries = rejected.take(20),
-                        message = "APK 包含非 ARM64 原生库：${abis.filterNot { it in allowedAbis }.joinToString()}。TaiXu 只允许 arm64-v8a。",
+                        message = "APK chứa thư viện native không phải ARM64: ${abis.filterNot { it in allowedAbis }.joinToString()}. TaiXu chỉ cho phép arm64-v8a.",
                     )
                 } else {
                     ApkArtifactVerification(
                         isValid = true,
                         nativeAbis = abis,
                         rejectedEntries = emptyList(),
-                        message = if (abis.isEmpty()) "APK 不含原生库，ABI 检查通过" else "APK ABI 检查通过：arm64-v8a",
+                        message = if (abis.isEmpty()) "APK không chứa thư viện native, kiểm tra ABI đạt" else "Kiểm tra ABI của APK đạt: arm64-v8a",
                     )
                 }
             }

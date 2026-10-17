@@ -910,7 +910,7 @@ private fun ProactiveWorkflowBanner(
                         contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 10.dp, vertical = 4.dp),
                         modifier = Modifier.height(28.dp),
                     ) {
-                        Text("运行", style = MaterialTheme.typography.labelSmall)
+                        Text("Chạy", style = MaterialTheme.typography.labelSmall)
                     }
                     IconButton(
                         onClick = { onDismiss(suggestion.workflowId) },

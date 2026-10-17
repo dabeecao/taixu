@@ -153,10 +153,10 @@ class SubagentLaneRunner(
                     operations.providerSettled(operationId, null, usage = usageEntity, round = round)
                 }
                 if (roundCalls.isEmpty() && !forceFinalAnswer && textNormalization.hasUnresolvedMarkers) {
-                    finalizer.finish(sessionId, "failed", details = "无法解析文本工具调用", laneName = laneName)
+                    finalizer.finish(sessionId, "failed", details = "Không parse được lệnh gọi công cụ dạng text", laneName = laneName)
                     return SubagentLaneResult(
                         success = false,
-                        summary = "模型返回了无法解析的文本工具调用，未将其误判为任务完成",
+                        summary = "Model trả về lệnh gọi công cụ dạng text không parse được, chưa vội coi là tác vụ xong",
                         toolCallCount = toolRoundRunner.toolCallCount,
                         termination = SubagentTermination.UNPARSEABLE_TOOL_CALL,
                         pendingApprovals = deferredApprovals.toList(),
@@ -202,9 +202,9 @@ class SubagentLaneRunner(
             SubagentLaneResult(
                 success = false,
                 summary = buildString {
-                    append("⚠️ 子智能体用尽 $toolRounds 轮工具预算仍未收束，未产出最终结论。")
+                    append("⚠️ Subagent đã dùng hết $toolRounds vòng ngân sách công cụ mà vẫn chưa hội tụ, chưa cho ra kết luận cuối.")
                     if (finalText.isNotBlank()) {
-                        append("\n\n最后阶段输出：\n")
+                        append("\n\nOutput giai đoạn cuối:\n")
                         append(finalText)
                     }
                 },
@@ -214,13 +214,13 @@ class SubagentLaneRunner(
                 blockedWrites = blockedWrites.toList(),
             )
         } catch (cancellation: CancellationException) {
-            finalizer.interrupted(sessionId, laneName, operationId, "aborted", "已取消")
+            finalizer.interrupted(sessionId, laneName, operationId, "aborted", "Đã hủy")
             throw cancellation
         } catch (throwable: Throwable) {
             val repairOutput = finalizer.interrupted(sessionId, laneName, operationId, "failed", throwable.message)
             SubagentLaneResult(
                 success = false,
-                summary = listOfNotNull(throwable.message ?: "子智能体执行失败", repairOutput).joinToString("\n\n"),
+                summary = listOfNotNull(throwable.message ?: "Subagent thực thi thất bại", repairOutput).joinToString("\n\n"),
                 toolCallCount = toolRoundRunner.toolCallCount,
                 termination = SubagentTermination.FAILED,
                 pendingApprovals = deferredApprovals.toList(),
@@ -329,27 +329,27 @@ internal fun laneSummary(
 ): String {
     if (verdict.accepted) return roundText
     return buildString {
-        appendLine("⚠️ 子任务未确认完成：${verdict.reason}")
+        appendLine("⚠️ Tác vụ con chưa xác nhận xong: ${verdict.reason}")
         if (deferredApprovals.isNotEmpty()) {
             appendLine()
-            appendLine("**需要主智能体在主会话重新发起并完成审批的调用**（后台 Lane 无法暂停等待审批）：")
+            appendLine("**Cần agent chính khởi tạo lại và hoàn tất phê duyệt lệnh gọi trong phiên chính** (Lane nền không thể tạm dừng chờ phê duyệt):")
             deferredApprovals.forEach { handoff ->
-                appendLine("- `${handoff.toolName}` 参数：${handoff.argumentsJson}")
+                appendLine("- Tham số `${handoff.toolName}`: ${handoff.argumentsJson}")
             }
         }
         if (blockedWrites.isNotEmpty()) {
             appendLine()
-            appendLine("**被写租约拦截、实际未落盘的写入**：${blockedWrites.joinToString("、")}")
-            appendLine("重新派发时请为该子任务声明 write_paths，或由主智能体自行写入。")
+            appendLine("**Lệnh ghi bị chặn bởi lease ghi, thực tế chưa ghi xuống đĩa**: ${blockedWrites.joinToString("、")}")
+            appendLine("Khi điều phối lại hãy khai báo write_paths cho tác vụ con này, hoặc để agent chính tự ghi.")
         }
         if (failedWrites.isNotEmpty()) {
             appendLine()
-            appendLine("**未确认成功的写入目标**（可能已部分写入，请按各项说明核验）：")
+            appendLine("**Đích ghi chưa xác nhận thành công** (có thể đã ghi một phần, hãy kiểm chứng theo từng hướng dẫn):")
             failedWrites.forEach { (target, reason) -> appendLine("- $target → $reason") }
         }
         if (roundText.isNotBlank()) {
             appendLine()
-            appendLine("子智能体最后输出：")
+            appendLine("Output cuối của sub-agent:")
             append(roundText)
         }
     }.trim()

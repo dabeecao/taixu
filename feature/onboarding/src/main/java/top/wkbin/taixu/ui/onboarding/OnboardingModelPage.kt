@@ -159,11 +159,11 @@ internal fun ModelSetupPage(viewModel: OnboardingViewModel?, modifier: Modifier)
                 val result = viewModel?.importProfileFromJson(jsonStr)
                 result?.fold(
                     onSuccess = { profile ->
-                        Toast.makeText(context, "成功载入模型配置「${profile.name.ifBlank { profile.model }}」", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Đã tải cấu hình mô hình \"${profile.name.ifBlank { profile.model }}\" thành công", Toast.LENGTH_SHORT).show()
                         showImportDialog = false
                     },
                     onFailure = { err ->
-                        Toast.makeText(context, "解析失败: ${err.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Phân tích thất bại: ${err.message}", Toast.LENGTH_LONG).show()
                     },
                 )
             },

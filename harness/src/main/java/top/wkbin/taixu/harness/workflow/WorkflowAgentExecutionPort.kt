@@ -101,7 +101,7 @@ class HarnessWorkflowAgentExecutionPort(
             val existing = sessions.findById(sessionId)
             val entity = (existing ?: HarnessSessionEntity(
                 id = sessionId,
-                title = "工作流 · ${request.nodeTitle}",
+                title = "Workflow · ${request.nodeTitle}",
                 createdAt = now,
                 updatedAt = now,
                 modelId = resolvedModelId,
@@ -109,7 +109,7 @@ class HarnessWorkflowAgentExecutionPort(
                 workspace = request.workspacePath,
                 approvalMode = ApprovalMode.FULL_ACCESS.id,
             )).copy(
-                title = "工作流 · ${request.nodeTitle}",
+                title = "Workflow · ${request.nodeTitle}",
                 updatedAt = now,
                 modelId = resolvedModelId ?: existing?.modelId,
                 modelVariant = resolvedVariant ?: existing?.modelVariant,

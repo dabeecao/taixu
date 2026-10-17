@@ -87,15 +87,15 @@ fun AboutCommunityScreen(
                     title = {
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             RuntimeIcon(RuntimeIconName.Check, Modifier.size(22.dp), tint = successStatusColor())
-                            Text("已是最新版本", fontWeight = FontWeight.Bold)
+                            Text("Đã là phiên bản mới nhất", fontWeight = FontWeight.Bold)
                         }
                     },
                     text = {
-                        Text("当前太墟版本 v${state.info.currentVersion} 已是最新稳定版，无需更新。")
+                        Text("Phiên bản TaiXu hiện tại v${state.info.currentVersion} đã là bản ổn định mới nhất, không cần cập nhật.")
                     },
                     confirmButton = {
                         TextButton(onClick = { viewModel?.clearUpdateState() }) {
-                            Text("确定")
+                            Text("Xác nhận")
                         }
                     },
                     dismissButton = {
@@ -104,7 +104,7 @@ fun AboutCommunityScreen(
                             viewModel?.loadCurrentReleaseNotes(currentVersion)
                             showReleaseNotesDialog = true
                         }) {
-                            Text("本版日志")
+                            Text("Nhật ký bản này")
                         }
                     },
                 )
@@ -116,13 +116,13 @@ fun AboutCommunityScreen(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         RuntimeIcon(RuntimeIconName.Alert, Modifier.size(22.dp), tint = MaterialTheme.colorScheme.error)
-                        Text("检查更新失败")
+                        Text("Kiểm tra cập nhật thất bại")
                     }
                 },
                 text = { Text(state.message) },
                 confirmButton = {
                     TextButton(onClick = { viewModel?.clearUpdateState() }) {
-                        Text("知道了")
+                        Text("Đã hiểu")
                     }
                 },
             )
@@ -152,11 +152,11 @@ fun AboutCommunityScreen(
     }
 
     RuntimeSettingsScaffold(
-        title = "关于与社区", onBack = onBack,
+        title = "Giới thiệu & cộng đồng", onBack = onBack,
     ) {
         item {
             Text(
-                text = "应用版本与更新",
+                text = "Phiên bản & cập nhật ứng dụng",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 4.dp, bottom = 4.dp),
@@ -164,9 +164,9 @@ fun AboutCommunityScreen(
             SettingsGroup {
                 SettingsRow(
                     icon = RuntimeIconName.Update,
-                    title = "检查新版本",
-                    subtitle = "基于 GitHub Releases 自动检测与在线升级",
-                    value = if (updateCheckState is UpdateCheckState.Checking) "检查中…" else "v$currentVersion",
+                    title = "Kiểm tra phiên bản mới",
+                    subtitle = "Tự động phát hiện và nâng cấp trực tuyến dựa trên GitHub Releases",
+                    value = if (updateCheckState is UpdateCheckState.Checking) "Đang kiểm tra…" else "v$currentVersion",
                     onClick = {
                         // 检查进行中禁止重复触发
                         if (updateCheckState !is UpdateCheckState.Checking) {
@@ -177,8 +177,8 @@ fun AboutCommunityScreen(
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Document,
-                    title = "版本更新日志",
-                    subtitle = "查看当前版本 (v$currentVersion) 的更新说明与功能亮点",
+                    title = "Nhật ký cập nhật phiên bản",
+                    subtitle = "Xem ghi chú cập nhật và điểm nổi bật của phiên bản hiện tại (v$currentVersion)",
                     onClick = {
                         viewModel?.loadCurrentReleaseNotes(currentVersion)
                         showReleaseNotesDialog = true
@@ -187,21 +187,21 @@ fun AboutCommunityScreen(
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 ToggleRow(
                     icon = RuntimeIconName.Update,
-                    title = "启动时自动检查更新",
-                    subtitle = "应用启动时在后台静默检测新版本",
+                    title = "Tự động kiểm tra cập nhật khi khởi động",
+                    subtitle = "Khi khởi động ứng dụng, lặng lẽ kiểm tra phiên bản mới trong nền",
                     checked = autoCheckUpdates,
                     change = { arg0 -> viewModel?.setAutoCheckUpdates(arg0) },
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Sparkles,
-                    title = "重看功能引导",
-                    subtitle = "重新展示插件中心、工作坊、多会话终端等首次使用引导",
+                    title = "Xem lại hướng dẫn tính năng",
+                    subtitle = "Hiển thị lại hướng dẫn lần đầu như trung tâm plugin, xưởng, terminal đa phiên…",
                     onClick = {
                         viewModel?.replayFirstUseGuides()
                         Toast.makeText(
                             context,
-                            "已重置功能引导，下次进入相应页面会重新展示",
+                            "Đã đặt lại hướng dẫn tính năng, lần vào trang tương ứng sẽ hiển thị lại",
                             Toast.LENGTH_SHORT,
                         ).show()
                     },
@@ -211,7 +211,7 @@ fun AboutCommunityScreen(
 
         item {
             Text(
-                text = "官方社区与开源",
+                text = "Cộng đồng chính thức & mã nguồn mở",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 4.dp, bottom = 4.dp),
@@ -219,30 +219,30 @@ fun AboutCommunityScreen(
             SettingsGroup {
                 SettingsRow(
                     icon = RuntimeIconName.Github,
-                    title = "GitHub 开源项目",
-                    subtitle = "https://github.com/wkbin/taixu · 欢迎 Star 支持",
+                    title = "Dự án mã nguồn mở GitHub",
+                    subtitle = "https://github.com/wkbin/taixu · chào đón Star ủng hộ",
                     onClick = { openBrowser(context, "https://github.com/wkbin/taixu") },
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Qq,
-                    title = "官方 QQ 交流群",
-                    subtitle = "群号: 964382207 · 点击一键加群 / 复制群号",
+                    title = "Nhóm QQ giao lưu chính thức",
+                    subtitle = "Số nhóm: 964382207 · bấm để tham gia / sao chép số nhóm",
                     value = "964382207",
                     onClick = { joinQqGroup(context, "964382207") },
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Sponsor,
-                    title = "赞助支持",
-                    subtitle = "赞助太墟 · 助力开源持续开发",
+                    title = "Ủng hộ",
+                    subtitle = "Ủng hộ TaiXu · tiếp sức phát triển mã nguồn mở",
                     onClick = onOpenSponsor,
                 )
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                 SettingsRow(
                     icon = RuntimeIconName.Info,
-                    title = "关于太墟 · TaiXu",
-                    subtitle = "Android 原生 Linux PRoot 沙箱与 AI 结对中枢",
+                    title = "Về TaiXu",
+                    subtitle = "Sandbox Linux PRoot gốc Android và trung tâm kết đôi AI",
                     onClick = { showAboutDialog = true },
                 )
             }
@@ -262,15 +262,15 @@ private fun AboutAppDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 RuntimeIcon(name = RuntimeIconName.Package, modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("太墟 · TaiXu", fontWeight = FontWeight.Bold)
+                Text("TaiXu", fontWeight = FontWeight.Bold)
             }
         },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("Android 原生 Linux PRoot 沙箱与 AI 结对编程中枢", style = MaterialTheme.typography.bodyMedium)
-                Text("版本: v$appVersion (Material 3 Expressive)", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
-                Text("架构: aarch64 · chroot-less user-space virtualization", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text("协议: Apache-2.0 License", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Sandbox Linux PRoot gốc Android và trung tâm lập trình kết đôi AI", style = MaterialTheme.typography.bodyMedium)
+                Text("Phiên bản: v$appVersion (Material 3 Expressive)", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                Text("Kiến trúc: aarch64 · chroot-less user-space virtualization", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Giấy phép: Apache-2.0 License", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(4.dp))
                 OutlinedButton(
                     onClick = onOpenReleaseNotes,
@@ -279,7 +279,7 @@ private fun AboutAppDialog(
                 ) {
                     RuntimeIcon(RuntimeIconName.Document, Modifier.size(16.dp), MaterialTheme.colorScheme.primary)
                     Spacer(Modifier.width(8.dp))
-                    Text("本版更新日志")
+                    Text("Nhật ký cập nhật bản này")
                 }
                 OutlinedButton(
                     onClick = { joinQqGroup(context, "964382207") },
@@ -288,12 +288,12 @@ private fun AboutAppDialog(
                 ) {
                     RuntimeIcon(RuntimeIconName.Chat, Modifier.size(16.dp), MaterialTheme.colorScheme.primary)
                     Spacer(Modifier.width(8.dp))
-                    Text("加入 QQ 交流群 (964382207)")
+                    Text("Tham gia nhóm QQ (964382207)")
                 }
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text("确定") }
+            TextButton(onClick = onDismiss) { Text("Xác nhận") }
         },
     )
 }
@@ -312,7 +312,7 @@ private fun UpdateInfoDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 RuntimeIcon(RuntimeIconName.Refresh, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("发现新版本 v${info.latestVersion}", fontWeight = FontWeight.Bold)
+                Text("Phát hiện phiên bản mới v${info.latestVersion}", fontWeight = FontWeight.Bold)
             }
         },
         text = {
@@ -325,7 +325,7 @@ private fun UpdateInfoDialog(
                     shape = RoundedCornerShape(8.dp),
                 ) {
                     Text(
-                        text = "当前版本: v${info.currentVersion}  ➔  最新版本: v${info.latestVersion}",
+                        text = "Phiên bản hiện tại: v${info.currentVersion}  ➔  Phiên bản mới nhất: v${info.latestVersion}",
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
@@ -334,7 +334,7 @@ private fun UpdateInfoDialog(
 
                 if (info.releaseNotes.isNotBlank()) {
                     Text(
-                        text = "更新日志：",
+                        text = "Nhật ký cập nhật:",
                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                     )
                     Surface(
@@ -351,7 +351,7 @@ private fun UpdateInfoDialog(
 
                 if (isDownloading) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text("正在下载更新安装包...", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        Text("Đang tải gói cài đặt cập nhật...", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                         if (downloadProgress != null) {
                             LinearProgressIndicator(
                                 progress = { downloadProgress },
@@ -372,17 +372,17 @@ private fun UpdateInfoDialog(
                     onClick = onDownload,
                     enabled = !isDownloading,
                 ) {
-                    Text(if (isDownloading) "正在下载…" else "应用内立即更新")
+                    Text(if (isDownloading) "Đang tải xuống…" else "Cập nhật ngay trong ứng dụng")
                 }
             } else {
                 Button(onClick = onOpenBrowser) {
-                    Text("前往 GitHub 下载")
+                    Text("Đến GitHub để tải")
                 }
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss, enabled = !isDownloading) {
-                Text("稍后再说")
+                Text("Để sau")
             }
         },
     )
@@ -398,9 +398,9 @@ private fun joinQqGroup(context: Context, groupId: String = "964382207") {
     }.onFailure {
         // 剪贴板兜底
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-        val clip = ClipData.newPlainText("太墟官方交流群", groupId)
+        val clip = ClipData.newPlainText("Nhóm giao lưu chính thức của TaiXu", groupId)
         clipboard?.setPrimaryClip(clip)
-        Toast.makeText(context, "已复制 QQ 群号：$groupId，可打开 QQ 搜索加入", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Đã sao chép số nhóm QQ: $groupId, mở QQ tìm để tham gia", Toast.LENGTH_LONG).show()
     }
 }
 
@@ -414,7 +414,7 @@ private fun openBrowser(context: Context, url: String) {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
         val clip = ClipData.newPlainText("URL", url)
         clipboard?.setPrimaryClip(clip)
-        Toast.makeText(context, "已复制链接：$url", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Đã sao chép liên kết: $url", Toast.LENGTH_SHORT).show()
     }
 }
 
@@ -431,7 +431,7 @@ private fun VersionReleaseNotesDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 RuntimeIcon(RuntimeIconName.Document, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
-                Text("太墟 v$version 更新说明", fontWeight = FontWeight.Bold)
+                Text("Ghi chú cập nhật TaiXu v$version", fontWeight = FontWeight.Bold)
             }
         },
         text = {
@@ -462,15 +462,15 @@ private fun VersionReleaseNotesDialog(
                         )
                     }
                 } else {
-                    Text("暂无当前版本的更新日志", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Chưa có ghi chú cập nhật cho phiên bản này", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text("确定") }
+            TextButton(onClick = onDismiss) { Text("Xác nhận") }
         },
         dismissButton = {
-            TextButton(onClick = onOpenHistory) { Text("查看全部历史") }
+            TextButton(onClick = onOpenHistory) { Text("Xem toàn bộ lịch sử") }
         },
     )
 }

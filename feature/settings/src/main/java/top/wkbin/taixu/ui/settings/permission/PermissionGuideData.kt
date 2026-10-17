@@ -67,32 +67,32 @@ enum class KeepaliveTopic(
 ) {
     AUTOSTART(
         id = "autostart",
-        title = "自启动与后台唤醒",
-        subtitle = "允许系统在开机或后台需要时自动拉起沙箱与 Agent 服务",
+        title = "Tự khởi động & đánh thức nền",
+        subtitle = "Cho phép hệ thống tự khởi động sandbox và dịch vụ Agent khi mở máy hoặc cần chạy nền",
         icon = RuntimeIconName.Cpu,
     ),
     BATTERY_UNRESTRICTED(
         id = "battery_unrestricted",
-        title = "电池优化无限制",
-        subtitle = "豁免系统省电策略与 Doze 模式，防止息屏后 PRoot 进程被冻结",
+        title = "Tối ưu pin không giới hạn",
+        subtitle = "Miễn chính sách tiết kiệm pin và chế độ Doze, tránh tiến trình PRoot bị đóng băng sau khi tắt màn hình",
         icon = RuntimeIconName.Battery,
     ),
     LOCK_RECENTS(
         id = "lock_recents",
-        title = "多任务卡片加锁",
-        subtitle = "在最近任务列表中锁定太墟，防止一键清理时杀死前台服务",
+        title = "Khóa thẻ đa nhiệm",
+        subtitle = "Khóa TaiXu trong danh sách tác vụ gần đây, tránh bị dọn dẹp một chạm giết dịch vụ nền trước",
         icon = RuntimeIconName.Shield,
     ),
     FLOATING_OVERLAY(
         id = "floating_overlay",
-        title = "悬浮窗与后台弹出",
-        subtitle = "允许在后台运行时弹出构建完成或 Agent 交互通知与窗口",
+        title = "Cửa sổ nổi & bật lên nền",
+        subtitle = "Cho phép hiện thông báo/cửa sổ khi build xong hoặc Agent tương tác lúc chạy nền",
         icon = RuntimeIconName.Terminal,
     ),
     NOTIFICATION(
         id = "notification",
-        title = "通知与前台常驻",
-        subtitle = "保持前台保活服务通知栏显示，确保 Linux 运行时最高优先级存活",
+        title = "Thông báo & thường trú nền trước",
+        subtitle = "Giữ thông báo dịch vụ nền trước hiển thị, đảm bảo Linux runtime sống với độ ưu tiên cao nhất",
         icon = RuntimeIconName.Chat,
     ),
 }

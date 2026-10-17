@@ -299,7 +299,7 @@ fun SkillSecurityAuditDialog(
                         containerColor = MaterialTheme.colorScheme.error,
                     ),
                 ) {
-                    Text("安全策略已阻断")
+                    Text("Đã bị chính sách bảo mật chặn")
                 }
             } else {
                 RuntimeButton(
@@ -315,16 +315,16 @@ fun SkillSecurityAuditDialog(
                             strokeWidth = 2.dp,
                             color = MaterialTheme.colorScheme.onPrimary,
                         )
-                        Text("正在安装…")
+                        Text("Đang cài đặt…")
                     } else {
-                        Text(if (audit.hasWarnings) "了解风险并确认安装" else "通过审查并安装")
+                        Text(if (audit.hasWarnings) "Đã hiểu rủi ro và xác nhận cài đặt" else "Vượt kiểm tra và cài đặt")
                     }
                 }
             }
         },
         dismissButton = {
             RuntimeOutlinedButton(onClick = onDismiss) {
-                Text(if (isBlocked) "关闭" else "放弃")
+                Text(if (isBlocked) "Đóng" else "Bỏ qua")
             }
         },
     )

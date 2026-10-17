@@ -46,20 +46,20 @@ fun AgentEcoSettingsScreen(
 
     PersonalizationScaffold(stringResource(R.string.personal_agents_title), onBack) {
         item {
-            PersonalizationSection("模型档案与提供商") {
+            PersonalizationSection("Hồ sơ mô hình & nhà cung cấp") {
                 PreferenceSurface(first = true, last = false) {
                     SettingsRow(
                         icon = RuntimeIconName.Model,
-                        title = "模型档案管理",
+                        title = "Quản lý hồ sơ mô hình",
                         subtitle = stringResource(R.string.settings_nav_models_summary),
-                        value = if (models.isEmpty()) "未配置" else "${models.size} 个模型",
+                        value = if (models.isEmpty()) "Chưa cấu hình" else "${models.size} mô hình",
                         onClick = onOpenModelProfiles,
                     )
                 }
                 PreferenceSurface(first = false, last = false) {
                     SettingsRow(
                         icon = RuntimeIconName.Cpu,
-                        title = "本地 LLM",
+                        title = "LLM cục bộ",
                         subtitle = stringResource(R.string.settings_nav_local_summary),
                         onClick = onOpenLocalLlm,
                     )
@@ -67,16 +67,16 @@ fun AgentEcoSettingsScreen(
                 PreferenceSurface(first = false, last = false) {
                     SettingsRow(
                         icon = RuntimeIconName.Chat,
-                        title = "快捷短语与常用指令",
+                        title = "Cụm từ nhanh và lệnh thường dùng",
                         subtitle = stringResource(R.string.settings_nav_phrases_summary),
-                        value = "${phrases.count { it.isEnabled }} 条已启用",
+                        value = "${phrases.count { it.isEnabled }} cụm từ đã bật",
                         onClick = onOpenQuickPhrases,
                     )
                 }
                 PreferenceSurface(first = false, last = true) {
                     SettingsRow(
                         icon = RuntimeIconName.Speed,
-                        title = "数据统计与用量分析",
+                        title = "Thống kê dữ liệu & phân tích mức dùng",
                         subtitle = stringResource(R.string.settings_nav_stats_summary),
                         onClick = onOpenStats,
                     )
@@ -85,7 +85,7 @@ fun AgentEcoSettingsScreen(
         }
 
         item {
-            PersonalizationSection("虚拟屏") {
+            PersonalizationSection("Màn hình ảo") {
                 PreferenceSurface(first = true, last = true) {
                     PhoneAgentSettingsEntry(onOpen = onOpenPhoneAgent)
                 }
@@ -93,11 +93,11 @@ fun AgentEcoSettingsScreen(
         }
 
         item {
-            PersonalizationSection("工具与插件生态") {
+            PersonalizationSection("Sinh thái công cụ & plugin") {
                 PreferenceSurface(first = true, last = false) {
                     SettingsRow(
                         icon = RuntimeIconName.Wrench,
-                        title = "插件与底层工具中心",
+                        title = "Trung tâm plugin & công cụ nền tảng",
                         subtitle = if (activeServerId != null) stringResource(R.string.settings_nav_tools_remote_summary) else stringResource(R.string.settings_nav_tools_summary),
                         onClick = if (activeServerId != null) null else onOpenToolCenter,
                     )
@@ -105,24 +105,24 @@ fun AgentEcoSettingsScreen(
                 PreferenceSurface(first = false, last = false) {
                     SettingsRow(
                         icon = RuntimeIconName.Sparkles,
-                        title = "智能体中枢 (CC-Switch)",
+                        title = "Trung tâm agent (CC-Switch)",
                         subtitle = stringResource(R.string.settings_nav_cc_summary),
                         onClick = onOpenCcSwitch,
                     )
                 }
                 PreferenceSurface(first = false, last = false) {
-                    SettingsRow(icon = RuntimeIconName.Bot, title = "Agent 执行与上下文", subtitle = stringResource(R.string.settings_nav_execution_summary), onClick = onOpenAgentSettings)
+                    SettingsRow(icon = RuntimeIconName.Bot, title = "Agent thực thi & ngữ cảnh", subtitle = stringResource(R.string.settings_nav_execution_summary), onClick = onOpenAgentSettings)
                 }
                 PreferenceSurface(first = false, last = false) {
-                    SettingsRow(icon = RuntimeIconName.Bot, title = "子智能体角色", subtitle = stringResource(R.string.settings_nav_roles_summary), onClick = onOpenSubagentSettings)
+                    SettingsRow(icon = RuntimeIconName.Bot, title = "Vai trò subagent", subtitle = stringResource(R.string.settings_nav_roles_summary), onClick = onOpenSubagentSettings)
                 }
                 PreferenceSurface(first = false, last = false) {
-                    SettingsRow(icon = RuntimeIconName.Sparkles, title = "Skills 与插件", subtitle = stringResource(R.string.settings_nav_skills_summary), value = "${skills.count { it.isEnabled }} 个技能", onClick = onOpenSkillSettings)
+                    SettingsRow(icon = RuntimeIconName.Sparkles, title = "Skills & plugin", subtitle = stringResource(R.string.settings_nav_skills_summary), value = "${skills.count { it.isEnabled }} skill", onClick = onOpenSkillSettings)
                 }
                 PreferenceSurface(first = false, last = true) {
                     SettingsRow(
                         icon = RuntimeIconName.Network,
-                        title = "MCP 协议生态与服务",
+                        title = "Sinh thái & dịch vụ giao thức MCP",
                         subtitle = stringResource(R.string.settings_nav_mcp_summary),
                         onClick = onOpenMcpSettings,
                     )

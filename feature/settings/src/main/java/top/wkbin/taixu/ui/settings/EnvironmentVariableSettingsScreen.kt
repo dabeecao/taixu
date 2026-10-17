@@ -94,20 +94,20 @@ fun EnvironmentVariableSettingsScreen(
     showDelete?.let { entry ->
         RuntimeAlertDialog(
             onDismissRequest = { deleteKey = null },
-            title = { Text("删除环境变量") },
-            text = { Text("确定删除 ${entry.key}？") },
-            confirmButton = { TextButton(onClick = { viewModel?.deleteEnvironmentVariable(entry.id); deleteKey = null }) { Text("删除") } },
-            dismissButton = { TextButton(onClick = { deleteKey = null }) { Text("取消") } },
+            title = { Text("Xóa biến môi trường") },
+            text = { Text("Xác nhận xóa ${entry.key}?") },
+            confirmButton = { TextButton(onClick = { viewModel?.deleteEnvironmentVariable(entry.id); deleteKey = null }) { Text("Xóa") } },
+            dismissButton = { TextButton(onClick = { deleteKey = null }) { Text("Hủy") } },
         )
     }
 
     RuntimeSettingsScaffold(
-        title = "环境变量", onBack = onBack,
+        title = "Biến môi trường", onBack = onBack,
         actions = {
-            IconButton(onClick = { viewModel?.refreshEnvironmentVariables() }, contentDescription = "刷新环境变量", enabled = !loading && runtimeState is RuntimeState.Ready) {
+            IconButton(onClick = { viewModel?.refreshEnvironmentVariables() }, contentDescription = "Làm mới biến môi trường", enabled = !loading && runtimeState is RuntimeState.Ready) {
                 RuntimeIcon(RuntimeIconName.Refresh)
             }
-            IconButton(onClick = { openEnvironmentEditor(null, "", "") }, contentDescription = "添加环境变量", enabled = !loading && runtimeState is RuntimeState.Ready) {
+            IconButton(onClick = { openEnvironmentEditor(null, "", "") }, contentDescription = "Thêm biến môi trường", enabled = !loading && runtimeState is RuntimeState.Ready) {
                 RuntimeIcon(RuntimeIconName.Plus)
             }
         },
@@ -116,8 +116,8 @@ fun EnvironmentVariableSettingsScreen(
             SettingsGroup {
                 SettingsRow(
                     icon = RuntimeIconName.Shield,
-                    title = "Agent 隐私遮盖",
-                    subtitle = "仅遮盖发送给 Agent 和写入对话的变量值；本页仍显示明文",
+                    title = "Che mờ riêng tư Agent",
+                    subtitle = "Chỉ che mờ giá trị biến gửi cho Agent và ghi vào trò chuyện; trang này vẫn hiện văn bản rõ",
                     trailing = { Switch(checked = privacyMode, onCheckedChange = { arg0 -> viewModel?.setEnvironmentPrivacyMode(arg0) }) },
                 )
             }
@@ -133,7 +133,7 @@ fun EnvironmentVariableSettingsScreen(
                     RuntimeIcon(RuntimeIconName.Alert, tint = semanticColors().warning)
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
-                            "警告 · 修改环境变量可能导致运行异常",
+                            "Cảnh báo · Sửa biến môi trường có thể khiến ứng dụng chạy bất thường",
                             style = MaterialTheme.typography.titleSmall,
                             color = semanticColors().onWarningContainer,
                         )
@@ -148,7 +148,7 @@ fun EnvironmentVariableSettingsScreen(
         }
         item {
             Text(
-                "用户变量保存在 $activeDistroId 的 Linux /etc/profile.d 中，并在下一次命令或终端会话启动时生效。值以受限文件权限保存。",
+                "Biến người dùng được lưu trong Linux /etc/profile.d của $activeDistroId, có hiệu lực từ lần chạy lệnh hoặc phiên terminal tiếp theo. Giá trị được lưu với quyền tệp hạn chế.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -167,8 +167,8 @@ fun EnvironmentVariableSettingsScreen(
         }
         item {
             SectionHeader(
-                title = "用户变量",
-                subtitle = "可编辑的 TaiXu 用户配置",
+                title = "Biến người dùng",
+                subtitle = "Cấu hình người dùng TaiXu có thể chỉnh sửa",
                 trailing = { Text(entries.size.toString(), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) },
             )
         }
@@ -179,7 +179,7 @@ fun EnvironmentVariableSettingsScreen(
                 }
             }
         } else if (entries.isEmpty()) {
-            item { SettingsDetailCard(modifier = Modifier.fillMaxWidth()) { Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) { Text("暂无用户变量", style = MaterialTheme.typography.titleMedium); Text("点击右上角 + 添加", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) } } }
+            item { SettingsDetailCard(modifier = Modifier.fillMaxWidth()) { Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) { Text("Chưa có biến người dùng", style = MaterialTheme.typography.titleMedium); Text("Chạm dấu + góc trên bên phải để thêm", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) } } }
         } else {
             items(entries, key = { it.id }) { entry ->
                 SettingsDetailCard(
@@ -205,7 +205,7 @@ fun EnvironmentVariableSettingsScreen(
                                 )
                             }
                             Text(
-                                values[entry.key].orEmpty().ifEmpty { "（空值）" },
+                                values[entry.key].orEmpty().ifEmpty { "(trống)" },
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontFamily = FontFamily.Monospace,
@@ -213,16 +213,16 @@ fun EnvironmentVariableSettingsScreen(
                                 overflow = TextOverflow.Ellipsis,
                             )
                         }
-                        IconButton(onClick = { openEnvironmentEditor(entry, entry.key, values[entry.key].orEmpty()) }, contentDescription = "编辑 ${entry.key}") { RuntimeIcon(RuntimeIconName.Edit) }
-                        IconButton(onClick = { deleteKey = entry.id }, contentDescription = "删除 ${entry.key}") { RuntimeIcon(RuntimeIconName.Trash, tint = MaterialTheme.colorScheme.error) }
+                        IconButton(onClick = { openEnvironmentEditor(entry, entry.key, values[entry.key].orEmpty()) }, contentDescription = "Chỉnh sửa ${entry.key}") { RuntimeIcon(RuntimeIconName.Edit) }
+                        IconButton(onClick = { deleteKey = entry.id }, contentDescription = "Xóa ${entry.key}") { RuntimeIcon(RuntimeIconName.Trash, tint = MaterialTheme.colorScheme.error) }
                     }
                 }
             }
         }
         item {
             SectionHeader(
-                title = "当前有效环境",
-                subtitle = "新命令实际可见的变量与值",
+                title = "Môi trường hiệu lực hiện tại",
+                subtitle = "Biến và giá trị mà lệnh mới thực sự thấy được",
                 trailing = { Text(effectiveEntries.size.toString(), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) },
             )
         }
@@ -235,7 +235,7 @@ fun EnvironmentVariableSettingsScreen(
         } else if (effectiveEntries.isEmpty()) {
             item {
                 SettingsDetailCard(modifier = Modifier.fillMaxWidth()) {
-                    Text("暂无可读取的运行时环境", modifier = Modifier.padding(20.dp), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Chưa có môi trường runtime đọc được", modifier = Modifier.padding(20.dp), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         } else {
@@ -247,7 +247,7 @@ fun EnvironmentVariableSettingsScreen(
                         SettingsRow(
                             icon = RuntimeIconName.Key,
                             title = entry.key,
-                            subtitle = entry.value.ifEmpty { "（空值）" },
+                            subtitle = entry.value.ifEmpty { "(trống)" },
                             onClick = {
                                 if (managedEntry == null) {
                                     openEnvironmentEditor(null, entry.key, entry.value)
@@ -277,28 +277,28 @@ private fun EnvironmentVariableEditor(
     var note by androidx.compose.runtime.saveable.rememberSaveable(entry?.id, initialKey) { mutableStateOf(entry?.note.orEmpty()) }
     RuntimeAlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (entry != null) "编辑环境变量" else if (initialKey.isNotBlank()) "配置环境变量" else "添加环境变量") },
+        title = { Text(if (entry != null) "Chỉnh sửa biến môi trường" else if (initialKey.isNotBlank()) "Cấu hình biến môi trường" else "Thêm biến môi trường") },
         text = {
             Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.Top) {
                     RuntimeIcon(RuntimeIconName.Alert, Modifier.size(18.dp), MaterialTheme.colorScheme.tertiary)
                     Text(
                         if (entry == null && initialKey.isNotBlank()) {
-                            "这会在用户配置中覆盖 Linux 当前值。错误配置可能导致相关命令无法运行。"
+                            "Thao tác này sẽ ghi đè giá trị hiện tại của Linux trong cấu hình người dùng. Cấu hình sai có thể khiến các lệnh liên quan không chạy được."
                         } else {
-                            "修改后会影响新启动的命令与终端，请确认变量名称和值正确。"
+                            "Thay đổi sẽ ảnh hưởng các lệnh và terminal khởi động sau đó, hãy kiểm tra tên biến và giá trị cho đúng."
                         },
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.tertiary,
                     )
                 }
-                RuntimeFilledTextField(value = key, onValueChange = { key = it.uppercase() }, label = { Text("名称") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                RuntimeFilledTextField(value = value, onValueChange = { value = it }, label = { Text("值") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                RuntimeFilledTextField(value = note, onValueChange = { note = it }, label = { Text("备注（可选）") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                RuntimeFilledTextField(value = key, onValueChange = { key = it.uppercase() }, label = { Text("Tên") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                RuntimeFilledTextField(value = value, onValueChange = { value = it }, label = { Text("Giá trị") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                RuntimeFilledTextField(value = note, onValueChange = { note = it }, label = { Text("Ghi chú (tùy chọn)") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
             }
         },
-        confirmButton = { TextButton(onClick = { onSave(key, value, note) }, enabled = key.isNotBlank() && (entry != null || value.isNotEmpty())) { Text("保存") } },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("取消") } },
+        confirmButton = { TextButton(onClick = { onSave(key, value, note) }, enabled = key.isNotBlank() && (entry != null || value.isNotEmpty())) { Text("Lưu") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Hủy") } },
     )
 }

@@ -170,7 +170,7 @@ class WorkflowViewModel(
             _viewingRunId.value = result.executionId
             _historySnapshot.value = null
             if (!Settings.canDrawOverlays(appContext)) {
-                _error.value = "未授予悬浮窗权限，工作流进度仅在应用内显示。可在系统设置中开启「显示在其他应用上层」。"
+                _error.value = "Chưa cấp quyền cửa sổ nổi, tiến độ workflow chỉ hiện trong ứng dụng. Có thể bật [Hiển thị trên ứng dụng khác] trong cài đặt hệ thống."
             }
         }
     }
@@ -244,7 +244,7 @@ class WorkflowViewModel(
     }
 
     fun beginConnection(nodeId: String) {
-        _editorState.value = _editorState.value?.copy(connectionSourceId = nodeId, selectedNodeId = nodeId, message = "请选择目标节点")
+        _editorState.value = _editorState.value?.copy(connectionSourceId = nodeId, selectedNodeId = nodeId, message = "Vui lòng chọn nút đích")
     }
 
     fun cancelConnection() {
@@ -351,10 +351,10 @@ class WorkflowViewModel(
             runCatching { repository.upsert(history.current.copy(updatedAt = System.currentTimeMillis())) }
                 .onSuccess {
                     history.markSaved()
-                    publishEditor(history, selectedNodeId = _editorState.value?.selectedNodeId, message = "已保存")
+                    publishEditor(history, selectedNodeId = _editorState.value?.selectedNodeId, message = "Đã lưu")
                 }
                 .onFailure { error ->
-                    _editorState.value = _editorState.value?.copy(isSaving = false, message = error.message ?: "保存失败")
+                    _editorState.value = _editorState.value?.copy(isSaving = false, message = error.message ?: "Lưu thất bại")
                 }
         }
     }
@@ -372,7 +372,7 @@ class WorkflowViewModel(
                 publishEditor(history, selectedNodeId)
             }
             .onFailure { error ->
-                _editorState.value = _editorState.value?.copy(message = error.message ?: "编辑失败")
+                _editorState.value = _editorState.value?.copy(message = error.message ?: "Chỉnh sửa thất bại")
             }
     }
 

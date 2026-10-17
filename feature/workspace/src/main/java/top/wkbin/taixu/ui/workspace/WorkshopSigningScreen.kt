@@ -428,7 +428,7 @@ private fun SigningField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(if (optional) "$label（可选）" else label) },
+        label = { Text(if (optional) "$label (tùy chọn)" else label) },
         singleLine = true,
         isError = isError,
         supportingText = supportingText?.let { hint -> { Text(hint) } },

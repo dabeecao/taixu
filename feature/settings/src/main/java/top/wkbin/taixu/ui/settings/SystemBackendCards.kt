@@ -23,7 +23,7 @@ internal fun BackendChoiceCard(title: String, detail: String, icon: RuntimeIconN
                 Text(title, style = MaterialTheme.typography.titleMedium)
                 Text(detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
             }
-            if (selected) StatusBadge("当前")
+            if (selected) StatusBadge("Hiện tại")
         }
     }
 }
@@ -41,13 +41,13 @@ internal fun ConnectionProfileCard(server: RemoteServer, selected: Boolean, onSe
                     Text("${server.username}@${server.host}:${server.port}", style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
-                RuntimeIconButton(onClick = onEdit, contentDescription = "编辑 ${server.name}") { RuntimeIcon(RuntimeIconName.Edit) }
-                RuntimeIconButton(onClick = onRemove, contentDescription = "移除 ${server.name}") { RuntimeIcon(RuntimeIconName.Trash, tint = MaterialTheme.colorScheme.error) }
+                RuntimeIconButton(onClick = onEdit, contentDescription = "Chỉnh sửa ${server.name}") { RuntimeIcon(RuntimeIconName.Edit) }
+                RuntimeIconButton(onClick = onRemove, contentDescription = "Gỡ ${server.name}") { RuntimeIcon(RuntimeIconName.Trash, tint = MaterialTheme.colorScheme.error) }
             }
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(server.workspace, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                StatusBadge(if (selected) "主系统" else if (server.authentication == SshAuthentication.PRIVATE_KEY) "密钥认证" else "密码认证")
+                StatusBadge(if (selected) "Hệ thống chính" else if (server.authentication == SshAuthentication.PRIVATE_KEY) "Xác thực khóa" else "Xác thực mật khẩu")
             }
         }
     }

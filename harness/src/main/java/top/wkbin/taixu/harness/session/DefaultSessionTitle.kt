@@ -68,7 +68,7 @@ class QueuedInstructionRecorder(
 
     suspend fun record(sessionId: String, pending: PendingMessage) {
         val taskId = pending.taskId ?: return
-        val description = pending.text.ifBlank { "用户发送了 ${pending.imageUrls.size} 张图片" }
+        val description = pending.text.ifBlank { "Người dùng đã gửi ${pending.imageUrls.size} ảnh" }
         val title = DefaultSessionTitle.fromInstruction(description)
         tasks.createQueued(
             id = taskId,

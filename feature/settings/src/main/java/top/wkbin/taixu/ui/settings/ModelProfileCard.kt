@@ -129,7 +129,7 @@ internal fun ModelProfileCard(
                         modifier = Modifier
                         .minimumInteractiveComponentSize()
                         .size(48.dp),
-                        contentDescription = "更多操作",
+                        contentDescription = "Thao tác khác",
                     ) {
                         RuntimeIcon(
                             name = RuntimeIconName.More,
@@ -146,7 +146,7 @@ internal fun ModelProfileCard(
                             text = {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                     RuntimeIcon(RuntimeIconName.Edit, Modifier.size(16.dp))
-                                    Text("编辑档案")
+                                    Text("Chỉnh sửa hồ sơ")
                                 }
                             },
                             onClick = {
@@ -158,7 +158,7 @@ internal fun ModelProfileCard(
                             text = {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                     RuntimeIcon(RuntimeIconName.OpenInNew, Modifier.size(16.dp))
-                                    Text("导出为 JSON")
+                                    Text("Xuất ra JSON")
                                 }
                             },
                             onClick = {
@@ -171,7 +171,7 @@ internal fun ModelProfileCard(
                                 text = {
                                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                         RuntimeIcon(RuntimeIconName.Check, Modifier.size(16.dp))
-                                        Text("设为激活")
+                                        Text("Kích hoạt")
                                     }
                                 },
                                 onClick = {
@@ -185,7 +185,7 @@ internal fun ModelProfileCard(
                             text = {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                     RuntimeIcon(RuntimeIconName.Trash, Modifier.size(16.dp), MaterialTheme.colorScheme.error)
-                                    Text("删除档案", color = MaterialTheme.colorScheme.error)
+                                    Text("Xóa hồ sơ", color = MaterialTheme.colorScheme.error)
                                 }
                             },
                             onClick = {
@@ -214,7 +214,7 @@ internal fun ModelProfileCard(
                     onClick = onActivate,
                     contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
                 ) {
-                    Text("设为激活", style = MaterialTheme.typography.labelLarge)
+                    Text("Kích hoạt", style = MaterialTheme.typography.labelLarge)
                 }
             }
 

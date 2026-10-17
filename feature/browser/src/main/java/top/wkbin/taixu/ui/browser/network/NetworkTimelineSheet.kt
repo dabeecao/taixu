@@ -62,10 +62,10 @@ fun NetworkTimelineSheet(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     RuntimeTextButton(onClick = { detailId = null }) {
-                        Text("← 返回", color = MaterialTheme.colorScheme.primary)
+                        Text("← Quay lại", color = MaterialTheme.colorScheme.primary)
                     }
                     Text(
-                        "请求详情",
+                        "Chi tiết yêu cầu",
                         style = MaterialTheme.typography.titleMedium,
                     )
                 }
@@ -94,12 +94,12 @@ fun NetworkTimelineSheet(
                         RuntimeTab(
                             selected = selectedTab == 0,
                             onClick = { selectedTab = 0 },
-                            text = { Text("请求 (${requests.size})", style = MaterialTheme.typography.labelMedium) },
+                            text = { Text("Yêu cầu (${requests.size})", style = MaterialTheme.typography.labelMedium) },
                         )
                         RuntimeTab(
                             selected = selectedTab == 1,
                             onClick = { selectedTab = 1 },
-                            text = { Text("Hook 命中 (${hookHits.size})", style = MaterialTheme.typography.labelMedium) },
+                            text = { Text("Hook khớp (${hookHits.size})", style = MaterialTheme.typography.labelMedium) },
                         )
                     }
                     if (selectedTab == 0) {
@@ -115,7 +115,7 @@ fun NetworkTimelineSheet(
         },
         confirmButton = {
             RuntimeTextButton(onClick = onDismiss) {
-                Text("关闭", color = MaterialTheme.colorScheme.primary)
+                Text("Đóng", color = MaterialTheme.colorScheme.primary)
             }
         },
     )

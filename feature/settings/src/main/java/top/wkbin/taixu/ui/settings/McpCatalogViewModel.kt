@@ -74,7 +74,7 @@ class McpCatalogViewModel(
     fun onToggleRequested(serverId: String, enabled: Boolean): Boolean {
         if (!enabled) return true
         val component = installBlocked.value[serverId] ?: return true
-        _installNotice.value = "「$component」尚未安装。请到「设置 → 工具中心 → MCP 能力仓库」安装后再开启。"
+        _installNotice.value = "「$component」chưa được cài. Hãy đến 「Cài đặt → Trung tâm công cụ → Kho năng lực MCP」cài rồi bật lại."
         return false
     }
 
@@ -105,7 +105,7 @@ class McpCatalogViewModel(
         if (_checkingUpdates.value) return
         val targets = installedEntries()
         if (targets.isEmpty()) {
-            _updateNotice.value = "还没有已安装的能力。先装配一个再检查更新。"
+            _updateNotice.value = "Chưa có năng lực nào được cài. Hãy lắp ráp một cái rồi kiểm tra cập nhật."
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
@@ -114,8 +114,8 @@ class McpCatalogViewModel(
                 val results = targets.associate { it.id to updater.check(it) }
                 _updateStatuses.value = _updateStatuses.value + results
             } catch (e: Exception) {
-                logger.w("检查 MCP 能力更新失败: ${e.message}", e)
-                _updateNotice.value = "检查更新失败，请确认本机 Linux 运行时可用后重试"
+                logger.w("Kiểm tra cập nhật năng lực MCP thất bại: ${e.message}", e)
+                _updateNotice.value = "Kiểm tra cập nhật thất bại, hãy chắc chắn Linux runtime nội bộ khả dụng rồi thử lại"
             } finally {
                 _checkingUpdates.value = false
             }
@@ -133,13 +133,13 @@ class McpCatalogViewModel(
                 val status = updater.upgrade(entry)
                 _updateStatuses.value = _updateStatuses.value + (entryId to status)
                 _updateNotice.value = if (status.error.isBlank()) {
-                    "「${entry.name}」当前版本 v${status.installedVersion}；后续调用自动使用已安装版本，无需手动重启"
+                    "「${entry.name}」phiên bản hiện tại v${status.installedVersion}; các lệnh gọi sau tự dùng bản đã cài, không cần khởi động lại thủ công"
                 } else {
-                    "「${entry.name}」升级失败：${status.error}"
+                    "「${entry.name}」nâng cấp thất bại: ${status.error}"
                 }
             } catch (e: Exception) {
-                logger.w("升级 MCP 能力失败: $entryId, ${e.message}", e)
-                _updateNotice.value = "「${entry.name}」升级失败，请稍后重试"
+                logger.w("Nâng cấp năng lực MCP thất bại: $entryId, ${e.message}", e)
+                _updateNotice.value = "「${entry.name}」nâng cấp thất bại, vui lòng thử lại sau"
             } finally {
                 _upgradingId.value = null
             }
@@ -150,7 +150,7 @@ class McpCatalogViewModel(
 
     private fun blockedByRemote(): Boolean {
         if (remoteServers.activeId.value == null) return false
-        _updateNotice.value = "当前主系统为 SSH 远程服务器，MCP 能力仅安装在本机 PRoot；请先在「Linux 系统管理」切回本地系统。"
+        _updateNotice.value = "Hệ thống chính hiện tại là máy chủ SSH từ xa, năng lực MCP chỉ cài trên PRoot nội bộ; hãy chuyển về hệ thống nội bộ trong 「Quản lý hệ thống Linux」trước."
         return true
     }
 
@@ -169,9 +169,9 @@ class McpCatalogViewModel(
                         componentId != null && componentId in installed
                     }
                     runCatching { mcpServerRepository.syncInstalledCapabilities(installed) }
-                        .onFailure { logger.w("同步 MCP 能力安装状态失败: ${it.message}", it) }
+                        .onFailure { logger.w("Đồng bộ trạng thái cài đặt năng lực MCP thất bại: ${it.message}", it) }
                 }
-                .onFailure { logger.w("探测开发套件组件状态失败: ${it.message}", it) }
+                .onFailure { logger.w("Dò trạng thái thành phần bộ dev thất bại: ${it.message}", it) }
         }
     }
 

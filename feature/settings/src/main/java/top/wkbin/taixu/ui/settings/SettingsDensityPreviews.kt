@@ -22,21 +22,21 @@ import top.wkbin.taixu.ui.components.RuntimePreview
 private fun SettingsDensityPreview() {
     RuntimePreview {
         Column(Modifier.verticalScroll(rememberScrollState()).padding(16.dp)) {
-            PersonalizationSection("模型档案与提供商") {
+            PersonalizationSection("Hồ sơ mô hình & nhà cung cấp") {
                 PreferenceSurface(last = false) {
-                    SettingsRow(RuntimeIconName.Model, "模型档案管理",
-                        stringResource(R.string.settings_nav_models_summary), value = "未配置", onClick = {})
+                    SettingsRow(RuntimeIconName.Model, "Quản lý hồ sơ mô hình",
+                        stringResource(R.string.settings_nav_models_summary), value = "Chưa cấu hình", onClick = {})
                 }
                 PreferenceSurface(first = false, last = false) {
-                    SettingsRow(RuntimeIconName.Cpu, "本地 LLM",
+                    SettingsRow(RuntimeIconName.Cpu, "LLM cục bộ",
                         stringResource(R.string.settings_nav_local_summary), onClick = {})
                 }
                 PreferenceSurface(first = false, last = false) {
-                    SettingsRow(RuntimeIconName.Chat, "快捷短语与常用指令",
-                        stringResource(R.string.settings_nav_phrases_summary), value = "14 条已启用", onClick = {})
+                    SettingsRow(RuntimeIconName.Chat, "Cụm từ nhanh và lệnh thường dùng",
+                        stringResource(R.string.settings_nav_phrases_summary), value = "14 cụm từ đã bật", onClick = {})
                 }
                 PreferenceSurface(first = false) {
-                    SettingsRow(RuntimeIconName.Speed, "数据统计与用量分析",
+                    SettingsRow(RuntimeIconName.Speed, "Thống kê dữ liệu & phân tích mức dùng",
                         stringResource(R.string.settings_nav_stats_summary), onClick = {})
                 }
             }

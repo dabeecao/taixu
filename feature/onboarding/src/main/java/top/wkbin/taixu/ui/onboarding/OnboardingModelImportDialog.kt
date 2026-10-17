@@ -64,10 +64,10 @@ internal fun OnboardingModelImportDialog(
                 if (!fileContent.isNullOrBlank()) {
                     jsonText = fileContent
                     selectedTab = 0
-                    Toast.makeText(context, "已载入文件内容", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Đã tải nội dung tệp", Toast.LENGTH_SHORT).show()
                 }
             }.onFailure {
-                Toast.makeText(context, "读取文件失败: ${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Đọc tệp thất bại: ${it.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -77,7 +77,7 @@ internal fun OnboardingModelImportDialog(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 RuntimeIcon(RuntimeIconName.Download, Modifier.size(20.dp), MaterialTheme.colorScheme.primary)
-                Text("导入模型配置", fontWeight = FontWeight.Bold)
+                Text("Nhập cấu hình mô hình", fontWeight = FontWeight.Bold)
             }
         },
         text = {
@@ -94,7 +94,7 @@ internal fun OnboardingModelImportDialog(
                     Tab(
                         selected = selectedTab == 0,
                         onClick = { selectedTab = 0 },
-                        text = { Text("剪贴板粘贴") },
+                        text = { Text("Dán từ bộ nhớ tạm") },
                     )
                     Tab(
                         selected = selectedTab == 1,
@@ -102,7 +102,7 @@ internal fun OnboardingModelImportDialog(
                             selectedTab = 1
                             filePickerLauncher.launch(arrayOf("application/json", "text/plain", "*/*"))
                         },
-                        text = { Text("选择本地文件") },
+                        text = { Text("Chọn tệp local") },
                     )
                 }
 
@@ -111,7 +111,7 @@ internal fun OnboardingModelImportDialog(
                         value = jsonText,
                         onValueChange = { jsonText = it },
                         modifier = Modifier.fillMaxWidth().heightIn(min = 120.dp),
-                        placeholder = { Text("粘贴导出的 JSON 模型配置（单个或 bundle 均支持）") },
+                        placeholder = { Text("Dán cấu hình mô hình JSON đã xuất (hỗ trợ cả đơn lẻ và bundle)") },
                         textStyle = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
                         shape = MaterialTheme.shapes.medium,
                     )
@@ -123,12 +123,12 @@ internal fun OnboardingModelImportDialog(
                             if (clipText.isNotBlank()) {
                                 jsonText = clipText
                             } else {
-                                Toast.makeText(context, "剪贴板为空", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Bộ nhớ tạm trống", Toast.LENGTH_SHORT).show()
                             }
                         },
                         modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
                                             ) {
-                        Text("一键粘贴剪贴板内容")
+                        Text("Dán nội dung bộ nhớ tạm một chạm")
                     }
                 } else {
                     Column(
@@ -143,7 +143,7 @@ internal fun OnboardingModelImportDialog(
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                 RuntimeIcon(RuntimeIconName.File, Modifier.size(16.dp))
-                                Text("选择本地 JSON 文件")
+                                Text("Chọn tệp JSON local")
                             }
                         }
                         if (jsonText.isNotBlank()) {
@@ -162,12 +162,12 @@ internal fun OnboardingModelImportDialog(
                 onClick = { onImportJson(jsonText) },
                 enabled = jsonText.isNotBlank(),
             ) {
-                Text("载入配置")
+                Text("Tải cấu hình")
             }
         },
         dismissButton = {
             RuntimeTextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Hủy")
             }
         },
     )
