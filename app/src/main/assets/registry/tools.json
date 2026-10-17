@@ -2,17 +2,26 @@
   {
     "schemaVersion": 1,
     "id": "llama-cpp",
-    "name": "llama.cpp 本地推理引擎",
-    "description": "在 ARM64 Linux 沙箱内运行 GGUF 模型，并提供 OpenAI 兼容的本地推理接口。",
-    "dependencies": ["python>=3.11", "curl", "ca-certificates"],
+    "name": "llama.cpp Công cụ suy luận cục bộ",
+    "description": "Chạy mô hình GGUF trong sandbox Linux ARM64, cung cấp giao diện suy luận cục bộ tương thích OpenAI.",
+    "dependencies": [
+      "python>=3.11",
+      "curl",
+      "ca-certificates"
+    ],
     "launchType": "one_shot",
     "version": "1.0.0",
     "latestVersion": "1.0.0",
     "publisher": "ggml-org / TaiXu",
     "homepage": "https://github.com/ggml-org/llama.cpp",
     "category": "AI_AGENT",
-    "architectures": ["ARM64"],
-    "permissions": ["NETWORK", "LOCAL_WEB"],
+    "architectures": [
+      "ARM64"
+    ],
+    "permissions": [
+      "NETWORK",
+      "LOCAL_WEB"
+    ],
     "installMethod": "SCRIPT",
     "installSteps": [
       "case \"$(uname -m)\" in aarch64|arm64) ;; *) echo 'llama.cpp 本地推理仅支持 ARM64/aarch64' >&2; exit 64;; esac",
@@ -25,7 +34,9 @@
     ],
     "launchCommand": "llama-server --version",
     "verifyCommand": "case \"$(uname -m)\" in aarch64|arm64) llama-server --version;; *) exit 1;; esac",
-    "commandLinks": ["llama-server"],
+    "commandLinks": [
+      "llama-server"
+    ],
     "environment": {
       "LD_LIBRARY_PATH": "/opt/taixu/tools/llama-cpp/lib/release"
     }
@@ -34,15 +45,20 @@
     "schemaVersion": 1,
     "id": "hello-tool",
     "name": "Hello Tool",
-    "description": "用于验证安装、启动、校验和回滚流程的内置测试工具。",
+    "description": "Công cụ kiểm thử tích hợp, dùng để xác minh quy trình cài đặt, khởi động, kiểm tra và khôi phục.",
     "dependencies": [],
     "launchType": "one_shot",
     "version": "1.0.0",
     "latestVersion": "1.0.0",
     "publisher": "TaiXu",
     "category": "DEVELOPER_TOOL",
-    "architectures": ["ARM64"],
-    "permissions": ["WORKSPACE_READ", "WORKSPACE_WRITE"],
+    "architectures": [
+      "ARM64"
+    ],
+    "permissions": [
+      "WORKSPACE_READ",
+      "WORKSPACE_WRITE"
+    ],
     "installMethod": "SCRIPT",
     "installSteps": [
       "mkdir -p $TAIXU_TOOL_DIR/bin",
@@ -51,22 +67,33 @@
     ],
     "launchCommand": "hello-tool",
     "verifyCommand": "hello-tool",
-    "commandLinks": ["hello-tool"]
+    "commandLinks": [
+      "hello-tool"
+    ]
   },
   {
     "schemaVersion": 1,
     "id": "qemu-x86-64-compat",
-    "name": "QEMU x86_64 兼容构建环境",
-    "description": "可选的 ARM64 QEMU 用户态模拟器与隔离 x86_64 Ubuntu Base RootFS，仅用于第三方项目的兼容构建。",
-    "dependencies": ["curl", "ca-certificates"],
+    "name": "Môi trường build tương thích QEMU x86_64",
+    "description": "Trình giả lập QEMU user-mode ARM64 tùy chọn và RootFS Ubuntu Base x86_64 cách ly, chỉ dùng cho build tương thích của dự án bên thứ ba.",
+    "dependencies": [
+      "curl",
+      "ca-certificates"
+    ],
     "launchType": "command",
     "version": "1.0.0",
     "latestVersion": "1.0.0",
     "publisher": "TaiXu",
     "homepage": "https://github.com/termux/proot-distro",
     "category": "DEVELOPER_TOOL",
-    "architectures": ["ARM64"],
-    "permissions": ["NETWORK", "WORKSPACE_READ", "WORKSPACE_WRITE"],
+    "architectures": [
+      "ARM64"
+    ],
+    "permissions": [
+      "NETWORK",
+      "WORKSPACE_READ",
+      "WORKSPACE_WRITE"
+    ],
     "installMethod": "SCRIPT",
     "installSteps": [
       "case \"$(uname -m)\" in aarch64|arm64) ;; *) echo 'QEMU 兼容插件宿主仅支持 ARM64' >&2; exit 64;; esac",
@@ -95,7 +122,9 @@
     ],
     "launchCommand": "qemu-x86_64 --version",
     "verifyCommand": "test -x /opt/taixu/compat/x86_64/qemu-x86_64 && test -x /opt/taixu/compat/x86_64/rootfs/bin/sh && test -x /opt/taixu/compat/x86_64/jdk-17/bin/java && test -x /opt/taixu/compat/x86_64/android-sdk/build-tools/35.0.0/aapt2 && test -x /opt/taixu/compat/x86_64/flutter/bin/cache/dart-sdk/bin/dart && qemu-x86_64 --version",
-    "commandLinks": ["qemu-x86_64"],
+    "commandLinks": [
+      "qemu-x86_64"
+    ],
     "environment": {
       "TAIXU_QEMU_COMPAT_ROOT": "/opt/taixu/compat/x86_64",
       "TAIXU_QEMU_COMPAT_QEMU": "/opt/taixu/compat/x86_64/qemu-x86_64",
