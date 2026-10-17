@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_welcome">Chào mừng đến với TaiXu</string>
+    <string name="onboarding_welcome_description">Mang Linux, AI và sức sáng tạo vào túi áo bạn.</string>
+    <string name="onboarding_feature_linux">Linux trong tầm tay</string>
+    <string name="onboarding_feature_linux_description">Không cần Root, chỉ cần chọn bản phân phối là bắt đầu.</string>
+    <string name="onboarding_feature_agent">AI cộng tác cùng bạn</string>
+    <string name="onboarding_feature_agent_description">Trò chuyện, viết code, biến ý tưởng thành hiện thực.</string>
+    <string name="onboarding_feature_workspace">Không gian làm việc của riêng bạn</string>
+    <string name="onboarding_feature_workspace_description">Quản lý dự án, khám phá và xây dựng trong Terminal.</string>
+    <string name="onboarding_start">Bắt đầu khám phá</string>
+    <string name="onboarding_back">Về trang chào mừng</string>
+    <string name="onboarding_step">%1$d / 3</string>
+</resources>

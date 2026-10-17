@@ -1,0 +1,14 @@
+<resources>
+    <string name="settings_chat_background">Nền trò chuyện</string>
+    <string name="settings_chat_background_description">Dùng cho trang trò chuyện chính. Bản xem trước cập nhật theo thời gian thực khi bạn chỉnh độ hiển thị và độ mờ.</string>
+    <string name="settings_chat_background_choose">Đổi ảnh</string>
+    <string name="settings_chat_background_remove">Xóa</string>
+    <string name="settings_chat_background_loading">Đang xử lý</string>
+    <string name="settings_chat_background_error">Không cập nhật được nền. Hãy chọn ảnh hợp lệ dưới 25 MB rồi thử lại.</string>
+    <string name="settings_chat_background_visibility">Độ hiển thị nền %1$d%%</string>
+    <string name="settings_chat_background_blur">Độ mờ nền %1$d dp</string>
+    <string name="settings_chat_background_preview">Xem trước nền trò chuyện</string>
+    <string name="settings_chat_background_preview_title">TaiXu · Trò chuyện</string>
+    <string name="settings_chat_background_preview_user">Giúp tôi sắp xếp các ý tưởng hôm nay.</string>
+    <string name="settings_chat_background_preview_assistant">Được, mình bắt đầu từ việc quan trọng nhất nhé.</string>
+</resources>

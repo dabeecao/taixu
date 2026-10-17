@@ -87,6 +87,7 @@ fun AppearanceSettingsScreen(
                         Triple("system", R.string.settings_language_system, R.string.settings_language_system_description),
                         Triple("zh", R.string.settings_language_chinese, R.string.settings_language_chinese_description),
                         Triple("en", R.string.settings_language_english, R.string.settings_language_english_description),
+                        Triple("vi", R.string.settings_language_vietnamese, R.string.settings_language_vietnamese_description),
                     )
                     languages.forEachIndexed { index, (code, title, description) ->
                         PreferenceSurface(first = index == 0, last = index == languages.lastIndex) {
@@ -94,6 +95,7 @@ fun AppearanceSettingsScreen(
                                 AppCompatDelegate.setApplicationLocales(when (code) {
                                     "system" -> LocaleListCompat.getEmptyLocaleList()
                                     "zh" -> LocaleListCompat.forLanguageTags("zh-CN")
+                                    "vi" -> LocaleListCompat.forLanguageTags("vi")
                                     else -> LocaleListCompat.forLanguageTags("en")
                                 })
                             }

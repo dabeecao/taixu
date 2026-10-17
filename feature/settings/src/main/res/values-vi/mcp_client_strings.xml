@@ -1,0 +1,9 @@
+<resources>
+    <string name="mcp_client_intro">MCP mang khả năng công cụ bên ngoài cho Agent. Dịch vụ STDIO chạy trong môi trường Linux đã liên kết; dịch vụ HTTP kết nối qua endpoint đã cấu hình.</string>
+    <string name="mcp_client_idle_title">Thời gian chờ STDIO</string>
+    <string name="mcp_client_minutes">%1$d phút</string>
+    <string name="mcp_client_idle_hint">Thu hồi tiến trình nhàn rỗi khi vượt quá thời gian đã chọn, giữ lại danh mục công cụ; lần gọi tiếp theo sẽ tự kết nối lại. Các yêu cầu đang thực hiện không bị thu hồi. Kiểm tra mỗi phút một lần, chỉ áp dụng cho dịch vụ STDIO.</string>
+    <string name="mcp_client_save_failed">Lưu thất bại, vui lòng chọn lại.</string>
+    <string name="mcp_client_sleeping">Sẵn sàng (đang ngủ), lần gọi tiếp theo tự kết nối</string>
+    <string name="mcp_client_waking">Đang đánh thức tiến trình…</string>
+</resources>

@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="settings_legacy_0001" formatted="false">Đóng</string>
+<string name="settings_legacy_0002" formatted="false">Hủy</string>
+<string name="settings_legacy_0003" formatted="false">Lưu</string>
+<string name="settings_legacy_0004" formatted="false">Xóa</string>
+<string name="settings_legacy_0005" formatted="false">Xác nhận</string>
+<string name="settings_legacy_0006" formatted="false">Hoàn tất</string>
+<string name="settings_legacy_0007" formatted="false">Trắng sáng (Light)</string>
+<string name="settings_legacy_0008" formatted="false">Sáng trong, tinh tế — phù hợp với môi trường sáng ban ngày</string>
+<string name="settings_legacy_0009" formatted="false">Obsidian (Dark)</string>
+<string name="settings_legacy_0010" formatted="false">Cấu hình sẵn của nhà cung cấp</string>
+<string name="settings_legacy_0011" formatted="false">Base URL (Địa chỉ API)</string>
+<string name="settings_legacy_0012" formatted="false">Để sau</string>
+<string name="settings_legacy_0013" formatted="false">Đang tải xuống…</string>
+<string name="settings_legacy_0014" formatted="false">TaiXu · Cài đặt</string>
+<string name="settings_legacy_0015" formatted="false">TaiXu</string>
+<string name="settings_legacy_0016" formatted="false">Cài đặt hệ thống và trung tâm điều khiển</string>
+<string name="settings_legacy_0017" formatted="false">Hệ thống &amp; cấu hình</string>
+<string name="settings_legacy_0018" formatted="false">Agent &amp; mô hình AI</string>
+<string name="settings_legacy_0019" formatted="false">Agent &amp; mô hình</string>
+<string name="settings_legacy_0020" formatted="false">Hồ sơ mô hình, trung tâm plugin &amp; công cụ, skill và hệ sinh thái MCP</string>
+<string name="settings_legacy_0021" formatted="false">Hồ sơ mô hình</string>
+<string name="settings_legacy_0022" formatted="false">Quản lý hồ sơ mô hình</string>
+<string name="settings_legacy_0023" formatted="false">Hồ sơ mô hình &amp; nhà cung cấp</string>
+<string name="settings_legacy_0024" formatted="false">Cấu hình endpoint và khóa cho OpenAI / DeepSeek / Claude / mô hình local</string>
+<string name="settings_legacy_0025" formatted="false">Thêm mô hình</string>
+<string name="settings_legacy_0026" formatted="false">Thêm hồ sơ mô hình</string>
+<string name="settings_legacy_0027" formatted="false">Chỉnh sửa mô hình</string>
+<string name="settings_legacy_0028" formatted="false">Chỉnh sửa hồ sơ mô hình</string>
+<string name="settings_legacy_0029" formatted="false">Chưa có hồ sơ mô hình</string>
+<string name="settings_legacy_0030" formatted="false">Chưa cấu hình mô hình</string>
+<string name="settings_legacy_0031" formatted="false">Nhấn nút phía trên để thêm cấu hình OpenAI / DeepSeek / Claude…</string>
+<string name="settings_legacy_0032" formatted="false">Tên hồ sơ</string>
+<string name="settings_legacy_0033" formatted="false">Tên</string>
+<string name="settings_legacy_0034" formatted="false">ID mô hình (chọn hoặc nhập)</string>
+<string name="settings_legacy_0035" formatted="false">Lưu cấu hình mô hình</string>
+<string name="settings_legacy_0036" formatted="false">Làm mới mô hình online</string>
+<string name="settings_legacy_0037" formatted="false">Đang làm mới…</string>
+<string name="settings_legacy_0038" formatted="false">Kiểm tra kết nối</string>
+<string name="settings_legacy_0039" formatted="false">Đang kiểm tra…</string>
+<string name="settings_legacy_0040" formatted="false">Kết nối thành công</string>
+<string name="settings_legacy_0041" formatted="false">Cài đặt nâng cao</string>
+<string name="settings_legacy_0042" formatted="false">Lấy mẫu, ngữ cảnh, suy luận, công cụ và header</string>
+<string name="settings_legacy_0043" formatted="false">Pool API key (mỗi dòng một key)</string>
+<string name="settings_legacy_0044" formatted="false">Nhiều key cùng endpoint sẽ tự xoay vòng theo từng request và chuyển key khi gặp 429</string>
+<string name="settings_legacy_0045" formatted="false">Giới hạn request/phút cho mỗi key</string>
+<string name="settings_legacy_0046" formatted="false">0 hoặc để trống là không giới hạn; khi chạm giới hạn sẽ ưu tiên dùng key khác</string>
+<string name="settings_legacy_0047" formatted="false">Chế độ suy luận</string>
+<string name="settings_legacy_0048" formatted="false">Bật suy luận sâu (suy nghĩ kỹ hơn)</string>
+<string name="settings_legacy_0049" formatted="false">Theo mặc định của mô hình</string>
+<string name="settings_legacy_0050" formatted="false">Hỗ trợ gọi hàm (Tool Call)</string>
+<string name="settings_legacy_0051" formatted="false">Dùng function call chuẩn OpenAI để chạy lệnh sandbox và lệnh mở rộng</string>
+<string name="settings_legacy_0052" formatted="false">Hỗ trợ nhận dạng ảnh</string>
+<string name="settings_legacy_0053" formatted="false">Bật: ảnh gửi trực tiếp cho AI nhận dạng; Tắt: tự gọi công cụ để đọc ảnh</string>
+<string name="settings_legacy_0054" formatted="false">Giới hạn token ngữ cảnh</string>
+<string name="settings_legacy_0055" formatted="false">Header tùy chỉnh (không bắt buộc)</string>
+<string name="settings_legacy_0056" formatted="false">Không inject công cụ và prompt</string>
+<string name="settings_legacy_0057" formatted="false">Tắt system prompt và định nghĩa công cụ, chỉ gửi tin nhắn người dùng (để gỡ lỗi)</string>
+<string name="settings_legacy_0059" formatted="false">Quản lý Agent</string>
+<string name="settings_legacy_0060" formatted="false">Hiển thị luồng suy nghĩ, chiến lược nén ngữ cảnh và skill/plugin</string>
+<string name="settings_legacy_0061" formatted="false">Hệ sinh thái công cụ &amp; plugin</string>
+<string name="settings_legacy_0062" formatted="false">Trung tâm plugin &amp; công cụ</string>
+<string name="settings_legacy_0063" formatted="false">Cài một chạm Claude Code, OpenClaw và các AI CLI / môi trường dev</string>
+<string name="settings_legacy_0064" formatted="false">Dịch vụ &amp; hệ sinh thái giao thức MCP</string>
+<string name="settings_legacy_0065" formatted="false">Quản lý các dịch vụ Model Context Protocol như SQLite, Git, Fetch</string>
+<string name="settings_legacy_0066" formatted="false">Container Linux &amp; lưu trữ</string>
+<string name="settings_legacy_0067" formatted="false">Quản lý container và sandbox</string>
+<string name="settings_legacy_0068" formatted="false">Quản lý nhiều distro · ánh xạ bộ nhớ host · chế độ đặc quyền</string>
+<string name="settings_legacy_0069" formatted="false">Quản lý distro Linux</string>
+<string name="settings_legacy_0070" formatted="false">Chạy nhiều sandbox · kéo image · chuyển hệ thống chính một chạm</string>
+<string name="settings_legacy_0071" formatted="false">Mount &amp; chia sẻ bộ nhớ</string>
+<string name="settings_legacy_0072" formatted="false">PRoot ánh xạ bộ nhớ host (-b /sdcard)</string>
+<string name="settings_legacy_0073" formatted="false">Chế độ đặc quyền hệ thống</string>
+<string name="settings_legacy_0074" formatted="false">Sandbox userspace PRoot · Shizuku · Root</string>
+<string name="settings_legacy_0075" formatted="false">Giao diện, cỡ chữ và tùy chỉnh terminal</string>
+<string name="settings_legacy_0076" formatted="false">Theme sáng/tối · thu phóng cỡ chữ · màu sắc &amp; font terminal</string>
+<string name="settings_legacy_0077" formatted="false">Giữ app sống &amp; chẩn đoán cho dev</string>
+<string name="settings_legacy_0078" formatted="false">Giữ hoạt động &amp; chẩn đoán</string>
+<string name="settings_legacy_0079" formatted="false">Tối ưu pin &amp; chạy nền</string>
+<string name="settings_legacy_0080" formatted="false">Miễn giới hạn pin hệ thống, tránh Agent bị đóng băng khi tắt màn hình</string>
+<string name="settings_legacy_0081" formatted="false">Giới hạn tiến trình con trên Android 12</string>
+<string name="settings_legacy_0082" formatted="false">Gỡ giới hạn 32 tiến trình phantom chạy nền</string>
+<string name="settings_legacy_0083" formatted="false">Đã gỡ</string>
+<string name="settings_legacy_0084" formatted="false">Chưa gỡ</string>
+<string name="settings_legacy_0085" formatted="false">Không cần xử lý</string>
+<string name="settings_legacy_0086" formatted="false">Chờ kiểm tra</string>
+<string name="settings_legacy_0087" formatted="false">Đã gỡ giới hạn</string>
+<string name="settings_legacy_0088" formatted="false">Giới hạn vẫn còn hiệu lực</string>
+<string name="settings_legacy_0089" formatted="false">Hệ thống hiện tại không cần xử lý</string>
+<string name="settings_legacy_0090" formatted="false">Tạm thời không kiểm tra được</string>
+<string name="settings_legacy_0091" formatted="false">Đang kiểm tra</string>
+<string name="settings_legacy_0092" formatted="false">Chưa kiểm tra</string>
+<string name="settings_legacy_0093" formatted="false">Đọc cấu hình thực tế của hệ thống để xác nhận giới hạn phantom process còn hiệu lực hay không.</string>
+<string name="settings_legacy_0094" formatted="false">Gỡ một chạm bằng Shizuku / Root</string>
+<string name="settings_legacy_0095" formatted="false">Đang xử lý</string>
+<string name="settings_legacy_0096" formatted="false">Hoặc chạy trên terminal máy tính đã kết nối điện thoại:</string>
+<string name="settings_legacy_0097" formatted="false">Sao chép lệnh</string>
+<string name="settings_legacy_0098" formatted="false">Đã sao chép lệnh</string>
+<string name="settings_legacy_0099" formatted="false">Chế độ chẩn đoán cho dev</string>
+<string name="settings_legacy_0100" formatted="false">Bật giám sát sức khỏe tầng thấp và console gỡ lỗi</string>
+<string name="settings_legacy_0101" formatted="false">Console dành cho dev</string>
+<string name="settings_legacy_0102" formatted="false">Gỡ lỗi &amp; console cho dev</string>
+<string name="settings_legacy_0103" formatted="false">Xem trực tiếp tiến trình PRoot và trace lệnh</string>
+<string name="settings_legacy_0104" formatted="false">Giới thiệu &amp; cộng đồng</string>
+<string name="settings_legacy_0105" formatted="false">Giới thiệu về TaiXu</string>
+<string name="settings_legacy_0106" formatted="false">Giới thiệu, cập nhật &amp; cộng đồng chính thức</string>
+<string name="settings_legacy_0107" formatted="false">Phiên bản app &amp; cập nhật</string>
+<string name="settings_legacy_0108" formatted="false">Kiểm tra phiên bản mới</string>
+<string name="settings_legacy_0109" formatted="false">Đang kiểm tra…</string>
+<string name="settings_legacy_0110" formatted="false">Đã ở phiên bản mới nhất</string>
+<string name="settings_legacy_0111" formatted="false">Kiểm tra cập nhật thất bại</string>
+<string name="settings_legacy_0112" formatted="false">Tự kiểm tra cập nhật khi khởi động</string>
+<string name="settings_legacy_0113" formatted="false">Khi app khởi động, lặng lẽ kiểm tra phiên bản mới dưới nền</string>
+<string name="settings_legacy_0114" formatted="false">Cộng đồng chính thức &amp; mã nguồn mở</string>
+<string name="settings_legacy_0115" formatted="false">Dự án mã nguồn mở trên GitHub</string>
+<string name="settings_legacy_0116" formatted="false">Nhóm trao đổi chính thức của TaiXu</string>
+<string name="settings_legacy_0117" formatted="false">Nhóm QQ trao đổi chính thức</string>
+<string name="settings_legacy_0118" formatted="false">Tải từ GitHub</string>
+<string name="settings_legacy_0119" formatted="false">Đang chạy ổn định</string>
+<string name="settings_legacy_0120" formatted="false">Chưa cấu hình</string>
+<string name="settings_legacy_0121" formatted="false">Đang kích hoạt</string>
+<string name="settings_legacy_0122" formatted="false">Đặt làm đang dùng</string>
+<string name="settings_legacy_0123" formatted="false">Sáng</string>
+<string name="settings_legacy_0124" formatted="false">Obsidian</string>
+<string name="settings_legacy_0125" formatted="false">Theo hệ thống</string>
+<string name="settings_legacy_0126" formatted="false">Chọn theme giao diện</string>
+<string name="settings_legacy_0127" formatted="false">Chọn chế độ chạy hệ thống</string>
+<string name="settings_legacy_0128" formatted="false">Đặc quyền hệ thống tầng thấp</string>
+<string name="settings_legacy_0129" formatted="false">Đang dò đặc quyền và xin cấp phép…</string>
+<string name="settings_legacy_0130" formatted="false">Cấp phép chế độ chạy thất bại</string>
+<string name="settings_legacy_0131" formatted="false">Biến môi trường</string>
+<string name="settings_legacy_0132" formatted="false">Inject biến đã mã hóa vào terminal, Agent và công cụ</string>
+<string name="settings_legacy_0133" formatted="false">Thêm biến môi trường</string>
+<string name="settings_legacy_0134" formatted="false">Chỉnh sửa biến môi trường</string>
+<string name="settings_legacy_0135" formatted="false">Xóa biến môi trường</string>
+<string name="settings_legacy_0136" formatted="false">Chưa có biến môi trường</string>
+<string name="settings_legacy_0137" formatted="false">Giá trị</string>
+<string name="settings_legacy_0138" formatted="false">Giá trị mới (để trống giữ nguyên giá trị cũ)</string>
+<string name="settings_legacy_0139" formatted="false">Ghi chú (không bắt buộc)</string>
+<string name="settings_legacy_0140" formatted="false">Chế độ riêng tư</string>
+<string name="settings_legacy_0141" formatted="false">Che giá trị biến đã cấu hình trước khi gửi cho Agent</string>
+<string name="settings_legacy_0142" formatted="false">Đã hiểu</string>
+<string name="settings_legacy_0143" formatted="false">Sao chép</string>
+<string name="settings_legacy_0144" formatted="false">Yêu cầu phê duyệt</string>
+<string name="settings_legacy_0145" formatted="false">Phê duyệt giúp tôi</string>
+<string name="settings_legacy_0146" formatted="false">Thất bại</string>
+<string name="settings_legacy_0147" formatted="false">Truy cập đầy đủ</string>
+<string name="settings_text_0001" formatted="false">- Liên kết năng lực chuyên sâu: @Linux沙箱运维专精</string>
+<string name="settings_text_0002" formatted="false">- Ngữ cảnh lỗi và log đầu ra:</string>
+<string name="settings_text_0003" formatted="false">Plugin AI</string>
+<string name="settings_text_0004" formatted="false">Tự phục hồi bằng AI</string>
+<string name="settings_text_0005" formatted="false">Quản lý &amp; cấu hình Agent</string>
+<string name="settings_text_0006" formatted="false">Lệnh giới hạn tiến trình con trên Android 12</string>
+<string name="settings_text_0007" formatted="false">Trung tâm sandbox PRoot Linux gốc trên Android &amp; lập trình cặp cùng AI</string>
+<string name="settings_text_0008" formatted="false">Trung tâm sandbox PRoot Linux gốc trên Android &amp; lập trình cặp AI</string>
+<string name="settings_text_0009" formatted="false">Link tải GGUF</string>
+<string name="settings_text_0010" formatted="false">Đường dẫn tệp GGUF</string>
+<string name="settings_text_0011" formatted="false">Lỗi phân tích cú pháp JSON</string>
+<string name="settings_text_0012" formatted="false">Đã sao chép cấu hình JSON</string>
+<string name="settings_text_0013" formatted="false">M3 Obsidian nhung đen, đắm chìm tập trung</string>
+<string name="settings_text_0014" formatted="false">Cấu hình MCP JSON</string>
+<string name="settings_text_0015" formatted="false">Cấu hình MCP JSON (định dạng Cursor / Claude)</string>
+<string name="settings_text_0016" formatted="false">Plugin MCP &amp; hệ sinh thái giao thức</string>
+<string name="settings_text_0017" formatted="false">Max Tokens phải là số nguyên dương</string>
+<string name="settings_text_0018" formatted="false">PRoot ánh xạ bộ nhớ host (-b)</string>
+<string name="settings_text_0019" formatted="false">SHA-256 (không bắt buộc)</string>
+<string name="settings_text_0020" formatted="false">URL endpoint SSE</string>
+<string name="settings_text_0021" formatted="false">Temperature phải là số từ 0.0 đến 2.0</string>
+<string name="settings_text_0022" formatted="false">Top P phải là số từ 0.0 đến 1.0</string>
+<string name="settings_text_0023" formatted="false">Dịch vụ gateway web</string>
+<string name="settings_text_0024" formatted="false">Mô hình offline sandbox llama.cpp</string>
+<string name="settings_text_0025" formatted="false">mcpServers không phải đối tượng JSON hợp lệ</string>
+<string name="settings_text_0026" formatted="false">v0.3.0 bản ổn định</string>
+<string name="settings_text_0027" formatted="false">✓ Đã sẵn sàng</string>
+<string name="settings_text_0028" formatted="false">:</string>
+<string name="settings_text_0029" formatted="false"></string>
+<string name="settings_text_0030" formatted="false">Lệnh dùng một lần</string>
+<string name="settings_text_0031" formatted="false">Cài một chạm</string>
+<string name="settings_text_0032" formatted="false">Token ngữ cảnh phải là số nguyên dương</string>
+<string name="settings_text_0033" formatted="false">Giới hạn ngân sách token ngữ cảnh</string>
+<string name="settings_text_0034" formatted="false">Bộ nhớ ngữ cảnh &amp; nén thông minh</string>
+<string name="settings_text_0035" formatted="false">Tải xuống</string>
+<string name="settings_text_0036" formatted="false">Thư mục tải xuống (Download)</string>
+<string name="settings_text_0037" formatted="false">Đường tải &amp; tăng tốc mirror:</string>
+<string name="settings_text_0038" formatted="false">Agent chính tự chọn vai trò theo nhu cầu tác vụ và ủy quyền song song</string>
+<string name="settings_text_0039" formatted="false">Hệ thống chính</string>
+<string name="settings_text_0040" formatted="false">Terminal tương tác</string>
+<string name="settings_text_0041" formatted="false">Chỉ làm giá trị khởi tạo cho phiên mới; phiên đã tồn tại có thể chuyển riêng ở đầu khung trò chuyện.</string>
+<string name="settings_text_0042" formatted="false">Chỉ ủy quyền khi người dùng yêu cầu rõ ràng chạy song song hoặc cộng tác sub-agent</string>
+<string name="settings_text_0043" formatted="false">Chỉ hỗ trợ chữ cái tiếng Anh, số, gạch dưới và gạch ngang</string>
+<string name="settings_text_0044" formatted="false">Nhập từ đường dẫn</string>
+<string name="settings_text_0045" formatted="false">Tối ưu tiêu thụ token của tác vụ dài, tránh chạm giới hạn cửa sổ ngữ cảnh của mô hình</string>
+<string name="settings_text_0046" formatted="false">Loại giao thức truyền tải</string>
+<string name="settings_text_0047" formatted="false">Ưu tiên máy RAM thấp · trò chuyện hằng ngày tiếng Trung/Anh</string>
+<string name="settings_text_0048" formatted="false">Dùng nút phía trên để tải xuống hoặc nhập mô hình GGUF</string>
+<string name="settings_text_0049" formatted="false">Ví dụ: ảnh trong thư viện, source code dự án</string>
+<string name="settings_text_0050" formatted="false">Dependency</string>
+<string name="settings_text_0051" formatted="false">Đang chạy giả lập</string>
+<string name="settings_text_0052" formatted="false">Dừng</string>
+<string name="settings_text_0053" formatted="false">Dừng dịch vụ thất bại</string>
+<string name="settings_text_0054" formatted="false">Bộ công cụ fullstack</string>
+<string name="settings_text_0055" formatted="false">Toàn bộ hệ sinh thái</string>
+<string name="settings_text_0056" formatted="false">Tất cả component đã sẵn sàng</string>
+<string name="settings_text_0057" formatted="false">Hết bộ nhớ</string>
+<string name="settings_text_0058" formatted="false">Đóng băng tiến trình, biểu hiện là Agent đang suy luận hoặc chạy lệnh thì dừng giữa chừng. Nên bật hai mục sau:</string>
+<string name="settings_text_0059" formatted="false">Đang chuẩn bị kéo image...</string>
+<string name="settings_text_0060" formatted="false">Chuyển chế độ đặc quyền sẽ tự khởi động kiểm tra cấp phép; khi cấp phép thành công sẽ mở ngay các khả năng hệ thống &amp; phần cứng nâng cao tương ứng.</string>
+<string name="settings_text_0061" formatted="false">Xóa sub-agent</string>
+<string name="settings_text_0062" formatted="false">Xóa dịch vụ</string>
+<string name="settings_text_0063" formatted="false">Xóa mô hình thất bại</string>
+<string name="settings_text_0064" formatted="false">Tham gia nhóm QQ (964382207)</string>
+<string name="settings_text_0065" formatted="false">Tên trợ lý</string>
+<string name="settings_text_0066" formatted="false">Giấy phép: Apache-2.0 License</string>
+<string name="settings_text_0067" formatted="false">RPM mỗi key phải là số nguyên không âm</string>
+<string name="settings_text_0068" formatted="false">Giới hạn vòng gọi công cụ tối đa mỗi lượt</string>
+<string name="settings_text_0069" formatted="false">Số lần gọi công cụ tối đa mỗi lượt</string>
+<string name="settings_text_0070" formatted="false">Gỡ cài đặt</string>
+<string name="settings_text_0071" formatted="false">Gỡ công cụ</string>
+<string name="settings_text_0072" formatted="false">Chiến lược nén</string>
+<string name="settings_text_0074" formatted="false">Tham số (cách nhau bằng dấu cách)</string>
+<string name="settings_text_0075" formatted="false">Có thể gọi Agent TaiXu tự chẩn đoán và tự phục hồi trong sandbox PRoot</string>
+<string name="settings_text_0076" formatted="false">Có thể cập nhật</string>
+<string name="settings_text_0077" formatted="false">Đang lắp ráp bộ công cụ dev dưới nền...</string>
+<string name="settings_text_0078" formatted="false">Whitelist tối ưu pin chạy nền · giám sát gỡ lỗi · console PRoot</string>
+<string name="settings_text_0079" formatted="false">Inject quy phạm chuyên ngành và hướng dẫn thao tác vào system prompt của Agent</string>
+<string name="settings_text_0080" formatted="false">Nếu không, chính sách tiết kiệm pin của hãng vẫn sẽ kill tiến trình.</string>
+<string name="settings_text_0081" formatted="false">Khởi động</string>
+<string name="settings_text_0082" formatted="false">Đang khởi động</string>
+<string name="settings_text_0083" formatted="false">Đang khởi động…</string>
+<string name="settings_text_0084" formatted="false">Lệnh khởi động</string>
+<string name="settings_text_0085" formatted="false">Khởi động thất bại</string>
+<string name="settings_text_0086" formatted="false">Loại khởi động</string>
+<string name="settings_text_0087" formatted="false">Sau khi khởi động gateway, link truy cập sẽ hiện tại đây</string>
+<string name="settings_text_0088" formatted="false">Gọi tự phục hồi</string>
+<string name="settings_text_0089" formatted="false">Mirror Trung Quốc</string>
+<string name="settings_text_0090" formatted="false">Nhập system prompt tùy chỉnh tại đây, hỗ trợ macro như {{cur_datetime}}...</string>
+<string name="settings_text_0091" formatted="false">Tự phát hiện và nâng cấp online dựa trên GitHub Releases</string>
+<string name="settings_text_0092" formatted="false">Sao chép JSON</string>
+<string name="settings_text_0093" formatted="false">Tác vụ phức tạp và có thể chạy song song sẽ do agent chính tự quyết định có ủy quyền hay không</string>
+<string name="settings_text_0094" formatted="false">Chạy nhiều sandbox &amp; chuyển đổi linh hoạt</string>
+<string name="settings_text_0095" formatted="false">Khi lịch sử vượt ngưỡng gập token sẽ tự tạo tóm tắt có cấu trúc, giữ nguyên văn gần đây, trạng thái tác vụ và dấu vết tệp quan trọng</string>
+<string name="settings_text_0096" formatted="false">VD: sqlite / github / fetch</string>
+<string name="settings_text_0097" formatted="false">Cài đặt</string>
+<string name="settings_text_0098" formatted="false">Đang cài đặt</string>
+<string name="settings_text_0099" formatted="false">Cài đặt thất bại</string>
+<string name="settings_text_0100" formatted="false">Cài đặt thành công</string>
+<string name="settings_text_0101" formatted="false">Cài distro Linux mới</string>
+<string name="settings_text_0102" formatted="false">Cài hệ thống mới</string>
+<string name="settings_text_0103" formatted="false">Cách cài đặt</string>
+<string name="settings_text_0104" formatted="false">Đang nhận nhật ký cài đặt...</string>
+<string name="settings_text_0105" formatted="false">Đường dẫn cài đặt</string>
+<string name="settings_text_0106" formatted="false">Bộ nhớ chia sẻ đầy đủ (/sdcard)</string>
+<string name="settings_text_0107" formatted="false">Tùy chỉnh persona khởi tạo, mô tả môi trường và inject macro động cho Agent</string>
+<string name="settings_text_0108" formatted="false">Đường dẫn mount container (Linux)</string>
+<string name="settings_text_0109" formatted="false">Đường dẫn host (Android)</string>
+<string name="settings_text_0110" formatted="false">Nhập</string>
+<string name="settings_text_0111" formatted="false">Nhập hoặc tải GGUF, suy luận offline qua llama.cpp ngay trên thiết bị ARM64</string>
+<string name="settings_text_0112" formatted="false">IP mạng LAN</string>
+<string name="settings_text_0113" formatted="false">ID công cụ</string>
+<string name="settings_text_0114" formatted="false">Thông tin công cụ</string>
+<string name="settings_text_0115" formatted="false">Cài đặt công cụ / tự kiểm tra môi trường không đạt</string>
+<string name="settings_text_0116" formatted="false">Công cụ chưa được cài đặt, hãy cài đặt trong trung tâm công cụ trước</string>
+<string name="settings_text_0117" formatted="false">Không tìm thấy công cụ</string>
+<string name="settings_text_0118" formatted="false">Giới hạn gọi công cụ</string>
+<string name="settings_text_0119" formatted="false">Đã tải xuống</string>
+<string name="settings_text_0120" formatted="false">Đã dừng</string>
+<string name="settings_text_0121" formatted="false">Plugin đã cài đặt</string>
+<string name="settings_text_0122" formatted="false">Đã nhập mô hình</string>
+<string name="settings_text_0123" formatted="false">Đã sẵn sàng</string>
+<string name="settings_text_0124" formatted="false">Đã áp dụng</string>
+<string name="settings_text_0125" formatted="false">Đã gửi tác vụ cài đặt engine suy luận llama.cpp, xem tiến độ trong trung tâm công cụ</string>
+<string name="settings_text_0126" formatted="false">Đã có tác vụ truyền mô hình đang chạy</string>
+<string name="settings_text_0127" formatted="false">Đã bind 0.0.0.0</string>
+<string name="settings_text_0128" formatted="false">Đã miễn trừ</string>
+<string name="settings_text_0129" formatted="false">Đã miễn trừ tối ưu pin</string>
+<string name="settings_text_0130" formatted="false">Đã kết nối</string>
+<string name="settings_text_0131" formatted="false">Áp dụng</string>
+<string name="settings_text_0132" formatted="false">Cập nhật ngay trong app</string>
+<string name="settings_text_0133" formatted="false">Nhật ký cài đặt bộ công cụ dev</string>
+<string name="settings_text_0134" formatted="false">Bộ fullstack cho dev (Dev Bundles)</string>
+<string name="settings_text_0135" formatted="false">Bật nén ngữ cảnh thông minh (Context Compaction)</string>
+<string name="settings_text_0136" formatted="false">Bắt đầu tải xuống</string>
+<string name="settings_text_0137" formatted="false">Bắt đầu cài đặt</string>
+<string name="settings_text_0138" formatted="false">Bất thường</string>
+<string name="settings_text_0141" formatted="false">Khi phiên gắn với không gian làm việc, lệnh base mặc định lấy thư mục đó làm đường dẫn làm việc (cwd)</string>
+<string name="settings_text_0142" formatted="false">Khi lịch sử phiên vượt số vòng này, bắt đầu cắt tỉa thông minh, 4 vòng gần nhất giữ nguyên</string>
+<string name="settings_text_0143" formatted="false">Đang hoạt động</string>
+<string name="settings_text_0144" formatted="false">Thành phần bắt buộc</string>
+<string name="settings_text_0146" formatted="false">Hiển thị suy nghĩ</string>
+<string name="settings_text_0147" formatted="false">Luồng suy nghĩ, sub-agent, Skill và plugin</string>
+<string name="settings_text_0148" formatted="false">Luồng suy nghĩ &amp; hiệu năng thực thi</string>
+<string name="settings_text_0149" formatted="false">Quá trình suy nghĩ (kể cả nội dung đang sinh) mặc định gập lại, nhấn để mở xem</string>
+<string name="settings_text_0150" formatted="false">Tất cả distro Linux có sẵn đã được cài đặt xong!</string>
+<string name="settings_text_0151" formatted="false">Gợi ý mô hình nhỏ cho điện thoại</string>
+<string name="settings_text_0152" formatted="false">Mở chi tiết app (tự khởi động / chạy nền)</string>
+<string name="settings_text_0153" formatted="false">Mở terminal</string>
+<string name="settings_text_0154" formatted="false">Ngữ cảnh thực thi</string>
+<string name="settings_text_0155" formatted="false">Lệnh thực thi (VD: npx / uvx / python3)</string>
+<string name="settings_text_0156" formatted="false">Tên skill (VD: Chuyên gia biên dịch Rust)</string>
+<string name="settings_text_0157" formatted="false">Quản lý skill</string>
+<string name="settings_text_0158" formatted="false">Tên điểm mount</string>
+<string name="settings_text_0159" formatted="false">Cấp phép thất bại</string>
+<string name="settings_text_0160" formatted="false">Công cụ dò</string>
+<string name="settings_text_0161" formatted="false">Điều khiển hiển thị quá trình suy nghĩ và giới hạn thực thi công cụ của các mô hình suy luận như DeepSeek</string>
+<string name="settings_text_0162" formatted="false">Đã sao chép nhật ký console</string>
+<string name="settings_text_0163" formatted="false">Mô tả (không bắt buộc)</string>
+<string name="settings_text_0164" formatted="false">Nội dung template prompt:</string>
+<string name="settings_text_0165" formatted="false">Chỉnh sửa prompt</string>
+<string name="settings_text_0166" formatted="false">Trung tâm plugin &amp; công cụ</string>
+<string name="settings_text_0167" formatted="false">Thao tác</string>
+<string name="settings_text_0168" formatted="false">Thao tác chưa hoàn tất</string>
+<string name="settings_text_0169" formatted="false">Ưu tiên hiệu năng · phù hợp điện thoại RAM 6 GB trở lên</string>
+<string name="settings_text_0170" formatted="false">Thư mục dữ liệu</string>
+<string name="settings_text_0171" formatted="false">Thư mục tài liệu (Documents)</string>
+<string name="settings_text_0172" formatted="false">Mô hình đa năng thế hệ mới · hiện chạy ở chế độ văn bản</string>
+<string name="settings_text_0173" formatted="false">Quyền công cụ mặc định cho phiên mới</string>
+<string name="settings_text_0174" formatted="false">Thêm vai trò sub-agent</string>
+<string name="settings_text_0175" formatted="false">Thêm điểm mount bộ nhớ</string>
+<string name="settings_text_0176" formatted="false">Thêm mount</string>
+<string name="settings_text_0177" formatted="false">Thêm skill tùy chỉnh</string>
+<string name="settings_text_0178" formatted="false">Không đọc được tệp đã chọn</string>
+<string name="settings_text_0179" formatted="false">Nhật ký</string>
+<string name="settings_text_0180" formatted="false">Đã sao chép nhật ký vào bộ nhớ tạm</string>
+<string name="settings_text_0181" formatted="false">Ngày</string>
+<string name="settings_text_0182" formatted="false">Ngày giờ</string>
+<string name="settings_text_0183" formatted="false">Múi giờ</string>
+<string name="settings_text_0184" formatted="false">Thời gian</string>
+<string name="settings_text_0185" formatted="false">Tên hiển thị</string>
+<string name="settings_text_0186" formatted="false">Hệ sinh thái Agent</string>
+<string name="settings_text_0187" formatted="false">Hệ sinh thái &amp; dịch vụ Agent (Agents &amp; Services)</string>
+<string name="settings_text_0188" formatted="false">Chưa có nhật ký dịch vụ. Sau khi nhấn gateway, thông tin console và lỗi sẽ được xuất trực tiếp tại đây.</string>
+<string name="settings_text_0189" formatted="false">Chưa có mô hình</string>
+<string name="settings_text_0190" formatted="false">Chưa có nhật ký sự kiện liên quan</string>
+<string name="settings_text_0191" formatted="false">Chưa có điểm mount tùy chỉnh</string>
+<string name="settings_text_0192" formatted="false">Cập nhật</string>
+<string name="settings_text_0193" formatted="false">Nhật ký cập nhật:</string>
+<string name="settings_text_0194" formatted="false">Lần lắp ráp bộ dev gần nhất</string>
+<string name="settings_text_0195" formatted="false">Tên dịch vụ</string>
+<string name="settings_text_0196" formatted="false">Nhật ký console trực tiếp của dịch vụ</string>
+<string name="settings_text_0197" formatted="false">Dịch vụ chưa khởi động</string>
+<string name="settings_text_0198" formatted="false">Cổng dịch vụ</string>
+<string name="settings_text_0199" formatted="false">URL endpoint dịch vụ</string>
+<string name="settings_text_0200" formatted="false">Chưa bật</string>
+<string name="settings_text_0201" formatted="false">Chưa cài đặt</string>
+<string name="settings_text_0202" formatted="false">Không tìm thấy cấu hình dịch vụ MCP hợp lệ</string>
+<string name="settings_text_0203" formatted="false">Chưa phát hiện</string>
+<string name="settings_text_0204" formatted="false">Chưa miễn trừ</string>
+<string name="settings_text_0205" formatted="false">Chưa miễn trừ · chạy nền có thể bị đóng băng</string>
+<string name="settings_text_0206" formatted="false">Chưa chạy</string>
+<string name="settings_text_0207" formatted="false">LLM local</string>
+<string name="settings_text_0208" formatted="false">Suy luận LLM local</string>
+<string name="settings_text_0209" formatted="false">Quyền:</string>
+<string name="settings_text_0210" formatted="false">Danh sách quyền</string>
+<string name="settings_text_0211" formatted="false">Xem nhật ký cài đặt</string>
+<string name="settings_text_0212" formatted="false">Xem từ hướng dẫn (Prompt)</string>
+<string name="settings_text_0213" formatted="false">Xem chi tiết</string>
+<string name="settings_text_0214" formatted="false">Kiểm tra phiên bản mới · kho mã nguồn mở GitHub · nhóm QQ chính thức</string>
+<string name="settings_text_0215" formatted="false">Kiểm tra cập nhật thất bại, hãy kiểm tra mạng</string>
+<string name="settings_text_0216" formatted="false">Đang phát hiện</string>
+<string name="settings_text_0217" formatted="false">ID mô hình</string>
+<string name="settings_text_0218" formatted="false">Truyền mô hình thất bại</string>
+<string name="settings_text_0219" formatted="false">Phát hiện mô hình thất bại</string>
+<string name="settings_text_0220" formatted="false">Tên mô hình</string>
+<string name="settings_text_0221" formatted="false">Khởi động mô hình thất bại</string>
+<string name="settings_text_0222" formatted="false">Dịch vụ mô hình đã khởi động và được đặt làm mô hình trò chuyện hiện tại</string>
+<string name="settings_text_0223" formatted="false">Cấu hình mô hình</string>
+<string name="settings_text_0224" formatted="false">Đang tải xuống và cấu hình RootFS...</string>
+<string name="settings_text_0225" formatted="false">Đang tải gói cài đặt cập nhật...</string>
+<string name="settings_text_0226" formatted="false">Đang tải mô hình</string>
+<string name="settings_text_0227" formatted="false">Đang cài đặt sandbox Linux...</string>
+<string name="settings_text_0228" formatted="false">Đang nhập mô hình</string>
+<string name="settings_text_0229" formatted="false">Đang chạy pipeline lắp ráp hàng loạt dưới nền, bạn có thể tự do chuyển sang trang khác</string>
+<string name="settings_text_0230" formatted="false">Đang chạy pipeline lắp ráp nguyên tử hàng loạt...</string>
+<string name="settings_text_0231" formatted="false">Đang kiểm tra GGUF</string>
+<string name="settings_text_0232" formatted="false">Mỗi dòng một header, định dạng "Key: Value", sẽ được thêm vào request API</string>
+<string name="settings_text_0233" formatted="false">Dò runtime sandbox, chặn an toàn thao tác nguy hiểm &amp; khả năng mở rộng</string>
+<string name="settings_text_0234" formatted="false">Tiến trình sandbox</string>
+<string name="settings_text_0235" formatted="false">Kiểm tra kết nối sandbox &amp; dò công cụ</string>
+<string name="settings_text_0236" formatted="false">Prompt hướng dẫn inject vào hệ thống (System Prompt):</string>
+<string name="settings_text_0237" formatted="false">Thêm</string>
+<string name="settings_text_0238" formatted="false">Thêm dịch vụ MCP</string>
+<string name="settings_text_0239" formatted="false">Thêm và bật</string>
+<string name="settings_text_0240" formatted="false">Thêm mount</string>
+<string name="settings_text_0241" formatted="false">Thêm dịch vụ</string>
+<string name="settings_text_0242" formatted="false">Xóa hết</string>
+<string name="settings_text_0243" formatted="false">Xóa token</string>
+<string name="settings_text_0244" formatted="false">Nhấn “Thêm mount” phía trên để ánh xạ bất kỳ thư mục Android nào vào sandbox Linux</string>
+<string name="settings_text_0245" formatted="false">Nhấn + ở góc phải trên để thêm</string>
+<string name="settings_text_0246" formatted="false">Nhấn để chèn nhanh macro động:</string>
+<string name="settings_text_0247" formatted="false">Phiên bản: v0.3.0 (Material 3 Expressive)</string>
+<string name="settings_text_0248" formatted="false">Tạo token bảo mật</string>
+<string name="settings_text_0249" formatted="false">Tên người dùng</string>
+<string name="settings_text_0251" formatted="false">Xin miễn trừ tối ưu pin</string>
+<string name="settings_text_0252" formatted="false">Tối ưu pin &amp; giữ chạy nền</string>
+<string name="settings_text_0253" formatted="false">Mức pin</string>
+<string name="settings_text_0254" formatted="false">Dán trực tiếp cấu hình chuẩn Claude Desktop / Cursor:</string>
+<string name="settings_text_0255" formatted="false">Xác nhận gỡ cài đặt</string>
+<string name="settings_text_0256" formatted="false">Offline</string>
+<string name="settings_text_0257" formatted="false">Trợ lý lập trình di động · phù hợp điện thoại RAM 6 GB trở lên</string>
+<string name="settings_text_0258" formatted="false">Mô hình di động chất lượng cao · hiện chạy ở chế độ văn bản</string>
+<string name="settings_text_0259" formatted="false">Endpoint không trả về mô hình Agent khả dụng</string>
+<string name="settings_text_0260" formatted="false">Mô tả ngắn</string>
+<string name="settings_text_0261" formatted="false">Tùy chỉnh system prompt &amp; persona</string>
+<string name="settings_text_0262" formatted="false">Quy tắc system prompt (System Prompt)</string>
+<string name="settings_text_0263" formatted="false">Core hệ thống thường trú</string>
+<string name="settings_text_0264" formatted="false">Phiên bản hệ thống</string>
+<string name="settings_text_0265" formatted="false">Mount nhanh có sẵn của hệ thống</string>
+<string name="settings_text_0266" formatted="false">Quản lý &amp; cấu hình component</string>
+<string name="settings_text_0267" formatted="false">Trợ lý lập trình</string>
+<string name="settings_text_0268" formatted="false">Chỉnh sửa vai trò sub-agent</string>
+<string name="settings_text_0269" formatted="false">Dịch vụ gateway</string>
+<string name="settings_text_0270" formatted="false">Tải qua mạng</string>
+<string name="settings_text_0271" formatted="false">Tải GGUF qua mạng</string>
+<string name="settings_text_0272" formatted="false">Số nhóm: 964382207 · nhấn để tham gia / sao chép số nhóm</string>
+<string name="settings_text_0273" formatted="false">Quá trình suy nghĩ mới sinh trong khung trò chuyện sẽ mặc định mở rộng</string>
+<string name="settings_text_0274" formatted="false">Giới thiệu trách nhiệm</string>
+<string name="settings_text_0275" formatted="false">Tự động (Auto)</string>
+<string name="settings_text_0276" formatted="false">Tự đánh giá và chia nhỏ tác vụ</string>
+<string name="settings_text_0277" formatted="false">Tăng tốc tự động</string>
+<string name="settings_text_0278" formatted="false">Chính sách ủy quyền tự động</string>
+<string name="settings_text_0279" formatted="false">Tự inject đường dẫn không gian làm việc liên kết</string>
+<string name="settings_text_0280" formatted="false">Tùy chỉnh</string>
+<string name="settings_text_0281" formatted="false">Vai trò sub-agent tùy chỉnh</string>
+<string name="settings_text_0282" formatted="false">Skill tùy chỉnh</string>
+<string name="settings_text_0283" formatted="false">Mount tùy chỉnh</string>
+<string name="settings_text_0284" formatted="false">Binding ánh xạ tùy chỉnh</string>
+<string name="settings_text_0285" formatted="false">System prompt tùy chỉnh (System Prompt)</string>
+<string name="settings_text_0286" formatted="false">Tiếng Anh (English)</string>
+<string name="settings_text_0287" formatted="false">Tác vụ lắp ráp đã kết thúc, có thể xem nhật ký đầy đủ</string>
+<string name="settings_text_0288" formatted="false">Bộ lắp ráp</string>
+<string name="settings_text_0289" formatted="false">Ghi đè System Prompt mặc định toàn cục, hỗ trợ inject macro động</string>
+<string name="settings_text_0290" formatted="false">Danh sách vai trò</string>
+<string name="settings_text_0291" formatted="false">Từ hướng dẫn vai trò</string>
+<string name="settings_text_0292" formatted="false">Định danh vai trò</string>
+<string name="settings_text_0293" formatted="false">Lệnh gỡ đã chạy thành công, đã đọc lại trạng thái hệ thống.</string>
+<string name="settings_text_0294" formatted="false">Lệnh kích hoạt (không bắt buộc, VD: /rust)</string>
+<string name="settings_text_0295" formatted="false">Đặt làm hệ thống chính</string>
+<string name="settings_text_0296" formatted="false">Thông tin thiết bị</string>
+<string name="settings_text_0297" formatted="false">Link truy cập</string>
+<string name="settings_text_0298" formatted="false">Chế độ chẩn đoán đã bật</string>
+<string name="settings_text_0299" formatted="false">Dịch vụ đã kết nối nhưng không trả về định nghĩa công cụ nào</string>
+<string name="settings_text_0300" formatted="false">Định danh vai trò này đã tồn tại</string>
+<string name="settings_text_0301" formatted="false">Cấu hình chi tiết</string>
+<string name="settings_text_0302" formatted="false">Ngôn ngữ</string>
+<string name="settings_text_0303" formatted="false">Hãy nhập link tải HTTPS của GGUF trước</string>
+<string name="settings_text_0304" formatted="false">Hãy chọn các component cần lắp ráp</string>
+<string name="settings_text_0305" formatted="false">Hãy nhập đường dẫn tệp GGUF</string>
+<string name="settings_text_0306" formatted="false">Hãy nhập nội dung JSON</string>
+<string name="settings_text_0307" formatted="false">Khi vượt quá sẽ tự nén tin nhắn cũ (cửa sổ trượt + bộ nhớ tóm tắt)</string>
+<string name="settings_text_0308" formatted="false">Hoàn thiện code nhẹ &amp; giải thích đơn giản</string>
+<string name="settings_text_0309" formatted="false">Đang chạy</string>
+<string name="settings_text_0310" formatted="false">Giữ tiến trình sống &amp; đánh thức</string>
+<string name="settings_text_0311" formatted="false">HTTP từ xa</string>
+<string name="settings_text_0312" formatted="false">Kết nối thất bại</string>
+<string name="settings_text_0313" formatted="false">Khi nhiều vòng gọi công cụ liên tiếp đều thất bại sẽ chủ động dừng, tránh rơi vào vòng lặp chết</string>
+<string name="settings_text_0314" formatted="false">Ngưỡng ngắt mạch khi thất bại liên tiếp</string>
+<string name="settings_text_0315" formatted="false">Phù hợp máy này</string>
+<string name="settings_text_0316" formatted="false">Chọn mô hình bên dưới để khởi động dịch vụ; sau khi khởi động thành công sẽ tự đặt làm mô hình trò chuyện hiện tại</string>
+<string name="settings_text_0317" formatted="false">Chọn tệp</string>
+<string name="settings_text_0318" formatted="false">Chọn hệ thống Linux muốn tải và cài đặt:</string>
+<string name="settings_text_0319" formatted="false">Cấu hình phải chứa trường command hoặc url</string>
+<string name="settings_text_0320" formatted="false">Chi tiết cấu hình</string>
+<string name="settings_text_0321" formatted="false">Tạo lại token</string>
+<string name="settings_text_0322" formatted="false">Đặt lại template</string>
+<string name="settings_text_0323" formatted="false">Thử lại</string>
+<string name="settings_text_0324" formatted="false">Đã sao chép link</string>
+<string name="settings_text_0325" formatted="false">Lỗi</string>
+<string name="settings_text_0326" formatted="false">Tránh mô hình rơi vào vòng lặp chết trong tác vụ phức tạp; khi hết vòng sẽ xuất tóm tắt và mời người dùng làm từng bước</string>
+<string name="settings_text_0327" formatted="false">Tránh mô hình gọi ồ ạt quá nhiều công cụ một lúc làm cạn ngữ cảnh hoặc vòng lặp mất kiểm soát</string>
+<string name="settings_text_0328" formatted="false">Tự chuyển theo chế độ sáng/tối của hệ thống thiết bị Android</string>
+<string name="settings_text_0329" formatted="false">Tự khởi động cùng app</string>
+<string name="settings_text_0330" formatted="false">Cần cài đặt engine suy luận llama.cpp trước</string>
+<string name="settings_text_0331" formatted="false">Có sẵn</string>
+<string name="settings_text_0332" formatted="false">Lệnh xác minh</string>
+<string name="settings_text_0333" formatted="false">Mặc định mở rộng quá trình suy nghĩ của mô hình</string>
+<string name="settings_text_0334" formatted="false">📋 Nhập JSON</string>
+<string name="settings_text_0335" formatted="false">📝 Chế độ biểu mẫu</string>
+<string name="settings_text_0336" formatted="false">🧠 Tự phục hồi bằng AI</string>
+<string name="settings_text_0337" formatted="false">Tránh mô hình rơi vào vòng lặp chết trong tác vụ phức tạp; khi hết vòng sẽ vào checkpoint tự chạy tiếp bên dưới</string>
+<string name="settings_text_0338" formatted="false">Tự chạy tiếp khi hết vòng</string>
+<string name="settings_text_0339" formatted="false">Dừng và chờ người dùng xác nhận khi hết vòng; phù hợp khi muốn kiểm soát từng đoạn</string>
+<string name="settings_text_0340" formatted="false">Khi hết vòng, mô hình sẽ thu gọn và ghi lại tiến độ rồi tự chạy tiếp, không cần người dùng nhấn tiếp tục; tổng ngân sách tối đa %1$s vòng</string>
+<string name="settings_text_0341" formatted="false">%1$s lần</string>
+<string name="settings_text_0342" formatted="false">Cách xưng hô &amp; persona</string>
+<string name="settings_text_0343" formatted="false">Xem system prompt mặc định</string>
+<string name="settings_text_0344" formatted="false">Mô hình tự xưng</string>
+<string name="settings_text_0345" formatted="false">TaiXu Agent</string>
+<string name="settings_text_0346" formatted="false">Cách gọi người dùng</string>
+<string name="settings_text_0347" formatted="false">Người dùng</string>
+<string name="settings_text_0348" formatted="false">Sửa xong có hiệu lực ngay với mọi cuộc trò chuyện (để trống để khôi phục mặc định); macro {{char}} / {{user}} trong prompt tùy chỉnh cũng sẽ dùng hai giá trị này.</string>
+<string name="settings_text_0349" formatted="false">System prompt mặc định (core.md)</string>
+<string name="settings_text_0350" formatted="false">(Tải system prompt mặc định thất bại)</string>
+<string name="settings_long_001" formatted="false">, target.sizeBytes.toDouble() / (1024 * 1024))} MB dung lượng). Các tệp code trong không gian làm việc /workspace sẽ không bị ảnh hưởng.</string>
+<string name="settings_long_002" formatted="false">1. Phân tích lỗi báo trong sandbox PRoot ở trên (như hỏng dependency dpkg, sót lock, tải mạng bị chặn, thiếu symlink commandLinks hoặc thiếu môi trường);</string>
+<string name="settings_long_003" formatted="false">2. Gọi trực tiếp công cụ base để chạy lệnh sửa chữa (như dọn lock /var/lib/dpkg, dpkg --configure -a, apt-get --fix-broken install, kéo thủ công từ nguồn dự phòng hoặc bổ sung symlink);</string>
+<string name="settings_long_004" formatted="false">Android 12+ giám sát các tiến trình con do app tạo ra, vượt quá giới hạn hệ thống có thể kill PRoot, trình biên dịch hoặc tác vụ Agent. Ở đây gỡ là giới hạn tiến trình con, không phải số thread Java/Kotlin.</string>
+<string name="settings_long_005" formatted="false">MCP là giao thức ngữ cảnh mô hình chuẩn mở. Sau khi bật, TaiXu sẽ khởi động dịch vụ Stdio tương ứng trong sandbox PRoot hoặc kết nối endpoint SSE local, và inject động năng lực công cụ chuyên sâu cho Agent TaiXu.</string>
+<string name="settings_long_006" formatted="false">https://github.com/wkbin/taixu · Hãy Star ủng hộ</string>
+<string name="settings_long_007" formatted="false">Trong lúc Agent chạy, TaiXu sẽ khởi động dịch vụ foreground và giữ khóa tiến trình CPU, nhưng tối ưu pin của hệ thống vẫn có thể tác động sau khi tắt màn hình</string>
+<string name="settings_long_008" formatted="false">TaiXu hỗ trợ chạy nhiều hệ thống Linux cùng lúc. Mọi hệ thống đều tự mount dự án code /workspace, bộ nhớ ngoài /sdcard được inject theo toggle ở trang 「Mount &amp; chia sẻ bộ nhớ」, hệ sinh thái phần mềm và trình quản lý gói của mỗi distro hoàn toàn độc lập, cách ly nhau.</string>
+<string name="settings_long_009" formatted="false">Chưa cấu hình hồ sơ mô hình nào, hãy vào để thêm mô hình Claude, OpenAI hoặc DeepSeek</string>
+<string name="settings_long_010" formatted="false">Mount chỉ tác dụng với các tiến trình trong sandbox Linux (terminal, Agent TaiXu, tác vụ build và dịch vụ nền), không ảnh hưởng trình duyệt tệp — trình duyệt tệp luôn truy cập trực tiếp bộ nhớ host. Mount được inject khi phiên khởi động, terminal / tác vụ build mới tạo sau khi sửa mới áp dụng. Để đọc ghi đầy đủ còn cần cấp quyền 「Truy cập mọi tệp」 trong cài đặt hệ thống.</string>
+<string name="settings_long_012" formatted="false">Mẹo: trên hệ thống của các hãng như Xiaomi/Huawei/OPPO còn cần bật thủ công 「Tự khởi động」 và 「Chạy nền」 trong chi tiết app,</string>
+<string name="settings_long_013" formatted="false">Dịch vụ chưa khởi động, hãy nhấn khởi động trong thẻ trước; sau khi khởi động thành công, link truy cập sẽ hiện tại đây. Token có thể tạo trước, sẽ tự inject khi khởi động.</string>
+<string name="settings_long_014" formatted="false">Kiến trúc: aarch64 · chroot-less user-space virtualization</string>
+<string name="settings_long_015" formatted="false">Có hiệu lực khi mô hình không cấu hình riêng contextTokens; lịch sử phiên dài vượt ngân sách sẽ tự gập nội dung cũ</string>
+<string name="settings_long_017" formatted="false">Dán link trực tiếp HTTPS kết thúc bằng.gguf. Trên trang tệp Hugging Face hãy sao chép link Download.</string>
+<string name="settings_long_018" formatted="false">Dịch vụ gateway đã bind toàn bộ card mạng (0.0.0.0). Thiết bị cùng mạng LAN mở là thao tác trực tiếp được, không cần ánh xạ localhost.</string>
+<string name="settings_long_019" formatted="false">Nhập đường dẫn tuyệt đối mà app có thể đọc, VD: /storage/emulated/0/Download/model.gguf. Khi bị giới hạn quyền bộ nhớ Android, hãy dùng “Chọn tệp” thay thế.</string>
+<string name="settings_long_020" formatted="false">Chạy mô hình GGUF trong sandbox Linux qua llama.cpp, dữ liệu suy luận không rời khỏi thiết bị. Hỗ trợ tải tiếp (resume) link trực tiếp HTTPS / Hugging Face, cũng có thể nhập từ trình chọn tệp trên điện thoại.</string>
+<string name="settings_dynamic_system_count">%1$s hệ thống</string>
+<string name="settings_dynamic_system_mode">%1$s hệ thống · %2$s</string>
+<string name="settings_dynamic_model_count">%1$s mô hình</string>
+<string name="settings_dynamic_model_skill_count">%1$s mô hình · %2$s skill</string>
+<string name="settings_dynamic_skill_count">%1$s skill</string>
+<string name="settings_dynamic_item_count">%1$s mục</string>
+<string name="settings_dynamic_round_count">%1$s vòng</string>
+<string name="settings_dynamic_new_version">Phát hiện phiên bản mới v%1$s</string>
+<string name="settings_dynamic_downloaded">Đã tải: %1$s MB</string>
+<string name="settings_dynamic_download_progress">Đang tải: %1$s / %2$s MB</string>
+<string name="settings_dynamic_delete_confirm">Xác nhận xóa %1$s?</string>
+<string name="settings_dynamic_tool_count">Đã phát hiện thành công %1$s công cụ</string>
+</resources>

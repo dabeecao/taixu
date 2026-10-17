@@ -2,11 +2,13 @@
 <resources>
     <string name="settings_language_title">App language</string>
     <string name="settings_language_system">Follow system language</string>
-    <string name="settings_language_system_description">Use Chinese or English based on the Android system language</string>
+    <string name="settings_language_system_description">Use Chinese, English or Vietnamese based on the Android system language</string>
     <string name="settings_language_chinese">Simplified Chinese</string>
     <string name="settings_language_chinese_description">Display the app interface in Simplified Chinese</string>
     <string name="settings_language_english">English</string>
     <string name="settings_language_english_description">Display the app interface in English</string>
+    <string name="settings_language_vietnamese">Vietnamese</string>
+    <string name="settings_language_vietnamese_description">Display the app interface in Vietnamese</string>
     <string name="settings_appearance_title">Appearance &amp; terminal</string>
     <string name="settings_terminal_preview">Live terminal preview</string>
     <string name="settings_terminal_appearance">Terminal appearance &amp; console</string>

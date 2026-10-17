@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="model_setup_import">Nhập cấu hình</string>
+    <string name="model_setup_connection">Thông tin kết nối</string>
+    <string name="model_setup_url">Địa chỉ API · Base URL</string>
+    <string name="model_setup_key">API Key</string>
+    <string name="model_setup_model">Chọn mô hình</string>
+    <string name="model_setup_discover">Lấy danh sách mô hình</string>
+    <string name="model_setup_show_key">Hiện khóa</string>
+    <string name="model_setup_hide_key">Ẩn khóa</string>
+    <string name="model_setup_protocol_openai">Giao diện tương thích OpenAI</string>
+    <string name="model_setup_protocol_anthropic">Giao diện Claude Messages</string>
+</resources>

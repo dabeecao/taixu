@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_title">Chuẩn bị Linux của bạn</string>
+    <string name="onboarding_description">Chọn bản phân phối yêu thích, TaiXu sẽ tải xuống và chuẩn bị môi trường chạy cho bạn.</string>
+    <string name="onboarding_distribution">Bản phân phối Linux</string>
+    <string name="onboarding_mirror">Kênh mirror tăng tốc</string>
+    <string name="onboarding_mirror_auto">Tự động chọn kênh tốt nhất</string>
+    <string name="onboarding_mirror_official">Nguồn chính thức</string>
+    <string name="onboarding_mirror_china">Kênh mirror tăng tốc (Trung Quốc)</string>
+    <string name="onboarding_initialization_failed">Khởi tạo thất bại. Kiểm tra mạng rồi thử lại.</string>
+    <string name="onboarding_retry">Tải lại và khởi tạo lại</string>
+    <string name="onboarding_preparing">Đang chuẩn bị môi trường…</string>
+    <string name="onboarding_initialize">Khởi tạo sandbox một chạm</string>
+    <string name="onboarding_recheck">Đã cài môi trường rồi? Chạm để kiểm tra lại (không tải lại).</string>
+    <string name="onboarding_import">Nhập bản phân phối Linux từ tệp</string>
+    <string name="onboarding_import_hint">Hỗ trợ RootFS ARM64: .tar, .tar.gz, .tgz, .tar.xz, .tar.zst — cần có Bash, /bin/sh và os-release.</string>
+    <string name="onboarding_connect_model">Kết nối AI của bạn</string>
+    <string name="onboarding_connect_model_description">Kết nối dịch vụ mô hình thường dùng để bắt đầu cộng tác với AI. Bạn cũng có thể cấu hình sau trong Cài đặt.</string>
+    <string name="onboarding_base_url">Base URL (địa chỉ API)</string>
+    <string name="onboarding_api_key">API Key (tùy chọn)</string>
+    <string name="onboarding_model_selection">Chọn mô hình / Preset gợi ý</string>
+    <string name="onboarding_model_empty">Hãy làm mới hoặc nhập thủ công trước</string>
+    <string name="onboarding_model_id">ID mô hình (nhập tay được)</string>
+    <string name="onboarding_later">Cấu hình sau</string>
+    <string name="onboarding_enter">Vào TaiXu</string>
+    <string name="onboarding_provider_preset">Preset nhà cung cấp</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_material_features_data">Tính năng và dữ liệu</string>
+    <string name="settings_material_plugins_title">Quản lý plugin</string>
+    <string name="settings_material_plugins_summary">Cài đặt, cập nhật và quản lý tiện ích mở rộng</string>
+    <string name="settings_material_backup_summary">Xuất hoặc khôi phục trò chuyện, mô hình và cấu hình</string>
+    <string name="settings_material_features_intro">Sáng tạo, cộng tác và tự động hóa</string>
+    <string name="settings_material_creation">Sáng tạo và cộng tác</string>
+    <string name="settings_material_automation">Tự động hóa hằng ngày</string>
+    <string name="settings_material_connection">Kết nối các thiết bị</string>
+</resources>
