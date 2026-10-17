@@ -1,0 +1,8 @@
+<resources>
+    <string name="workspace_project_taixu_plugin">Phát triển plugin nội bộ TaiXu</string>
+    <string name="workspace_plugin_debug_import">Nhập để gỡ lỗi bằng một chạm</string>
+    <string name="workspace_plugin_debug_failed">Đóng gói plugin gỡ lỗi thất bại</string>
+    <string name="workspace_plugin_debug_dismiss">Đã hiểu</string>
+    <string name="workspace_plugin_debug_preparing">Đang đóng gói dự án và chuẩn bị cài đặt xem trước…</string>
+    <string name="workspace_plugin_debug_cancel">Hủy</string>
+</resources>

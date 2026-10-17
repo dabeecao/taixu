@@ -1,0 +1,7 @@
+<resources>
+    <string name="workflow_review_configuration">Tôi đã kiểm tra toàn bộ cấu hình của hành động này</string>
+    <string name="plugin_node_id">Plugin ID</string>
+    <string name="plugin_node_extension">ID extension nút</string>
+    <string name="plugin_node_arguments">Tham số JSON</string>
+    <string name="plugin_node_scope">Nút plugin cần xác nhận trước mỗi lần chạy. Chỉ hỗ trợ extension đã được biên dịch và lắp ráp; tham số phải đúng Schema của nó.</string>
+</resources>

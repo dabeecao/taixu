@@ -1,0 +1,4 @@
+<resources>
+    <string name="terminal_plugin_title">Terminal</string>
+    <string name="terminal_plugin_description">Shell tương tác và lệnh dự án</string>
+</resources>

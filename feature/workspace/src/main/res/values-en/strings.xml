@@ -106,6 +106,8 @@
     <string name="workspace_export_apk_description">Allows host-side tools such as MT Manager to open it directly; full file access is required</string>
     <string name="workspace_git_url">Git repository URL</string>
     <string name="workspace_git_import_description">The imported repository is authoritative; template files will not be generated</string>
+    <string name="workspace_git_clone_in_progress">Pulling project from GitHub</string>
+    <string name="workspace_git_clone_connecting">Connecting to repository…</string>
     <string name="workspace_internal_storage">Internal storage</string>
     <string name="workspace_shared_space">Shared storage</string>
     <string name="workspace_location_project">Project directory  /workspace/%1$s</string>
@@ -307,7 +309,7 @@
     <string name="workshop_script_field_name">Name</string>
     <string name="workshop_script_field_desc">Purpose and supported versions</string>
     <string name="workshop_script_type">Type: %1$s</string>
-    <string name="workshop_script_api_note">Contract: %1$s is the project directory; %2$s for Android is the Gradle task, and for Flutter the full build arguments.</string>
+    <string name="workshop_script_api_note">Contract: %1$s is the project directory; %2$s for Android is the Gradle task, and %2$s for Flutter is the full build arguments.</string>
     <string name="workshop_action_save">Save</string>
     <string name="workshop_env_title">Development environment</string>
     <string name="workshop_env_scanning_subtitle">Probing sandbox toolchains…</string>

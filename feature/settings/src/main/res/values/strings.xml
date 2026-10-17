@@ -2,11 +2,13 @@
 <resources>
     <string name="settings_language_title">应用语言</string>
     <string name="settings_language_system">跟随系统语言</string>
-    <string name="settings_language_system_description">根据 Android 设备语言自动选择中文或英文</string>
+    <string name="settings_language_system_description">根据 Android 设备语言自动选择中文、英文或越南语</string>
     <string name="settings_language_chinese">简体中文</string>
     <string name="settings_language_chinese_description">使用简体中文显示应用界面</string>
     <string name="settings_language_english">English</string>
     <string name="settings_language_english_description">使用英文显示应用界面</string>
+    <string name="settings_language_vietnamese">越南语</string>
+    <string name="settings_language_vietnamese_description">使用越南语显示应用界面</string>
     <string name="settings_appearance_title">外观与终端</string>
     <string name="settings_terminal_preview">终端实时效果预览</string>
     <string name="settings_terminal_appearance">终端外观与控制台</string>

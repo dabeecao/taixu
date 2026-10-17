@@ -1,0 +1,28 @@
+<resources>
+    <string name="harness_plugins_counts">Công cụ %1$d · Tài liệu nền %2$d · Provider %3$d · Quy trình %4$d</string>
+    <string name="harness_plugins_title">Tiện ích tích hợp</string>
+    <string name="harness_plugins_core_title">Nhân Agent</string>
+    <string name="harness_plugins_scope">Khả năng Agent, mô hình và quy trình đi kèm ứng dụng</string>
+    <string name="package_confirm_title">Xác nhận cài đặt plugin cục bộ</string>
+    <string name="package_dependencies">Plugin phụ thuộc (bắt buộc đã cài)</string>
+    <string name="package_resources">Khai báo quyền sở hữu tài nguyên</string>
+    <string name="package_new_capabilities">Yêu cầu năng lực mới so với phiên bản đã cài</string>
+    <string name="package_none">Không có</string>
+    <string name="package_install">Cài đặt</string>
+    <string name="package_confirm_scope">Sau khi xác nhận sẽ giải nén gói và chạy script cài đặt. Các năng lực và tài nguyên chỉ là khai báo, không phải hộp cát tiến trình; script vẫn giữ quyền môi trường PRoot. Tài nguyên dùng chung được giữ lại khi gỡ.</string>
+    <string name="packaged_plugins_title">Plugin và công cụ</string>
+    <string name="packaged_plugins_scope">Công cụ cục bộ của hệ thống hiện tại, chạm để xem và quản lý</string>
+    <string name="packaged_plugins_filter_installed">Đã cài đặt</string>
+    <string name="packaged_plugins_filter_all">Tất cả</string>
+    <string name="packaged_plugins_empty">Chưa có plugin nào phù hợp, có thể cài thêm trong trung tâm công cụ.</string>
+    <string name="packaged_plugins_display_version">Phiên bản %1$s</string>
+    <string name="packaged_plugins_installed">Đã cài đặt</string>
+    <string name="packaged_plugins_update">Có bản cập nhật</string>
+    <string name="packaged_plugins_installing">Đang cài đặt</string>
+    <string name="packaged_plugins_check">Cần kiểm tra</string>
+    <string name="packaged_plugins_disabled">Đã tắt</string>
+    <string name="packaged_plugins_failed">Không đọc được danh mục plugin, vui lòng quay lại rồi thử lại.</string>
+    <string name="packaged_plugins_version">Phiên bản danh mục %1$s · Đã cài %2$s</string>
+    <string name="packaged_plugins_uninstalled">Chưa cài đặt</string>
+    <string name="packaged_plugins_details">Mở chi tiết công cụ</string>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_error_workspace_start">Không thể khởi động terminal của không gian làm việc</string>
+    <string name="terminal_error_start">Không thể khởi động terminal</string>
+    <string name="terminal_error_create_session">Tạo phiên mới thất bại</string>
+    <string name="terminal_error_close_session">Đóng phiên thất bại</string>
+    <string name="terminal_clipboard_label">Đầu ra terminal</string>
+    <string name="terminal_copied">Đã sao chép nội dung terminal</string>
+    <string name="terminal_starting">Đang khởi động môi trường Linux TaiXu…</string>
+    <string name="terminal_reset_complete">Đã đặt lại và khởi động lại terminal</string>
+    <string name="terminal_default_label">Terminal %1$d</string>
+    <string name="terminal_quick_main">Terminal chính</string>
+    <string name="terminal_quick_build">Build nền</string>
+    <string name="terminal_quick_service">Gỡ lỗi dịch vụ</string>
+    <string name="terminal_quick_git">Vận hành Git</string>
+    <string name="terminal_quick_python">Môi trường Python</string>
+    <string name="terminal_new_session">Tạo phiên terminal mới</string>
+    <string name="terminal_target_distribution">Bản phân phối Linux đích：</string>
+    <string name="terminal_label">Tên nhãn terminal：</string>
+    <string name="terminal_label_hint">Ví dụ: Build nền / Vận hành Git</string>
+    <string name="terminal_initial_cwd">Thư mục làm việc ban đầu (CWD)：</string>
+    <string name="terminal_root_directory">Thư mục home của root hệ thống (/root)</string>
+    <string name="terminal_create">Tạo terminal</string>
+    <string name="terminal_cancel">Hủy</string>
+    <string name="terminal_sessions">Các phiên terminal ma trận</string>
+    <string name="terminal_active_sessions">%1$d phiên đang hoạt động</string>
+    <string name="terminal_only_session_hint">Đây là terminal đang hoạt động duy nhất, nhấn biểu tượng đặt lại ở bên phải để khởi động lại phiên này</string>
+    <string name="terminal_current">Hiện tại</string>
+    <string name="terminal_new">Tạo terminal mới</string>
+    <string name="terminal_close">Đóng</string>
+    <string name="terminal_loading">Đang tải…</string>
+    <string name="terminal_pty_header">PTY %1$s %2$s</string>
+    <string name="terminal_retry">Thử lại</string>
+    <string name="terminal_back">Quay lại</string>
+    <string name="terminal_open_navigation">Mở điều hướng</string>
+    <string name="terminal_reset_session_desc">Đóng và đặt lại phiên terminal</string>
+    <string name="terminal_close_session_desc">Đóng phiên</string>
+    <string name="terminal_close_confirm_title">Đóng phiên terminal này?</string>
+    <string name="terminal_close_confirm_message">Việc đóng sẽ chấm dứt mọi tiến trình đang chạy trong phiên này và không thể hoàn tác.</string>
+    <string name="terminal_close_confirm">Xác nhận đóng</string>
+    <string name="terminal_close_confirm_countdown">Xác nhận đóng (%1$d giây)</string>
+    <string name="terminal_guide_title">Terminal đa phiên song song</string>
+    <string name="terminal_guide_message">Nhấn nút danh sách trên thanh trên cùng để quản lý nhiều phiên terminal: vừa biên dịch vừa gõ lệnh, hoặc thao tác nhiều dự án cùng lúc mà không ảnh hưởng lẫn nhau.</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="personal_settings_title">Cài đặt</string>
+    <string name="personal_appearance_title">Giao diện và trải nghiệm</string>
+    <string name="personal_color_intro">Biến màu sắc, chữ viết và nền thành đúng chất của bạn.</string>
+    <string name="personal_wallpaper_color">Màu từ hình nền</string>
+    <string name="personal_wallpaper_color_description">Đưa màu sắc từ hình nền vào khắp ứng dụng</string>
+    <string name="personal_search">Tìm kiếm cài đặt và tính năng</string>
+    <string name="personal_environment">Tính năng và môi trường</string>
+    <string name="personal_application">Ứng dụng và hỗ trợ</string>
+    <string name="personal_agents_title">Agent và mô hình</string>
+    <string name="personal_linux_title">Linux và lưu trữ</string>
+    <string name="personal_diagnostics_title">Chạy nền và chẩn đoán</string>
+    <string name="personal_phrase_enabled">Đã bật</string>
+    <string name="personal_phrase_disabled">Đã tắt</string>
+    <string name="personal_mcp_title">Dịch vụ MCP</string>
+</resources>

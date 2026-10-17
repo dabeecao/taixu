@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_nav_models_summary">Quản lý mô hình, nhà cung cấp và kết nối</string>
+    <string name="settings_nav_local_summary">Nhập GGUF, suy luận ngoại tuyến trên thiết bị</string>
+    <string name="settings_nav_phrases_summary">Prompt thường dùng và lệnh nhanh</string>
+    <string name="settings_nav_stats_summary">Mức sử dụng, hoạt động và xếp hạng mô hình</string>
+    <string name="settings_nav_tools_summary">Cài đặt và quản lý công cụ phát triển cục bộ</string>
+    <string name="settings_nav_tools_remote_summary">Đang ở hệ thống từ xa, hãy chuyển về hệ thống cục bộ để cài đặt</string>
+    <string name="settings_nav_cc_summary">Quản lý phiên bản Agent và cấu hình mô hình</string>
+    <string name="settings_nav_execution_summary">Hiển thị suy luận, ngữ cảnh và gọi công cụ</string>
+    <string name="settings_nav_roles_summary">Chiến lược ủy quyền và vai trò Agent</string>
+    <string name="settings_nav_skills_summary">Prompt, script và plugin runtime</string>
+    <string name="settings_nav_mcp_summary">Dịch vụ MCP tích hợp và bên thứ ba</string>
+    <string name="settings_nav_agents_summary">Mô hình, công cụ, kỹ năng và MCP</string>
+    <string name="settings_nav_linux_summary">Bản phân phối, gắn lưu trữ và quyền truy cập</string>
+    <string name="settings_nav_appearance_summary">Chủ đề, cỡ chữ, nền và terminal</string>
+    <string name="settings_nav_diagnostics_summary">Chạy nền và chẩn đoán</string>
+    <string name="settings_nav_features_summary">Sáng tạo, cộng tác và tự động hóa AI</string>
+    <string name="settings_nav_about_summary">Cập nhật phiên bản và cộng đồng chính thức</string>
+    <string name="settings_nav_about_title">Giới thiệu và cộng đồng</string>
+</resources>
